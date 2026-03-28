@@ -9,11 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #1a1a18; --ink-mid: #4a4a46; --ink-light: #8a8a84;
-    --cream: #f7f5f0; --gold: #b8965a; --gold-light: #e8d9bc;
-    --rule: rgba(26,26,24,0.12);
-  }
+  :root { --ink: #1a1a18; --ink-mid: #4a4a46; --ink-light: #8a8a84; --cream: #f7f5f0; --gold: #b8965a; --gold-light: #e8d9bc; --rule: rgba(26,26,24,0.12); }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.92); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--rule); }
@@ -71,6 +67,8 @@
   .contact-item { display: flex; flex-direction: column; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--rule); }
   .contact-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .contact-type { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; }
+  .contact-type a { color: var(--ink-light); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s; }
+  .contact-type a:hover { color: var(--gold); border-color: var(--gold-light); }
   .contact-value { font-size: 1rem; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold-light); display: inline; transition: border-color 0.2s; }
   .contact-value:hover { border-color: var(--gold); }
   .contact-value.no-border { border-bottom: none; }
@@ -131,7 +129,6 @@
 <section id="work">
   <div class="section-label">Selected work</div>
   <div class="cases">
-
     <div class="case">
       <div class="case-meta">
         <div class="case-org">Global Life Sciences</div>
@@ -153,7 +150,6 @@
         <div class="outcome-desc">Strategic pharma accounts managed</div>
       </div>
     </div>
-
     <div class="case">
       <div class="case-meta">
         <div class="case-org">Biotech SaaS / Genomics</div>
@@ -175,7 +171,6 @@
         <div class="outcome-desc">Sample processing via workflow automation</div>
       </div>
     </div>
-
     <div class="case">
       <div class="case-meta">
         <div class="case-org">Genomics Tools</div>
@@ -197,7 +192,6 @@
         <div class="outcome-desc">HubSpot · SFDC · CPQ · Epicor · Tableau</div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -245,5 +239,17 @@
         <span class="contact-value no-border">Denver, CO · Available nationally</span>
       </div>
       <div class="contact-item">
-        <span class="contact-type">Schedule a call</span>
-        <a href="https://calendly.com/jonstac
+        <span class="contact-type"><a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">Schedule a call</a></span>
+        <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" class="btn-calendly">Book a 30-minute intro →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Stacks Advisory</span>
+  <span>Life Sciences · Commercial Strategy · Denver, CO</span>
+</footer>
+
+</body>
+</html>
