@@ -9,325 +9,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --ink: #1a1a18;
-    --ink-mid: #4a4a46;
-    --ink-light: #8a8a84;
-    --cream: #f7f5f0;
-    --white: #ffffff;
-    --gold: #b8965a;
-    --gold-light: #e8d9bc;
+    --ink: #1a1a18; --ink-mid: #4a4a46; --ink-light: #8a8a84;
+    --cream: #f7f5f0; --gold: #b8965a; --gold-light: #e8d9bc;
     --rule: rgba(26,26,24,0.12);
   }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1.25rem 3rem;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(247,245,240,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 0.5px solid var(--rule);
-  }
-  .nav-logo {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-cta {
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold-light);
-    padding-bottom: 1px;
-    transition: border-color 0.2s;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.92); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--rule); }
+  .nav-logo { font-family: 'DM Sans', sans-serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; color: var(--ink); text-decoration: none; }
+  .nav-cta { font-size: 13px; letter-spacing: 0.08em; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold-light); padding-bottom: 1px; transition: border-color 0.2s; }
   .nav-cta:hover { border-color: var(--gold); }
-
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 7rem 3rem 5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 7rem 3rem 5rem; max-width: 1100px; margin: 0 auto; }
   .hero-inner { max-width: 720px; }
-
-  .eyebrow {
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .eyebrow::after {
-    content: '';
-    display: block;
-    width: 48px; height: 1px;
-    background: var(--gold);
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 2rem;
-  }
+  .eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; }
+  .eyebrow::after { content: ''; display: block; width: 48px; height: 1px; background: var(--gold); }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 2rem; }
   h1 em { font-style: italic; color: var(--gold); }
-
-  .hero-sub {
-    font-size: 1.05rem;
-    color: var(--ink-mid);
-    max-width: 540px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-  }
-
+  .hero-sub { font-size: 1.05rem; color: var(--ink-mid); max-width: 540px; line-height: 1.8; margin-bottom: 3rem; }
   .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-
-  .btn-primary {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    background: var(--ink);
-    color: var(--cream);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
+  .btn-primary { display: inline-block; padding: 0.75rem 2rem; background: var(--ink); color: var(--cream); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
   .btn-primary:hover { background: #333; }
-
-  .btn-ghost {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    border: 1px solid var(--rule);
-    color: var(--ink);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.2s;
-  }
+  .btn-ghost { display: inline-block; padding: 0.75rem 2rem; border: 1px solid var(--rule); color: var(--ink); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s; }
   .btn-ghost:hover { border-color: var(--ink); }
-
-  .section-rule {
-    max-width: 1100px; margin: 0 auto;
-    padding: 0 3rem;
-    border: none;
-    border-top: 0.5px solid var(--rule);
-  }
-
-  section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 5rem 3rem;
-  }
-
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 3.5rem;
-  }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-  }
+  .btn-calendly { display: inline-block; padding: 0.75rem 2rem; background: var(--gold); color: var(--cream); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; margin-top: 0.75rem; }
+  .btn-calendly:hover { background: #a07848; }
+  .section-rule { max-width: 1100px; margin: 0 auto; padding: 0 3rem; border: none; border-top: 0.5px solid var(--rule); }
+  section { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 3.5rem; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
-
   .pillar { border-top: 2px solid var(--gold); padding-top: 1.5rem; }
-  .pillar-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    color: var(--gold-light);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  .pillar h3 {
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
-    color: var(--ink);
-  }
+  .pillar-number { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--gold-light); line-height: 1; margin-bottom: 1rem; }
+  .pillar h3 { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.75rem; color: var(--ink); }
   .pillar p { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.75; }
-
   .cases { display: flex; flex-direction: column; }
-
-  .case {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 2rem;
-    padding: 2.25rem 0;
-    border-top: 0.5px solid var(--rule);
-    align-items: start;
-  }
+  .case { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; padding: 2.25rem 0; border-top: 0.5px solid var(--rule); align-items: start; }
   .case:last-child { border-bottom: 0.5px solid var(--rule); }
-
-  .case-org {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.4rem;
-  }
-  .case-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.35;
-  }
-
-  .case-body p {
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
+  .case-org { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .case-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--ink); line-height: 1.35; }
+  .case-body p { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1rem; }
   .case-body p:last-child { margin-bottom: 0; }
-
   .case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-  .tag {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    border: 0.5px solid var(--rule);
-    padding: 0.3rem 0.75rem;
-  }
-
+  .tag { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border: 0.5px solid var(--rule); padding: 0.3rem 0.75rem; }
   .case-outcome { text-align: right; }
-  .outcome-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.5rem;
-  }
-  .outcome-stat {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    color: var(--ink);
-    line-height: 1.2;
-  }
+  .outcome-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem; }
+  .outcome-stat { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); line-height: 1.2; }
   .outcome-desc { font-size: 0.8rem; color: var(--ink-mid); margin-top: 0.4rem; }
-
-  @media (max-width: 760px) {
-    .case { grid-template-columns: 1fr; }
-    .case-outcome { text-align: left; }
-  }
-
-  .creds {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 0.5px solid var(--rule);
-  }
+  @media (max-width: 760px) { .case { grid-template-columns: 1fr; } .case-outcome { text-align: left; } }
+  .creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 0.5px solid var(--rule); }
   @media (max-width: 760px) { .creds { grid-template-columns: 1fr; } }
-
   .cred { padding: 2rem; border-right: 0.5px solid var(--rule); }
   .cred:last-child { border-right: none; }
-  .cred-company {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
+  .cred-company { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
   .cred-role { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem; }
   .cred-detail { font-size: 0.85rem; color: var(--ink-mid); }
-
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
   @media (max-width: 760px) { .contact-inner { grid-template-columns: 1fr; gap: 2rem; } }
-
-  .contact-lead {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 400;
-    line-height: 1.3;
-    color: var(--ink);
-  }
+  .contact-lead { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.3; color: var(--ink); }
   .contact-lead em { font-style: italic; color: var(--gold); }
-
-  .contact-item {
-    display: flex; flex-direction: column;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 0.5px solid var(--rule);
-  }
+  .contact-item { display: flex; flex-direction: column; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--rule); }
   .contact-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .contact-type {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.3rem;
-  }
-  .contact-value {
-    font-size: 1rem;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold-light);
-    display: inline;
-    transition: border-color 0.2s;
-  }
+  .contact-type { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; }
+  .contact-value { font-size: 1rem; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold-light); display: inline; transition: border-color 0.2s; }
   .contact-value:hover { border-color: var(--gold); }
   .contact-value.no-border { border-bottom: none; }
-
-  footer {
-    border-top: 0.5px solid var(--rule);
-    padding: 2rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: var(--ink-light);
-    letter-spacing: 0.06em;
-  }
-
-  @media (max-width: 600px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    section { padding: 3rem 1.5rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  footer { border-top: 0.5px solid var(--rule); padding: 2rem 3rem; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-light); letter-spacing: 0.06em; }
+  @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .hero { padding: 6rem 1.5rem 3rem; } section { padding: 3rem 1.5rem; } footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .hero-inner > * { animation: fadeUp 0.7s ease both; }
   .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
   .hero-inner > *:nth-child(2) { animation-delay: 0.25s; }
@@ -339,7 +88,7 @@
 
 <nav>
   <a href="#" class="nav-logo">Stacks Advisory</a>
-  <a href="/cdn-cgi/l/email-protection#9bf1f4f5dbe8effaf8f0e8faffedf2e8f4e9e2b5f8f4f6" class="nav-cta"><span class="__cf_email__" data-cfemail="e68c8988a6959287858d958782908f9589949fc885898b">[email&#160;protected]</span></a>
+  <a href="mailto:jon@stacksadvisory.com" class="nav-cta">jon@stacksadvisory.com</a>
 </nav>
 
 <div class="hero">
@@ -348,7 +97,7 @@
     <h1>Building the commercial<br>architecture that <em>Stacks.</em></h1>
     <p class="hero-sub">20+ years leading enterprise sales, GTM strategy, and commercial operations across life sciences — from Thermo Fisher and Takara Bio to genomics platforms and biopharma SaaS. I help science-driven companies build the systems, teams, and strategies that turn breakthrough technology into durable revenue.</p>
     <div class="hero-actions">
-      <a href="/cdn-cgi/l/email-protection#701a1f1e30030411131b0311140619031f02095e131f1d" class="btn-primary">Start a conversation</a>
+      <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" class="btn-primary">Book an intro call</a>
       <a href="#work" class="btn-ghost">See the work</a>
     </div>
   </div>
@@ -485,10 +234,28 @@
     <div class="contact-details">
       <div class="contact-item">
         <span class="contact-type">Email</span>
-        <a href="/cdn-cgi/l/email-protection#83e9ecedc3f0f7e2e0e8f0e2e7f5eaf0ecf1faade0ecee" class="contact-value"><span class="__cf_email__" data-cfemail="2b4144456b585f4a4840584a4f5d425844595205484446">[email&#160;protected]</span></a>
+        <a href="mailto:jon@stacksadvisory.com" class="contact-value">jon@stacksadvisory.com</a>
       </div>
       <div class="contact-item">
         <span class="contact-type">LinkedIn</span>
         <a href="https://www.linkedin.com/in/jon-stacks" target="_blank" class="contact-value">linkedin.com/in/jon-stacks</a>
       </div>
-      <div class="contact-item"
+      <div class="contact-item">
+        <span class="contact-type">Location</span>
+        <span class="contact-value no-border">Denver, CO · Available nationally</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Schedule a call</span>
+        <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" class="btn-calendly">Book a 30-minute intro →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Stacks Advisory</span>
+  <span>Life Sciences · Commercial Strategy · Denver, CO</span>
+</footer>
+
+</body>
+</html>
