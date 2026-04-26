@@ -3,279 +3,1234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jon Stacks — Professional Profile</title>
+<title>Stacks Advisory | Commercial Transformation for Life Sciences</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream:   #F5F0E8;
-    --ink:     #1A1814;
-    --rust:    #C4501A;
-    --forest:  #2C4A3E;
-    --sand:    #E8E0D0;
-    --muted:   #7A7060;
-    --card-bg: #FFFFFF;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-  }
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --navy:      #0D1B2A;
+  --deep:      #0A1520;
+  --teal:      #00A896;
+  --seafoam:   #02C39A;
+  --ice:       #C8E6E3;
+  --cream:     #F5F1EA;
+  --warm-white:#FAFAF7;
+  --slate:     #4A5568;
+  --muted:     #8E9CAD;
+  --gold:      #C9A84C;
+  --red-soft:  #E05555;
+  --blue-soft: #5599E0;
+  --purple:    #8855E0;
+  --border-dark: rgba(0,168,150,0.18);
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+}
 
-  /* ── nav ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--cream);
-    border-bottom: 1px solid var(--sand);
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 4rem;
-  }
-  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem;
-    letter-spacing: 0.08em; text-transform: uppercase; transition: color .2s; }
-  .nav-links a:hover { color: var(--rust); }
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+button { font-family: var(--sans); }
 
-  /* ── hero ── */
-  .hero {
-    max-width: 1100px; margin: 0 auto;
-    padding: 7rem 4rem 5rem;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-  }
-  .hero-eyebrow {
-    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--rust); margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .hero-eyebrow::after {
-    content: ''; display: block; height: 1px; width: 3rem; background: var(--rust);
-  }
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    line-height: 1.1; font-weight: 400;
-    margin-bottom: 0.5rem;
-  }
-  h1 em { color: var(--forest); font-style: italic; }
-  .hero-title {
-    font-size: 0.9rem; color: var(--muted); letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-summary { font-size: 1.05rem; color: var(--ink); opacity: .85; max-width: 42ch; }
-  .hero-cta {
-    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
-  }
-  .btn {
-    padding: .75rem 1.75rem; border-radius: 2px; font-size: 0.85rem;
-    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
-    transition: all .2s;
-  }
-  .btn-primary { background: var(--rust); color: #fff; }
-  .btn-primary:hover { background: #a83e12; }
-  .btn-secondary { border: 1px solid var(--ink); color: var(--ink); }
-  .btn-secondary:hover { background: var(--ink); color: var(--cream); }
+/* ─────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────── */
+.eyebrow {
+  display: block;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.serif { font-family: var(--serif); }
+.teal  { color: var(--teal); }
 
-  /* hero right — stats */
-  .stats-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px;
-    background: var(--sand); border: 1px solid var(--sand);
-  }
-  .stat {
-    background: var(--card-bg); padding: 2rem 1.5rem;
-    display: flex; flex-direction: column;
-  }
-  .stat-num {
-    font-family: 'DM Serif Display', serif; font-size: 2.4rem;
-    color: var(--forest); line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem;
-    letter-spacing: 0.05em;
-  }
+/* ─────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 3px; border: none; cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-ghost-light { background: transparent; color: var(--cream); border: 1px solid rgba(245,241,234,0.22); }
+.btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
+.btn-ghost-dark  { background: transparent; color: var(--navy); border: 1px solid rgba(13,27,42,0.25); }
+.btn-ghost-dark:hover  { border-color: var(--teal); color: var(--teal); }
 
-  /* ── section shell ── */
-  section { max-width: 1100px; margin: 0 auto; padding: 5rem 4rem; }
-  .section-eyebrow {
-    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--rust); margin-bottom: 3rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-eyebrow::after {
-    content: ''; display: block; height: 1px; flex: 1; background: var(--sand);
-  }
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(13,27,42,0.97);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0,168,150,0.14);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.25rem; color: var(--cream); letter-spacing: 0.03em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--teal); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-links a:hover { color: var(--teal); }
 
-  /* ── capabilities ── */
-  .caps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5px; background: var(--sand);
-    border: 1px solid var(--sand);
-  }
-  .cap-card {
-    background: var(--card-bg); padding: 2rem;
-    transition: background .2s;
-  }
-  .cap-card:hover { background: #faf7f2; }
-  .cap-tag {
-    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--rust); display: block; margin-bottom: 0.75rem;
-  }
-  .cap-card h3 {
-    font-family: 'DM Serif Display', serif; font-size: 1.15rem;
-    font-weight: 400; margin-bottom: 0.75rem; line-height: 1.3;
-  }
-  .cap-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5rem;
+  padding: 8rem 3rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 72% 38%, rgba(0,168,150,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 18% 78%, rgba(2,195,154,0.05) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,168,150,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,168,150,0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-label {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid rgba(0,168,150,0.35);
+  padding: 0.3rem 0.85rem; border-radius: 2px;
+  margin-bottom: 1.8rem;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  line-height: 1.13; color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.hero h1 em { font-style: italic; color: var(--teal); }
+.hero-sub {
+  font-size: 1rem; font-weight: 300; line-height: 1.8;
+  color: rgba(245,241,234,0.7);
+  max-width: 480px; margin-bottom: 1.2rem;
+}
+.hero-tagline {
+  font-size: 0.88rem; font-weight: 400; font-style: italic;
+  color: rgba(245,241,234,0.45);
+  line-height: 1.6; margin-bottom: 2.4rem;
+  border-left: 2px solid rgba(0,168,150,0.38);
+  padding-left: 0.85rem; max-width: 480px;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  /* ── domain tags ── */
-  .tags-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .domain-tag {
-    font-size: 0.78rem; letter-spacing: 0.06em;
-    border: 1px solid var(--sand); padding: 0.4rem 0.9rem;
-    color: var(--forest); background: var(--card-bg);
-    transition: all .2s;
-  }
-  .domain-tag:hover { background: var(--forest); color: var(--cream); }
+/* Hero diagram */
+.hero-diagram { position: relative; z-index: 1; }
+.diagram-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+.frag-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.frag-node {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px; padding: 0.65rem 0.4rem;
+  text-align: center;
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.04em;
+  color: rgba(245,241,234,0.5);
+  animation: fragPulse 4s ease-in-out infinite;
+}
+.frag-node:nth-child(2) { animation-delay: 0.5s; }
+.frag-node:nth-child(3) { animation-delay: 1.0s; }
+.frag-node:nth-child(4) { animation-delay: 1.5s; }
+.frag-node:nth-child(5) { animation-delay: 0.8s; }
+.frag-node:nth-child(6) { animation-delay: 1.3s; }
+.frag-node:nth-child(7) { animation-delay: 0.3s; }
+.frag-node:nth-child(8) { animation-delay: 1.8s; }
+@keyframes fragPulse {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 0.9; }
+}
+.vs-row {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem;
+}
+.vs-line { flex: 1; height: 1px; background: rgba(0,168,150,0.28); }
+.vs-chip {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 0.22rem 0.65rem; border-radius: 2px;
+}
+.unified-node {
+  background: linear-gradient(135deg, rgba(0,168,150,0.13), rgba(2,195,154,0.06));
+  border: 1px solid rgba(0,168,150,0.42);
+  border-radius: 8px; padding: 1.1rem 1.3rem;
+  display: flex; align-items: center; gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+.unified-dot {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--teal), var(--seafoam));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.unified-title { font-size: 0.82rem; font-weight: 600; color: var(--cream); margin-bottom: 0.18rem; }
+.unified-desc  { font-size: 0.71rem; color: var(--muted); line-height: 1.5; }
+.kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.kpi-chip {
+  background: rgba(0,168,150,0.09);
+  border: 1px solid rgba(0,168,150,0.22);
+  border-radius: 5px; padding: 0.55rem; text-align: center;
+}
+.kpi-val {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--teal);
+  display: block; line-height: 1.1; margin-bottom: 0.15rem;
+}
+.kpi-lbl {
+  font-size: 0.61rem; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
 
-  /* ── career ── */
-  .career-entry {
-    border-left: 2px solid var(--sand); padding-left: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .career-meta {
-    font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem;
-    display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap;
-  }
-  .career-years {
-    font-size: 0.78rem; color: var(--muted); font-weight: 300;
-  }
-  .career-entry p { font-size: 0.88rem; color: var(--muted); }
+/* trust strip */
+.trust {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(0,168,150,0.12);
+  padding: 1rem 3rem;
+}
+.trust-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.trust-label {
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; flex-shrink: 0;
+}
+.trust-rule { width: 1px; height: 16px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.trust-logos { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.trust-co {
+  font-size: 0.77rem; font-weight: 500; letter-spacing: 0.05em;
+  color: rgba(245,241,234,0.32);
+  transition: color 0.2s; white-space: nowrap;
+}
+.trust-co:hover { color: rgba(245,241,234,0.65); }
 
-  /* ── sources ── */
-  .sources-list {
-    font-family: 'DM Sans', monospace; font-size: 0.8rem; color: var(--muted);
-  }
-  .source-item {
-    padding: 0.5rem 0; border-bottom: 1px solid var(--sand);
-  }
-  .source-item:last-child { border-bottom: none; }
+/* who we work with */
+.who {
+  background: var(--cream);
+  padding: 4rem 3rem;
+  border-bottom: 1px solid rgba(13,27,42,0.07);
+}
+.who-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 3.5rem; align-items: center;
+}
+.who h2 {
+  font-family: var(--serif);
+  font-size: 1.9rem; line-height: 1.2; color: var(--navy);
+}
+.who h2 em { font-style: italic; color: var(--teal); }
+.who-cards {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.who-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 8px; padding: 1.4rem 1.2rem;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+.who-card:hover {
+  box-shadow: 0 8px 28px rgba(0,168,150,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(0,168,150,0.3);
+}
+.who-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.who-title {
+  font-size: 0.88rem; font-weight: 600; color: var(--navy);
+  margin-bottom: 0.35rem; line-height: 1.3;
+}
+.who-desc { font-size: 0.78rem; color: var(--slate); line-height: 1.6; }
 
-  /* ── contact ── */
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  }
-  .contact-block h3 {
-    font-family: 'DM Serif Display', serif; font-size: 1.8rem;
-    font-weight: 400; margin-bottom: 1rem;
-  }
-  .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
-  .contact-links a {
-    color: var(--forest); text-decoration: none; font-size: 0.9rem;
-    transition: color .2s;
-  }
-  .contact-links a:hover { color: var(--rust); }
+/* ─────────────────────────────────────────
+   SECTION SHELL
+───────────────────────────────────────── */
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3.5rem; }
+.section-header p {
+  font-size: 1rem; font-weight: 300; line-height: 1.8;
+  color: var(--slate); max-width: 560px; margin-top: 0.9rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  line-height: 1.18; color: var(--navy);
+}
+.section-title em { font-style: italic; color: var(--teal); }
 
-  /* ── footer ── */
-  footer {
-    border-top: 1px solid var(--sand); text-align: center;
-    padding: 2rem; font-size: 0.78rem; color: var(--muted);
-  }
+/* ─────────────────────────────────────────
+   PROBLEM
+───────────────────────────────────────── */
+.problem { background: var(--navy); }
+.problem .section-title { color: var(--cream); }
+.problem .section-header p { color: rgba(245,241,234,0.62); }
 
-  /* ── divider ── */
-  .divider { border: none; border-top: 1px solid var(--sand); }
+.problem-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; align-items: start;
+}
+.problem-list { display: flex; flex-direction: column; gap: 0.9rem; }
+.problem-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.1rem 1.3rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 6px 6px 0;
+  transition: background 0.2s;
+}
+.problem-item:hover { background: rgba(0,168,150,0.05); }
+.problem-item:nth-child(1) { border-left-color: var(--red-soft); }
+.problem-item:nth-child(2) { border-left-color: #E09055; }
+.problem-item:nth-child(3) { border-left-color: var(--gold); }
+.problem-item:nth-child(4) { border-left-color: var(--purple); }
+.problem-item:nth-child(5) { border-left-color: var(--blue-soft); }
+.problem-item:nth-child(6) { border-left-color: var(--teal); }
+.pi-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+.pi-title { font-size: 0.88rem; font-weight: 600; color: var(--cream); margin-bottom: 0.2rem; }
+.pi-desc  { font-size: 0.79rem; color: rgba(245,241,234,0.52); line-height: 1.6; }
 
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
-    section { padding: 3rem 1.5rem; }
-    nav { padding: 1rem 1.5rem; }
-    .contact-grid { grid-template-columns: 1fr; }
-  }
+.problem-visual {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,168,150,0.14);
+  border-radius: 10px; padding: 1.8rem;
+}
+.pv-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.3rem;
+}
+.pv-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+.pv-step { display: flex; align-items: center; gap: 0.7rem; }
+.pv-badge {
+  font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.28rem 0.65rem;
+  border-radius: 3px; min-width: 88px; text-align: center; flex-shrink: 0;
+}
+.badge-red    { background: rgba(224,85,85,0.14);  color: var(--red-soft);  border: 1px solid rgba(224,85,85,0.28); }
+.badge-orange { background: rgba(224,144,85,0.14); color: #E09055;          border: 1px solid rgba(224,144,85,0.28); }
+.badge-teal   { background: rgba(0,168,150,0.14);  color: var(--teal);      border: 1px solid rgba(0,168,150,0.28); }
+.pv-arrow { color: rgba(255,255,255,0.25); font-size: 0.75rem; flex-shrink: 0; }
+.pv-node {
+  font-size: 0.74rem; color: rgba(245,241,234,0.65);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px; padding: 0.3rem 0.65rem;
+}
+.leak-box {
+  background: rgba(224,85,85,0.06);
+  border: 1px solid rgba(224,85,85,0.2);
+  border-radius: 6px; padding: 1rem;
+}
+.leak-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--red-soft); margin-bottom: 0.6rem;
+}
+.leak-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.leak-tag {
+  font-size: 0.67rem; color: rgba(224,85,85,0.8);
+  border: 1px solid rgba(224,85,85,0.2);
+  background: rgba(224,85,85,0.05);
+  padding: 0.18rem 0.55rem; border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────
+   HOW WE HELP — PILLARS
+───────────────────────────────────────── */
+.help { background: var(--cream); }
+
+.pillars {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;
+}
+.pillar {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 10px; padding: 1.8rem 1.5rem;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.22s, transform 0.18s;
+}
+.pillar:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.pillar-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.accent-teal   { background: var(--teal); }
+.accent-gold   { background: var(--gold); }
+.accent-blue   { background: var(--blue-soft); }
+.accent-purple { background: var(--purple); }
+.pillar-num {
+  font-family: var(--serif); font-size: 2.4rem; line-height: 1;
+  color: rgba(13,27,42,0.06);
+  position: absolute; top: 1.1rem; right: 1.2rem;
+}
+.pillar-icon { font-size: 1.7rem; margin-bottom: 1rem; }
+.pillar-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.pillar-body  { font-size: 0.81rem; color: var(--slate); line-height: 1.7; }
+
+/* ─────────────────────────────────────────
+   OFFERS — concrete, buyable
+───────────────────────────────────────── */
+.offers { background: white; }
+
+.offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.offer-card {
+  border: 1px solid var(--border-light);
+  border-radius: 10px; padding: 2rem 1.8rem;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.22s, border-color 0.22s;
+}
+.offer-card:hover {
+  box-shadow: 0 10px 36px rgba(0,168,150,0.1);
+  border-color: rgba(0,168,150,0.3);
+}
+.offer-card.featured {
+  background: var(--navy);
+  border-color: rgba(0,168,150,0.35);
+}
+.offer-badge {
+  display: inline-block; align-self: flex-start;
+  font-size: 0.63rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 0.22rem 0.65rem;
+  border-radius: 2px; margin-bottom: 1.2rem;
+}
+.badge-standard { background: rgba(0,168,150,0.1);  color: var(--teal);  border: 1px solid rgba(0,168,150,0.2); }
+.badge-featured { background: var(--teal); color: var(--navy); }
+.badge-project  { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+.offer-title {
+  font-family: var(--serif); font-size: 1.3rem; color: var(--navy);
+  margin-bottom: 0.5rem; line-height: 1.2;
+}
+.offer-card.featured .offer-title { color: var(--cream); }
+.offer-sub {
+  font-size: 0.8rem; color: var(--slate); margin-bottom: 1.4rem; line-height: 1.5;
+}
+.offer-card.featured .offer-sub { color: rgba(245,241,234,0.58); }
+.offer-items { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; flex: 1; margin-bottom: 1.6rem; }
+.offer-items li {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  font-size: 0.81rem; color: var(--slate); line-height: 1.55;
+}
+.offer-card.featured .offer-items li { color: rgba(245,241,234,0.68); }
+.offer-items li::before { content: '→'; color: var(--teal); flex-shrink: 0; font-weight: 600; }
+
+/* ─────────────────────────────────────────
+   PROCESS
+───────────────────────────────────────── */
+.process { background: var(--cream); }
+
+.process-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 0; position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute; top: 39px; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,168,150,0.4), transparent);
+}
+.ps { text-align: center; padding: 0 0.8rem; }
+.ps-ring {
+  width: 78px; height: 78px; border-radius: 50%;
+  margin: 0 auto 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  background: white;
+  border: 2px solid var(--ice);
+  box-shadow: 0 3px 16px rgba(0,168,150,0.09);
+  position: relative; z-index: 1;
+  transition: border-color 0.22s, box-shadow 0.22s;
+}
+.ps:hover .ps-ring { border-color: var(--teal); box-shadow: 0 3px 22px rgba(0,168,150,0.22); }
+.ps-num {
+  position: absolute; top: -5px; right: -5px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--teal); color: var(--navy);
+  font-size: 0.62rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.ps-title { font-size: 0.87rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+.ps-desc  { font-size: 0.77rem; color: var(--slate); line-height: 1.6; }
+
+/* ─────────────────────────────────────────
+   IMPACT / PROOF
+───────────────────────────────────────── */
+.impact { background: var(--navy); }
+.impact .section-title { color: var(--cream); }
+.impact .section-header p { color: rgba(245,241,234,0.62); }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 2.5rem; }
+.stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,168,150,0.14);
+  border-radius: 8px; padding: 1.6rem 1.3rem; text-align: center;
+  transition: border-color 0.22s;
+}
+.stat:hover { border-color: rgba(0,168,150,0.38); }
+.stat-val {
+  font-family: var(--serif); font-size: 2.6rem; line-height: 1;
+  color: var(--teal); margin-bottom: 0.45rem; display: block;
+}
+.stat-lbl { font-size: 0.78rem; color: rgba(245,241,234,0.5); line-height: 1.5; }
+
+.cases { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.case {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 1.7rem;
+  transition: border-color 0.22s;
+}
+.case:hover { border-color: rgba(0,168,150,0.28); }
+.case-tag {
+  display: inline-block;
+  font-size: 0.63rem; font-weight: 700; letter-spacing: 0.11em;
+  text-transform: uppercase; padding: 0.22rem 0.65rem;
+  border-radius: 2px; margin-bottom: 0.9rem;
+}
+.tag-biopharma { background: rgba(0,168,150,0.14);  color: var(--teal); }
+.tag-meddev    { background: rgba(85,153,224,0.14);  color: var(--blue-soft); }
+.tag-genomics  { background: rgba(136,85,224,0.14);  color: var(--purple); }
+.tag-cgt       { background: rgba(201,168,76,0.14);  color: var(--gold); }
+.case-title { font-size: 0.95rem; font-weight: 600; color: var(--cream); margin-bottom: 0.6rem; }
+.case-body  { font-size: 0.8rem; color: rgba(245,241,234,0.52); line-height: 1.7; margin-bottom: 1rem; }
+.case-result {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-size: 0.79rem; color: var(--teal); font-weight: 500;
+}
+.case-result::before { content: '▲'; font-size: 0.65rem; }
+
+/* ─────────────────────────────────────────
+   EXPERTISE / BIO
+───────────────────────────────────────── */
+.expertise { background: var(--warm-white); }
+
+.expertise-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+.exp-list { display: flex; flex-direction: column; gap: 0.9rem; }
+.exp-item {
+  display: flex; gap: 1.1rem; align-items: flex-start;
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 8px; padding: 1.1rem;
+  transition: box-shadow 0.2s;
+}
+.exp-item:hover { box-shadow: 0 5px 20px rgba(0,168,150,0.09); }
+.exp-ico {
+  width: 40px; height: 40px; border-radius: 7px; flex-shrink: 0;
+  background: rgba(0,168,150,0.08); border: 1px solid rgba(0,168,150,0.18);
+  display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
+}
+.exp-name { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+.exp-desc { font-size: 0.78rem; color: var(--slate); line-height: 1.6; }
+
+.bio {
+  background: var(--navy); border-radius: 12px;
+  padding: 2.4rem; position: relative; overflow: hidden;
+}
+.bio::after {
+  content: '';
+  position: absolute; bottom: -50px; right: -50px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,168,150,0.1), transparent);
+  pointer-events: none;
+}
+.bio-name  { font-family: var(--serif); font-size: 1.55rem; color: var(--cream); margin-bottom: 0.3rem; }
+.bio-role  {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 1.3rem;
+}
+.bio-body  {
+  font-size: 0.86rem; font-weight: 300; line-height: 1.82;
+  color: rgba(245,241,234,0.68); margin-bottom: 1.5rem;
+}
+.bio-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.bio-tag {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+  background: rgba(0,168,150,0.09); color: rgba(245,241,234,0.75);
+  border: 1px solid rgba(0,168,150,0.18);
+  padding: 0.28rem 0.65rem; border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────
+   CTA
+───────────────────────────────────────── */
+.cta {
+  background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028);
+  padding: 7rem 3rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent);
+}
+.cta-inner { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; }
+.cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem;
+}
+.cta h2 em { font-style: italic; color: var(--teal); }
+.cta p {
+  font-size: 1rem; font-weight: 300; color: rgba(245,241,234,0.62);
+  line-height: 1.78; margin-bottom: 2.4rem;
+}
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-bridge {
+  font-size: 0.85rem; font-style: italic;
+  color: rgba(0,168,150,0.7) !important;
+  margin-bottom: 1rem !important;
+  letter-spacing: 0.01em;
+}
+
+/* why stacks advisory */
+.why { background: var(--navy); }
+.why .section-title { color: var(--cream); }
+.why .section-header p { color: rgba(245,241,234,0.58); }
+.why-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;
+}
+.why-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,168,150,0.12);
+  border-radius: 10px; padding: 1.8rem 1.5rem;
+  transition: border-color 0.22s, background 0.22s;
+}
+.why-card:hover {
+  border-color: rgba(0,168,150,0.35);
+  background: rgba(0,168,150,0.04);
+}
+.why-icon { font-size: 1.5rem; margin-bottom: 0.9rem; }
+.why-title {
+  font-size: 0.9rem; font-weight: 600; color: var(--cream);
+  margin-bottom: 0.5rem; line-height: 1.3;
+}
+.why-desc { font-size: 0.8rem; color: rgba(245,241,234,0.5); line-height: 1.7; }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer {
+  background: #060D14; padding: 2.2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
+.footer-logo span { color: var(--teal); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a {
+  font-size: 0.72rem; color: rgba(245,241,234,0.3);
+  text-decoration: none; transition: color 0.18s;
+}
+.footer-links a:hover { color: var(--teal); }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 960px) {
+  .nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+
+  .hero { grid-template-columns: 1fr; padding: 5.5rem 1.5rem 3rem; gap: 2.5rem; }
+  .hero-diagram { display: none; }
+
+  .who { padding: 3rem 1.5rem; }
+  .who-inner { grid-template-columns: 1fr; gap: 1.8rem; }
+  .who-cards { grid-template-columns: 1fr 1fr; }
+
+  .section { padding: 4rem 1.5rem; }
+
+  .problem-layout  { grid-template-columns: 1fr; gap: 2rem; }
+  .pillars         { grid-template-columns: 1fr 1fr; }
+  .offer-grid      { grid-template-columns: 1fr; }
+  .process-steps   { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .process-steps::before { display: none; }
+  .stats           { grid-template-columns: 1fr 1fr; }
+  .cases           { grid-template-columns: 1fr; }
+  .expertise-layout{ grid-template-columns: 1fr; gap: 2.5rem; }
+  .why-grid        { grid-template-columns: 1fr 1fr; }
+
+  .footer { flex-direction: column; text-align: center; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">Jon <em style="font-family:'DM Serif Display',serif;font-style:italic">Stacks</em></div>
-  <div class="nav-links">
-    <a href="#capabilities">Capabilities</a>
-    <a href="#career">Career</a>
-    <a href="#contact">Contact</a>
-  </div>
+<!-- ── NAV ────────────────────────────────── -->
+<nav class="nav">
+  <a class="nav-logo" href="#">stacks<span>.</span>advisory</a>
+  <ul class="nav-links">
+    <li><a href="#who">Who We Help</a></li>
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#offers">Engagements</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#expertise">About</a></li>
+  </ul>
+  <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-primary">Start a Conversation</a>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Denver, CO</div>
-    <h1>Jon <em>Stacks</em></h1>
-    <div class="hero-title">Founder & Senior Commercial Advisor</div>
-    <p class="hero-summary">Twenty years at the intersection of life science discovery and enterprise commercial scale — from bench-adjacent genomics tools to a $367M global pharma revenue base. Now building the commercial infrastructure that emerging biotech ventures need to grow.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">Book a Call</a>
-      <a class="btn btn-secondary" href="mailto:jon@stacksadvisory.com">Email Me</a>
+<!-- ── HERO ───────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <span class="hero-label">Commercial Transformation · Life Sciences</span>
+    <h1>
+      Fragmented data.<br>
+      Disconnected decisions.<br>
+      <em>Untapped value.</em>
+    </h1>
+    <p class="hero-sub">
+      We help growth-stage life sciences companies build commercial infrastructure, execute GTM strategy, and convert scientific complexity into revenue.
+    </p>
+    <p class="hero-tagline">We work where scientific complexity, fragmented systems, and commercial growth intersect.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="#who" class="btn btn-ghost-light">View Our Approach</a>
     </div>
   </div>
-  <div class="stats-grid"><div class="stat"><span class="stat-num">20+</span><span class="stat-label">Years Enterprise Life Sciences</span></div><div class="stat"><span class="stat-num">$367M</span><span class="stat-label">Revenue Base Managed</span></div><div class="stat"><span class="stat-num">26</span><span class="stat-label">Global Pharma Accounts</span></div><div class="stat"><span class="stat-num">#18</span><span class="stat-label">First Sales Hire · L7 Informatics</span></div></div>
-</div>
 
-<hr class="divider">
-
-<!-- CAPABILITIES -->
-<section id="capabilities">
-  <div class="section-eyebrow">Capabilities</div>
-  <div class="caps-grid"><div class="cap-card"><span class="cap-tag">Commercial Architecture</span><h3>Building Revenue Infrastructure from Scratch</h3><p>Designed and deployed full commercial functions at pre-scale organizations — CRM selection, territory design, sales playbooks, hiring profiles, and onboarding. Closed the first five logos at L7 Informatics before building the team that scaled to 25+ clients.</p></div><div class="cap-card"><span class="cap-tag">Enterprise Account Strategy</span><h3>Managing Complex, Multi-Stakeholder Accounts</h3><p>Stewarded a $367M global pharma revenue base across 26 enterprise accounts at Thermo Fisher Scientific, navigating post-M&A integration, multi-divisional alignment, and C-suite relationships across major biopharma organizations.</p></div><div class="cap-card"><span class="cap-tag">Scientific Fluency</span><h3>Credibility Across Genomics & Cell Biology</h3><p>Molecular biology foundation (BA, CU Boulder) enables genuine technical dialogue with scientists and R&D leaders. Fluent across NGS workflows, cell/gene therapy, CRISPR, liquid biopsy, and lab informatics.</p></div><div class="cap-card"><span class="cap-tag">BD & Partnerships</span><h3>Structuring Strategic Relationships</h3><p>Execution-level BD for early-stage ventures — LOI development, partner qualification, outreach sequencing, and meeting documentation. Currently supporting Codebreaker Labs Pioneer Program partnerships with academic medical centers and genomics platforms.</p></div><div class="cap-card"><span class="cap-tag">Go-to-Market Strategy</span><h3>Positioning for Emerging Life Science Markets</h3><p>Deep experience sizing and entering new verticals — from genomics tools to lab SaaS to causal genomics data-as-a-service. Comfortable with ambiguity, first-principles market mapping, and building narrative before proof points exist.</p></div><div class="cap-card"><span class="cap-tag">Founder Operating</span><h3>Building Stacks Advisory</h3><p>Launched and operating Stacks Advisory, a commercial infrastructure consultancy for life science ventures. Full-stack founder work: brand, web, content strategy, client development, and delivery — building inbound through a 40-post LinkedIn thought leadership program.</p></div><div class="cap-card"><span class="cap-tag">21 CFR Part 11</span><h3>Regulatory Compliance & Quality Systems</h3><p>Demonstrates deep familiarity with FDA 21 CFR Part 11 requirements for electronic records and signatures in life sciences settings. Understands the practical implementation of compliance frameworks including audit trails, timestamp validation, protocol revision control, and closed-loop data integrity for discovery and development-stage automation systems.</p></div><div class="cap-card"><span class="cap-tag">LIMS Implementation</span><h3>Laboratory Information Management Systems</h3><p>Deep expertise in LIMS solutions that streamline integrated laboratory processes and facilitate communication between lab technicians, managers, bioinformaticians, and scientists. Experience with configurable workflow applications including sample tracking, inventory management, and instrument integration.</p></div><div class="cap-card"><span class="cap-tag">Data Provenance</span><h3>Scientific Data Provenance & Traceability</h3><p>Knowledge of full data provenance tracking from instrument connectors through QC and mapping pipelines to experiment-specific analyses. Expertise in maintaining audit trails that enable compliance with FDA, CAP, and CLIA regulatory requirements.</p></div><div class="cap-card"><span class="cap-tag">Healthcare Compliance</span><h3>Healthcare Professional Interactions & Ethics Compliance</h3><p>Deep familiarity with federal and state healthcare compliance frameworks including anti-kickback statutes, AdvaMed Code standards, and FDA regulations governing medical device company interactions with healthcare professionals. Experience with policies governing HCP training, educational grants, meals, and transparency requirements.</p></div><div class="cap-card"><span class="cap-tag">Government Contracts</span><h3>Federal Government Contract Compliance</h3><p>Experience operating under Federal Acquisition Regulations (FAR) and government contract compliance programs. Understanding of audit requirements, ethics reporting systems, and compliance certification processes for federal, state, and local government procurement.</p></div><div class="cap-card"><span class="cap-tag">Open vs Closed Systems</span><h3>Regulatory System Classification Strategy</h3><p>Expertise in evaluating and classifying laboratory automation systems under FDA open/closed system definitions. Understands that most real-world discovery systems qualify as open systems due to shared credentials or external database dependencies, requiring enhanced authentication and integrity controls.</p></div><div class="cap-card"><span class="cap-tag">Audit Trail Design</span><h3>Secure Audit Trail Implementation</h3><p>Knowledge of designing secure, computer-generated, time-stamped audit trails that preserve record history without obscuring prior data. Includes understanding of NIST clock synchronization for legally defensible timestamps supporting patent filings and regulatory submissions.</p></div><div class="cap-card"><span class="cap-tag">Closed-Loop Automation</span><h3>Fail-Safe Data Import Architecture</h3><p>Understands closed-loop automation design principles where database records are only created upon instrument confirmation of completed processes. Expertise in transaction processing rollback mechanisms to prevent partial or corrupted data entry during system failures.</p></div><div class="cap-card"><span class="cap-tag">ESP Platform Expertise</span><h3>L7 ESP Ecosystem Knowledge</h3><p>Deep familiarity with L7 ESP's modular architecture including LIMS, Analysis, Containers, Inventory, and Data applications. Understands how native integration across ESP applications enables comprehensive laboratory operations tracking and workflow management.</p></div><div class="cap-card"><span class="cap-tag">User-Defined Workflows</span><h3>Custom Workflow Development</h3><p>Experience with configurable LIMS solutions that allow user-defined workflows without requiring vendor professional services. Enables labs to develop custom solutions matching specific operational needs while minimizing implementation downtime.</p></div><div class="cap-card"><span class="cap-tag">Advanced Queue Management</span><h3>Work Queue Customization</h3><p>Knowledge of advanced queuing systems for managing and tracking complex laboratory workflows. Expertise in configuring customized work queues that optimize technician productivity and workflow visibility.</p></div><div class="cap-card"><span class="cap-tag">Precision Medicine Platforms</span><h3>Longitudinal Patient Data Integration</h3><p>Connected patient registries with biomarkers, RNA sequencing data, and analytical instrument results within unified platforms. Enabled tracking of differentially expressed lncRNAs over time to accelerate understanding of transcriptional regulation factors.</p></div><div class="cap-card"><span class="cap-tag">Research-Clinical Translation</span><h3>Bridging Research to Clinical Outcomes</h3><p>Positioned platforms to overcome impedance between genomic research results and clinical/patient relevance. Facilitated collaboration between researchers, physicians, nurses, and informaticians on single operational platforms with full audit capabilities.</p></div><div class="cap-card"><span class="cap-tag">Multi-Modal Data Management</span><h3>Comprehensive Biomedical Data Integration</h3><p>Managed systems integrating patient registries, wet lab workflows, analytics, sequencing data, consent tracking, EMR connections, and sample provenance. Supported tagging of patient samples with metadata and supplemental imaging from FACS and radiology.</p></div><div class="cap-card"><span class="cap-tag">Longitudinal Study Design</span><h3>Multi-Timepoint Clinical Research Architecture</h3><p>Designed longitudinal research frameworks capturing dynamic immune responses, infection progression, and structural lung changes over time in pediatric CF populations. Integrated clinical phenotyping with molecular profiling across multiple disease stages.</p></div><div class="cap-card"><span class="cap-tag">Innate Immunity Research</span><h3>Host-Pathogen Immune Dysregulation Analysis</h3><p>Deep expertise in CF innate immune dysfunction, including monocyte tolerance mechanisms, cytokine imbalances, and the interplay between CFTR defects and inflammatory signaling. Understanding of how systemic factors alter circulating immune cell transcriptional profiles.</p></div><div class="cap-card"><span class="cap-tag">Epigenetic Mechanisms</span><h3>Chromatin Remodeling and Trained Immunity</h3><p>Knowledge of epigenetic regulation in immune cells, including histone modifications at enhancers and promoters that govern inflammatory gene expression. Familiar with chromatin accessibility states underlying trained immunity phenotypes.</p></div><div class="cap-card"><span class="cap-tag">CRM Architecture</span><h3>CRM System Design & Administration</h3><p>Design and administer Salesforce and HubSpot CRM systems from the ground up. Built architecture supporting 500+ contacts with deal desk workflows, standardized stage criteria, and DocuSign automation achieving 95% contract completion rates.</p></div><div class="cap-card"><span class="cap-tag">Revenue Operations</span><h3>End-to-End RevOps Infrastructure</h3><p>Build commercial operating systems that improve forecast accuracy, pipeline hygiene, and scalable execution. Implement quote-to-cash optimization, approval workflows, and data governance reducing cycle time by 40%.</p></div><div class="cap-card"><span class="cap-tag">KPI Dashboard Development</span><h3>Executive Reporting & QBR Cadence</h3><p>Deploy Tableau and BI dashboards tracking pipeline health, conversion rates, cycle time, and win/loss analysis. Establish quarterly business review operating rhythms that improve deal velocity and cross-functional alignment.</p></div><div class="cap-card"><span class="cap-tag">Master Data Management</span><h3>Data Governance & Integrity</h3><p>Establish data governance policies and master data management practices ensuring CRM integrity, accurate reporting, and compliance with enterprise security requirements.</p></div><div class="cap-card"><span class="cap-tag">Enterprise Account Management</span><h3>Strategic Account Portfolio Leadership</h3><p>Manage multi-year account plans for global enterprise customers with consistent 105-120% quota attainment. Expanded strategic account base from 8 to 25 accounts with 19% year-over-year revenue growth.</p></div><div class="cap-card"><span class="cap-tag">Quote-to-Cash Optimization</span><h3>Deal Desk & Contract Automation</h3><p>Streamline quote-to-cash motions through deal desk approval workflows, DocuSign CLM integration, and contract automation. Support complex enterprise deals spanning Sales, Legal, Procurement, and IT/Security stakeholders.</p></div><div class="cap-card"><span class="cap-tag">MEDDPICC Methodology</span><h3>Enterprise Sales Qualification Framework</h3><p>Apply MEDDPICC rigorously to qualify and advance complex enterprise deals. Structure discovery around Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implications, Champion, and Competition to de-risk long-cycle opportunities.</p></div><div class="cap-card"><span class="cap-tag">Complex Contract Negotiation</span><h3>Multi-Stakeholder Agreement Structuring</h3><p>Structure and negotiate complex agreements including MSAs, SOWs, DPAs, and DUAs with Fortune 500 biopharma companies. Conduct comprehensive security and privacy diligence reviews to accelerate deal closure.</p></div><div class="cap-card"><span class="cap-tag">DocuSign Automation</span><h3>Contract Lifecycle Management</h3><p>Implement DocuSign CLM and eSignature workflows achieving 95% completion rates. Automate deal desk approval processes to reduce friction and accelerate time-to-signature.</p></div><div class="cap-card"><span class="cap-tag">QBR Cadence Management</span><h3>Executive Business Review Leadership</h3><p>Lead quarterly business review cadence with C-level executives driving 90% customer retention and identifying $3M+ expansion opportunities annually. Structure joint growth plans that align vendor and customer objectives.</p></div><div class="cap-card"><span class="cap-tag">KOL Network Development</span><h3>Key Opinion Leader Relationship Building</h3><p>Build extensive KOL networks spanning 40+ academic and pharmaceutical research institutions. Leverage scientific credibility to influence adoption and inform product strategy.</p></div><div class="cap-card"><span class="cap-tag">Co-Sell Program Design</span><h3>Strategic Partner Revenue Alignment</h3><p>Develop repeatable partnership playbooks for co-sell and co-market initiatives with technology and service partners. Structure integration and OEM partnerships that expand market reach.</p></div><div class="cap-card"><span class="cap-tag">Security & Privacy Diligence</span><h3>Enterprise Compliance Review</h3><p>Conduct security and privacy diligence reviews for enterprise prospects including HIPAA, SOC 2, GDPR, and GxP environment requirements. Navigate IT/security and data governance stakeholder concerns in complex deal cycles.</p></div><div class="cap-card"><span class="cap-tag">ICP Definition</span><h3>Ideal Customer Profile Development</h3><p>Define ideal customer profiles and disqualifiers to make focus a competitive advantage. Execute small number of high-leverage plays end-to-end with clear targeting criteria.</p></div><div class="cap-card"><span class="cap-tag">Executive Storytelling</span><h3>Outcome Narratives for Buyers</h3><p>Package the story for each buyer combining outcome narrative with proof and risk mitigation plan. Remove uncertainty through structured diligence and pilot programs.</p></div><div class="cap-card"><span class="cap-tag">Stakeholder Mapping</span><h3>Multi-Stakeholder Pursuit Management</h3><p>Align scientific, IT/security, data governance, legal, and procurement stakeholders to accelerate decision-making. Reduce sales cycle friction through multithreaded engagement.</p></div><div class="cap-card"><span class="cap-tag">Partner Ecosystem Strategy</span><h3>OEM/ISV/Co-sell Architecture</h3><p>Build partnership ecosystem strategies and partner-ready narratives supporting co-sell, co-market, and integration/OEM conversations. Establish repeatable partner pathways for commercial acceleration.</p></div><div class="cap-card"><span class="cap-tag">Competitive Intelligence</span><h3>Market & Competitive Analysis</h3><p>Develop competitive positioning maps and market segmentation models. Leverage tools like ZoomInfo and LinkedIn Sales Navigator for account mapping and stakeholder analysis.</p></div><div class="cap-card"><span class="cap-tag">Business Case Development</span><h3>ROI Analysis & Value Propositions</h3><p>Structure business cases combining ROI analysis with value proposition development. Translate technical platform capabilities into executive-ready narratives.</p></div><div class="cap-card"><span class="cap-tag">Forecast Optimization</span><h3>Deal Velocity & Accuracy Improvement</h3><p>Design stage governance and KPI dashboards that improved forecast accuracy and deal velocity by 40%. Implement operating cadence and metrics for pipeline management.</p></div><div class="cap-card"><span class="cap-tag">Channel Revenue Planning</span><h3>Multi-Channel Revenue Forecasting & Alignment</h3><p>Built comprehensive regional/channel alignment models spanning NA, EU, APAC, and emerging markets. Tracked revenue across direct, CCG, VWR, and Tier 2 distribution channels with bridge analysis for customer wins, losses, and channel shifts.</p></div><div class="cap-card"><span class="cap-tag">Global Distribution Strategy</span><h3>Multi-Region Channel Architecture</h3><p>Structured channel strategies across six global regions including Central South America and Middle East Africa. Managed complex distributor mix balancing direct sales against CCG, VWR, and tiered distribution partners.</p></div><div class="cap-card"><span class="cap-tag">Product Line P&L Management</span><h3>Life Sciences Product Portfolio Financial Planning</h3><p>Owned revenue planning across molecular biology, PCR, cell science, bioreagents, and bioprocess production product lines. Managed pricing, market growth, and product lifecycle factors in annual planning cycles.</p></div><div class="cap-card"><span class="cap-tag">President's Club Achievement</span><h3>Elite Sales Performance Recognition</h3><p>Achieved President's Club status at Thermo Fisher Scientific, placing in the top 4% of global sales professionals. Qualification required exceeding 100% of Annual Operating Target while delivering positive year-over-year territory revenue growth.</p></div><div class="cap-card"><span class="cap-tag">Territory Revenue Growth</span><h3>Sustained Revenue Expansion</h3><p>Demonstrated consistent territory revenue growth versus prior year performance. Met rigorous qualification criteria combining weighted revenue performance to target (80%) and territory growth metrics (20%).</p></div><div class="cap-card"><span class="cap-tag">Key Account Scorecards</span><h3>Multi-Channel Account Performance Tracking</h3><p>Designed comprehensive scorecard systems tracking key account performance across direct, distributor, and direct-ship channels. Enabled year-over-year variance analysis by business unit and product line to identify growth opportunities and optimize channel mix.</p></div><div class="cap-card"><span class="cap-tag">Distributor Channel Analytics</span><h3>Multi-Tier Distribution Performance Management</h3><p>Developed analytics frameworks spanning VWR, CCG, Cardinal, and Tier 2 distributors to monitor channel-specific revenue and penetration. Created consolidated views enabling comparison of direct versus indirect channel performance at the product and customer level.</p></div><div class="cap-card"><span class="cap-tag">Lab Equipment Portfolio</span><h3>Laboratory Equipment Commercial Expertise</h3><p>Managed commercial operations across cold storage, centrifuges, biosafety cabinets, CO2 incubators, fluid handling, and temperature control product lines. Oversaw multi-brand portfolio including Forma, Revco, Sorvall, Heraeus, Nalgene, and Nunc brands.</p></div><div class="cap-card"><span class="cap-tag">Global Account Governance</span><h3>Corporate Account Portfolio Oversight</h3><p>Managed global and North American corporate account assignments across 35+ strategic accounts spanning pharma, biotech, diagnostics, and academic institutions. Coordinated account ownership across District Managers, Territory Account Managers, Regional VPs, and Senior Representatives to ensure unified customer engagement.</p></div><div class="cap-card"><span class="cap-tag">Corporate Account Analytics</span><h3>Global Corporate Account Revenue Tracking</h3><p>Built and maintained comprehensive revenue tracking systems for global corporate accounts across multiple business divisions. Managed year-over-year variance analysis and quarterly performance monitoring for enterprise pharmaceutical and biotech customers.</p></div><div class="cap-card"><span class="cap-tag">Multi-Division Revenue Analysis</span><h3>Cross-Divisional Sales Performance Analysis</h3><p>Analyzed revenue performance across BID, CSD, GSD, BPD, and OEM business units for major corporate accounts. Tracked quarterly and annual metrics to identify growth opportunities and underperforming segments.</p></div><div class="cap-card"><span class="cap-tag">Pharma Account Portfolio</span><h3>Top-20 Pharma Corporate Account Management</h3><p>Managed commercial relationships with major pharmaceutical accounts including Amgen, AstraZeneca, Bayer, Biogen, BMS, Eli Lilly, GSK, J&J, Novartis, Pfizer, Roche, Sanofi, and Takeda. Tracked multi-million dollar revenue streams across product divisions.</p></div><div class="cap-card"><span class="cap-tag">Promotional Program Management</span><h3>Multi-Channel Promo Code Administration</h3><p>Managed complex promotional code systems spanning digital, sales, and back-pocket channels across North American regions. Coordinated discount structures, bundle configurations, and extension tracking for molecular biology and genomics product portfolios.</p></div><div class="cap-card"><span class="cap-tag">SKU-Level Pricing Strategy</span><h3>Product-Specific Discount Architecture</h3><p>Designed and maintained tiered discount programs including percentage-off, bundle pricing, and fixed-price promotions for qPCR, genetic analysis, and antibody products. Balanced competitive positioning with margin protection through targeted back-pocket promos for difficult accounts.</p></div><div class="cap-card"><span class="cap-tag">Sales Compensation Design</span><h3>Commission Plan Architecture & Modeling</h3><p>Designed and modeled sales compensation structures including tiered payout scales, quota attainment thresholds, and large deal bonus mechanics. Built scenario analyses comparing plan variations to optimize rep motivation while managing commission liability across 35+ territory sales reps.</p></div><div class="cap-card"><span class="cap-tag">Territory Quota Management</span><h3>Regional Sales Quota Allocation & Tracking</h3><p>Managed quarterly quota distribution across North American sales territories spanning Central, Southeast, Western, and Canada regions. Tracked individual rep performance against quota with granular YTD and QTD earned vs. paid reconciliation.</p></div><div class="cap-card"><span class="cap-tag">Sales Performance Analytics</span><h3>Rep Attainment & Payout Calculation</h3><p>Developed comprehensive models calculating percent-to-quota, tiered payout multipliers, and overachievement bonuses. Analyzed distribution of reps across performance bands to inform compensation plan adjustments and forecast total commission expense.</p></div><div class="cap-card"><span class="cap-tag">Global Pipeline Management</span><h3>Multi-Division Opportunity Tracking</h3><p>Managed complex global sales pipelines spanning multiple product divisions including Bioproduction, Genetic Sciences, Chemical Analysis, and Laboratory Equipment. Coordinated cross-divisional opportunities with estimated values ranging from $50K to $30M across strategic and business development teams.</p></div><div class="cap-card"><span class="cap-tag">Strategic Account Coordination</span><h3>Global Strategic Account Oversight</h3><p>Oversaw opportunity management across top-tier pharmaceutical and diagnostics accounts including Abbott, Amgen, Pfizer, Roche, Novartis, and AstraZeneca. Coordinated multi-site global strategic initiatives spanning R&D, manufacturing, and commercial operations.</p></div><div class="cap-card"><span class="cap-tag">Revenue Synergy Identification</span><h3>Cross-Business Revenue Synergies</h3><p>Identified and tracked LSG revenue synergy opportunities across the enterprise portfolio, flagging cross-sell potential in major accounts like LabCorp, Merck, and Genentech to maximize wallet share from strategic relationships.</p></div><div class="cap-card"><span class="cap-tag">Channel Revenue Reallocation</span><h3>Strategic Channel Mix Optimization</h3><p>Designed and executed channel swap analyses to optimize revenue allocation between direct sales and channel partner (CCG) distribution. Modeled quarterly revenue shifts across product lines to maximize margin while maintaining market coverage.</p></div><div class="cap-card"><span class="cap-tag">Product Portfolio Analytics</span><h3>Multi-Product Line Revenue Modeling</h3><p>Built comprehensive portfolio models tracking Detection, Modulation, and Tools product lines across quarters. Analyzed revenue-to-channel percentages and portfolio mix to inform strategic pricing and distribution decisions.</p></div><div class="cap-card"><span class="cap-tag">Revenue Attribution Modeling</span><h3>Channel Attribution & Variance Analysis</h3><p>Developed revenue attribution frameworks comparing direct versus channel performance with variance analysis against prior year benchmarks. Quantified financial impact of channel swap scenarios to guide go-to-market decisions.</p></div><div class="cap-card"><span class="cap-tag">Territory Planning</span><h3>Strategic Territory & Account Planning</h3><p>Design and execute quarterly business planning with SWOT analysis and SMART objectives. Build 100-day action plans aligned to district, regional, and company goals for accelerated growth.</p></div><div class="cap-card"><span class="cap-tag">Sales Call Excellence</span><h3>Structured Sales Call Methodology</h3><p>Maximize sales call effectiveness through rigorous pre-call preparation, objective-driven agendas, and systematic post-call review. Focus on high-value activities with clear customer commitments.</p></div><div class="cap-card"><span class="cap-tag">Value-Based Pricing</span><h3>Strategic Pricing Optimization</h3><p>Execute intelligent pricing decisions balancing price gain with long-term share gain. Leverage impact analysis and price recommendation tools while selling on value rather than price.</p></div><div class="cap-card"><span class="cap-tag">Lead-to-Close Handoff</span><h3>Marketing-to-Sales Lead Management</h3><p>Orchestrate seamless handoff of qualified opportunities from marketing, TAS, and FAS teams through unified CRM workflows with defined SLAs and status tracking.</p></div><div class="cap-card"><span class="cap-tag">Sales Funnel Discipline</span><h3>Opportunity Pipeline Management</h3><p>Maintain rigorous funnel hygiene with consistent stage progression, probability weighting, and velocity tracking. Apply Miller Heiman blue sheets for complex opportunity advancement.</p></div><div class="cap-card"><span class="cap-tag">Forecast Accuracy</span><h3>Predictable Revenue Forecasting</h3><p>Build forecast confidence through disciplined funnel metrics, win-loss analysis, and opportunity spread across quarters. Ensure sufficient pipeline coverage against committed targets.</p></div><div class="cap-card"><span class="cap-tag">SPIF Program Design</span><h3>Sales Performance Incentive Fund Architecture</h3><p>Designed SPIF programs with tiered stretch targets (10-20% above baseline) to drive incremental unit sales. Modeled lead generation scenarios across best/worst/likely cases to set realistic closure rate expectations and payout thresholds.</p></div><div class="cap-card"><span class="cap-tag">Lead Generation Modeling</span><h3>Quantitative Lead Flow Forecasting</h3><p>Built probabilistic models for field lead generation incorporating rep-level activity rates and closure rate assumptions. Applied scenario analysis to project quarterly unit sales impact from technical sales specialist programs.</p></div><div class="cap-card"><span class="cap-tag">Invoice-Level Analytics</span><h3>Granular Transaction Analysis</h3><p>Analyze invoice-level data across thousands of SKUs to identify revenue patterns and customer purchasing behavior. Track shipment timing, pricing variances, and channel performance at the individual order level.</p></div><div class="cap-card"><span class="cap-tag">Academic Account Management</span><h3>University Research Account Expertise</h3><p>Manage complex academic purchasing relationships with major research universities including UC system, Caltech, Arizona State, and Cedars-Sinai Medical Center. Navigate supply center fulfillment and departmental purchasing workflows.</p></div><div class="cap-card"><span class="cap-tag">Protein Biology Sales</span><h3>Protein Analysis Product Specialist</h3><p>Deep expertise in protein electrophoresis, western blotting, and detection product lines including NuPAGE gels, transfer buffers, and ECL substrates. Support researchers with complete workflow solutions from sample prep through detection.</p></div><div class="cap-card"><span class="cap-tag">KPI Framework Design</span><h3>Enterprise KPI Architecture</h3><p>Structured tiered KPI frameworks spanning Customer, Financial, People, and Quality dimensions across process manufacturing, discrete manufacturing, and commercial operations. Designed measurement hierarchies balancing executive visibility with operational granularity.</p></div><div class="cap-card"><span class="cap-tag">Customer Allegiance Metrics</span><h3>CAS Score Implementation</h3><p>Implemented Customer Allegiance Score methodology as primary customer health indicator. Integrated proactive order status communication and complaint response tracking into unified customer experience measurement.</p></div><div class="cap-card"><span class="cap-tag">Cash Conversion Analytics</span><h3>Cash Cycle Optimization</h3><p>Developed cash conversion cycle tracking integrating DSO, inventory turns, and payables management. Linked working capital metrics to operational execution and forecast accuracy.</p></div><div class="cap-card"><span class="cap-tag">Quality Cost Analysis</span><h3>Cost of Quality Framework</h3><p>Built Cost of Quality measurement systems capturing prevention, appraisal, and failure costs. Tracked Out of Box Quality metrics as leading indicators for customer satisfaction and warranty expense.</p></div><div class="cap-card"><span class="cap-tag">First Call Resolution</span><h3>Service Efficiency Metrics</h3><p>Established First Call Resolution benchmarks for both technical support and customer service functions. Designed escalation tracking to identify training gaps and process improvement opportunities.</p></div><div class="cap-card"><span class="cap-tag">Order Cycle Optimization</span><h3>Quote-to-Delivery Tracking</h3><p>Created cycle time measurement spanning quote generation through order fulfillment. Segmented metrics by customer service versus operations accountability for targeted improvement.</p></div><div class="cap-card"><span class="cap-tag">Employee Engagement Metrics</span><h3>Employer of Choice Measurement</h3><p>Deployed Employer of Choice survey frameworks alongside Role Model Leader Index to correlate leadership effectiveness with retention and productivity outcomes.</p></div><div class="cap-card"><span class="cap-tag">End-to-End Revenue Modeling</span><h3>Multi-Quarter Product Line Revenue Analysis</h3><p>Developed comprehensive revenue models tracking quarterly performance across product lines with CCG margin assumptions, direct vs. channel splits, and incremental revenue attribution. Built systematic frameworks distinguishing reported revenue from total end-to-end revenue across global and regional views.</p></div><div class="cap-card"><span class="cap-tag">Regional Revenue Segmentation</span><h3>Worldwide vs North America Analytics</h3><p>Created multi-sheet analytical workbooks comparing worldwide and North America performance across identical metrics. Enabled regional variance analysis and identification of geographic revenue concentration patterns.</p></div><div class="cap-card"><span class="cap-tag">CCG Margin Management</span><h3>Centralized Corporate Group Revenue Attribution</h3><p>Designed margin assumption frameworks for allocating centralized corporate group revenue contributions across product lines. Applied consistent 25% CCG margin assumptions to calculate revenue-to-CCG transfers and incremental revenue impacts.</p></div><div class="cap-card"><span class="cap-tag">Product Mix Analytics</span><h3>Detection/Modulation/Tools Revenue Tracking</h3><p>Built quarterly tracking systems for distinct product categories including Detection, Modulation, Tools, and MolBio portfolios. Monitored percent-of-SMF revenue metrics to identify portfolio balance shifts and growth trends.</p></div><div class="cap-card"><span class="cap-tag">M&A Integration Management</span><h3>Post-Acquisition Commercial Integration</h3><p>Led program management for transitioning strategic account coverage during Life Technologies integration into Thermo Fisher Scientific. Designed frameworks to eliminate resource duplication while ensuring non-disruptive customer transfers across enterprise accounts.</p></div><div class="cap-card"><span class="cap-tag">Cross-Functional Program Leadership</span><h3>Enterprise Account Transition Programs</h3><p>Appointed to manage complex organizational transition bridging legacy SRM team with Corporate Accounts infrastructure. Built partnership frameworks between commercial organizations to optimize coverage of large pharma accounts including Merck, Novartis, and Eli Lilly.</p></div><div class="cap-card"><span class="cap-tag">Integration Sales Training</span><h3>Cross-Business Sales Enablement</h3><p>Designed and delivered integration training programs for Technical Sales Specialists during post-merger integration. Created lead handoff processes and rules of engagement to enable cross-selling between legacy organizations.</p></div><div class="cap-card"><span class="cap-tag">Competitive Positioning</span><h3>Competitive Selling Frameworks</h3><p>Developed decision-tree selling strategies against key competitors like BioRad T100 and C1000. Mapped customer needs to product differentiation points including touchscreen interfaces, gradient capabilities, and mobile app connectivity.</p></div><div class="cap-card"><span class="cap-tag">Product Portfolio Training</span><h3>Instrument Portfolio Positioning</h3><p>Trained field teams on segmented thermal cycler portfolio spanning price-sensitive to high-throughput applications. Articulated value positioning across 2720, SimpliAmp, Veriti, and ProFlex platforms with clear use-case alignment.</p></div><div class="cap-card"><span class="cap-tag">EU Strategic Accounts</span><h3>European Strategic Account Revenue Management</h3><p>Managed strategic account portfolios across European subsidiaries with multi-currency revenue tracking at AOP rates. Delivered consolidated dashboard reporting across four strategic accounts covering Gene Detection and Gene Modulation product lines.</p></div><div class="cap-card"><span class="cap-tag">Subsidiary Revenue Consolidation</span><h3>Multi-Subsidiary Financial Consolidation</h3><p>Built consolidated revenue views across multiple European subsidiaries with CCG true-up adjustments and freight exclusions. Enabled year-over-year growth analysis across complex organizational structures.</p></div><div class="cap-card"><span class="cap-tag">RNA Product Sales</span><h3>RNA Product Line Revenue Leadership</h3><p>Drove RNA product portfolio generating $194K to $423K in annual revenue across strategic accounts. Managed significant year-over-year growth trajectory demonstrating strong customer adoption.</p></div><div class="cap-card"><span class="cap-tag">shRNA Product Management</span><h3>shRNA Portfolio Revenue Tracking</h3><p>Oversaw shRNA product line performance within strategic accounts, tracking revenue fluctuations and identifying growth opportunities. Managed product line recovery from $3.2K to $32K annual performance.</p></div><div class="cap-card"><span class="cap-tag">Multi-Channel Revenue Analysis</span><h3>Comprehensive Channel Performance Reporting</h3><p>Built detailed revenue analysis frameworks comparing performance across CCG, VWR, Tier2, and Direct channels. Tracked YTD versus prior year and AOP comparables with growth percentages and variance analysis across all distribution channels.</p></div><div class="cap-card"><span class="cap-tag">OEM Revenue Estimation</span><h3>OEM Business Segmentation Analytics</h3><p>Developed OEM revenue estimation models to separate OEM business from regional category totals. Created annualized projections showing OEM contribution percentages across North America, Europe, and Asia-Pacific markets.</p></div><div class="cap-card"><span class="cap-tag">Channel Composition Analysis</span><h3>Distribution Mix Optimization Tracking</h3><p>Analyzed channel composition percentages to understand revenue distribution shifts between direct and indirect sales. Monitored changes in CCG, VWR, Tier2, and Direct channel proportions year-over-year to inform go-to-market strategy.</p></div><div class="cap-card"><span class="cap-tag">YoY Revenue Variance Analysis</span><h3>Year-over-Year Performance Tracking for Strategic Accounts</h3><p>Conducted detailed YTD variance analysis comparing 2014 to 2015 performance across major pharma accounts including AstraZeneca, BMS, and Pfizer. Identified revenue shifts at account, geography, and product line levels to inform strategic resource allocation.</p></div><div class="cap-card"><span class="cap-tag">Geographic Revenue Attribution</span><h3>Country-Level Ultimate Destination Revenue Tracking</h3><p>Analyzed revenue distribution across geographic regions including US, Europe, Greater China, and emerging markets. Tracked significant shifts such as 172% growth in Greater China and 10.5% growth in Europe to inform global account strategy.</p></div><div class="cap-card"><span class="cap-tag">Business Unit Mix Analysis</span><h3>Multi-BU Revenue Composition for Enterprise Accounts</h3><p>Segmented $10M+ enterprise account revenue across business units including Cell Biology, Synthetic Biology, qPCR, and Protein Biology. Identified growth drivers like Sera (+176%) and Cell Engineering (+16%) versus declining units.</p></div><div class="cap-card"><span class="cap-tag">Daily Sales Monitoring</span><h3>Real-Time Revenue Dashboard Management</h3><p>Built and maintained daily sales dashboards tracking instrument and consumable revenue across Americas regions. Monitored daily, weekly, monthly, quarterly, and YTD performance against prior year comparisons with variance calculations.</p></div><div class="cap-card"><span class="cap-tag">Regional Revenue Decomposition</span><h3>Multi-Territory Americas Revenue Analysis</h3><p>Managed revenue reporting across GA East, GA West, Canada, Government, and Core territories. Tracked performance by product category including qPCR, CE, and Ion Torrent instrument and consumable lines.</p></div><div class="cap-card"><span class="cap-tag">Instrument vs Consumable Mix</span><h3>Platform and Recurring Revenue Segmentation</h3><p>Analyzed revenue split between capital equipment placements and recurring consumable streams across sequencing and amplification platforms. Tracked installed base leverage through consumable pull-through metrics.</p></div><div class="cap-card"><span class="cap-tag">Channel Revenue Analytics</span><h3>Distribution vs. Direct Sales Analysis</h3><p>Analyze revenue performance across channel partners versus direct sales organization. Built comparative frameworks showing CCG distributor sales against LSR direct sales across product categories and customer segments.</p></div><div class="cap-card"><span class="cap-tag">Academic Account Segmentation</span><h3>Top 50 Research Institution Revenue Mapping</h3><p>Developed detailed revenue analysis across elite academic medical centers, research universities, and NIH. Tracked multi-year purchasing patterns across institutions including Harvard, Stanford, Johns Hopkins, and Memorial Sloan Kettering.</p></div><div class="cap-card"><span class="cap-tag">Product Category Analysis</span><h3>Molecular Biology Revenue Segmentation</h3><p>Structured revenue reporting across Nucleic Acid Detection, Gene Modulation, and Molecular Biology Tools categories. Identified growth variance between product lines to inform portfolio strategy and resource allocation.</p></div><div class="cap-card"><span class="cap-tag">Large Pharma Account Tracking</span><h3>Enterprise Pharmaceutical Revenue Analysis</h3><p>Monitored purchasing patterns across major pharmaceutical accounts including Pfizer, Merck, and GlaxoSmithKline. Analyzed revenue trends to identify account-specific opportunities and competitive dynamics.</p></div><div class="cap-card"><span class="cap-tag">Employee Recognition Programs</span><h3>Peer-to-Peer Recognition Platform Administration</h3><p>Operated within Thermo Fisher's Appreciate recognition system, a points-based platform tied to 4i Values and Customer Allegiance. Familiar with tiered award structures from peer-level acknowledgments through VP discretionary cash awards up to $2,500.</p></div><div class="cap-card"><span class="cap-tag">Team Recognition Analytics</span><h3>Manager-Level Recognition Data & Reporting</h3><p>Utilized Actionable Insights and Team View dashboards to monitor team recognition activity and export recognition data. Leveraged Talent Maps for visibility into organizational recognition patterns.</p></div><div class="cap-card"><span class="cap-tag">PPI Business System</span><h3>Practical Process Improvement Methodology</h3><p>Apply structured continuous improvement frameworks to drive productivity, quality, and working capital optimization. Execute systematic process improvement initiatives aligned with enterprise goals.</p></div><div class="cap-card"><span class="cap-tag">CAS Score Optimization</span><h3>Customer Allegiance Score Management</h3><p>Drive customer experience improvements through order fulfillment excellence and value proposition delivery. Focus on measurable customer satisfaction metrics to gain market share.</p></div><div class="cap-card"><span class="cap-tag">Digital Value Proposition</span><h3>Digital Customer Engagement</h3><p>Leverage digital capabilities and eBusiness initiatives to strengthen customer value proposition. Connect digital transformation to commercial execution and growth acceleration.</p></div><div class="cap-card"><span class="cap-tag">APAC Growth Strategy</span><h3>Emerging Markets Expansion</h3><p>Accelerate revenue growth in Asia-Pacific and emerging markets through targeted commercial strategies. Balance regional expansion with core market optimization.</p></div><div class="cap-card"><span class="cap-tag">Product Vitality Management</span><h3>New Product Introduction Excellence</h3><p>Drive product vitality metrics through disciplined new product introduction processes. Connect NPI commitments to organic growth targets and commercial execution.</p></div><div class="cap-card"><span class="cap-tag">EIS Improvement</span><h3>Employee Involvement Survey Initiatives</h3><p>Design and execute high-impact initiatives to improve employee engagement survey results. Connect colleague engagement to mission awareness and cultural competitive advantage.</p></div><div class="cap-card"><span class="cap-tag">Shared Services Leverage</span><h3>Shared Services Productivity</h3><p>Enhance enterprise productivity by leveraging shared services and procurement initiatives. Drive cost optimization through centralized operational excellence.</p></div><div class="cap-card"><span class="cap-tag">LAMP Methodology</span><h3>Large Account Management Process</h3><p>Apply Miller Heiman's LAMP framework to develop one- to three-year strategic account plans. Guide cross-functional teams in protecting and growing key customer relationships through structured collaboration and resource allocation.</p></div><div class="cap-card"><span class="cap-tag">Account Relationship Mapping</span><h3>Buying-Selling Organization Alignment</h3><p>Align selling team members with their counterparts in customer organizations to improve communication and collaboration. Analyze relationship status to identify discrepancies and develop shared vision between organizations.</p></div><div class="cap-card"><span class="cap-tag">Stop Investment Analysis</span><h3>Resource Allocation Optimization</h3><p>Evaluate account portfolios to identify focus investments versus stop investments. Allocate limited resources more effectively across strategic accounts based on growth potential and relationship health.</p></div><div class="cap-card"><span class="cap-tag">Vendor to Advisor Transition</span><h3>Trusted Advisor Positioning</h3><p>Transform vendor relationships into trusted advisor status with strategic customers. Manage customer perception to reduce price sensitivity and competitive threats through deeper collaborative partnerships.</p></div><div class="cap-card"><span class="cap-tag">Quota Build Process</span><h3>Annual Quota Setting & Roll-Out Management</h3><p>Designed and managed end-to-end annual quota setting processes from AOP finalization through quota letter distribution. Coordinated cross-functional timelines spanning sales directors, HR, finance, and IT to ensure quota assignments aligned with corporate targets and were implemented in reporting systems.</p></div><div class="cap-card"><span class="cap-tag">Sales Data Warehouse</span><h3>SDW Implementation & Configuration</h3><p>Led business requirements for Sales Data Warehouse (SDW) updates including territory structures, FX rate implementation, and true-up factor configurations. Coordinated sandbox environment testing to validate 2014 rules against historical data before production deployment.</p></div><div class="cap-card"><span class="cap-tag">True-Up Rate Design</span><h3>Commission True-Up Process Development</h3><p>Established correlation between natural revenue numbers and true-up calculations tied to HFM financial systems. Designed uplift rules and true-up factor processes to bridge commission revenue across fiscal years and territory realignments.</p></div><div class="cap-card"><span class="cap-tag">Cross-Functional Timeline Mgmt</span><h3>Comp Planning Timeline Orchestration</h3><p>Created and managed detailed project timelines coordinating sales, HR, finance, legal, and IT dependencies for annual compensation planning cycles. Identified critical path items and established milestone checkpoints to accelerate quota rollout ahead of sales meetings.</p></div><div class="cap-card"><span class="cap-tag">Ship-To Account Analytics</span><h3>Multi-Entity Ship-To Revenue Tracking</h3><p>Managed complex account structures distinguishing ship-to vs sold-to revenue attribution across $11M+ accounts. Tracked revenue performance across 25+ product lines and 30+ sales representatives at granular ship-to location level.</p></div><div class="cap-card"><span class="cap-tag">Product Line Profitability</span><h3>SKU-Level Product Mix Analysis</h3><p>Analyzed revenue variance across diverse product portfolios including Cell Biology, Molecular, Synthetic Biology, qPCR, and Protein categories. Identified growth drivers and underperformers with year-over-year variance analysis at product line level.</p></div><div class="cap-card"><span class="cap-tag">Sales Team Coordination</span><h3>Multi-Rep Account Orchestration</h3><p>Coordinated coverage across core account managers, technical sales specialists, and product specialists to optimize territory performance. Managed accountability across 30+ rep codes serving single strategic accounts.</p></div><div class="cap-card"><span class="cap-tag">BID-to-SGN Mapping</span><h3>Account Identifier Cross-Reference Systems</h3><p>Built lookup tools mapping account numbers to SGN identifiers across multi-team sales organizations. Enabled rapid account ownership identification spanning CORE, Pro Bio, and Mol Bio field teams.</p></div><div class="cap-card"><span class="cap-tag">Multi-Team Territory Alignment</span><h3>Cross-Functional Account Coverage Design</h3><p>Designed account assignment frameworks supporting parallel coverage by CORE account managers and specialist Technical Sales Specialists (TSS). Structured position codes and primary flags to clarify ownership across overlapping territories.</p></div><div class="cap-card"><span class="cap-tag">Trade Channel Segmentation</span><h3>Direct vs Distribution Account Classification</h3><p>Implemented trade channel and sub-trade channel coding (DIR/DRA/DRI) to segment direct accounts from distribution-served accounts. Supported channel strategy decisions through systematic account classification.</p></div><div class="cap-card"><span class="cap-tag">Competent Cell Portfolio</span><h3>Competent Cell Product Expertise</h3><p>Deep technical knowledge of transformation efficiency metrics and competent cell strain selection including TOP10, OmniMAX 2, Mach1, DH5α, and specialty strains. Understand genotype markers and their functional implications for cloning applications.</p></div><div class="cap-card"><span class="cap-tag">Gel Electrophoresis Systems</span><h3>Nucleic Acid Separation Products</h3><p>Expertise in precast agarose gel formats including E-Gel dry-run systems, traditional gel platforms, and competitive positioning against Bio-Rad, Lonza, and Sigma offerings. Navigate pricing tiers and technical differentiation across product lines.</p></div><div class="cap-card"><span class="cap-tag">Gel Documentation Systems</span><h3>Imaging Equipment Portfolio Management</h3><p>Knowledge of gel documentation system market segmentation from consumer-grade through multiplex fluorescence detection. Understand feature-price relationships for cameras, light sources, and automation options across competitive landscape.</p></div><div class="cap-card"><span class="cap-tag">Nucleic Acid Stain Products</span><h3>DNA Gel Stain Positioning</h3><p>Technical fluency in nucleic acid stain portfolio including SYBR Safe, SYBR Gold, and ethidium bromide alternatives. Navigate safety, sensitivity, and light source considerations for customer applications.</p></div><div class="cap-card"><span class="cap-tag">Global Compensation Planning</span><h3>Multi-Country Salary Budget Management</h3><p>Managed country-specific merit increase and salary adjustment budgets across 50+ countries spanning North America, EMEA, APAC, and Latin America. Navigated regulatory complexities including mandated increases in markets like Belgium and Finland while optimizing discretionary budget allocation.</p></div><div class="cap-card"><span class="cap-tag">International HR Operations</span><h3>Cross-Border Compensation Compliance</h3><p>Administered compensation programs accounting for hyperinflationary markets like Argentina (18%+ merit budgets) and emerging market dynamics in India, Vietnam, and Indonesia. Balanced market competitiveness with corporate budget constraints across diverse regulatory environments.</p></div><div class="cap-card"><span class="cap-tag">New Product Forecasting</span><h3>New Product Launch Revenue Estimation</h3><p>Build bottoms-up revenue projections for new product launches across multiple market segments. Apply hedge factors and regional allocation models to translate global projections into territory-specific forecasts.</p></div><div class="cap-card"><span class="cap-tag">NGS Portfolio Strategy</span><h3>Next-Gen Sequencing Sample Prep Planning</h3><p>Evaluate portfolio gaps in NGS sample preparation kits supporting Ion Torrent and Illumina workflows. Assess competitive positioning against market leaders to prioritize range expansion investments.</p></div><div class="cap-card"><span class="cap-tag">Gene Editing Market Entry</span><h3>CRISPR/Cas9 Portfolio Planning</h3><p>Develop market entry strategies for emerging gene editing technologies including Cas9 kits. Project initial revenue potential for first entries into synthetic biology applications.</p></div><div class="cap-card"><span class="cap-tag">Competitive Product Cross-Referencing</span><h3>Built cross-reference tools mapping competitor products to internal portfolio</h3><p>Developed comprehensive product cross-reference databases mapping Qiagen catalog numbers to Thermo Scientific equivalents. Enabled sales teams to quickly identify competitive displacement opportunities across nucleic acid purification workflows.</p></div><div class="cap-card"><span class="cap-tag">Nucleic Acid Purification Expertise</span><h3>Deep knowledge of DNA/RNA extraction product portfolios</h3><p>Maintained detailed understanding of blood DNA, tissue DNA, viral nucleic acid, and plant genomic purification kit portfolios across competitors. Supported sales enablement with size and application matching between Qiagen and Thermo Fisher GeneJET/MagJET product lines.</p></div><div class="cap-card"><span class="cap-tag">Product Bag Management</span><h3>Sales Organization Product Assignment Architecture</h3><p>Designed and managed product bag assignment matrices defining which SKUs each sales role can sell. Coordinated complex multi-organization product eligibility rules across Core, Genetic Analysis, Cell Biology, Bioproduction, and specialty teams.</p></div><div class="cap-card"><span class="cap-tag">Sales Role Segmentation</span><h3>Multi-Tier Sales Territory Product Alignment</h3><p>Structured product access rules differentiating Core sales, Technical Sales Specialists, and Application specialists. Maintained year-over-year product assignment rules tracking changes across 70+ distinct sales roles and product combinations.</p></div><div class="cap-card"><span class="cap-tag">OEM Licensing Administration</span><h3>License Commercial Supply Product Governance</h3><p>Administered OEM and license commercial supply product categorizations including IDX, ANT, MDX, AMI, and PLA license types. Ensured proper product routing between direct sales and licensed commercial channels.</p></div><div class="cap-card"><span class="cap-tag">SaaS Contract Negotiation</span><h3>Enterprise Software Licensing Agreements</h3><p>Structured master license and services agreements for enterprise science platform deployments. Negotiated subscription terms, authorized user provisions, and professional services frameworks for informatics solutions.</p></div><div class="cap-card"><span class="cap-tag">Cloud Deployment Strategy</span><h3>Cloud Provider Software Installation</h3><p>Managed software deployment options including on-premise installation and cloud service provider arrangements. Ensured contractual protections for proprietary platform rights across deployment models.</p></div><div class="cap-card"><span class="cap-tag">Reverse Transcription Products</span><h3>SuperScript RT Product Expertise</h3><p>Deep familiarity with reverse transcriptase product lines including SuperScript IV and SuperScript VILO for cDNA synthesis applications. Understanding of performance differentiators such as inhibitor resistance, thermostability, and reaction speed in RT-qPCR workflows.</p></div><div class="cap-card"><span class="cap-tag">Hot-Start PCR Technology</span><h3>Platinum Taq Product Knowledge</h3><p>Experience with hot-start DNA polymerase products for high-specificity PCR amplification. Knowledge of fragment amplification capabilities and KB Extender applications for long-range PCR.</p></div><div class="cap-card"><span class="cap-tag">Multi-Tier Sales Hierarchy</span><h3>VP-to-Rep Territory Structures</h3><p>Designed and managed complex sales hierarchies spanning VP, Director, Regional Manager, and Account Manager levels. Built territory coding systems enabling precise alignment of field resources across functional specialties.</p></div><div class="cap-card"><span class="cap-tag">Territory Code Architecture</span><h3>Alphanumeric Territory Design</h3><p>Created systematic territory coding frameworks (e.g., 3.1SLN, 19.4.1NIH, 10.27DGS) enabling clear organizational mapping. Established naming conventions that encoded geography, function, and account type for rapid territory identification.</p></div><div class="cap-card"><span class="cap-tag">Specialty Sales Segmentation</span><h3>Functional Territory Differentiation</h3><p>Implemented territory structures differentiating between Core, Genetic Analysis (GA), Clinical (ONC), Animal Health (AH), Technical Sales Specialists (TSS), and Inside Sales (IS) teams. Aligned territory types to product complexity and customer requirements.</p></div><div class="cap-card"><span class="cap-tag">Sales Training Program Design</span><h3>Multi-Track Sales Curriculum Development</h3><p>Designed and managed comprehensive sales training programs spanning multiple tracks for sales professionals and district managers. Developed curriculum including Sales Essentials, Professional Selling Skills, Selling in a Competitive World, and Professional Sales Negotiations courses.</p></div><div class="cap-card"><span class="cap-tag">Sales Coaching Methodology</span><h3>Needs-Based Coaching Framework</h3><p>Implemented Needs-Based Coaching frameworks focused on employee competence, relatedness, and autonomy to drive sustained performance. Applied research-backed motivation principles to shape coaching conversations and feedback delivery.</p></div><div class="cap-card"><span class="cap-tag">Presentation Skills Training</span><h3>Executive Presentation Development</h3><p>Delivered executive presentation skills training as part of advanced sales curriculum. Emphasized audience engagement techniques and structured presentation methodologies for customer-facing interactions.</p></div><div class="cap-card"><span class="cap-tag">Sales Negotiation Training</span><h3>Professional Sales Negotiation Curriculum</h3><p>Developed and facilitated Professional Sales Negotiation training for both sales representatives and district managers. Integrated negotiation skills with coaching methodologies for management development tracks.</p></div><div class="cap-card"><span class="cap-tag">Learning Center Operations</span><h3>Wet Lab Training Facility Management</h3><p>Managed hands-on instrument demonstrations and wet lab training experiences at the Life Learning Center facility. Coordinated product knowledge sessions showcasing instrument capabilities to new sales hires.</p></div><div class="cap-card"><span class="cap-tag">Global Account Classification</span><h3>Strategic Account Tier Segmentation</h3><p>Designed frameworks to classify enterprise accounts by scope (Global, NA, BPD) and channel alignment (Fisher Prime, VWR, Controlled). This segmentation enables targeted resource allocation and relationship management strategies across complex multi-tier account portfolios.</p></div><div class="cap-card"><span class="cap-tag">Go-Do Campaign Tracking</span><h3>Sales Promotion Initiative Tracking</h3><p>Designed and managed Go-Do sales promotion tracking systems measuring rep-level completion of targeted product campaigns. Tracked completion rates across Cell Analysis, Endpoint PCR, and qPCR Consumables initiatives with district-level rollup analytics.</p></div><div class="cap-card"><span class="cap-tag">District-Level Campaign Analytics</span><h3>Multi-District Campaign Performance Measurement</h3><p>Built comprehensive tracking frameworks monitoring sales initiative execution across East, West, and CA/Government regions. Created dashboards showing individual rep goal achievement and district aggregate completion percentages against defined targets.</p></div><div class="cap-card"><span class="cap-tag">Inside Sales Enablement</span><h3>Inside Sales Territory Campaign Management</h3><p>Coordinated specialized product initiatives across Inside Sales (IS) districts alongside Core and Academic (ACA) field territories. Managed campaign tracking for geographically distributed inside sales teams executing focused product promotions.</p></div><div class="cap-card"><span class="cap-tag">SGN Territory Mapping</span><h3>Territory-to-Account Structure Design</h3><p>Designed and managed complex territory-to-SGN (Ship-to Geographic Number) mapping structures linking sales territories to account master data. Created systematic relationships between position codes and territory assignments across diverse product lines.</p></div><div class="cap-card"><span class="cap-tag">Position Code Architecture</span><h3>Sales Position Code Management</h3><p>Developed and maintained position code structures (AM designations) linking account managers to specific territory-product combinations. Managed multi-dimensional territory assignments spanning imaging, flow cytometry, molecular biology, and specialty product lines.</p></div><div class="cap-card"><span class="cap-tag">Product Territory Matrix</span><h3>Cross-Product Territory Alignment</h3><p>Built territory matrices spanning EVOS imaging, flow cytometry (FLOW/FLOWTSS), genetic analysis (GACE), cell biology (CBI), and clinical solutions (CSS) product lines. Coordinated territory coverage ensuring account managers had appropriate product-territory assignments.</p></div><div class="cap-card"><span class="cap-tag">Sales Force Integration</span><h3>Post-Merger Sales Team Consolidation</h3><p>Designed and communicated multi-team integration plans combining legacy Life Technologies and BID sales organizations. Structured district-level management hierarchies spanning US and Canada with clear specialist role definitions.</p></div><div class="cap-card"><span class="cap-tag">Change Management Communications</span><h3>Integration Launch Messaging Strategy</h3><p>Developed targeted communication sequences for distinct sales audiences during organizational transitions. Crafted role-specific messaging that addressed quota continuity, product bag changes, and territory impacts for each affected team.</p></div><div class="cap-card"><span class="cap-tag">SPIF Launch Coordination</span><h3>Q4 Incentive Program Design</h3><p>Designed spiff programs to accelerate cross-selling of legacy products during integration periods. Structured stretch goals and payout mechanisms to drive Thermal Cycler sales through specialist-to-field handoff workflows.</p></div><div class="cap-card"><span class="cap-tag">Territory Gap Analysis</span><h3>Territory Gap-to-Goal Planning</h3><p>Structured methodology for comparing current territory performance against prior year baselines and growth targets. Enables rapid identification of revenue gaps requiring pipeline coverage through opportunity development.</p></div><div class="cap-card"><span class="cap-tag">Pipeline Coverage Modeling</span><h3>Win-Rate Pipeline Calculation</h3><p>Applied close-rate analysis to determine required pipeline multipliers for target attainment. If revenue gap is $1M and win rate is 50%, pipeline must contain $2M in opportunities to achieve goal.</p></div><div class="cap-card"><span class="cap-tag">Flagship Portfolio Intelligence</span><h3>Biotech Ecosystem Mapping & Investment Landscape Analysis</h3><p>Leverage ZoomInfo and market intelligence platforms to map Flagship Pioneering portfolio companies and their leadership networks. Track funding rounds, organizational structures, and strategic investor relationships across emerging life sciences ventures.</p></div><div class="cap-card"><span class="cap-tag">Contact Data Enrichment</span><h3>Executive Contact Intelligence & Prospecting</h3><p>Build and maintain executive contact databases with accuracy scoring, LinkedIn integration, and multi-channel outreach capability. Enable strategic account targeting through verified direct phone and email data.</p></div><div class="cap-card"><span class="cap-tag">Instrument Seed Programs</span><h3>Instrument Placement Programs</h3><p>Design and manage strategic instrument seed programs to drive consumable pull-through revenue. Balance upfront investment against long-term customer capture and recurring revenue potential.</p></div><div class="cap-card"><span class="cap-tag">Trade-In Program Design</span><h3>Equipment Trade-In Strategy</h3><p>Architect trade-in policies that accelerate customer upgrades while managing returned equipment valuation. Create competitive switching incentives that reduce barriers to platform adoption.</p></div><div class="cap-card"><span class="cap-tag">Competitive Switching Tools</span><h3>Competitive Displacement Enablement</h3><p>Leverage 'Pivot' and similar competitive switching platforms to systematically convert competitor-installed base. Enable field teams with cross-reference tools and switching justification content.</p></div><div class="cap-card"><span class="cap-tag">Regional Marketing Operations</span><h3>Field Marketing Integration</h3><p>Coordinate regional marketing programs including events, demo depot operations, and promotional campaigns. Align marketing investments with territory-level revenue objectives.</p></div><div class="cap-card"><span class="cap-tag">New Lab Start-Up Programs</span><h3>New Lab Capture Strategy</h3><p>Execute Jump Start and similar new lab programs to capture emerging research accounts at establishment. Coordinate equipment, reagent, and service bundles for de novo lab outfitting.</p></div><div class="cap-card"><span class="cap-tag">Marketing Concierge Services</span><h3>Field Marketing Support</h3><p>Enable field teams with marketing concierge functions for custom collateral, promotional item fulfillment, and campaign coordination. Bridge central marketing resources with local execution needs.</p></div><div class="cap-card"><span class="cap-tag">eProcurement Integration</span><h3>B2B Procurement Connectivity</h3><p>Manage eProcurement business-to-business connections with institutional purchasing systems. Enable seamless ordering through customer procurement platforms and supply center integrations.</p></div><div class="cap-card"><span class="cap-tag">Sales Meeting Cadence</span><h3>Commercial Meeting Architecture</h3><p>Design and execute sales summits, regional meetings, and weekly sales update calls to drive alignment. Create communication rhythms that reinforce strategy and accelerate field execution.</p></div><div class="cap-card"><span class="cap-tag">Credit Limit Management</span><h3>Customer Credit Administration</h3><p>Navigate credit limit policies and order hold procedures to maintain revenue velocity. Partner with finance to resolve credit issues and protect customer relationships.</p></div><div class="cap-card"><span class="cap-tag">Revenue Recognition Discipline</span><h3>Revenue Timing Compliance</h3><p>Ensure deal structures comply with revenue recognition policies and fiscal calendar requirements. Coordinate quarter-end transactions to optimize timing while maintaining audit compliance.</p></div><div class="cap-card"><span class="cap-tag">Rebate Program Management</span><h3>Customer Rebate Administration</h3><p>Structure and administer customer rebate programs to drive volume commitments. Track rebate accruals and ensure accurate payout calculations aligned with contractual terms.</p></div><div class="cap-card"><span class="cap-tag">Demo Depot Operations</span><h3>Equipment Demonstration Programs</h3><p>Coordinate demo equipment inventory and deployment through centralized depot operations. Enable customer evaluations and proof-of-concept demonstrations to accelerate purchase decisions.</p></div><div class="cap-card"><span class="cap-tag">Bids and Contracts Process</span><h3>Competitive Bid Response</h3><p>Navigate institutional bid processes and contract negotiations with standardized workflows. Ensure compliant responses while optimizing pricing and terms for competitive positioning.</p></div><div class="cap-card"><span class="cap-tag">Platform-Agnostic Deployment</span><h3>Cross-Environment Software Deployment</h3><p>Experience deploying scientific software across diverse environments from single workstations to enterprise cloud. Ensure self-contained installation with minimal configuration for rapid time-to-value.</p></div><div class="cap-card"><span class="cap-tag">HPC Integration</span><h3>High-Performance Computing Orchestration</h3><p>Leverage existing job schedulers, file systems, and user models to integrate seamlessly into compute environments. Support all major job schedulers with task graph engines executing shell scripts as primary units.</p></div><div class="cap-card"><span class="cap-tag">Instrument Connectivity</span><h3>Laboratory Instrument Integration</h3><p>Connect laboratory instruments and software systems via REST APIs and CLI tools. Integrate with major platforms including EMR systems using HL7, eliminating manual data transfer and reducing turnaround time.</p></div><div class="cap-card"><span class="cap-tag">Workflow Modularization</span><h3>Modular Application Architecture</h3><p>Deploy discrete software modules matching specific workflow requirements without full platform overhead. Enable incremental functionality additions while maintaining end-to-end data provenance across all applications.</p></div><div class="cap-card"><span class="cap-tag">BioBuildsTM Curation</span><h3>Open-Source Bioinformatics Libraries</h3><p>Manage versioned and curated libraries of commonly used open-source bioinformatics tools for NGS informatics. Enable rapid user onboarding while supporting development of complex workflows through user-friendly builder tools.</p></div><div class="cap-card"><span class="cap-tag">Capacity Planning</span><h3>Manufacturing Capacity Management</h3><p>Track manufacturing and processing capacities alongside inventory stocks through holistic operational management. Enable faster access to operational metrics driving improved organizational ROI.</p></div><div class="cap-card"><span class="cap-tag">Regulatory Documentation</span><h3>CAP/CLIA Compliance Documentation</h3><p>Maintain deep data provenance critical for healthcare, diagnostic, and therapeutic environments. Support audit requirements for FDA, CAP, and CLIA regulatory agencies through complete record accessibility.</p></div><div class="cap-card"><span class="cap-tag">Integration Training Design</span><h3>Post-Merger Sales Training Curriculum Development</h3><p>Designed comprehensive multi-phase training programs for sales force integration following acquisitions. Structured blended learning approaches combining pre-work eLearning, on-site hands-on training, and post-training reinforcement modules.</p></div><div class="cap-card"><span class="cap-tag">Workflow-Based Enablement</span><h3>Scientific Workflow Training Architecture</h3><p>Organized sales enablement content around complete scientific workflows (ePCR, protein analysis, sample prep) rather than isolated products. Mapped training modules to customer application areas to enable consultative selling.</p></div><div class="cap-card"><span class="cap-tag">LMS Administration</span><h3>Learning Management System Curriculum Operations</h3><p>Managed iLearn platform course assignments and completion tracking for distributed sales teams. Coordinated mandatory vs optional eLearning modules with specific completion deadlines tied to role requirements.</p></div></div>
-</section>
-
-<hr class="divider">
-
-<!-- DOMAIN TAGS -->
-<section id='domains'><div class='section-eyebrow'>Domain Expertise</div><div class='tags-cloud'><span class="domain-tag">Cystic Fibrosis Research</span><span class="domain-tag">Genomics & Epigenomics</span><span class="domain-tag">Precision Medicine</span><span class="domain-tag">Pediatric Pulmonology</span><span class="domain-tag">lncRNA Analysis</span><span class="domain-tag">Pseudomonas aeruginosa Infection</span><span class="domain-tag">CFTR Modulator Therapeutics</span><span class="domain-tag">Monocyte/Macrophage Biology</span><span class="domain-tag">Innate Immune Tolerance</span><span class="domain-tag">Contract Research Organizations</span><span class="domain-tag">Cell & Gene Therapy</span><span class="domain-tag">Laboratory Informatics</span><span class="domain-tag">Multi-Omics Data Management</span><span class="domain-tag">CDMO Partnerships</span><span class="domain-tag">Academic Medical Centers</span><span class="domain-tag">Flow Cytometry</span><span class="domain-tag">Bioinformatics Platforms</span><span class="domain-tag">ELN-LIMS Solutions</span><span class="domain-tag">Enterprise SaaS Platforms</span><span class="domain-tag">Cloud-Native Informatics</span><span class="domain-tag">Molecular Biology Reagents</span><span class="domain-tag">PCR & Amplification Products</span><span class="domain-tag">Bioprocess Production</span><span class="domain-tag">Life Science Chemicals</span><span class="domain-tag">Cell Imaging Systems</span><span class="domain-tag">Laboratory Equipment</span><span class="domain-tag">Cold Storage Systems</span><span class="domain-tag">Centrifugation</span><span class="domain-tag">Biosafety Cabinets</span><span class="domain-tag">Lab Consumables</span><span class="domain-tag">Distribution Channel Management</span><span class="domain-tag">Agricultural Biotechnology</span><span class="domain-tag">Diagnostics Reference Labs</span><span class="domain-tag">Clinical Laboratory Networks</span><span class="domain-tag">Biopharmaceutical Manufacturing</span><span class="domain-tag">Large Pharma Enterprise Accounts</span><span class="domain-tag">OEM Supply Agreements</span><span class="domain-tag">TaqMan qPCR Assays</span><span class="domain-tag">Genetic Analyzer Systems</span><span class="domain-tag">Alexa Fluor Antibodies</span><span class="domain-tag">Gene Synthesis Services</span><span class="domain-tag">Dynabead Immunoprecipitation</span><span class="domain-tag">Sales Compensation Planning</span><span class="domain-tag">North America Field Sales Operations</span><span class="domain-tag">In Vitro Diagnostics OEM</span><span class="domain-tag">Bioprocess Single-Use Systems</span><span class="domain-tag">Therapeutic Drug Monitoring</span><span class="domain-tag">Laboratory Automation Equipment</span><span class="domain-tag">Ion Torrent Sequencing</span><span class="domain-tag">Mass Spectrometry Platforms</span><span class="domain-tag">Chromatography Data Systems</span><span class="domain-tag">Channel Partner Revenue Management</span><span class="domain-tag">PCR Product Lines</span><span class="domain-tag">RNA Product Lines</span><span class="domain-tag">Molecular Biology Reagent Portfolio</span><span class="domain-tag">Sales Force Effectiveness</span><span class="domain-tag">Miller Heiman Methodology</span><span class="domain-tag">Siebel CRM Platform</span><span class="domain-tag">Thermal Cycler Equipment</span><span class="domain-tag">Technical Sales Specialist Programs</span><span class="domain-tag">Western Blot Detection Systems</span><span class="domain-tag">Protein Electrophoresis Gels</span><span class="domain-tag">University Supply Centers</span><span class="domain-tag">Research Hospital Accounts</span><span class="domain-tag">Luminex Immunoassay Platforms</span><span class="domain-tag">Manufacturing Operations KPIs</span><span class="domain-tag">Customer Service Excellence</span><span class="domain-tag">Working Capital Management</span><span class="domain-tag">Quality Management Systems</span><span class="domain-tag">Operational Performance Measurement</span><span class="domain-tag">Detection Product Lines</span><span class="domain-tag">Modulation Technologies</span><span class="domain-tag">Molecular Biology Tools Portfolio</span><span class="domain-tag">SMF Revenue Management</span><span class="domain-tag">Post-Merger Integration</span><span class="domain-tag">Strategic Relationship Management</span><span class="domain-tag">Thermal Cycler Systems</span><span class="domain-tag">PCR Instrumentation</span><span class="domain-tag">Applied Biosystems Legacy Products</span><span class="domain-tag">TSS Field Sales Enablement</span><span class="domain-tag">European Market Operations</span><span class="domain-tag">shRNA Research Products</span><span class="domain-tag">Gene Detection Products</span><span class="domain-tag">Multi-Entity Revenue Reporting</span><span class="domain-tag">Cytokine/Chemokine Assays</span><span class="domain-tag">NIH Procurement</span><span class="domain-tag">Sole Source Justification</span><span class="domain-tag">VWR Distribution Channel</span><span class="domain-tag">Tier2 Distributor Networks</span><span class="domain-tag">OEM Revenue Segmentation</span><span class="domain-tag">Cell Biology Reagents</span><span class="domain-tag">Synthetic Biology Products</span><span class="domain-tag">Cell Engineering Tools</span><span class="domain-tag">Sera Products</span><span class="domain-tag">Fragment & Sequence Genomics</span><span class="domain-tag">Flow Cytometry Imaging</span><span class="domain-tag">Transplant Diagnostics</span><span class="domain-tag">Capillary Electrophoresis Systems</span><span class="domain-tag">MCB Consumables Portfolio</span><span class="domain-tag">Dharmacon RNAi Products</span><span class="domain-tag">Fermentas Molecular Biology</span><span class="domain-tag">Abgene PCR Products</span><span class="domain-tag">Open Biosystems Products</span><span class="domain-tag">Fisher Scientific Distribution</span><span class="domain-tag">Gene Modulation Products</span><span class="domain-tag">Nucleic Acid Detection Products</span><span class="domain-tag">Academic Research Procurement</span><span class="domain-tag">Employee Recognition Platforms</span><span class="domain-tag">Globoforce Recognition Systems</span><span class="domain-tag">Corporate Goal Cascading</span><span class="domain-tag">Cybersecurity Ownership</span><span class="domain-tag">Diversity & Inclusion Initiatives</span><span class="domain-tag">4i Values Framework</span><span class="domain-tag">Miller Heiman LAMP Methodology</span><span class="domain-tag">Strategic Account Planning</span><span class="domain-tag">Sales Compensation Administration</span><span class="domain-tag">HFM Financial Integration</span><span class="domain-tag">Quota Letter Generation</span><span class="domain-tag">Territory Zip Code Mapping</span><span class="domain-tag">Neurobiology Research Products</span><span class="domain-tag">Synthetic Biology Reagents</span><span class="domain-tag">CE Consumables Portfolio</span><span class="domain-tag">Bioproduction Supplies</span><span class="domain-tag">Food Safety Testing Products</span><span class="domain-tag">Animal Health Diagnostics</span><span class="domain-tag">Oncology Research Products</span><span class="domain-tag">Storage Plastics</span><span class="domain-tag">HID Products</span><span class="domain-tag">SGN Account Master Data</span><span class="domain-tag">Technical Sales Specialist Alignment</span><span class="domain-tag">Biotech Startup Accounts</span><span class="domain-tag">Government Civil Support Accounts</span><span class="domain-tag">Canadian Life Science Accounts</span><span class="domain-tag">Competent Cell Products</span><span class="domain-tag">Cloning & Transformation</span><span class="domain-tag">Gel Electrophoresis</span><span class="domain-tag">Gel Documentation Systems</span><span class="domain-tag">Nucleic Acid Stains</span><span class="domain-tag">E-Gel Platform</span><span class="domain-tag">Global Compensation Administration</span><span class="domain-tag">International Workforce Planning</span><span class="domain-tag">Dallas Training Facilities</span><span class="domain-tag">Nucleic Acid Purification Products</span><span class="domain-tag">NGS Sample Preparation Kits</span><span class="domain-tag">CRISPR Gene Editing Tools</span><span class="domain-tag">RNAi Screening Libraries</span><span class="domain-tag">Inducible Expression Systems</span><span class="domain-tag">FFPE Sample Processing</span><span class="domain-tag">Endotoxin-Free Purification</span><span class="domain-tag">Qiagen Competitive Intelligence</span><span class="domain-tag">Blood DNA Purification</span><span class="domain-tag">Viral Nucleic Acid Extraction</span><span class="domain-tag">Automated DNA Extraction</span><span class="domain-tag">FFPE Tissue Processing</span><span class="domain-tag">Forensic DNA Analysis</span><span class="domain-tag">GeneJET Purification Kits</span><span class="domain-tag">MagJET Magnetic Separation</span><span class="domain-tag">Clontech/Takara Sales Operations</span><span class="domain-tag">West Coast Academic Accounts</span><span class="domain-tag">Boston Academic Medical Accounts</span><span class="domain-tag">ELISA Products</span><span class="domain-tag">Restriction Enzymes</span><span class="domain-tag">qPCR Master Mixes</span><span class="domain-tag">Mutagenesis Reagents</span><span class="domain-tag">Fetal Bovine Serum Products</span><span class="domain-tag">Primary Cell Media</span><span class="domain-tag">Insect Cell Media</span><span class="domain-tag">Cell Biology TSS Organization</span><span class="domain-tag">Genetic Analysis Sales Organization</span><span class="domain-tag">Bioproduction Division Sales</span><span class="domain-tag">Arcturus Laser Capture Products</span><span class="domain-tag">Cell Imaging Systems Sales</span><span class="domain-tag">Protein Electrophoresis Products</span><span class="domain-tag">Western Blot Analysis</span><span class="domain-tag">Immunology Antibody Products</span><span class="domain-tag">Bioluminescence Assays</span><span class="domain-tag">Isoelectric Focusing</span><span class="domain-tag">HHMI Research Institutions</span><span class="domain-tag">Cibus US LLC</span><span class="domain-tag">Gene Editing Agriculture</span><span class="domain-tag">Enterprise Science Platform Licensing</span><span class="domain-tag">cDNA Synthesis Products</span><span class="domain-tag">RT-qPCR Workflows</span><span class="domain-tag">Hot-Start Polymerase Products</span><span class="domain-tag">Life Sciences Field Service Operations</span><span class="domain-tag">EVOS Imaging Sales</span><span class="domain-tag">Synthetic Biology Specialist Teams</span><span class="domain-tag">Sales Training Curriculum</span><span class="domain-tag">Management Development Programs</span><span class="domain-tag">Needs-Based Motivation Theory</span><span class="domain-tag">Life Learning Center (Van Allen Way)</span><span class="domain-tag">Abbott/AbbVie Enterprise</span><span class="domain-tag">Amgen Global Account</span><span class="domain-tag">AstraZeneca/MedImmune</span><span class="domain-tag">Bayer Global Account</span><span class="domain-tag">Beckman Coulter Enterprise</span><span class="domain-tag">Biogen Idec Account</span><span class="domain-tag">Bristol-Myers Squibb Global</span><span class="domain-tag">Boehringer Ingelheim Enterprise</span><span class="domain-tag">Celgene Account Management</span><span class="domain-tag">Eli Lilly Enterprise</span><span class="domain-tag">GSK Global Account</span><span class="domain-tag">Hospira Account</span><span class="domain-tag">Janssen Pharmaceutical</span><span class="domain-tag">Johnson & Johnson Enterprise</span><span class="domain-tag">LabCorp/Covance Partnership</span><span class="domain-tag">Lonza BPD Account</span><span class="domain-tag">Merck Global Enterprise</span><span class="domain-tag">Monsanto Agriculture Account</span><span class="domain-tag">Novartis Global Account</span><span class="domain-tag">Novo Nordisk Enterprise</span><span class="domain-tag">Pfizer Global Account</span><span class="domain-tag">Pioneer DuPont Agriculture</span><span class="domain-tag">Quest Diagnostics Partnership</span><span class="domain-tag">Regeneron Account</span><span class="domain-tag">Roche Global Enterprise</span><span class="domain-tag">Samsung Bioprocessing</span><span class="domain-tag">Sanofi/Genzyme Global</span><span class="domain-tag">Siemens Healthcare Account</span><span class="domain-tag">Sonic Healthcare Global</span><span class="domain-tag">Syngenta Agriculture Account</span><span class="domain-tag">Takeda Global Account</span><span class="domain-tag">UC System Strategic Account</span><span class="domain-tag">Vertex Pharmaceuticals Account</span><span class="domain-tag">Fisher Prime Channel Strategy</span><span class="domain-tag">Controlled Account Programs</span><span class="domain-tag">Unstable DNA Cloning</span><span class="domain-tag">ccdB Vector Propagation</span><span class="domain-tag">Unmethylated DNA Preparation</span><span class="domain-tag">Cell Analysis Products</span><span class="domain-tag">Endpoint PCR Products</span><span class="domain-tag">qPCR Consumables</span><span class="domain-tag">Inside Sales Operations</span><span class="domain-tag">Government & CA Sales Districts</span><span class="domain-tag">Sales Initiative (SPI) Programs</span><span class="domain-tag">EVOS Imaging Systems</span><span class="domain-tag">Flow Cytometry Instruments</span><span class="domain-tag">Life Science Clinical Solutions</span><span class="domain-tag">Applied Informatics Solutions</span><span class="domain-tag">Qubit Quantitation Systems</span><span class="domain-tag">Genetic Testing Services</span><span class="domain-tag">Human Identification Products</span><span class="domain-tag">Mass Array Systems</span><span class="domain-tag">Ion Diagnostics</span><span class="domain-tag">Capillary Electrophoresis Instrumentation</span><span class="domain-tag">Sales Organization Design</span><span class="domain-tag">Integration Communications Strategy</span><span class="domain-tag">Flagship Pioneering Portfolio</span><span class="domain-tag">Foghorn Therapeutics (Chromatin Biology)</span><span class="domain-tag">Indigo Agriculture</span><span class="domain-tag">Denali Therapeutics (Neurodegeneration)</span><span class="domain-tag">Inari Agriculture (Gene Editing)</span><span class="domain-tag">Moderna Therapeutics</span><span class="domain-tag">Venture-Backed Biotech</span><span class="domain-tag">Series F Financing Intelligence</span><span class="domain-tag">North America LSG Commercial Operations</span><span class="domain-tag">Customer Value Continuum (CVC)</span><span class="domain-tag">BID Division Commercial Structure</span><span class="domain-tag">GSD Division Commercial Structure</span><span class="domain-tag">CSD Division Commercial Structure</span><span class="domain-tag">BPD Division Commercial Structure</span><span class="domain-tag">Sales Advisory Council</span><span class="domain-tag">myPARTNERidea Program</span><span class="domain-tag">Enterprise Data Warehouse Analytics</span><span class="domain-tag">Licensing and Commercial Supply</span><span class="domain-tag">Master Supply Agreements</span><span class="domain-tag">eProcurement Platforms</span><span class="domain-tag">Supply Center Operations</span><span class="domain-tag">Cell & Gene Therapy Manufacturing</span><span class="domain-tag">Clinical Treatment Protocols</span><span class="domain-tag">HL7 EMR Integration</span><span class="domain-tag">CAP/CLIA Compliance</span><span class="domain-tag">Agricultural Genomics</span><span class="domain-tag">Therapeutic Workflow Management</span><span class="domain-tag">BioBuildsTM NGS Tools</span><span class="domain-tag">iBlot Dry Blotting Systems</span><span class="domain-tag">iBind Western Systems</span><span class="domain-tag">Bolt Gel Electrophoresis</span><span class="domain-tag">Countess Cell Counters</span><span class="domain-tag">Tali Image Cytometer</span><span class="domain-tag">NanoDrop Spectrophotometers</span><span class="domain-tag">Neon Transfection Systems</span><span class="domain-tag">ProFlex Thermal Cyclers</span><span class="domain-tag">SimpliAmp Thermal Cyclers</span><span class="domain-tag">Veriti Thermal Cyclers</span><span class="domain-tag">TRIzol RNA Isolation</span><span class="domain-tag">PureLink Purification Kits</span><span class="domain-tag">NuPAGE Gel Systems</span><span class="domain-tag">Novex Electrophoresis</span><span class="domain-tag">dNTP Reagent Products</span><span class="domain-tag">Youth Cycling Programs</span><span class="domain-tag">Exercise Neuroscience</span><span class="domain-tag">K-12 Education Programs</span><span class="domain-tag">Biometric Assessment</span><span class="domain-tag">Cognitive Function Research</span></div></section><hr class='divider'>
-
-<!-- CAREER -->
-<section id='career'><div class='section-eyebrow'>Career</div><div class="career-entry"><div class="career-meta"><strong></strong> · Founder & Principal Commercial Advisor<span class="career-years"></span></div><p></p></div><div class="career-entry"><div class="career-meta"><strong></strong> · Sr. Manager, Corporate & Strategic Accounts<span class="career-years"></span></div><p></p></div><div class="career-entry"><div class="career-meta"><strong></strong> · Director, Sales & Strategic Accounts — Employee #18, First Sales Hire<span class="career-years"></span></div><p></p></div><div class="career-entry"><div class="career-meta"><strong></strong> · Western Regional Manager<span class="career-years"></span></div><p></p></div><div class="career-entry"><div class="career-meta"><strong>Codebreaker Labs</strong> · Commercial Strategy Advisor<span class="career-years">2025-Present</span></div><p>Advisory services for pre-seed precision medicine startup including CRM architecture, sales process design, and go-to-market infrastructure roadmap</p></div><div class="career-entry"><div class="career-meta"><strong>L7 Informatics</strong> · Director of Sales & Strategic Accounts<span class="career-years">2018-2025</span></div><p>Built commercial operating system from ground up; sustained $2M+ ARR with deal desk workflows reducing cycle time 40%</p></div><div class="career-entry"><div class="career-meta"><strong>Thermo Fisher Scientific</strong> · Sr. Manager, Strategic Accounts<span class="career-years">2012-2018</span></div><p>Managed 12 global enterprise accounts with 105-120% quota attainment; improved deal velocity 25% through QBR cadence</p></div><div class="career-entry"><div class="career-meta"><strong>Takara Bio USA / Becton Dickinson</strong> · Regional Director, Strategic Accounts<span class="career-years">2000-2012</span></div><p>Delivered 19% YoY revenue growth; expanded account base from 8 to 25; built KOL network across 40+ institutions</p></div><div class="career-entry"><div class="career-meta"><strong>The Specialized Foundation</strong> · Board/Advisor (implied)<span class="career-years">Unknown</span></div><p>Supporting research programs validating cycling's impact on middle school students' cognitive function, mood, and academic outcomes through biometric assessment across seven schools and 1000+ students</p></div></section><hr class='divider'>
-
-<!-- KNOWLEDGE SOURCES -->
-<section id="sources">
-  <div class="section-eyebrow">Knowledge Sources</div>
-  <h2 style="font-family:'DM Serif Display',serif;font-size:2.5rem;font-weight:400;margin-bottom:1rem">
-    Files <em style="font-style:italic;color:var(--forest)">ingested</em>
-  </h2>
-  <p style="color:var(--muted);font-size:0.88rem;margin-bottom:2rem">
-    Drop any PDF, DOCX, or XLSX into the folder subfolders<br>
-    — the agent reads them and evolves this page automatically.
-  </p>
-  <div class="sources-list"><div class="source-item">&#x2514;  21 cfr compliance_benefits.pdf</div><div class="source-item">&#x2514; 02) Territory Invoice Report (2 Years) KB.xlsx</div><div class="source-item">&#x2514; 02_16 North America LSG Sales Meeting_FINAL.pdf</div><div class="source-item">&#x2514; 150527 BID Conversion Calls Compared to CIMO (2).pdf</div><div class="source-item">&#x2514; 161118 AC 5 0 Master Program Tracker.xlsx</div><div class="source-item">&#x2514; 20.0.5ACR_2014 AOT Master Template Revised 4-10-14.xlsx</div><div class="source-item">&#x2514; 2011 Jan-SepInvDetailPivot.xlsx</div><div class="source-item">&#x2514; 2013 Commission Calculations Q3 - 2014 Modeling File.xlsx</div><div class="source-item">&#x2514; 2013 H2 NA RSD Plan from May 22 Meeting.xlsx</div><div class="source-item">&#x2514; 2013-07.pdf</div><div class="source-item">&#x2514; 2014 09 Q4 thermal cycler SPIF plan (2).xlsx</div><div class="source-item">&#x2514; 2014 Channel Swap.xlsx</div><div class="source-item">&#x2514; 2014 Regional Channels Alignment Template v2 (2) SM inputs.xlsx</div><div class="source-item">&#x2514; 2014 Year end planning - Working timelines -- 8-27-14.xlsx</div><div class="source-item">&#x2514; 2015 06 SGN Lookup Tool.xlsx</div><div class="source-item">&#x2514; 2015 10 13 CORPA Map.xlsx</div><div class="source-item">&#x2514; 2015 Americas Sales Performance_YTD Period 08-1.xlsx</div><div class="source-item">&#x2514; 2015 NA Product Bag 6.23.2015 .xlsx</div><div class="source-item">&#x2514; 2015 Presidents Club Rules_FINAL.pdf</div><div class="source-item">&#x2514; 2015 Promo Code Master Sales 9-2-15.xlsx</div><div class="source-item">&#x2514; 2016 Amgen Account Plan - Erick Bounlom revised 2016-04-12.xlsx</div><div class="source-item">&#x2514; 2016 Financial Close Calendar.xlsx</div><div class="source-item">&#x2514; 2016 Territory Plan GSD.xlsx</div><div class="source-item">&#x2514; 2017 Ethics and Compliance Guidebook.pdf</div><div class="source-item">&#x2514; 2017 Incentive Comp Workbook.xlsx</div><div class="source-item">&#x2514; 2017 Product Bag.3.xlsx</div><div class="source-item">&#x2514; 2017 Release Dates.xlsx</div><div class="source-item">&#x2514; 2017 Total Comp Instructions.docx</div><div class="source-item">&#x2514; 2017_Bioproduction team.xlsx</div><div class="source-item">&#x2514; 2018 Country Salary Budgets for iConnect.pdf</div><div class="source-item">&#x2514; 2018 Growth Rate Template.xlsx</div><div class="source-item">&#x2514; 3_23_2017.docx</div><div class="source-item">&#x2514; 5 Steps.docx</div><div class="source-item">&#x2514; 6_7_2017.docx</div><div class="source-item">&#x2514; 90066 Novartis REN 111914 10641.xlsx</div><div class="source-item">&#x2514; AM Weekly Invoice Report_02-09-16.xlsx</div><div class="source-item">&#x2514; APM Territory MGMT Tracking.xls</div><div class="source-item">&#x2514; Account Plan (Ship-To SGN NSGN) (6).xlsx</div><div class="source-item">&#x2514; All Opportunities LSG 2015.xlsx</div><div class="source-item">&#x2514; All in One - FINAL_Marketing+Opportunity+Report_RSD_HMD_Nov_04 V2.xlsx</div><div class="source-item">&#x2514; ApprovalAuthorityMatrix.xlsx</div><div class="source-item">&#x2514; Assess Potential Ratings.pdf</div><div class="source-item">&#x2514; BID Integrations Comms Oct launch 9-22-14.docx</div><div class="source-item">&#x2514; BID MBR Summary MAY Results 2016 vFNL 062016.pdf</div><div class="source-item">&#x2514; BID to CORE Account Look Up 09-19-14 v3 0.xlsx</div><div class="source-item">&#x2514; Best Practice Power Cards.pdf</div><div class="source-item">&#x2514; Biostorage Trends 2010.pdf</div><div class="source-item">&#x2514; Bristol Myers Squibb.pdf</div><div class="source-item">&#x2514; CDM_Customer_Data_Governance_Policy__last_updated_2014_Nov_121.docx</div><div class="source-item">&#x2514; CO_Foundation_Profiles_12_2017.2.xlsx</div><div class="source-item">&#x2514; CO_Foundation_Profiles_12_2017.xlsx</div><div class="source-item">&#x2514; CO_Foundation_Profiles_2018.xlsx</div><div class="source-item">&#x2514; CO_Foundation_Profiles_2018_2_3.xlsx</div><div class="source-item">&#x2514; Calibration Worksheet for Managers_Excel REVISED.xlsx</div><div class="source-item">&#x2514; Capillary Electrophoresis Catalog for all CE Products_CO31877.pdf</div><div class="source-item">&#x2514; CellBasedLabelFreeDetectionTrends2009.pdf</div><div class="source-item">&#x2514; Cell_Based Assays For Biologics Trends 2011.pdf</div><div class="source-item">&#x2514; Change_Management_Timelines and criteria 2017.docx</div><div class="source-item">&#x2514; Cibus - L7 - Form - MSA and EULA Final 630.pdf</div><div class="source-item">&#x2514; Cognos_Price_Vilnius_6_2017.xlsx</div><div class="source-item">&#x2514; Comp planning timeline v3 (2).xlsx</div><div class="source-item">&#x2514; Complete_Territory_Listing+2017-06-16T12_17_58.502Z(1).xlsx</div><div class="source-item">&#x2514; Contracts Tracker  Executive Summary March 11 2010.docx</div><div class="source-item">&#x2514; Copy of 882620_Bid_Template.xlsx</div><div class="source-item">&#x2514; Copy of FisherPrime vs VWR 3 31 2015 MH.xlsx</div><div class="source-item">&#x2514; Copy of Lessons Learned 2017 TA & QS_170403_V2.xlsx</div><div class="source-item">&#x2514; Copy of NSGN_Deduplications_Sept-Nov 2017 (002).xlsx</div><div class="source-item">&#x2514; Copy of Quota Tool 12-19 KB NW final.xlsx</div><div class="source-item">&#x2514; Copy of R4F Schools Master List v3a_170807.xlsx</div><div class="source-item">&#x2514; Corporate (VWR Agreement).pdf</div><div class="source-item">&#x2514; Corporate Development - New Valuation Model vFINAL_Unlocked.xlsx</div><div class="source-item">&#x2514; Current and Future ThermoFisher - LSG Responsibilities Jon Stacks 2016 V2.docx</div><div class="source-item">&#x2514; Customer data for ian and lsr meeting v3 (2).xlsx</div><div class="source-item">&#x2514; DISH_ENROLLMENT.xls.xlsx</div><div class="source-item">&#x2514; Data Sheet_R3.01 DIGITAL.pdf</div><div class="source-item">&#x2514; Divisional One Pager Template LSG - Q3.xlsx</div><div class="source-item">&#x2514; DonorOverview_v03b (4).pdf</div><div class="source-item">&#x2514; ECAT SKU list_V2 (2).xlsx</div><div class="source-item">&#x2514; ECAT.xlsx</div><div class="source-item">&#x2514; EDW Data Dictionary - 1.2.1.xls</div><div class="source-item">&#x2514; EOQ YTD Query 2016-11-28T14_14_38.714Z.xlsx</div><div class="source-item">&#x2514; End+to+End+Enablement+without+Territory_v132016+2016-08-30T13_51_04.178Z(1).xlsx</div><div class="source-item">&#x2514; EndUserDetailProtein+2015-02-25T17_33_24.567Z.xlsx</div><div class="source-item">&#x2514; Epigenetic Screening Trends 2010.pdf</div><div class="source-item">&#x2514; Executive Summary Research 171211.pdf</div><div class="source-item">&#x2514; Executive Summary Research_.docx</div><div class="source-item">&#x2514; Executive Summary Research_.pdf</div><div class="source-item">&#x2514; Executive Summary Riding for Focus 171211.pdf</div><div class="source-item">&#x2514; F-067569-Comp-Cell_LRF.pdf</div><div class="source-item">&#x2514; FINAL 2017 Terms and Conditions  Americas 12-19-16.docx</div><div class="source-item">&#x2514; Finance Competency Model.pdf</div><div class="source-item">&#x2514; Fiscal Calendar 2016(1).pdf</div><div class="source-item">&#x2514; Flagship Pioneering Portfolio.pdf</div><div class="source-item">&#x2514; Forecasting Daily Sales Report 20150102.xlsx</div><div class="source-item">&#x2514; GBD1&GBD2 Quota workbook.xlsx</div><div class="source-item">&#x2514; GPCR Screening Profiling Trends 2010.pdf</div><div class="source-item">&#x2514; GSD ALL Rep Lookup Alignments_NK_FINAL_ 1-30-2017.xlsx</div><div class="source-item">&#x2514; Gantt Chart Template.xlsx</div><div class="source-item">&#x2514; GoalTree_2018.pdf</div><div class="source-item">&#x2514; Govt Guide Part 02.pdf</div><div class="source-item">&#x2514; IMPACT-Training.pdf</div><div class="source-item">&#x2514; Implementation Workbook Master 10.2013.xlsx</div><div class="source-item">&#x2514; Individual Development Plan.docx</div><div class="source-item">&#x2514; Invitrogen Promotions_SSIV_SSVILO_PlatinumTaq_CO121754.pdf</div><div class="source-item">&#x2514; Jon Stacks Resume BD ATSO.pdf</div><div class="source-item">&#x2514; Jon Stacks Resume CommercialOps ATSO.pdf</div><div class="source-item">&#x2514; Jon Stacks Resume Strategy ATS Optimized.pdf</div><div class="source-item">&#x2514; Key Account Tracking 04 15 2015 JS  .xlsx</div><div class="source-item">&#x2514; L7 Brochure_Single.pdf</div><div class="source-item">&#x2514; L7 Informatics Letter of Support_Hara_Levy_2020_Draft_II.docx</div><div class="source-item">&#x2514; LPG  Key Account Scorecard Example.xlsx</div><div class="source-item">&#x2514; LSG CAS_Analytics A3 Update_20160502.xlsx</div><div class="source-item">&#x2514; LSG Corp Accounts Tracker 1_7_2018_DataPack.xlsx</div><div class="source-item">&#x2514; LSG Corporate Account Owners (Global) 9.30.2015 .xlsx</div><div class="source-item">&#x2514; LSG North America The Code FINAL.pdf</div><div class="source-item">&#x2514; LSG Performance Calibration Sales Ops-v2.xlsx</div><div class="source-item">&#x2514; LSG Proforma Template_2017.xlsx</div><div class="source-item">&#x2514; LSG-Corporate Accounts Tracker Summary.pdf</div><div class="source-item">&#x2514; Leadership Competency Model.pdf</div><div class="source-item">&#x2514; Leadership Copy - NA Sales Training Q2 2015.pdf</div><div class="source-item">&#x2514; Legacy BID CrossTool.xlsx</div><div class="source-item">&#x2514; LncRNA_CF_ResearchStrategy_05.10.2020_JS_EditsII.docx</div><div class="source-item">&#x2514; MB 2013 Sept Channels Report.xlsx</div><div class="source-item">&#x2514; MB ETE Workbook 2013.xlsx</div><div class="source-item">&#x2514; Medical_Liaison_Specialized_Foundation_Job Description.docx</div><div class="source-item">&#x2514; Mid_PMD_Review_2017_9_2017.pdf</div><div class="source-item">&#x2514; Mol Bio - US Data - July 2014 YTD.xlsx</div><div class="source-item">&#x2514; Mol Bio 2014 Channel AOP New Product Estimates (2).xlsx</div><div class="source-item">&#x2514; Mol Bio TSS Sales Call_031315.pdf</div><div class="source-item">&#x2514; Molecular Biology_Q3 13 QBR_v3 hc distr.xlsx</div><div class="source-item">&#x2514; NA SPI Tracker through 3-9-2015.xlsx</div><div class="source-item">&#x2514; Navigating Fisher Scientific- Contact List 7-1-12.xlsx</div><div class="source-item">&#x2514; Next Generation Sequencing Global 2011.pdf</div><div class="source-item">&#x2514; Operations Competency Assessment.xlsx</div><div class="source-item">&#x2514; Opportunity_Funnel_4-19-2017.xlsx</div><div class="source-item">&#x2514; Overview Template - Executive 7-28-11.docx</div><div class="source-item">&#x2514; Overview-LAMP.pdf</div><div class="source-item">&#x2514; P1-2017 LSG Operational Metrics Reporting  Package_Final.pdf</div><div class="source-item">&#x2514; PROD SGN to POS Full Extract 11-7-2016.xlsx</div><div class="source-item">&#x2514; Pfizer Stem Cell RFI_draft_v4 102715.xlsx</div><div class="source-item">&#x2514; Pilot Metrics.xls</div><div class="source-item">&#x2514; Proforma Sample Template20160829.xlsx</div><div class="source-item">&#x2514; Proforma_Core_Group - Template_Feedback_8_14_2017.1.xlsx</div><div class="source-item">&#x2514; Project_ Charter_Bisulfite_conversion.xlsx</div><div class="source-item">&#x2514; Proposal vs Change vs Renewal 02-06-2012.docx</div><div class="source-item">&#x2514; Q1 2017 GSD Leedom Bowler - Revised RSD targets.xlsx</div><div class="source-item">&#x2514; QTC Affy - Master Sheet.xlsx</div><div class="source-item">&#x2514; Quota Setting Analysis.xlsx</div><div class="source-item">&#x2514; RFP - RSD Checklist 4-2015.xlsx</div><div class="source-item">&#x2514; Rev_Segmentation_AOP_Test_EDW.xlsx</div><div class="source-item">&#x2514; SGN list for End to End_RSD.xlsx</div><div class="source-item">&#x2514; SRM Evolution AnnouncementJS.docx</div><div class="source-item">&#x2514; SRM4 - YTD 2014 vs 2015  Thru Mar 040715.xlsx</div><div class="source-item">&#x2514; Sales-Compensation-Trends-Best-Practices-Montreal-Roundtable-Final-3-26-2014.pdf</div><div class="source-item">&#x2514; Sera+Daily+Sales+-+Global+-+Ad+hoc+(Healthcare)+v1+2017-03-01T17_05_29.037Z.xlsx</div><div class="source-item">&#x2514; Sole Source Letter_NIH_08072017.pdf</div><div class="source-item">&#x2514; Strategic Account Report - EU with Quota.xlsx</div><div class="source-item">&#x2514; TCs_TSS training_CM_2_092014 Final.pdf</div><div class="source-item">&#x2514; TSS Quota Report - NA01.xlsx</div><div class="source-item">&#x2514; TSS Transaction Detail - PY CY - NA01.xlsx</div><div class="source-item">&#x2514; Territory to SGN 2017-06-14T09_56_15.203Z.xlsx</div><div class="source-item">&#x2514; Thermal Cycler Life Lead Form - Final.docx</div><div class="source-item">&#x2514; Thermo Fisher LAMP Program 7-15-15.docx</div><div class="source-item">&#x2514; Thermo Fisher Scientific KPI Manual - FINAL.pdf</div><div class="source-item">&#x2514; ThermoFisher_Appreciate_UserGuide.pdf</div><div class="source-item">&#x2514; US States.xlsx</div><div class="source-item">&#x2514; proj_fin_rev_49833_Fishersci April Enhancements_Jan2017.xlsx</div><div class="source-item">&#x2514; qPCR App FAQ's First Draft.docx</div><div class="source-item">&#x2514; qPCR Assay Trends 2010.pdf</div><div class="source-item">&#x2514; sales-comp-plan-models-for-shockwave-site.xlsx</div><div class="source-item">&#x2514; Proposed Revisions Physical Education.pdf</div><div class="source-item">&#x2514; Proposed Revisions Physical Education copy.pdf</div><div class="source-item">&#x2514; Copy of RSD Training-Final (2).xlsx</div><div class="source-item">&#x2514; TSF One Pager DRAFT.pdf</div></div>
-</section>
-
-<hr class="divider">
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow">Contact</div>
-  <div class="contact-grid">
-    <div class="contact-block">
-      <h3>Let's talk<br><em style="font-style:italic;color:var(--forest)">commercial strategy.</em></h3>
-      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem">Fragmented data. Disconnected decisions. Untapped value.</p>
-      <a class="btn btn-primary" href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">Schedule a Call</a>
+  <div class="hero-diagram">
+    <p class="diagram-label">The status quo: disconnected environments</p>
+    <div class="frag-grid">
+      <div class="frag-node">Instrument<br>Data</div>
+      <div class="frag-node">LIMS /<br>ELN</div>
+      <div class="frag-node">Clinical<br>Ops</div>
+      <div class="frag-node">CRM /<br>Sales</div>
+      <div class="frag-node">Supply<br>Chain</div>
+      <div class="frag-node">Sequencing<br>Pipelines</div>
+      <div class="frag-node">Regulatory<br>Docs</div>
+      <div class="frag-node">Finance /<br>ERP</div>
     </div>
-    <div class="contact-block">
-      <div class="contact-links">
-        <a href="mailto:jon@stacksadvisory.com">jon@stacksadvisory.com</a>
-        <a href="https://stacksadvisory.com" target="_blank">https://stacksadvisory.com</a>
-        <a href="https://www.linkedin.com/in/jon-stacks/" target="_blank">LinkedIn</a>
-        <div style="margin-top:.5rem;font-size:.8rem;color:var(--muted)">BA, Molecular Cellular & Developmental Biology · CU Boulder</div>
+    <div class="vs-row">
+      <div class="vs-line"></div>
+      <span class="vs-chip">vs. the opportunity</span>
+      <div class="vs-line"></div>
+    </div>
+    <div class="unified-node">
+      <div class="unified-dot">⬡</div>
+      <div>
+        <div class="unified-title">Unified Commercial Intelligence Layer</div>
+        <div class="unified-desc">Single source of truth connecting process, data, and GTM execution</div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi-chip"><span class="kpi-val">20+</span><span class="kpi-lbl">Yrs Experience</span></div>
+      <div class="kpi-chip"><span class="kpi-val">$367M</span><span class="kpi-lbl">Revenue Managed</span></div>
+      <div class="kpi-chip"><span class="kpi-val">26</span><span class="kpi-lbl">Global Pharma Accts</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO WE WORK WITH ───────────────────── -->
+<section class="who" id="who">
+  <div class="who-inner">
+    <div>
+      <span class="eyebrow">Who We Work With</span>
+      <h2 class="serif">Built for <em>builders</em><br>in life sciences.</h2>
+    </div>
+    <div class="who-cards">
+      <div class="who-card">
+        <div class="who-icon">🚀</div>
+        <div class="who-title">Growth-stage life sciences platforms</div>
+        <div class="who-desc">Series A–C companies building their first commercial function or scaling beyond founder-led sales.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">💻</div>
+        <div class="who-title">Scientific informatics & SaaS companies</div>
+        <div class="who-desc">LIMS, ELN, data catalog, and workflow platforms entering regulated pharma and clinical markets.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🧬</div>
+        <div class="who-title">Biopharma & genomics innovators</div>
+        <div class="who-desc">Pre-commercial and early-commercial platforms in rare disease, CGT, precision medicine, and diagnostics.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏗</div>
+        <div class="who-title">Founders & commercial leaders building GTM infrastructure</div>
+        <div class="who-desc">CEOs and CCOs who need a senior commercial partner — without the overhead of a full-time hire.</div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  © 2026 Jon Stacks · Founder & Senior Commercial Advisor ·
-  <span style="opacity:.6">Last updated April 26, 2026</span>
-</footer>
+<!-- ── TRUST STRIP ───────────────────────── -->
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Experience spanning</span>
+    <div class="trust-rule"></div>
+    <div class="trust-logos">
+      <span class="trust-co">Thermo Fisher Scientific</span>
+      <span class="trust-co">Takara Bio / Clontech</span>
+      <span class="trust-co">L7 Informatics</span>
+      <span class="trust-co">Codebreaker Labs</span>
+    </div>
+  </div>
+</div>
 
-</body>
-</html>
+<!-- ── PROBLEM ────────────────────────────── -->
+<section class="section problem" id="problem">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">The Core Challenge</span>
+      <h2 class="section-title">Legacy environments are<br><em>costing you more</em> than you think</h2>
+      <p>Healthcare, biotech, and pharma share a structural problem: disconnected instruments, fragmented workflows, and siloed data force critical decisions in the dark. The result isn't just inefficiency — it's compounding commercial risk at every handoff.</p>
+    </div>
+    <div class="problem-layout">
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="pi-icon">🔭</div>
+          <div>
+            <div class="pi-title">No Visibility Across the Value Chain</div>
+            <div class="pi-desc">No real-time view of where specimens, treatments, or commercial opportunities stand. Leaders navigate by assumption.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="pi-icon">🗂</div>
+          <div>
+            <div class="pi-title">Missing Metadata & Data Context</div>
+            <div class="pi-desc">Data exists — but without provenance, lineage, or searchability. No "Google for your scientific and commercial data."</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="pi-icon">⚙️</div>
+          <div>
+            <div class="pi-title">No Automation Architecture</div>
+            <div class="pi-desc">Manual handoffs and spreadsheet tracking drive excess cost, compliance risk, and velocity loss on time-critical workflows.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="pi-icon">🔗</div>
+          <div>
+            <div class="pi-title">Silos That Compound Across Enterprises</div>
+            <div class="pi-desc">Fragmentation doesn't stop at division lines — it multiplies across CRO, CDMO, and clinical site partners.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="pi-icon">📊</div>
+          <div>
+            <div class="pi-title">No Global Reporting Layer</div>
+            <div class="pi-desc">P&L leaders can't tie initiative-level activity to financial impact. The transformation at the bench never surfaces to the boardroom.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="pi-icon">🎯</div>
+          <div>
+            <div class="pi-title">GTM Strategy Without Signal</div>
+            <div class="pi-desc">Commercial strategies built on lagging indicators miss the window. Good decisions require a real-time data foundation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-visual">
+        <p class="pv-label">Precision medicine workflow — without a unified layer</p>
+        <div class="pv-flow">
+          <div class="pv-step">
+            <span class="pv-badge badge-red">Wet Lab</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Manual log</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Email handoff</span>
+          </div>
+          <div class="pv-step">
+            <span class="pv-badge badge-orange">Sequencing</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Separate LIMS</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">No linkage</span>
+          </div>
+          <div class="pv-step">
+            <span class="pv-badge badge-teal">Analysis</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Spreadsheet</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">PDF report</span>
+          </div>
+          <div class="pv-step">
+            <span class="pv-badge badge-orange">Diagnosis</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Siloed EMR</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">No provenance</span>
+          </div>
+          <div class="pv-step">
+            <span class="pv-badge badge-red">Treatment</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">Manual infusion log</span>
+            <span class="pv-arrow">→</span>
+            <span class="pv-node">No audit trail</span>
+          </div>
+        </div>
+        <div class="leak-box">
+          <div class="leak-label">Where value leaks</div>
+          <div class="leak-tags">
+            <span class="leak-tag">Manual handoffs</span>
+            <span class="leak-tag">Spreadsheet tracking</span>
+            <span class="leak-tag">No chain of custody</span>
+            <span class="leak-tag">Spec fragmentation</span>
+            <span class="leak-tag">Compliance gaps</span>
+            <span class="leak-tag">No audit trail</span>
+            <span class="leak-tag">Siloed reporting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW WE HELP ────────────────────────── -->
+<section class="section help" id="how">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">How We Help</span>
+      <h2 class="section-title">Four pillars of commercial <em>transformation</em></h2>
+      <p>We work where scientific complexity, fragmented systems, and commercial growth intersect — bringing 20+ years of enterprise life sciences GTM experience to the challenges that keep founders and commercial leaders up at night.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-accent accent-teal"></div>
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">🔬</div>
+        <div class="pillar-title">Commercial Architecture</div>
+        <div class="pillar-body">Design and build the GTM infrastructure — CRM, territory model, account segmentation — that connects your scientific value to buyer decisions at scale.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-accent accent-gold"></div>
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">🤝</div>
+        <div class="pillar-title">Strategic Partnerships & BD</div>
+        <div class="pillar-body">Identify, structure, and close partnerships that compound platform value — from Pioneer Programs to strategic alliances that create durable pipeline.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-accent accent-blue"></div>
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">📡</div>
+        <div class="pillar-title">Data-Driven GTM Strategy</div>
+        <div class="pillar-body">Translate scientific differentiation into a go-to-market thesis powered by market intelligence, competitive landscape analysis, and account-level signal.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-accent accent-purple"></div>
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon">📈</div>
+        <div class="pillar-title">Revenue Acceleration</div>
+        <div class="pillar-body">From second-source entry to sole-source conversion — structure commercial sequences that lock in account value and build the compounding engine.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OFFERS ─────────────────────────────── -->
+<section class="section offers" id="offers">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Engagement Models</span>
+      <h2 class="section-title">Choose how we <em>work together</em></h2>
+      <p>Three structured ways to engage — sized for the stage you're at and the outcome you need.</p>
+    </div>
+    <div class="offer-grid">
+
+      <div class="offer-card">
+        <span class="offer-badge badge-standard">Fractional</span>
+        <div class="offer-title">Fractional VP / Director</div>
+        <div class="offer-sub">Ongoing senior commercial leadership without a full-time hire. Ideal for pre-commercial and Series A–B companies.</div>
+        <ul class="offer-items">
+          <li>Commercial strategy ownership — targets, pipeline, and GTM execution</li>
+          <li>CRM build-out and sales process design (HubSpot, Salesforce)</li>
+          <li>Territory model, ICP definition, and account segmentation</li>
+          <li>BD outreach campaigns and partner development</li>
+          <li>Weekly leadership team participation</li>
+        </ul>
+        <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-ghost-dark">Discuss Your Needs</a>
+      </div>
+
+      <div class="offer-card featured">
+        <span class="offer-badge badge-featured">Most Popular</span>
+        <div class="offer-title">90-Day Commercial Sprint</div>
+        <div class="offer-sub">A focused engagement with a defined outcome. Diagnose, design, and launch — in one quarter.</div>
+        <ul class="offer-items">
+          <li>Commercial landscape analysis and competitive positioning</li>
+          <li>GTM thesis and account prioritization framework</li>
+          <li>Pioneer or key account outreach program (full execution)</li>
+          <li>Partner pipeline with executed LOIs or signed agreements</li>
+          <li>Playbook handoff your team can own and scale</li>
+        </ul>
+        <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-primary">Start the Sprint</a>
+      </div>
+
+      <div class="offer-card">
+        <span class="offer-badge badge-project">Project</span>
+        <div class="offer-title">Strategic Advisory Project</div>
+        <div class="offer-sub">A discrete deliverable for a specific strategic decision. Fast, focused, and ready to present to your board.</div>
+        <ul class="offer-items">
+          <li>M&A target identification and commercial diligence</li>
+          <li>Market entry analysis for new geographies or segments</li>
+          <li>Competitive landscape deep-dives (CGT, genomics, medtech)</li>
+          <li>Key account strategy for a single named account</li>
+          <li>Two-week turnaround on most deliverables</li>
+        </ul>
+        <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-ghost-dark">Scope a Project</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ────────────────────────────── -->
+<section class="section process" id="process">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">How It Works</span>
+      <h2 class="section-title">From diagnostic to <em>sustained impact</em></h2>
+      <p>Every engagement moves through a disciplined five-step sequence — connecting strategy to execution and execution to measurable value.</p>
+    </div>
+    <div class="process-steps">
+      <div class="ps">
+        <div class="ps-ring">🔍<div class="ps-num">1</div></div>
+        <div class="ps-title">Diagnose</div>
+        <div class="ps-desc">Map the current state — data environment, commercial infrastructure, competitive position, and value leakage points.</div>
+      </div>
+      <div class="ps">
+        <div class="ps-ring">🗺<div class="ps-num">2</div></div>
+        <div class="ps-title">Design</div>
+        <div class="ps-desc">Build the commercial thesis, prioritize initiatives, and set outcome-driven targets with clear financial traceability.</div>
+      </div>
+      <div class="ps">
+        <div class="ps-ring">✅<div class="ps-num">3</div></div>
+        <div class="ps-title">Validate</div>
+        <div class="ps-desc">Pressure-test the strategy — pilot outreach, partner discovery, and early-stage market signal collection.</div>
+      </div>
+      <div class="ps">
+        <div class="ps-ring">🚀<div class="ps-num">4</div></div>
+        <div class="ps-title">Launch & Realize</div>
+        <div class="ps-desc">Execute at speed — BD campaigns, key account activation, partnership closings, and pipeline development.</div>
+      </div>
+      <div class="ps">
+        <div class="ps-ring">♻️<div class="ps-num">5</div></div>
+        <div class="ps-title">Embed & Scale</div>
+        <div class="ps-desc">Build the playbook and capability your team owns — processes, tooling, and habits that sustain impact after we're done.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY STACKS ADVISORY ───────────────── -->
+<section class="section why" id="why-us">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Why Stacks Advisory</span>
+      <h2 class="section-title">What makes this <em>different</em></h2>
+      <p>Most advisors bring strategy or domain expertise. Rarely both. And almost never with the operational depth to execute alongside you.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🔬</div>
+        <div class="why-title">Built at the bench, proven in enterprise sales</div>
+        <div class="why-desc">A BA in molecular biology plus 20+ years of commercial execution means we speak both languages — scientific and commercial — without translation loss.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔁</div>
+        <div class="why-title">Experience across tools, SaaS, and biopharma</div>
+        <div class="why-desc">Most advisors know one sector. We've operated across life science tools, genomics platforms, biotech SaaS, and biopharma — giving us pattern recognition that generalists don't have.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚙️</div>
+        <div class="why-title">Focus on execution, not just strategy</div>
+        <div class="why-desc">We don't hand off decks. Engagements end with working CRM architecture, executed outreach, signed LOIs, or a playbook your team can run — not a recommendation.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌱</div>
+        <div class="why-title">Designed for pre-commercial and growth-stage companies</div>
+        <div class="why-desc">We're not built for Fortune 500 transformation programs. We're built for companies where the first commercial hire, first partnership, or first key account close actually changes the trajectory.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ─────────────────────────────── -->
+<section class="section impact" id="impact">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Track Record</span>
+      <h2 class="section-title">Experience that shows up <em>in context</em></h2>
+      <p>Twenty years of enterprise life sciences commercial work — from supporting Thermo Fisher's $13.6B Life Technologies integration to joining L7 Informatics as the first commercial hire.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-val">$367M</span>
+        <span class="stat-lbl">Revenue base managed across 26 global pharma accounts during the Thermo Fisher integration</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">$13.6B</span>
+        <span class="stat-lbl">Acquisition scale of the Life Technologies integration — one of the largest in life sciences tools history</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">25+</span>
+        <span class="stat-lbl">Enterprise logos contributed to across biopharma and academic medical centers at L7 Informatics</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">20+</span>
+        <span class="stat-lbl">Years across tools, genomics, biopharma SaaS, and medtech commercial roles</span>
+      </div>
+    </div>
+
+    <div class="cases">
+      <div class="case">
+        <span class="case-tag tag-biopharma">Biopharma SaaS</span>
+        <div class="case-title">Building commercial infrastructure from the ground up</div>
+        <div class="case-body">Joined L7 Informatics as employee #18 and first commercial hire. Helped design and build the initial GTM infrastructure — CRM, territory model, account segmentation, and partner program — contributing to growth across biopharma and academic medical center accounts.</div>
+        <div class="case-result">25+ enterprise logos developed · global sales team established</div>
+      </div>
+      <div class="case">
+        <span class="case-tag tag-meddev">Enterprise Key Accounts</span>
+        <div class="case-title">Supporting key account continuity through a $13.6B integration</div>
+        <div class="case-body">Led key account strategy during Thermo Fisher's Life Technologies integration — supporting commercial execution across 26 global pharma accounts in 14 countries as two organizations merged into a unified go-to-market structure.</div>
+        <div class="case-result">Contributed to integration-period continuity across a $367M revenue base</div>
+      </div>
+      <div class="case">
+        <span class="case-tag tag-genomics">Rare Disease Genomics</span>
+        <div class="case-title">Early partner development for a pre-commercial genomics platform</div>
+        <div class="case-body">Contributing to BD and partnerships at Codebreaker Labs — helping structure a Pioneer Program, supporting outreach to institutional partners, and contributing to early LOI conversations with Arpeggio Bio and Sant Joan de Déu Barcelona.</div>
+        <div class="case-result">2 LOIs in progress · US + EMEA pipeline developing</div>
+      </div>
+      <div class="case">
+        <span class="case-tag tag-cgt">Cell & Gene Therapy</span>
+        <div class="case-title">CGT market mapping and biopharma re-engagement motion</div>
+        <div class="case-body">Built pipeline and re-engagement motion across major biopharma targets in CAR-T, GLP-1, and rare disease — including account mapping, competitive landscape framing, and outreach sequencing across AstraZeneca, AbbVie, Eli Lilly, and Kyverna Therapeutics.</div>
+        <div class="case-result">Active re-engagement conversations underway · multi-program pipeline developing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERTISE / BIO ─────────────────────── -->
+<section class="section expertise" id="expertise">
+  <div class="section-inner">
+    <div class="expertise-layout">
+      <div>
+        <span class="eyebrow">Domain Expertise</span>
+        <h2 class="section-title" style="margin-bottom:1.5rem;">Built at the bench.<br><em>Proven in the market.</em></h2>
+        <p style="font-size:0.95rem;font-weight:300;color:var(--slate);line-height:1.8;margin-bottom:2rem;">
+          A foundation in molecular biology paired with 20+ years of enterprise commercial execution means we understand your science — and we know exactly how to sell it.
+        </p>
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-ico">🧬</div>
+            <div>
+              <div class="exp-name">Genomics & Sequencing</div>
+              <div class="exp-desc">NGS platforms, bioinformatics workflows, rare disease genomics, causal variant analysis, and precision medicine data infrastructure.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-ico">💊</div>
+            <div>
+              <div class="exp-name">Biopharma & Cell / Gene Therapy</div>
+              <div class="exp-desc">CAR-T manufacturing workflows, CGT CDMO/CRO testing ecosystems, regulatory strategy, and CGT CAGR modeling with FDA/HHS overlay.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-ico">🔬</div>
+            <div>
+              <div class="exp-name">Life Science Tools & Instruments</div>
+              <div class="exp-desc">Enterprise accounts at Thermo Fisher, Takara Bio/Clontech, and BD — deep knowledge of reagent, instrument, and consumables commercial motion.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-ico">💻</div>
+            <div>
+              <div class="exp-name">Scientific Informatics & Biotech SaaS</div>
+              <div class="exp-desc">LIMS, ELN, data catalog, and scientific process management platforms — and the commercial architecture that drives SaaS adoption in regulated environments.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bio">
+        <div class="bio-name">Jon Stacks</div>
+        <div class="bio-role">Founder · Senior Commercial Advisor</div>
+        <div class="bio-body">
+          20+ years leading enterprise commercial strategy across life science tools, genomics, and biopharma SaaS. Former Sr. Manager of Corporate &amp; Strategic Accounts at Thermo Fisher Scientific, Western Regional Manager at Takara Bio/Clontech, and Director of Sales &amp; Strategic Accounts at L7 Informatics (employee #18, first sales hire).
+          <br><br>
+          Available for fractional VP/Director engagements in BD, GTM strategy, strategic accounts, and commercial build-outs for pre-commercial and growth-stage life sciences companies.
+          <br><br>
+          BA in Molecular, Cellular, and Developmental Biology · University of Colorado Boulder · Based in Denver, CO.
+        </div>
+        <div class="bio-tags">
+          <span class="bio-tag">Thermo Fisher</span>
+          <span class="bio-tag">Takara Bio</span>
+          <span class="bio-tag">L7 Informatics</span>
+          <span class="bio-tag">Codebreaker Labs</span>
+          <span class="bio-tag">Denver, CO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────── -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Ready to turn your <em>data environment</em><br>into a commercial advantage?</h2>
+    <p class="cta-bridge">We work where scientific complexity, fragmented systems, and commercial growth intersect.</p>
+    <p>Whether you're building a commercial function from zero, navigating a complex key account, or designing a partnership program — start with a 30-minute commercial diagnostic. No pitch deck. No obligation.</p>
+    <div class="cta-actions">
+      <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank" rel="noopener" class="btn btn-primary">Schedule a 30-Minute Commercial Diagnostic</a>
+      <a href="mailto:jon@stacksadvisory.com" class="btn btn-ghost-light">Download Capabilities Overview</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer class="footer">
+  <span class="footer-logo">stacks<span>.</span>advisory</span>
+  <span class="footer-copy">© 2025 Stacks Advisory · Denver, CO · <a href="mailto:jon@stacksadvisory.com" style="color:var(--teal);text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <nav class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="/cdn-cg
