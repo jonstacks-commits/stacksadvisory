@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule a Diagnostic | Stacks Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0a0f0d;
+      --bg2:      #111812;
+      --bg3:      #16201a;
+      --border:   rgba(255,255,255,0.08);
+      --border2:  rgba(255,255,255,0.14);
+      --accent:   #1fba7c;
+      --text:     #e8ede9;
+      --muted:    #7a9080;
+      --muted2:   #9db0a2;
+      --serif:    'DM Serif Display', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+      --radius:   10px;
+      --t:        0.18s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+      background: rgba(10,15,13,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back {
+      font-size: 0.8rem; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px; transition: color var(--t);
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 680px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+
+    /* HEADER */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+    }
+    .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); opacity: 0.6; }
+    .page-header { margin-bottom: 3rem; }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 1rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); }
+    .page-header p { font-size: 1rem; color: var(--muted2); max-width: 520px; line-height: 1.65; }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 2.5rem; }
+    .progress-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: var(--muted); margin-bottom: 8px;
+      font-weight: 500; letter-spacing: 0.04em;
+    }
+    .progress-track { height: 2px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+    /* FORM SECTIONS */
+    .form-section { display: none; animation: fadeUp 0.3s ease forwards; }
+    .form-section.active { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1.75rem; display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* INPUTS */
+    .q-group { margin-bottom: 2rem; }
+    .q-group label {
+      display: block; font-size: 0.92rem; font-weight: 500;
+      color: var(--text); margin-bottom: 0.5rem; line-height: 1.4;
+    }
+    .q-group .hint { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.65rem; font-style: italic; }
+
+    input[type="text"], input[type="email"], input[type="url"], textarea, select {
+      width: 100%;
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text);
+      font-family: var(--sans); font-size: 0.92rem;
+      padding: 0.75rem 1rem; outline: none;
+      transition: border-color var(--t), box-shadow var(--t);
+      appearance: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(31,186,124,0.12);
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); font-style: italic; }
+    textarea { resize: vertical; min-height: 90px; line-height: 1.55; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a9080' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+      padding-right: 2.5rem; cursor: pointer;
+    }
+    select option { background: var(--bg2); color: var(--text); }
+
+    /* PILL GROUPS */
+    .pill-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill-group input[type="radio"], .pill-group input[type="checkbox"] { display: none; }
+    .pill-group label {
+      display: inline-flex; align-items: center;
+      padding: 0.45rem 1rem; border: 1px solid var(--border2);
+      border-radius: 20px; font-size: 0.82rem; font-weight: 400;
+      color: var(--muted2); cursor: pointer;
+      transition: all var(--t); margin: 0; background: transparent; user-select: none;
+    }
+    .pill-group input:checked + label {
+      background: rgba(31,186,124,0.12); border-color: var(--accent);
+      color: var(--accent); font-weight: 500;
+    }
+    .pill-group label:hover { border-color: var(--muted2); color: var(--text); }
+
+    /* TWO-COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* BUTTONS */
+    .btn-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 2.5rem; gap: 1rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.75rem 1.75rem; border-radius: var(--radius);
+      font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; transition: all var(--t);
+      border: 1px solid transparent; text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #061009; border-color: var(--accent); }
+    .btn-primary:hover { background: #25d48e; border-color: #25d48e; }
+    .btn-ghost { background: transparent; color: var(--muted2); border-color: var(--border2); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* CHAR COUNTER */
+    .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 4px; }
+    .req { color: var(--accent); margin-left: 2px; }
+
+    /* CONFIRMATION + CALENDLY */
+    #step-confirm { padding: 1rem 0; }
+    .confirm-top {
+      text-align: center; padding: 2rem 0 2rem;
+      animation: fadeUp 0.4s ease forwards;
+    }
+    .confirm-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(31,186,124,0.12);
+      border: 1px solid rgba(31,186,124,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .confirm-icon svg { width: 24px; height: 24px; color: var(--accent); }
+    .confirm-top h2 {
+      font-family: var(--serif); font-size: 1.75rem;
+      font-weight: 400; margin-bottom: 0.6rem; color: var(--text);
+    }
+    .confirm-top p { color: var(--muted2); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.5rem; }
+    .confirm-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 1.75rem 0 1.5rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .confirm-divider::before, .confirm-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border2);
+    }
+
+    /* Calendly embed container */
+    .calendly-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border2);
+      background: #fff;
+      min-height: 700px;
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+    .calendly-inline-widget {
+      min-width: 100% !important;
+      height: 700px !important;
+    }
+
+    /* Fallback link if JS blocked */
+    .calendly-fallback {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .calendly-fallback a { color: var(--accent); text-decoration: underline; }
+
+    /* TRUST BAR */
+    .trust-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .trust-item { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .trust-item .num { font-family: var(--serif); font-size: 1.3rem; color: var(--text); }
+    .trust-item .lbl { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://stacksadvisory.com" class="nav-logo">stacks<span>.</span>advisory</a>
+  <a href="https://stacksadvisory.com" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 3L5 8l5 5"/>
+    </svg>
+    Back to site
+  </a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <div class="eyebrow">Commercial diagnostic</div>
+    <h1>Two minutes before<br>we talk. <em>That's it.</em></h1>
+    <p>Six quick questions so the 30-minute call focuses on what matters for you — not basic discovery. No pitch deck. No obligation.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-labels">
+      <span id="progress-label">Step 1 of 3</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <form id="intake-form" novalidate>
+
+    <!-- STEP 1: WHO YOU ARE -->
+    <div class="form-section active" id="step-1">
+      <div class="section-label">About you</div>
+
+      <div class="two-col">
+        <div class="q-group">
+          <label for="fname">First name <span class="req">*</span></label>
+          <input type="text" id="fname" name="fname" placeholder="Jon" autocomplete="given-name" required>
+        </div>
+        <div class="q-group">
+          <label for="lname">Last name <span class="req">*</span></label>
+          <input type="text" id="lname" name="lname" placeholder="Stacks" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="q-group">
+        <label for="email">Work email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required>
+      </div>
+
+      <div class="two-col">
+        <div class="q-group">
+          <label for="company">Company <span class="req">*</span></label>
+          <input type="text" id="company" name="company" placeholder="Acme Bio" required>
+        </div>
+        <div class="q-group">
+          <label for="role">Your role <span class="req">*</span></label>
+          <input type="text" id="role" name="role" placeholder="CEO / CCO / Founder" required>
+        </div>
+      </div>
+
+      <div class="q-group">
+        <label for="linkedin">LinkedIn URL <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">(optional)</span></label>
+        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+      </div>
+
+      <div class="btn-row">
+        <span></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+          Continue
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: YOUR COMPANY -->
+    <div class="form-section" id="step-2">
+      <div class="section-label">Your company</div>
+
+      <div class="q-group">
+        <label>Company stage <span class="req">*</span></label>
+        <div class="pill-group">
+          <input type="radio" name="stage" id="s1" value="Pre-revenue / pre-commercial">
+          <label for="s1">Pre-revenue / pre-commercial</label>
+          <input type="radio" name="stage" id="s2" value="Series A">
+          <label for="s2">Series A</label>
+          <input type="radio" name="stage" id="s3" value="Series B">
+          <label for="s3">Series B</label>
+          <input type="radio" name="stage" id="s4" value="Series C+">
+          <label for="s4">Series C+</label>
+          <input type="radio" name="stage" id="s5" value="Growth / bootstrapped">
+          <label for="s5">Growth / bootstrapped</label>
+        </div>
+      </div>
+
+      <div class="q-group">
+        <label>Primary domain <span class="req">*</span></label>
+        <div class="pill-group">
+          <input type="radio" name="domain" id="d1" value="Genomics / sequencing">
+          <label for="d1">Genomics / sequencing</label>
+          <input type="radio" name="domain" id="d2" value="Biopharma / CGT">
+          <label for="d2">Biopharma / CGT</label>
+          <input type="radio" name="domain" id="d3" value="Scientific informatics / SaaS">
+          <label for="d3">Scientific informatics / SaaS</label>
+          <input type="radio" name="domain" id="d4" value="Diagnostics / IVD">
+          <label for="d4">Diagnostics / IVD</label>
+          <input type="radio" name="domain" id="d5" value="Life science tools">
+          <label for="d5">Life science tools</label>
+          <input type="radio" name="domain" id="d6" value="Other">
+          <label for="d6">Other</label>
+        </div>
+      </div>
+
+      <div class="q-group">
+        <label>Current commercial situation <span class="req">*</span></label>
+        <div class="pill-group">
+          <input type="radio" name="situation" id="sit1" value="Building from zero">
+          <label for="sit1">Building from zero</label>
+          <input type="radio" name="situation" id="sit2" value="GTM unclear or stalled">
+          <label for="sit2">GTM unclear or stalled</label>
+          <input type="radio" name="situation" id="sit3" value="Pipeline but low conversion">
+          <label for="sit3">Pipeline but low conversion</label>
+          <input type="radio" name="situation" id="sit4" value="Need BD / partnerships">
+          <label for="sit4">Need BD / partnerships</label>
+          <input type="radio" name="situation" id="sit5" value="Raise or M&A prep">
+          <label for="sit5">Raise or M&amp;A prep</label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(2)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Continue
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: THE GAP -->
+    <div class="form-section" id="step-3">
+      <div class="section-label">The gap</div>
+
+      <div class="q-group">
+        <label for="priority">What's the one commercial problem that, if solved, would most change your trajectory? <span class="req">*</span></label>
+        <div class="hint">Be specific — this shapes the entire diagnostic conversation.</div>
+        <textarea id="priority" name="priority" maxlength="500" required
+          placeholder="e.g. Strong scientific differentiation but no systematic way to reach the right buyers at large pharma. Pipeline is founder-led and doesn't scale."
+          oninput="updateCount(this,'priority-count')"></textarea>
+        <div class="char-count"><span id="priority-count">0</span> / 500</div>
+      </div>
+
+      <div class="q-group">
+        <label>Ideal engagement type <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">(pick all that apply)</span></label>
+        <div class="pill-group">
+          <input type="checkbox" name="engage" id="e1" value="Quick project (2–4 weeks)">
+          <label for="e1">Quick project (2–4 wks)</label>
+          <input type="checkbox" name="engage" id="e2" value="90-day commercial sprint">
+          <label for="e2">90-day sprint</label>
+          <input type="checkbox" name="engage" id="e3" value="Ongoing fractional partnership">
+          <label for="e3">Fractional partnership</label>
+          <input type="checkbox" name="engage" id="e4" value="Not sure yet — want to explore">
+          <label for="e4">Not sure yet</label>
+        </div>
+      </div>
+
+      <div class="q-group">
+        <label for="timeline">Timeline / urgency</label>
+        <select id="timeline" name="timeline">
+          <option value="" disabled selected>Select one</option>
+          <option>Immediate — need to move in the next 2–4 weeks</option>
+          <option>Near-term — looking to start within 1–2 months</option>
+          <option>Planning ahead — 3–6 month horizon</option>
+          <option>Exploratory — no set timeline yet</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(3)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">
+          Submit &amp; choose a time
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION + INLINE CALENDLY -->
+    <div class="form-section" id="step-confirm">
+      <div class="confirm-top">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <h2>Got it. Pick a time.</h2>
+        <p>Your answers are on their way to Jon. Choose a slot below and you're done — the call is already prepped around what you shared.</p>
+      </div>
+
+      <div class="confirm-divider">Choose your time</div>
+
+      <!-- Inline Calendly widget -->
+      <div class="calendly-wrap" id="calendly-container">
+        <!-- widget injected by JS below -->
+      </div>
+      <p class="calendly-fallback">
+        Calendar not loading? <a href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">Open Calendly directly →</a>
+      </p>
+    </div>
+
+  </form>
+
+  <div class="trust-bar" id="trust-bar">
+    <div class="trust-item"><span class="num">20+</span><span class="lbl">Yrs experience</span></div>
+    <div class="trust-item"><span class="num">$367M</span><span class="lbl">Revenue managed</span></div>
+    <div class="trust-item"><span class="num">26</span><span class="lbl">Global pharma accts</span></div>
+    <div class="trust-item"><span class="num">#18</span><span class="lbl">First sales hire · L7</span></div>
+  </div>
+
+</div>
+
+<!-- Calendly widget script — loads async, only renders when needed -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<script>
+  const TOTAL_STEPS = 3;
+  let currentStep = 1;
+  let formData = {};
+
+  function updateProgress(step) {
+    const pct = Math.min(Math.round(((step - 1) / TOTAL_STEPS) * 100), 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent =
+      step <= TOTAL_STEPS ? 'Step ' + step + ' of ' + TOTAL_STEPS : 'Complete';
+    document.getElementById('progress-pct').textContent = pct + '%';
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+    const target = n > TOTAL_STEPS ? 'step-confirm' : 'step-' + n;
+    document.getElementById(target).classList.add('active');
+    if (n > TOTAL_STEPS) {
+      document.getElementById('trust-bar').style.display = 'none';
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = 'Complete';
+      document.getElementById('progress-pct').textContent = '100%';
+      loadCalendly();
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function loadCalendly() {
+    const container = document.getElementById('calendly-container');
+    // Build prefill params from collected form data
+    const name  = encodeURIComponent((formData.fname || '') + ' ' + (formData.lname || '')).trim();
+    const email = encodeURIComponent(formData.email || '');
+
+    // Use Calendly inline widget API if script has loaded, otherwise inject iframe directly
+    function injectWidget() {
+      if (window.Calendly) {
+        Calendly.initInlineWidget({
+          url: 'https://calendly.com/jonstacks/introductory-discussion?hide_gdpr_banner=1&background_color=16201a&text_color=e8ede9&primary_color=1fba7c',
+          parentElement: container,
+          prefill: {
+            name:  (formData.fname || '') + ' ' + (formData.lname || ''),
+            email: formData.email || '',
+          },
+        });
+      } else {
+        // Fallback: inject iframe directly
+        const src = 'https://calendly.com/jonstacks/introductory-discussion?embed_type=Inline&hide_gdpr_banner=1&background_color=16201a&text_color=e8ede9&primary_color=1fba7c'
+          + (name  ? '&name='  + name  : '')
+          + (email ? '&email=' + email : '');
+        container.innerHTML =
+          '<iframe src="' + src + '" width="100%" height="700" frameborder="0" style="border:0;border-radius:10px;"></iframe>';
+      }
+    }
+
+    // If Calendly script already loaded, inject immediately; otherwise wait
+    if (window.Calendly) {
+      injectWidget();
+    } else {
+      const check = setInterval(function() {
+        if (window.Calendly) { clearInterval(check); injectWidget(); }
+      }, 150);
+      // After 4s give up and use iframe fallback
+      setTimeout(function() {
+        clearInterval(check);
+        if (!container.children.length) injectWidget();
+      }, 4000);
+    }
+
+    // Also fire mailto notification to jon@stacksadvisory.com
+    sendIntakeEmail();
+  }
+
+  function sendIntakeEmail() {
+    const body = [
+      'New diagnostic intake',
+      '',
+      'Name: '    + (formData.fname || '') + ' ' + (formData.lname || ''),
+      'Email: '   + (formData.email || ''),
+      'Company: ' + (formData.company || ''),
+      'Role: '    + (formData.role || ''),
+      '',
+      'Stage: '     + (formData.stage || ''),
+      'Domain: '    + (formData.domain || ''),
+      'Situation: ' + (formData.situation || ''),
+      '',
+      'Priority problem:',
+      formData.priority || '',
+      '',
+      'Engagement interest: ' + (formData.engage || ''),
+      'Timeline: '            + (formData.timeline || ''),
+    ].join('\n');
+
+    const mailto = 'mailto:jon@stacksadvisory.com'
+      + '?subject=' + encodeURIComponent('Diagnostic intake — ' + (formData.company || 'new prospect'))
+      + '&body='    + encodeURIComponent(body);
+
+    const a = document.createElement('a');
+    a.href = mailto;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function validateStep(step) {
+    if (step === 1) {
+      const required = ['fname','lname','email','company','role'];
+      for (const id of required) {
+        if (!document.getElementById(id).value.trim()) {
+          document.getElementById(id).focus(); return false;
+        }
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value)) {
+        document.getElementById('email').focus(); return false;
+      }
+    }
+    if (step === 2) {
+      if (!document.querySelector('input[name="stage"]:checked'))     return false;
+      if (!document.querySelector('input[name="domain"]:checked'))    return false;
+      if (!document.querySelector('input[name="situation"]:checked')) return false;
+    }
+    if (step === 3) {
+      if (!document.getElementById('priority').value.trim()) {
+        document.getElementById('priority').focus(); return false;
+      }
+    }
+    return true;
+  }
+
+  function collectFormData() {
+    formData = {
+      fname:     document.getElementById('fname').value.trim(),
+      lname:     document.getElementById('lname').value.trim(),
+      email:     document.getElementById('email').value.trim(),
+      company:   document.getElementById('company').value.trim(),
+      role:      document.getElementById('role').value.trim(),
+      linkedin:  document.getElementById('linkedin').value.trim(),
+      stage:     document.querySelector('input[name="stage"]:checked')?.value     || '',
+      domain:    document.querySelector('input[name="domain"]:checked')?.value    || '',
+      situation: document.querySelector('input[name="situation"]:checked')?.value || '',
+      priority:  document.getElementById('priority').value.trim(),
+      engage:    [...document.querySelectorAll('input[name="engage"]:checked')].map(e => e.value).join(', '),
+      timeline:  document.getElementById('timeline').value,
+    };
+  }
+
+  function nextStep(current) {
+    if (!validateStep(current)) return;
+    currentStep = current + 1;
+    updateProgress(currentStep);
+    showStep(currentStep);
+  }
+
+  function prevStep(current) {
+    currentStep = current - 1;
+    updateProgress(currentStep);
+    showStep(currentStep);
+  }
+
+  function submitForm() {
+    if (!validateStep(3)) return;
+    collectFormData();
+    showStep(TOTAL_STEPS + 1);
+  }
+
+  function updateCount(el, counterId) {
+    document.getElementById(counterId).textContent = el.value.length;
+  }
+
+  // Init
+  updateProgress(1);
+</script>
+
+</body>
+</html>
