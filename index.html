@@ -43,12 +43,27 @@ button { font-family: var(--sans); }
 .btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
 .btn-ghost-dark { background: transparent; color: var(--navy); border: 1px solid rgba(13,27,42,0.25); }
 .btn-ghost-dark:hover { border-color: var(--teal); color: var(--teal); }
+.btn-gold { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); }
+.btn-gold:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 3rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); }
 .nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--cream); letter-spacing: 0.03em; text-decoration: none; }
 .nav-logo span { color: var(--teal); }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
 .nav-links a:hover { color: var(--teal); }
+/* Services Navigator nav link — gold accent to distinguish it */
+.nav-links .nav-services a {
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 0.3rem 0.75rem;
+  border-radius: 3px;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.nav-links .nav-services a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
 .hero { min-height: 100vh; background: var(--navy); display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5rem; padding: 8rem 3rem 5rem; position: relative; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 72% 38%, rgba(0,168,150,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 50% at 18% 78%, rgba(2,195,154,0.05) 0%, transparent 60%); }
 .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(0,168,150,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,168,150,0.035) 1px, transparent 1px); background-size: 60px 60px; }
@@ -209,6 +224,108 @@ button { font-family: var(--sans); }
 .bio-body { font-size: 0.86rem; font-weight: 300; line-height: 1.82; color: rgba(245,241,234,0.68); margin-bottom: 1.5rem; }
 .bio-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .bio-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; background: rgba(0,168,150,0.09); color: rgba(245,241,234,0.75); border: 1px solid rgba(0,168,150,0.18); padding: 0.28rem 0.65rem; border-radius: 3px; }
+
+/* ── SERVICES NAVIGATOR CTA BLOCK ── */
+.navigator-cta {
+  background: linear-gradient(135deg, #0a1c2e, #071420);
+  border-top: 1px solid rgba(201,168,76,0.18);
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+  padding: 5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.navigator-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(201,168,76,0.05), transparent),
+              radial-gradient(ellipse 40% 60% at 85% 50%, rgba(0,168,150,0.05), transparent);
+}
+.navigator-cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.navigator-cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 0.28rem 0.75rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.navigator-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  color: var(--cream);
+  line-height: 1.18;
+  margin-bottom: 1rem;
+}
+.navigator-cta h2 em { font-style: italic; color: var(--gold); }
+.navigator-cta p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: rgba(245,241,234,0.58);
+  line-height: 1.8;
+  margin-bottom: 1.8rem;
+  max-width: 440px;
+}
+.navigator-cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.navigator-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.nav-step {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.nav-step:hover { border-color: rgba(201,168,76,0.25); background: rgba(201,168,76,0.03); }
+.nav-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 0.8rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.nav-step-text {
+  font-size: 0.8rem;
+  color: rgba(245,241,234,0.6);
+  line-height: 1.4;
+}
+.nav-step-text strong {
+  color: rgba(245,241,234,0.88);
+  font-weight: 600;
+  display: block;
+  font-size: 0.83rem;
+  margin-bottom: 0.1rem;
+}
+
 .cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 7rem 3rem; text-align: center; position: relative; overflow: hidden; }
 .cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
 .cta-inner { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; }
@@ -233,6 +350,8 @@ button { font-family: var(--sans); }
 .footer-links { display: flex; gap: 1.6rem; }
 .footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
 .footer-links a:hover { color: var(--teal); }
+.footer-links a.footer-nav-link { color: var(--gold); opacity: 0.7; }
+.footer-links a.footer-nav-link:hover { color: var(--gold); opacity: 1; }
 @media (max-width: 960px) {
   .nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
@@ -252,6 +371,8 @@ button { font-family: var(--sans); }
   .expertise-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .why-grid { grid-template-columns: 1fr 1fr; }
   .footer { flex-direction: column; text-align: center; }
+  .navigator-cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .navigator-cta { padding: 3.5rem 1.5rem; }
 }
 </style>
 </head>
@@ -266,6 +387,7 @@ button { font-family: var(--sans); }
     <li><a href="#offers">Engagements</a></li>
     <li><a href="#impact">Impact</a></li>
     <li><a href="#expertise">About</a></li>
+    <li class="nav-services"><a href="/services-cascade.html">🧬 Find Your Engagement</a></li>
   </ul>
   <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
 </nav>
@@ -324,26 +446,10 @@ button { font-family: var(--sans); }
       <h2 class="serif">Built for <em>builders</em><br>in life sciences.</h2>
     </div>
     <div class="who-cards">
-      <div class="who-card">
-        <div class="who-icon">🚀</div>
-        <div class="who-title">Growth-stage life sciences platforms</div>
-        <div class="who-desc">Series A–C companies building their first commercial function or scaling beyond founder-led sales.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">💻</div>
-        <div class="who-title">Scientific informatics & SaaS companies</div>
-        <div class="who-desc">LIMS, ELN, data catalog, and workflow platforms entering regulated pharma and clinical markets.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">🧬</div>
-        <div class="who-title">Biopharma & genomics innovators</div>
-        <div class="who-desc">Pre-commercial and early-commercial platforms in rare disease, CGT, precision medicine, and diagnostics.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">🏗</div>
-        <div class="who-title">Founders & commercial leaders building GTM infrastructure</div>
-        <div class="who-desc">CEOs and CCOs who need a senior commercial partner — without the overhead of a full-time hire.</div>
-      </div>
+      <div class="who-card"><div class="who-icon">🚀</div><div class="who-title">Growth-stage life sciences platforms</div><div class="who-desc">Series A–C companies building their first commercial function or scaling beyond founder-led sales.</div></div>
+      <div class="who-card"><div class="who-icon">💻</div><div class="who-title">Scientific informatics & SaaS companies</div><div class="who-desc">LIMS, ELN, data catalog, and workflow platforms entering regulated pharma and clinical markets.</div></div>
+      <div class="who-card"><div class="who-icon">🧬</div><div class="who-title">Biopharma & genomics innovators</div><div class="who-desc">Pre-commercial and early-commercial platforms in rare disease, CGT, precision medicine, and diagnostics.</div></div>
+      <div class="who-card"><div class="who-icon">🏗</div><div class="who-title">Founders & commercial leaders building GTM infrastructure</div><div class="who-desc">CEOs and CCOs who need a senior commercial partner — without the overhead of a full-time hire.</div></div>
     </div>
   </div>
 </section>
@@ -468,6 +574,28 @@ button { font-family: var(--sans); }
   </div>
 </section>
 
+<!-- SERVICES NAVIGATOR CTA — inserted between Engagements and Process -->
+<section class="navigator-cta">
+  <div class="navigator-cta-inner">
+    <div>
+      <div class="navigator-cta-label">🧬 Services Navigator</div>
+      <h2>Not sure which engagement<br>is right for <em>your situation?</em></h2>
+      <p>Tell us your role, your objective, and the outcome you need. We'll surface the specific services and engagement model built for you — from our catalog of 84 indexed capabilities across 4 commercial pillars.</p>
+      <div class="navigator-cta-actions">
+        <a href="/services-cascade.html" class="btn btn-gold">Find Your Engagement →</a>
+        <a href="/intake.html" class="btn btn-ghost-light">Skip to Intake</a>
+      </div>
+    </div>
+    <div class="navigator-steps">
+      <div class="nav-step"><div class="nav-step-num">1</div><div class="nav-step-text"><strong>Select your role</strong>Founder, CCO, RevOps, Product, Informatics, or Investor</div></div>
+      <div class="nav-step"><div class="nav-step-num">2</div><div class="nav-step-text"><strong>Choose your objective</strong>Build commercial infrastructure, close partners, prep a raise, and more</div></div>
+      <div class="nav-step"><div class="nav-step-num">3</div><div class="nav-step-text"><strong>Define your outcome</strong>What does success look like at the end of the engagement?</div></div>
+      <div class="nav-step"><div class="nav-step-num">4</div><div class="nav-step-text"><strong>Pick an engagement model</strong>Fractional, Sprint, Project, or Advisory</div></div>
+      <div class="nav-step"><div class="nav-step-num">5</div><div class="nav-step-text"><strong>See your matched services</strong>Scored from 84 live capabilities — then continue to intake</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="section process" id="process">
   <div class="section-inner">
@@ -564,6 +692,7 @@ button { font-family: var(--sans); }
     <p>We work where scientific complexity, fragmented systems, and commercial growth intersect.<br><br>Whether you're building a commercial function from zero, navigating a complex key account, or designing a partnership program — start with a 30-minute commercial diagnostic. No pitch deck. No obligation.</p>
     <div class="cta-actions">
       <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="/services-cascade.html" class="btn btn-gold">🧬 Find Your Engagement</a>
       <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
     </div>
   </div>
@@ -576,6 +705,7 @@ button { font-family: var(--sans); }
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html" class="footer-nav-link">🧬 Services Navigator</a>
     <a href="/intake.html">Start a Diagnostic</a>
   </div>
 </footer>
