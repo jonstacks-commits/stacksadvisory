@@ -116,6 +116,12 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 
 .hidden { display:none !important; }
 
+/* ── DOODLE MARK SIZING ── */
+.card-icon svg, .svc-icon svg { display:block; }
+.card-icon { display:flex; align-items:center; margin-bottom:10px; }
+.svc-icon  { display:flex; align-items:center; flex-shrink:0; margin-top:1px; }
+
+
 @media(max-width:600px){
   .site-header,.intro-strip,.breadcrumb-bar,.step-indicator,.stage { padding-left:18px; padding-right:18px; }
   .card-grid,.services-grid { grid-template-columns:1fr; }
@@ -124,6 +130,44 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 </style>
 </head>
 <body>
+
+
+<!-- ══ STACKS DOODLE MARK — JS ══
+     Single SVG symbol, referenced everywhere via <use>.
+     Variants controlled by CSS custom properties on the wrapper.
+-->
+<svg width="0" height="0" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="doodle-mark" viewBox="0 0 80 80">
+      <!-- Body sitting oval -->
+      <ellipse cx="40" cy="59" rx="21" ry="17" fill="var(--dm-fill,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8"/>
+      <!-- Curly fur body rows -->
+      <path d="M22 56 Q25 50 28 54 Q31 47 34 51 Q37 45 40 49 Q43 45 46 51 Q49 47 52 54 Q55 50 58 56" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M24 64 Q27 58 30 62 Q33 56 36 60 Q39 54 42 58 Q45 54 48 60 Q51 58 54 64" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Head circle -->
+      <circle cx="40" cy="27" r="15" fill="var(--dm-fill,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8"/>
+      <!-- Curly fur head rows -->
+      <path d="M27 24 Q30 19 33 23 Q36 17 39 21 Q42 17 45 21 Q48 19 51 24" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M27 30 Q30 25 33 29 Q36 23 39 27 Q42 23 45 27 Q48 25 51 30" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.4" stroke-linecap="round"/>
+      <!-- Floppy ears -->
+      <path d="M25 21 Q18 17 20 30 Q22 37 28 35 Q24 27 25 21Z" fill="var(--dm-ear,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M55 21 Q62 17 60 30 Q58 37 52 35 Q56 27 55 21Z" fill="var(--dm-ear,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- Nose -->
+      <ellipse cx="40" cy="32" rx="3.2" ry="2.2" fill="var(--dm-face,currentColor)"/>
+      <!-- Eyes -->
+      <circle cx="33.5" cy="25.5" r="2" fill="var(--dm-face,currentColor)"/>
+      <circle cx="46.5" cy="25.5" r="2" fill="var(--dm-face,currentColor)"/>
+      <circle cx="34.2" cy="24.8" r="0.7" fill="var(--dm-shine,white)"/>
+      <circle cx="47.2" cy="24.8" r="0.7" fill="var(--dm-shine,white)"/>
+      <!-- Collar with JS -->
+      <rect x="29" y="39" width="22" height="7" rx="3.5" fill="var(--dm-collar,currentColor)"/>
+      <text x="40" y="45" text-anchor="middle"
+            font-family="Georgia, 'Cormorant Garamond', serif"
+            font-size="5.5" font-weight="700"
+            fill="var(--dm-monogram,white)">JS</text>
+    </symbol>
+  </defs>
+</svg>
 
 <header class="site-header">
   <div class="logo">STACKS<em>.</em> Advisory</div>
@@ -218,6 +262,21 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 // PERSONA / OBJECTIVE / OUTCOME / ENGAGEMENT
 // (Navigation layer — fully self-contained)
 // ═══════════════════════════════════════════════════
+
+
+// ── DOODLE MARK RENDERER ──
+// variant: 'gold' | 'steel' | 'dark' | 'light'
+function doodleMark(size, variant) {
+  size = size || 28;
+  const variants = {
+    gold:  '--dm-stroke:#b8902a;--dm-fill:rgba(184,144,42,0.08);--dm-ear:rgba(184,144,42,0.2);--dm-face:#0c1a26;--dm-shine:white;--dm-collar:#0c1a26;--dm-monogram:#e8c96d',
+    steel: '--dm-stroke:#4a7090;--dm-fill:rgba(74,112,144,0.08);--dm-ear:rgba(74,112,144,0.18);--dm-face:#2a4459;--dm-shine:white;--dm-collar:#2a4459;--dm-monogram:#e8c96d',
+    dark:  '--dm-stroke:#e8c96d;--dm-fill:rgba(232,201,109,0.1);--dm-ear:rgba(232,201,109,0.2);--dm-face:#e8c96d;--dm-shine:#0c1a26;--dm-collar:#e8c96d;--dm-monogram:#0c1a26',
+    light: '--dm-stroke:#b8902a;--dm-fill:rgba(248,242,224,0.4);--dm-ear:rgba(200,169,110,0.3);--dm-face:#0c1a26;--dm-shine:white;--dm-collar:#b8902a;--dm-monogram:#faf8f4'
+  };
+  const style = variants[variant] || variants.gold;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 80 80" style="${style}" xmlns="http://www.w3.org/2000/svg"><use href="#doodle-mark"/></svg>`;
+}
 
 const PERSONAS = [
   { id:'founder-ceo',      icon:'🚀', title:'Founder / CEO',                           desc:'Building the company, setting commercial direction, allocating resources to growth.',             tag:'Executive' },
@@ -506,7 +565,7 @@ function updateStepIndicator(step) {
 function cardHTML(item, onclick) {
   return `
     <div class="card" onclick="${onclick}">
-      <span class="card-icon">${item.icon||''}</span>
+      <span class="card-icon">${doodleMark(26,'gold')}</span>
       <div class="card-title">${item.title}</div>
       <div class="card-desc">${item.desc||''}</div>
       ${item.tag?`<div class="card-tag">${item.tag}</div>`:''}
@@ -521,7 +580,7 @@ function renderOutcomes(id) {
   const outs = OUTCOMES[id] || [];
   document.getElementById('outcomeGrid').innerHTML = outs.map(o=>`
     <div class="card" onclick="selectOutcome('${o.id}')">
-      <span class="card-icon">${o.icon}</span>
+      <span class="card-icon">${doodleMark(24,'steel')}</span>
       <div class="card-title">${o.title}</div>
       <div class="card-action"><button class="btn-select">Select →</button></div>
     </div>`).join('');
@@ -563,7 +622,7 @@ function renderResults() {
   document.getElementById('servicesGrid').innerHTML = services.map(s=>`
     <div class="svc-card">
       <div class="svc-header">
-        <span class="svc-icon">${s.icon}</span>
+        <span class="svc-icon">${doodleMark(22,"light")}</span>
         <div class="svc-title">${s.title}</div>
       </div>
       <div class="svc-desc">${s.desc}</div>
