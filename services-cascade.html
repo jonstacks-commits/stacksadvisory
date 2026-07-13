@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacks Advisory — Find Your Engagement</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0c1a26;
+  --ink-mid: #2a4459;
+  --gold: #b8902a;
+  --gold-light: #e8c96d;
+  --gold-pale: #f8f2e0;
+  --steel: #4a7090;
+  --steel-light: #e0ecf4;
+  --cream: #faf8f4;
+  --rule: #ddd8cc;
+  --white: #ffffff;
+  --radius: 6px;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--ink);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+.logo em { color: var(--gold-light); font-style: normal; }
+
+.header-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #6a8fa8;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: var(--ink-mid);
+  padding: 28px 32px;
+  border-bottom: 2px solid var(--gold);
+}
+
+.intro-strip h1 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+}
+.intro-strip h1 em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.intro-strip p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #a0bcd0;
+  max-width: 580px;
+  line-height: 1.6;
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 52px;
+}
+
+.bc-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+}
+
+.bc-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.bc-value {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-light);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.bc-arrow {
+  color: var(--rule);
+  font-size: 14px;
+}
+
+.bc-empty {
+  font-size: 12px;
+  color: #bbb;
+  font-style: italic;
+}
+
+/* ── STEP INDICATOR ── */
+.step-indicator {
+  padding: 24px 32px 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 700px;
+}
+
+.step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: #aaa;
+  background: var(--white);
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+.step-dot.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+.step-dot.done {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--rule);
+  transition: background 0.25s;
+}
+.step-line.done { background: var(--gold); }
+
+/* ── MAIN STAGE ── */
+.stage {
+  padding: 28px 32px 48px;
+  max-width: 960px;
+}
+
+.stage-header {
+  margin-bottom: 20px;
+}
+
+.stage-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 6px;
+}
+
+.stage-question {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  cursor: pointer;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.12s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.18s;
+}
+
+.card:hover {
+  border-color: var(--ink-mid);
+  box-shadow: 0 4px 16px rgba(12,26,38,0.1);
+  transform: translateY(-1px);
+}
+
+.card:hover::before {
+  background: var(--gold);
+}
+
+.card.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,144,42,0.15);
+}
+
+.card.selected::before {
+  background: var(--gold);
+}
+
+.card-icon {
+  font-size: 20px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: #5a7a90;
+  line-height: 1.5;
+}
+
+.card-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-light);
+  border-radius: 3px;
+  padding: 2px 8px;
+  background: var(--gold-pale);
+}
+
+/* ── SELECT BUTTON ── */
+.card-action {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-select {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1.5px solid var(--rule);
+  border-radius: 4px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.btn-select:hover {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+/* ── SERVICES GRID (final step) ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.svc-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  border-left: 3px solid var(--gold);
+}
+
+.svc-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.svc-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.svc-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.svc-desc {
+  font-size: 12.5px;
+  color: #5a7a90;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+.svc-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.svc-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--steel-light);
+  color: var(--steel);
+  background: var(--steel-light);
+}
+
+/* ── SUMMARY PANEL ── */
+.summary-panel {
+  background: var(--ink);
+  border-radius: var(--radius);
+  padding: 28px 28px;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+
+.summary-panel h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  letter-spacing: -0.2px;
+}
+
+.summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.summary-key {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #6a8fa8;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.summary-val {
+  font-size: 13.5px;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.summary-count {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.summary-count-label {
+  font-size: 12px;
+  color: #6a8fa8;
+  margin-top: 2px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 11px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-cta {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn-cta:hover { background: var(--gold-light); color: var(--ink); }
+
+.btn-ghost {
+  background: transparent;
+  color: #a0bcd0;
+  border: 1.5px solid #2a4459;
+}
+.btn-ghost:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+/* ── BACK / NAV ── */
+.nav-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-back {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--steel);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  transition: color 0.15s;
+}
+.btn-back:hover { color: var(--ink); }
+
+.btn-restart {
+  font-size: 12px;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: color 0.15s;
+}
+.btn-restart:hover { color: var(--gold); }
+
+/* ── HIDDEN ── */
+.hidden { display: none !important; }
+
+/* ── ENGAGEMENT BADGE ── */
+.engagement-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--steel-light);
+  border: 1px solid #c0d8e8;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-mid);
+  margin-bottom: 6px;
+}
+
+/* ── COUNT BADGE ── */
+.count-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-left: 8px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .site-header, .intro-strip, .breadcrumb-bar,
+  .step-indicator, .stage { padding-left: 18px; padding-right: 18px; }
+  .card-grid, .services-grid { grid-template-columns: 1fr; }
+  .summary-panel { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">STACKS<em>.</em> Advisory</div>
+  <div class="header-sub">Services Navigator</div>
+</header>
+
+<div class="intro-strip">
+  <h1>Find your <em>engagement path</em>.</h1>
+  <p>Tell us where you sit, what you're trying to accomplish, and what you need. We'll surface the services built for you — and the right way to work together.</p>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar" id="breadcrumbBar">
+  <span class="bc-empty">Begin below — make your first selection.</span>
+</div>
+
+<!-- STEP INDICATOR -->
+<div class="step-indicator" id="stepIndicator">
+  <div class="step-dot active" id="sd1">1</div>
+  <div class="step-line" id="sl1"></div>
+  <div class="step-dot" id="sd2">2</div>
+  <div class="step-line" id="sl2"></div>
+  <div class="step-dot" id="sd3">3</div>
+  <div class="step-line" id="sl3"></div>
+  <div class="step-dot" id="sd4">4</div>
+  <div class="step-line" id="sl4"></div>
+  <div class="step-dot" id="sd5">5</div>
+</div>
+
+<div class="stage" id="stageContainer">
+
+  <!-- ══ STEP 1: PERSONA ══ -->
+  <div id="step1">
+    <div class="stage-header">
+      <div class="stage-label">Step 1 of 5 · Your Role</div>
+      <div class="stage-question">Which best describes your role?</div>
+    </div>
+    <div class="card-grid" id="personaGrid"></div>
+    <div class="nav-row">
+      <button class="btn-restart" onclick="restart()">↺ Start over</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: BUSINESS OBJECTIVE ══ -->
+  <div id="step2" class="hidden">
+    <div class="stage-header">
+      <div class="stage-label">Step 2 of 5 · Business Objective</div>
+      <div class="stage-question">What are you trying to accomplish?</div>
+    </div>
+    <div class="card-grid" id="objectiveGrid"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+      <button class="btn-restart" onclick="restart()">↺ Start over</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: DESIRED OUTCOME ══ -->
+  <div id="step3" class="hidden">
+    <div class="stage-header">
+      <div class="stage-label">Step 3 of 5 · Desired Outcome</div>
+      <div class="stage-question">What does success look like for you?</div>
+    </div>
+    <div class="card-grid" id="outcomeGrid"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-restart" onclick="restart()">↺ Start over</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: ENGAGEMENT MODEL ══ -->
+  <div id="step4" class="hidden">
+    <div class="stage-header">
+      <div class="stage-label">Step 4 of 5 · Engagement Model</div>
+      <div class="stage-question">How would you prefer to work together?</div>
+    </div>
+    <div class="card-grid" id="engagementGrid"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-restart" onclick="restart()">↺ Start over</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5: SERVICES ══ -->
+  <div id="step5" class="hidden">
+    <div class="stage-header">
+      <div class="stage-label">Step 5 of 5 · Your Advisory Request</div>
+      <div class="stage-question">Here's what we'd bring to your engagement.</div>
+    </div>
+
+    <div class="summary-panel" id="summaryPanel"></div>
+
+    <div class="stage-header" style="margin-top:24px; margin-bottom:14px;">
+      <div class="stage-label" id="serviceCountLabel">Matched Services</div>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(4)">← Adjust engagement model</button>
+      <button class="btn-restart" onclick="restart()">↺ Start over</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+
+const PERSONAS = [
+  {
+    id: 'founder-ceo',
+    icon: '🚀',
+    title: 'Founder / CEO',
+    desc: 'Building the company, setting commercial direction, allocating resources to growth.',
+    tag: 'Executive'
+  },
+  {
+    id: 'cco-vp-sales',
+    icon: '📈',
+    title: 'Chief Commercial Officer / VP Sales',
+    desc: 'Owning the revenue number — pipeline, quota, team structure, and GTM execution.',
+    tag: 'Commercial'
+  },
+  {
+    id: 'rev-ops',
+    icon: '⚙️',
+    title: 'Revenue Operations / Sales Operations',
+    desc: 'Building the systems, data, and processes that make the commercial engine run.',
+    tag: 'Operations'
+  },
+  {
+    id: 'product-marketing',
+    icon: '🎯',
+    title: 'Product / Marketing Leader',
+    desc: 'Translating scientific capabilities into market positioning, messaging, and launch.',
+    tag: 'Product · Marketing'
+  },
+  {
+    id: 'informatics',
+    icon: '🧬',
+    title: 'Scientific Software / Informatics Leader',
+    desc: 'Leading platforms at the intersection of genomics, LIMS, ELN, and commercial science.',
+    tag: 'Scientific Tech'
+  },
+  {
+    id: 'investor-board',
+    icon: '💼',
+    title: 'Investor / Board Member',
+    desc: 'Evaluating commercial readiness, diligencing assets, or guiding portfolio companies.',
+    tag: 'Investment'
+  }
+];
+
+const OBJECTIVES = {
+  'founder-ceo': [
+    { id: 'scale-first-commercial', icon: '🏗', title: 'Build or scale first commercial function', desc: 'Move beyond founder-led sales — design the infrastructure, hire the team, and install the process.' },
+    { id: 'launch-scientific-offering', icon: '🔬', title: 'Launch or scale a scientific offering', desc: 'Translate your platform science into a commercial thesis with ICP, messaging, and GTM motion.' },
+    { id: 'close-strategic-partners', icon: '🤝', title: 'Close strategic partnerships', desc: 'Identify, structure, and execute partnerships that create durable pipeline and platform value.' },
+    { id: 'prep-series-raise', icon: '📊', title: 'Prepare for a funding round', desc: 'Build the commercial story, data room narrative, and GTM evidence your next investors need.' },
+    { id: 'cro-cdmo-channel', icon: '🔗', title: 'Penetrate CRO/CDMO/clinical site channel', desc: 'Enter and activate the outsourced research ecosystem as a commercial channel.' }
+  ],
+  'cco-vp-sales': [
+    { id: 'build-territory-model', icon: '🗺', title: 'Build territory and account segmentation', desc: 'Define ICP, segment accounts by propensity, and design territory coverage with precision.' },
+    { id: 'pipeline-acceleration', icon: '⚡', title: 'Accelerate pipeline and close rates', desc: 'Diagnose velocity loss and install the sequencing, messaging, and deal stage discipline to close faster.' },
+    { id: 'hire-ramp-team', icon: '👥', title: 'Hire and ramp the commercial team', desc: 'Define the hire profile, design onboarding, and build the ramp plan tied to revenue milestones.' },
+    { id: 'sole-source-conversion', icon: '🔒', title: 'Convert second-source to sole-source', desc: 'Structure the account strategy and engagement cadence to win preferred-provider status.' },
+    { id: 'competitive-displacement', icon: '⚔️', title: 'Win competitive displacement opportunities', desc: 'Build the battlecard, proof structure, and reference architecture to displace incumbents.' },
+    { id: 'global-pharma-accounts', icon: '🌐', title: 'Activate global pharma account relationships', desc: 'Navigate enterprise buying structures to drive global standardization and multi-site adoption.' }
+  ],
+  'rev-ops': [
+    { id: 'crm-architecture', icon: '🏛', title: 'Design and build CRM architecture', desc: 'Build HubSpot or Salesforce to match your actual commercial motion — not a generic template.' },
+    { id: 'data-pipeline', icon: '📡', title: 'Build commercial data pipeline', desc: 'Connect instrument data, LIMS, CRM, and ERP into a unified commercial intelligence layer.' },
+    { id: 'reporting-layer', icon: '📊', title: 'Build GTM reporting and dashboards', desc: 'Create the executive and field-level reporting that ties activity to revenue outcomes.' },
+    { id: 'process-automation', icon: '🤖', title: 'Automate sales and BD workflows', desc: 'Eliminate manual handoffs and install automation across outreach, follow-up, and pipeline review.' },
+    { id: 'territory-ops', icon: '⚖️', title: 'Operationalize territory and quota models', desc: 'Build the calculation engine, documentation, and review cycle for territory and quota management.' }
+  ],
+  'product-marketing': [
+    { id: 'scientific-to-commercial-messaging', icon: '📝', title: 'Translate technical capabilities into buyer messaging', desc: 'Convert scientific differentiation into the language your buyers use to make decisions.' },
+    { id: 'launch-gtm-plan', icon: '🚀', title: 'Build product launch GTM plan', desc: 'Sequence the launch — positioning, ICP, channel mix, sales enablement, and go-live execution.' },
+    { id: 'competitive-positioning', icon: '🎯', title: 'Sharpen competitive positioning', desc: 'Map the landscape, identify the white space, and define the positioning architecture.' },
+    { id: 'content-sales-enablement', icon: '📚', title: 'Build sales enablement content', desc: 'Develop the case studies, battlecards, ROI calculators, and demo scripts that enable field selling.' },
+    { id: 'account-based-marketing', icon: '🎪', title: 'Design account-based marketing programs', desc: 'Pair the commercial team with targeted content and outreach programs for named accounts.' }
+  ],
+  'informatics': [
+    { id: 'platform-commercial-strategy', icon: '🧪', title: 'Commercialize an informatics platform', desc: 'Design the GTM motion for a scientific SaaS or data platform entering regulated pharma markets.' },
+    { id: 'lims-eln-gtm', icon: '💻', title: 'Enter LIMS / ELN / workflow market', desc: 'Build the ICP, messaging, and channel strategy for scientific software entering biopharma or CGT.' },
+    { id: 'partner-program', icon: '🤝', title: 'Build a partner and integration ecosystem', desc: 'Design and activate the technology partnership program — ISVs, CROs, and platform integrations.' },
+    { id: 'causal-genomics-bd', icon: '🔬', title: 'Develop BD pipeline for genomics / precision medicine', desc: 'Build the outreach strategy and pipeline for biopharma, CGT, and diagnostic platform buyers.' },
+    { id: 'data-catalog-positioning', icon: '📦', title: 'Position data catalog or unified data layer', desc: 'Build the commercial narrative for a unified scientific data infrastructure play.' }
+  ],
+  'investor-board': [
+    { id: 'commercial-diligence', icon: '🔍', title: 'Commercial diligence on a target', desc: 'Independent assessment of GTM readiness, pipeline quality, team capability, and market fit.' },
+    { id: 'portfolio-commercial-support', icon: '📈', title: 'Commercial acceleration for a portfolio company', desc: 'Hands-on GTM support for a portfolio company approaching a commercial inflection.' },
+    { id: 'market-entry-analysis', icon: '🌍', title: 'Market entry and sizing analysis', desc: 'Independent TAM/SAM/SOM build with named account opportunity mapping for a specific segment.' },
+    { id: 'board-narrative', icon: '📋', title: 'Build the commercial board narrative', desc: 'Structure the board-level commercial story — metrics, milestones, and forward-looking thesis.' },
+    { id: 'ma-target-id', icon: '🎯', title: 'M&A target identification', desc: 'Identify and screen acquisition targets in life sciences tools, informatics, or diagnostic segments.' }
+  ]
+};
+
+const OUTCOMES = {
+  // Founder
+  'scale-first-commercial': [
+    { id: 'working-crm', icon: '🏛', title: 'A working CRM and sales process', desc: 'HubSpot or Salesforce configured to your motion with pipeline stages, ICP definition, and field workflow.' },
+    { id: 'first-5-logos', icon: '🎯', title: 'First 5 customer logos closed', desc: 'Direct execution on outreach, demo, and close — not a playbook to hand off.' },
+    { id: 'commercial-playbook', icon: '📘', title: 'Commercial playbook your team can own', desc: 'The territory model, messaging guide, objection handling, and sales process documented for scale.' }
+  ],
+  'launch-scientific-offering': [
+    { id: 'gtm-thesis', icon: '🗺', title: 'GTM thesis and account prioritization', desc: 'Named account list, ICP definition, competitive landscape, and the commercial logic to enter the market.' },
+    { id: 'messaging-architecture', icon: '📝', title: 'Scientific-to-commercial messaging', desc: 'Translating your technical differentiation into buyer language — for field, web, and investor audiences.' },
+    { id: 'pioneer-program', icon: '⭐', title: 'Pioneer program execution', desc: 'Designed, activated, and closed — the first anchor accounts that prove the thesis.' }
+  ],
+  'close-strategic-partners': [
+    { id: 'signed-lois', icon: '✍️', title: 'Signed LOIs or partnership agreements', desc: 'Not just a pipeline — executed agreements with defined scope, value exchange, and next steps.' },
+    { id: 'partner-pipeline', icon: '🔗', title: 'Qualified partner pipeline', desc: 'Prioritized shortlist with outreach executed and decision-makers engaged.' },
+    { id: 'partner-playbook', icon: '📘', title: 'Partnership engagement playbook', desc: 'The structure, sequencing, and documents to replicate your partnership motion at scale.' }
+  ],
+  'prep-series-raise': [
+    { id: 'commercial-data-room', icon: '📊', title: 'Commercial data room and narrative', desc: 'Pipeline data, GTM evidence, unit economics, and the commercial story in investor-ready format.' },
+    { id: 'market-sizing', icon: '🌍', title: 'Market sizing and opportunity framing', desc: 'Independent TAM/SAM/SOM build with named account mapping for your target segment.' },
+    { id: 'revenue-milestones', icon: '📈', title: 'Revenue milestone framework', desc: 'The commercial milestones that de-risk the raise — tied to the metrics your investors will ask about.' }
+  ],
+  'cro-cdmo-channel': [
+    { id: 'channel-map', icon: '🗺', title: 'CRO/CDMO channel map and target list', desc: 'Named organizations, decision-makers, and procurement pathways into the outsourced research ecosystem.' },
+    { id: 'channel-outreach', icon: '📡', title: 'Channel outreach and activation', desc: 'Direct execution: sequenced outreach, discovery calls, and relationship establishment with priority targets.' },
+    { id: 'channel-agreements', icon: '✍️', title: 'Channel partnership agreements', desc: 'Preferred vendor, preferred supplier, and MOU structures that formalize the channel relationship.' }
+  ],
+  // CCO / VP Sales
+  'build-territory-model': [
+    { id: 'territory-model-doc', icon: '🗺', title: 'Territory model and coverage architecture', desc: 'Segmented by account type, geography, and propensity — with overlay and field assignment built in.' },
+    { id: 'icp-definition', icon: '🎯', title: 'ICP definition and account scoring', desc: 'The firmographic, technographic, and behavioral signals that define your best-fit accounts.' },
+    { id: 'quota-framework', icon: '⚖️', title: 'Quota framework and attainment model', desc: 'Territory-level quota construction with attainment tracking and annual review process.' }
+  ],
+  'pipeline-acceleration': [
+    { id: 'pipeline-audit', icon: '🔍', title: 'Pipeline audit and velocity diagnosis', desc: 'Stage-by-stage analysis of where deals stall — with root cause and intervention design.' },
+    { id: 'deal-stage-playbook', icon: '📘', title: 'Deal stage playbook', desc: 'Entry and exit criteria, required actions, and field coaching for each pipeline stage.' },
+    { id: 'multithreading-strategy', icon: '🕸', title: 'Multi-threading and champion development', desc: 'Engagement strategy to build internal champions and reduce single-threaded deal risk.' }
+  ],
+  'hire-ramp-team': [
+    { id: 'hire-profile', icon: '👤', title: 'Hire profile and interview framework', desc: 'Competency model, scorecard, and interview sequence for your next commercial hire.' },
+    { id: 'onboarding-ramp', icon: '📈', title: 'Onboarding and ramp plan', desc: '90-day plan with milestones, enablement content, and ramp-to-quota targets by role.' },
+    { id: 'comp-structure', icon: '💰', title: 'Compensation structure and OTE benchmarking', desc: 'Market-benchmarked OTE, base/variable split, and accelerator design for your commercial roles.' }
+  ],
+  'sole-source-conversion': [
+    { id: 'account-deepening', icon: '🔒', title: 'Account deepening strategy', desc: 'The engagement sequence, internal champion map, and value expansion plan for a named account.' },
+    { id: 'standardization-case', icon: '📋', title: 'Standardization business case', desc: 'The ROI case, risk-reduction narrative, and commercial structure to win a preferred-provider position.' },
+    { id: 'executive-engagement', icon: '🤝', title: 'Executive engagement and alignment', desc: 'C-suite engagement strategy and materials to elevate the relationship beyond field-level buying.' }
+  ],
+  'competitive-displacement': [
+    { id: 'competitive-battlecard', icon: '⚔️', title: 'Competitive battlecard and positioning', desc: 'Head-to-head differentiation, proof points, and objection handling for your primary competitive scenario.' },
+    { id: 'displacement-proof', icon: '🏆', title: 'Displacement proof structure', desc: 'Reference architecture, case study development, and proof-of-concept design to de-risk a switch.' },
+    { id: 'win-loss-analysis', icon: '🔍', title: 'Win/loss analysis', desc: 'Systematic review of recent competitive outcomes — by persona, segment, and objection pattern.' }
+  ],
+  'global-pharma-accounts': [
+    { id: 'enterprise-account-plan', icon: '🌐', title: 'Enterprise account plan', desc: 'Multi-site, multi-stakeholder account map with global standardization pathway and executive engagement strategy.' },
+    { id: 'procurement-navigation', icon: '🏛', title: 'Procurement and vendor approval navigation', desc: 'Guidance on preferred-supplier programs, vendor management, and global contract structures at Big Pharma.' },
+    { id: 'global-rollout-plan', icon: '🚀', title: 'Global rollout sequencing', desc: 'Site-by-site adoption plan with local champion development and cross-site knowledge transfer design.' }
+  ],
+  // Rev Ops
+  'crm-architecture': [
+    { id: 'crm-build', icon: '🏛', title: 'CRM build and configuration', desc: 'HubSpot or Salesforce configured to your commercial motion — stages, properties, views, and workflow.' },
+    { id: 'crm-data-model', icon: '📊', title: 'Commercial data model design', desc: 'Object architecture that reflects your ICP, deal types, and reporting requirements — not the out-of-box default.' },
+    { id: 'crm-adoption', icon: '👥', title: 'CRM adoption and field workflow training', desc: 'Adoption plan and field-facing documentation to make the system the team\'s actual system of record.' }
+  ],
+  'data-pipeline': [
+    { id: 'unified-data-layer', icon: '🔗', title: 'Unified commercial intelligence layer design', desc: 'Architecture connecting instrument data, LIMS, CRM, and ERP into a single commercial view.' },
+    { id: 'data-integration-map', icon: '📡', title: 'Integration and data flow mapping', desc: 'Current-state audit and future-state design of all data connections in your commercial stack.' },
+    { id: 'metadata-strategy', icon: '🗂', title: 'Metadata and provenance strategy', desc: 'Framework for data lineage, searchability, and chain-of-custody across your scientific-commercial environment.' }
+  ],
+  'reporting-layer': [
+    { id: 'executive-dashboard', icon: '📊', title: 'Executive commercial dashboard', desc: 'C-suite view of pipeline, revenue, account health, and leading indicators — tied to board-level metrics.' },
+    { id: 'field-reporting', icon: '📋', title: 'Field-level performance reporting', desc: 'Rep-level activity, pipeline, and attainment views that drive coaching and accountability.' },
+    { id: 'financial-traceability', icon: '💰', title: 'Financial traceability framework', desc: 'The connection between commercial activity, pipeline creation, and P&L impact for finance leadership.' }
+  ],
+  'process-automation': [
+    { id: 'outreach-automation', icon: '📧', title: 'Outreach sequence automation', desc: 'Multi-touch outreach sequences in HubSpot or Salesloft — personalized by persona and ICP segment.' },
+    { id: 'pipeline-review-automation', icon: '🔄', title: 'Pipeline review workflow automation', desc: 'Automated deal health scoring, follow-up triggers, and manager alert systems.' },
+    { id: 'onboarding-workflow', icon: '⚡', title: 'Customer onboarding workflow automation', desc: 'Post-close handoff, onboarding task automation, and early adoption tracking.' }
+  ],
+  'territory-ops': [
+    { id: 'quota-model', icon: '⚖️', title: 'Quota model and attainment tracking', desc: 'Territory-level quota build with real-time attainment tracking and annual review process.' },
+    { id: 'territory-revision', icon: '🗺', title: 'Territory revision and rebalancing', desc: 'Data-driven territory rebalancing as headcount changes or market intelligence evolves.' },
+    { id: 'spiff-incentive-design', icon: '🏆', title: 'SPIFF and incentive program design', desc: 'Short-term incentive program design tied to specific pipeline or product objectives.' }
+  ],
+  // Product Marketing
+  'scientific-to-commercial-messaging': [
+    { id: 'messaging-framework', icon: '📝', title: 'Messaging architecture and framework', desc: 'Persona-level messaging matrix: the problem, the proof, the differentiation — in buyer language.' },
+    { id: 'value-prop-development', icon: '💡', title: 'Value proposition development', desc: 'Distilling your scientific differentiation into the economic and operational value your buyers care about.' },
+    { id: 'pitch-materials', icon: '🎯', title: 'Pitch and presentation materials', desc: 'Board pitch, sales deck, and solution overview — built for the buyer, not the scientist.' }
+  ],
+  'launch-gtm-plan': [
+    { id: 'launch-plan', icon: '🚀', title: 'Product launch plan and execution calendar', desc: 'Sequenced launch plan with channel mix, content calendar, sales enablement, and field activation.' },
+    { id: 'launch-icp', icon: '🎯', title: 'Launch ICP and early-adopter targeting', desc: 'Named early-adopter target list with outreach sequencing for launch momentum.' },
+    { id: 'launch-metrics', icon: '📊', title: 'Launch metrics framework', desc: 'The leading and lagging indicators that tell you the launch is working — before the pipeline validates.' }
+  ],
+  'competitive-positioning': [
+    { id: 'landscape-mapping', icon: '🗺', title: 'Competitive landscape mapping', desc: 'Category map of the competitive environment with positioning of each named competitor.' },
+    { id: 'white-space-analysis', icon: '🔍', title: 'White space and differentiation analysis', desc: 'Where the market is underserved and where your platform owns unique ground.' },
+    { id: 'positioning-statement', icon: '📝', title: 'Positioning architecture and statement', desc: 'Category definition, positioning statement, and the proof points that make it defensible.' }
+  ],
+  'content-sales-enablement': [
+    { id: 'case-studies', icon: '📖', title: 'Customer case study development', desc: 'Problem-solution-outcome case studies for priority accounts and use cases — ready for field use.' },
+    { id: 'roi-calculator', icon: '💰', title: 'ROI and value calculator', desc: 'Quantified ROI model the field can customize for a prospect — tied to their specific operating context.' },
+    { id: 'demo-script', icon: '🎬', title: 'Demo script and objection handling guide', desc: 'Structured demo narrative and live objection handling for your three most common competitive scenarios.' }
+  ],
+  'account-based-marketing': [
+    { id: 'abm-program', icon: '🎪', title: 'ABM program design', desc: 'Account selection, content pairing, and outreach coordination between marketing and field.' },
+    { id: 'abm-content', icon: '📄', title: 'Account-specific content development', desc: 'Customized content assets for named accounts — referencing their context, pipeline, and language.' },
+    { id: 'abm-measurement', icon: '📊', title: 'ABM measurement and attribution framework', desc: 'How to measure engagement, intent signal, and pipeline influence from your ABM investment.' }
+  ],
+  // Informatics
+  'platform-commercial-strategy': [
+    { id: 'platform-gtm', icon: '🗺', title: 'Platform GTM strategy', desc: 'ICP definition, channel design, and commercial motion for a scientific SaaS entering regulated markets.' },
+    { id: 'biopharma-icp', icon: '🧬', title: 'Biopharma and CGT buyer mapping', desc: 'Named-account opportunity map with decision-maker identification for biopharma and CGT buyers.' },
+    { id: 'platform-pricing', icon: '💰', title: 'Pricing and packaging architecture', desc: 'Subscription, module, and enterprise pricing design that matches buyer expectations and value perception.' }
+  ],
+  'lims-eln-gtm': [
+    { id: 'regulated-market-entry', icon: '🏛', title: 'Regulated market entry strategy', desc: 'The compliance, procurement, and validation requirements that govern scientific software buying in pharma.' },
+    { id: 'lims-icp', icon: '🎯', title: 'LIMS/ELN ICP definition and outreach', desc: 'The specific roles, organizations, and buying contexts where your platform wins.' },
+    { id: 'integration-narrative', icon: '🔗', title: 'Integration and interoperability narrative', desc: 'How to position your connectivity and openness as a commercial advantage in a locked-in market.' }
+  ],
+  'partner-program': [
+    { id: 'partner-program-design', icon: '🤝', title: 'Technology partner program design', desc: 'Partner tiers, engagement model, co-sell motion, and partner enablement for ISV and CRO partners.' },
+    { id: 'integration-partnerships', icon: '🔌', title: 'Integration partnership execution', desc: 'Direct outreach and agreement execution with priority integration partners.' },
+    { id: 'ecosystem-map', icon: '🗺', title: 'Partner ecosystem mapping', desc: 'The integration landscape for your platform — where the white space is and which partners to prioritize.' }
+  ],
+  'causal-genomics-bd': [
+    { id: 'genomics-bd-pipeline', icon: '🔬', title: 'Genomics / causal inference BD pipeline', desc: 'Pioneer program outreach, stakeholder mapping, and pipeline development for biopharma and CGT buyers.' },
+    { id: 'mced-positioning', icon: '🧬', title: 'MCED / liquid biopsy commercial narrative', desc: 'The commercial story for multi-cancer early detection and liquid biopsy platforms.' },
+    { id: 'research-to-clinical-bridge', icon: '🌉', title: 'Research-to-clinical commercialization bridge', desc: 'GTM strategy bridging academic and research use cases to regulated clinical and diagnostic markets.' }
+  ],
+  'data-catalog-positioning': [
+    { id: 'data-infra-narrative', icon: '📦', title: 'Unified data infrastructure commercial narrative', desc: 'The buyer-facing story for a scientific data layer that replaces fragmented environments.' },
+    { id: 'build-buy-narrative', icon: '⚖️', title: 'Build vs. buy commercial argument', desc: 'The framework for positioning your platform against the internal build option at enterprise accounts.' },
+    { id: 'cios-cdo-engagement', icon: '🏛', title: 'CIO/CDO engagement strategy', desc: 'How to reach and engage the data leadership buyers at pharma and biotech enterprises.' }
+  ],
+  // Investor
+  'commercial-diligence': [
+    { id: 'gtm-readiness', icon: '🔍', title: 'GTM readiness assessment', desc: 'Independent assessment of ICP clarity, pipeline quality, team capability, and commercial infrastructure.' },
+    { id: 'pipeline-quality-audit', icon: '📊', title: 'Pipeline quality and coverage audit', desc: 'Stage-level review of pipeline reliability, coverage ratio, and forecast accuracy.' },
+    { id: 'competitive-diligence', icon: '⚔️', title: 'Competitive position diligence', desc: 'Market landscape assessment and differentiation analysis for the target\'s claimed position.' }
+  ],
+  'portfolio-commercial-support': [
+    { id: 'commercial-acceleration', icon: '🚀', title: 'Hands-on commercial acceleration', desc: 'Fractional CCO-level engagement — strategy and execution — for a portfolio company at commercial inflection.' },
+    { id: 'board-reporting', icon: '📋', title: 'Board-level commercial reporting design', desc: 'Commercial metrics framework and reporting cadence for portfolio company board review.' },
+    { id: 'hire-selection', icon: '👤', title: 'Commercial hire selection and evaluation', desc: 'Independent assessment of CCO/VP Sales candidates at a portfolio company.' }
+  ],
+  'market-entry-analysis': [
+    { id: 'tam-sam-som', icon: '🌍', title: 'TAM/SAM/SOM build', desc: 'Bottom-up market sizing with named account opportunity mapping for a defined segment.' },
+    { id: 'segment-mapping', icon: '🗺', title: 'Segment and buyer mapping', desc: 'The specific organizations, roles, and buying contexts that define the opportunity.' },
+    { id: 'competitive-landscape', icon: '🔍', title: 'Competitive landscape deep-dive', desc: 'Category mapping for CGT, genomics, medtech, or informatics — with positioning and white space analysis.' }
+  ],
+  'board-narrative': [
+    { id: 'commercial-board-deck', icon: '📋', title: 'Commercial board deck', desc: 'Board-ready narrative: metrics, milestones, forward thesis, and the commercial evidence for the strategy.' },
+    { id: 'commercial-kpi-framework', icon: '📊', title: 'Commercial KPI framework', desc: 'The leading and lagging indicators the board should track — and how to present them in context.' },
+    { id: 'risk-adjusted-forecast', icon: '📈', title: 'Risk-adjusted revenue forecast', desc: 'Pipeline-based forecast with scenario modeling and the assumptions driving each case.' }
+  ],
+  'ma-target-id': [
+    { id: 'ma-screen', icon: '🎯', title: 'M&A target screening', desc: 'Systematic identification of acquisition targets by commercial capability, market position, and strategic fit.' },
+    { id: 'commercial-fit-analysis', icon: '🔍', title: 'Commercial fit and integration analysis', desc: 'Assessment of commercial complementarity, channel overlap, and post-close integration complexity.' },
+    { id: 'ma-outreach', icon: '🤝', title: 'Soft-touch outreach and relationship development', desc: 'Relationship-first outreach to priority targets — before the formal process begins.' }
+  ]
+};
+
+const ENGAGEMENT_MODELS = [
+  {
+    id: 'fractional',
+    icon: '🔄',
+    title: 'Fractional VP / Director',
+    desc: 'Ongoing senior commercial leadership — strategy and execution — without a full-time hire. Ideal for Series A–B.',
+    tag: 'Ongoing · Monthly'
+  },
+  {
+    id: 'sprint',
+    icon: '⚡',
+    title: '90-Day Commercial Sprint',
+    desc: 'A focused engagement with a defined outcome. Diagnose, design, and launch — in one quarter.',
+    tag: 'Fixed-Scope · 90 Days'
+  },
+  {
+    id: 'project',
+    icon: '📋',
+    title: 'Strategic Advisory Project',
+    desc: 'A discrete deliverable for a specific strategic decision. Fast, focused, board-ready. Two-week turnaround on most.',
+    tag: 'Fixed-Scope · Deliverable'
+  },
+  {
+    id: 'advisory',
+    icon: '🧠',
+    title: 'Advisory Board / Advisor Role',
+    desc: 'Structured advisory relationship — monthly calls, network access, and on-demand input at key moments.',
+    tag: 'Retainer · Ongoing'
+  }
+];
+
+// Map outcomes to specific services
+const SERVICES_BY_OUTCOME = {
+  'working-crm': [
+    { icon: '🏛', title: 'CRM Architecture Design', desc: 'Full commercial data model and configuration for HubSpot or Salesforce — built for your motion.', tags: ['Commercial Architecture', 'Infrastructure'] },
+    { icon: '📊', title: 'Pipeline Stage Design', desc: 'Entry/exit criteria, deal stage taxonomy, and field workflow — aligned to how your buyers actually buy.', tags: ['Infrastructure', 'Process'] },
+    { icon: '👥', title: 'Field Adoption Program', desc: 'Training, documentation, and accountability design to make CRM the real system of record.', tags: ['Enablement'] }
+  ],
+  'first-5-logos': [
+    { icon: '🎯', title: 'Pioneer Account Program', desc: 'Identify, prioritize, and close your first anchor accounts — with direct outreach execution.', tags: ['BD Execution', 'Direct Selling'] },
+    { icon: '📝', title: 'Outreach Sequence Design', desc: 'Persona-specific multi-touch sequences for your ICP — cold, warm, and referral-enabled.', tags: ['BD Execution'] },
+    { icon: '💡', title: 'First-Logo Proof Strategy', desc: 'The proof structure, reference language, and case study framework to make logo 1 generate logo 2.', tags: ['Revenue Acceleration'] }
+  ],
+  'commercial-playbook': [
+    { icon: '📘', title: 'GTM Playbook Development', desc: 'The complete commercial operating manual — ICP, messaging, sequences, deal stage process, and metrics.', tags: ['Deliverable', 'Infrastructure'] },
+    { icon: '⚖️', title: 'Territory and Quota Framework', desc: 'Documented territory model with quota construction and annual review process.', tags: ['Infrastructure'] },
+    { icon: '🎬', title: 'Demo and Objection Handling Guide', desc: 'Structured demo narrative and live objection handling for your three most common competitive scenarios.', tags: ['Enablement'] }
+  ],
+  'gtm-thesis': [
+    { icon: '🗺', title: 'Market Entry Analysis', desc: 'Segment map, competitive landscape, and white space assessment for your target market.', tags: ['Strategy', 'Deliverable'] },
+    { icon: '🎯', title: 'ICP Definition and Account Prioritization', desc: 'The firmographic and technographic signals that define your best-fit accounts — with a named list.', tags: ['Strategy'] },
+    { icon: '📊', title: 'Competitive Landscape Deep-Dive', desc: 'Category mapping with named competitor positioning and differentiation framework.', tags: ['Strategy', 'Deliverable'] }
+  ],
+  'messaging-architecture': [
+    { icon: '📝', title: 'Scientific-to-Commercial Messaging', desc: 'Persona-level messaging matrix: problem, proof, differentiation — in the language your buyers use.', tags: ['Messaging', 'Enablement'] },
+    { icon: '💡', title: 'Value Proposition Architecture', desc: 'Economic and operational value framing that makes the scientific case in commercial language.', tags: ['Messaging'] },
+    { icon: '🎯', title: 'Pitch and Presentation Build', desc: 'Sales deck, solution overview, and executive pitch — built for the buyer, not the lab.', tags: ['Enablement', 'Deliverable'] }
+  ],
+  'pioneer-program': [
+    { icon: '⭐', title: 'Pioneer Program Design and Execution', desc: 'Scope, terms, target selection, outreach, and closure of your first structured customer program.', tags: ['BD Execution', 'Revenue Acceleration'] },
+    { icon: '🤝', title: 'Key Account Relationship Development', desc: 'Stakeholder mapping and multi-threaded engagement for priority pioneer targets.', tags: ['BD Execution'] },
+    { icon: '📋', title: 'Program Agreement and LOI Structure', desc: 'Commercial terms, LOI language, and program structure for a time-limited early-adopter engagement.', tags: ['Deliverable'] }
+  ],
+  'signed-lois': [
+    { icon: '✍️', title: 'Partnership Agreement Execution', desc: 'Direct negotiation and execution of partnership agreements — MOU, LOI, and preferred-supplier structures.', tags: ['BD Execution', 'Direct'] },
+    { icon: '🤝', title: 'Decision-Maker Engagement', desc: 'Senior-level outreach and relationship development with identified partnership targets.', tags: ['BD Execution'] },
+    { icon: '📋', title: 'Term Sheet and LOI Development', desc: 'Commercial term sheet structure and LOI language for partnership and co-development scenarios.', tags: ['Deliverable'] }
+  ],
+  'partner-pipeline': [
+    { icon: '🔍', title: 'Partner Identification and Screening', desc: 'Prioritized partner shortlist with strategic fit scoring and outreach sequencing.', tags: ['BD Strategy', 'Deliverable'] },
+    { icon: '📡', title: 'Partner Outreach Program', desc: 'Direct outreach execution with decision-makers at priority partner organizations.', tags: ['BD Execution'] },
+    { icon: '🗺', title: 'Ecosystem Map', desc: 'Competitive and complementary partner landscape — where the white space is and who to pursue.', tags: ['Strategy', 'Deliverable'] }
+  ],
+  'partner-playbook': [
+    { icon: '📘', title: 'Partnership Engagement Playbook', desc: 'The structure, sequencing, and commercial documents to replicate your partnership motion at scale.', tags: ['Infrastructure', 'Deliverable'] },
+    { icon: '🔗', title: 'Partner Enablement Program Design', desc: 'How to enable partners to sell and refer your platform — content, training, and incentive structure.', tags: ['Enablement'] }
+  ],
+  'commercial-data-room': [
+    { icon: '📊', title: 'Commercial Data Room Build', desc: 'Pipeline data, unit economics, GTM evidence, and the commercial narrative — investor-ready.', tags: ['Deliverable', 'Strategy'] },
+    { icon: '📈', title: 'Revenue Milestone Framework', desc: 'The commercial milestones that de-risk the raise, tied to the metrics investors will interrogate.', tags: ['Strategy', 'Deliverable'] },
+    { icon: '💡', title: 'Commercial Story Architecture', desc: 'The board-level narrative connecting market, differentiation, traction, and forward thesis.', tags: ['Messaging', 'Deliverable'] }
+  ],
+  'market-sizing': [
+    { icon: '🌍', title: 'TAM/SAM/SOM Build', desc: 'Bottom-up market sizing with named account opportunity mapping for your defined segment.', tags: ['Deliverable', 'Strategy'] },
+    { icon: '🗺', title: 'Segment and Buyer Mapping', desc: 'The specific organizations, roles, and buying contexts that define the commercial opportunity.', tags: ['Strategy', 'Deliverable'] }
+  ],
+  'revenue-milestones': [
+    { icon: '📈', title: 'Revenue Milestone Framework', desc: 'The commercial milestones by stage that de-risk the raise and focus the team.', tags: ['Deliverable', 'Strategy'] },
+    { icon: '📊', title: 'Commercial KPI Dashboard Design', desc: 'The leading and lagging indicators that tell the board the commercial motion is working.', tags: ['Infrastructure', 'Deliverable'] }
+  ],
+  // Default fallback services for unmapped outcomes
+  default: [
+    { icon: '🔬', title: 'Commercial Architecture Design', desc: 'GTM infrastructure built for your platform, market, and stage — from ICP through pipeline.', tags: ['Commercial Architecture'] },
+    { icon: '🤝', title: 'Strategic BD and Partnership Execution', desc: 'Identify, structure, and close partnerships that compound platform value.', tags: ['BD Execution'] },
+    { icon: '📡', title: 'Data-Driven GTM Strategy', desc: 'Market intelligence, competitive landscape, and account-level signal translated into a go-to-market thesis.', tags: ['GTM Strategy'] },
+    { icon: '📈', title: 'Revenue Acceleration Program', desc: 'From second-source entry to sole-source conversion — structured commercial sequences that lock in account value.', tags: ['Revenue Acceleration'] },
+    { icon: '📘', title: 'Playbook and Commercial Enablement', desc: 'The documented process, messaging, and tools your team can own and scale.', tags: ['Enablement', 'Deliverable'] }
+  ]
+};
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+
+let state = {
+  persona: null,
+  objective: null,
+  outcome: null,
+  engagement: null,
+  currentStep: 1
+};
+
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
+
+function renderPersonas() {
+  const grid = document.getElementById('personaGrid');
+  grid.innerHTML = PERSONAS.map(p => `
+    <div class="card" onclick="selectPersona('${p.id}')">
+      <span class="card-icon">${p.icon}</span>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="card-tag">${p.tag}</div>
+      <div class="card-action"><button class="btn-select">Select →</button></div>
+    </div>
+  `).join('');
+}
+
+function renderObjectives(personaId) {
+  const grid = document.getElementById('objectiveGrid');
+  const objs = OBJECTIVES[personaId] || [];
+  grid.innerHTML = objs.map(o => `
+    <div class="card" onclick="selectObjective('${o.id}')">
+      <span class="card-icon">${o.icon}</span>
+      <div class="card-title">${o.title}</div>
+      <div class="card-desc">${o.desc}</div>
+      <div class="card-action"><button class="btn-select">Select →</button></div>
+    </div>
+  `).join('');
+}
+
+function renderOutcomes(objectiveId) {
+  const grid = document.getElementById('outcomeGrid');
+  const outcomes = OUTCOMES[objectiveId] || [];
+  if (!outcomes.length) {
+    grid.innerHTML = '<div class="bc-empty" style="padding:20px 0;">No outcomes defined for this objective yet — contact us directly.</div>';
+    return;
+  }
+  grid.innerHTML = outcomes.map(o => `
+    <div class="card" onclick="selectOutcome('${o.id}')">
+      <span class="card-icon">${o.icon}</span>
+      <div class="card-title">${o.title}</div>
+      <div class="card-desc">${o.desc}</div>
+      <div class="card-action"><button class="btn-select">Select →</button></div>
+    </div>
+  `).join('');
+}
+
+function renderEngagements() {
+  const grid = document.getElementById('engagementGrid');
+  grid.innerHTML = ENGAGEMENT_MODELS.map(e => `
+    <div class="card" onclick="selectEngagement('${e.id}')">
+      <span class="card-icon">${e.icon}</span>
+      <div class="card-title">${e.title}</div>
+      <div class="card-desc">${e.desc}</div>
+      <div class="card-tag">${e.tag}</div>
+      <div class="card-action"><button class="btn-select">Select →</button></div>
+    </div>
+  `).join('');
+}
+
+function renderResults() {
+  const persona = PERSONAS.find(p => p.id === state.persona);
+  const allObjs = OBJECTIVES[state.persona] || [];
+  const objective = allObjs.find(o => o.id === state.objective);
+  const allOutcomes = OUTCOMES[state.objective] || [];
+  const outcome = allOutcomes.find(o => o.id === state.outcome);
+  const engagement = ENGAGEMENT_MODELS.find(e => e.id === state.engagement);
+
+  // Summary panel
+  const panel = document.getElementById('summaryPanel');
+  panel.innerHTML = `
+    <h3>Your Advisory Request</h3>
+    <div class="summary-rows">
+      <div class="summary-row">
+        <div class="summary-key">Role</div>
+        <div class="summary-val">${persona ? persona.title : '—'}</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-key">Objective</div>
+        <div class="summary-val">${objective ? objective.title : '—'}</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-key">Desired Outcome</div>
+        <div class="summary-val">${outcome ? outcome.title : '—'}</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-key">Engagement Model</div>
+        <div class="summary-val">${engagement ? engagement.title : '—'}</div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn-primary btn-cta" href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">
+        → Continue to Intake
+      </a>
+      <button class="btn-primary btn-ghost" onclick="restart()">
+        ↺ Start Over
+      </button>
+    </div>
+  `;
+
+  // Services
+  const services = SERVICES_BY_OUTCOME[state.outcome] || SERVICES_BY_OUTCOME['default'];
+  const label = document.getElementById('serviceCountLabel');
+  label.innerHTML = `Matched Services <span class="count-badge">${services.length}</span>`;
+
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = services.map(s => `
+    <div class="svc-card">
+      <div class="svc-card-header">
+        <span class="svc-icon">${s.icon}</span>
+        <div class="svc-title">${s.title}</div>
+      </div>
+      <div class="svc-desc">${s.desc}</div>
+      <div class="svc-meta">
+        ${s.tags.map(t => `<span class="svc-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// BREADCRUMB
+// ═══════════════════════════════════════════════════════
+
+function updateBreadcrumb() {
+  const bar = document.getElementById('breadcrumbBar');
+  const parts = [];
+
+  if (state.persona) {
+    const p = PERSONAS.find(x => x.id === state.persona);
+    parts.push({ label: 'Role', value: p ? p.title : state.persona });
+  }
+  if (state.objective) {
+    const allObjs = OBJECTIVES[state.persona] || [];
+    const o = allObjs.find(x => x.id === state.objective);
+    parts.push({ label: 'Objective', value: o ? o.title : state.objective });
+  }
+  if (state.outcome) {
+    const allOut = OUTCOMES[state.objective] || [];
+    const o = allOut.find(x => x.id === state.outcome);
+    parts.push({ label: 'Outcome', value: o ? o.title : state.outcome });
+  }
+  if (state.engagement) {
+    const e = ENGAGEMENT_MODELS.find(x => x.id === state.engagement);
+    parts.push({ label: 'Engagement', value: e ? e.title : state.engagement });
+  }
+
+  if (!parts.length) {
+    bar.innerHTML = '<span class="bc-empty">Begin below — make your first selection.</span>';
+    return;
+  }
+
+  bar.innerHTML = parts.map((p, i) => `
+    <div class="bc-item">
+      ${i > 0 ? '<span class="bc-arrow">›</span>' : ''}
+      <span class="bc-label">${p.label}</span>
+      <span class="bc-value">${p.value}</span>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// STEP INDICATORS
+// ═══════════════════════════════════════════════════════
+
+function updateStepIndicator(step) {
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.getElementById(`sd${i}`);
+    const line = i < 5 ? document.getElementById(`sl${i}`) : null;
+    dot.className = 'step-dot';
+    if (i < step) { dot.classList.add('done'); dot.innerHTML = '✓'; }
+    else if (i === step) { dot.classList.add('active'); dot.innerHTML = i; }
+    else { dot.innerHTML = i; }
+    if (line) { line.className = 'step-line'; if (i < step) line.classList.add('done'); }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════
+
+function showStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById(`step${i}`).classList.toggle('hidden', i !== n);
+  }
+  state.currentStep = n;
+  updateStepIndicator(n);
+  updateBreadcrumb();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goTo(step) {
+  if (step === 1) { state.objective = null; state.outcome = null; state.engagement = null; }
+  if (step === 2) { state.outcome = null; state.engagement = null; }
+  if (step === 3) { state.engagement = null; }
+  showStep(step);
+}
+
+function restart() {
+  state = { persona: null, objective: null, outcome: null, engagement: null, currentStep: 1 };
+  showStep(1);
+}
+
+function selectPersona(id) {
+  state.persona = id;
+  renderObjectives(id);
+  showStep(2);
+}
+
+function selectObjective(id) {
+  state.objective = id;
+  renderOutcomes(id);
+  showStep(3);
+}
+
+function selectOutcome(id) {
+  state.outcome = id;
+  showStep(4);
+}
+
+function selectEngagement(id) {
+  state.engagement = id;
+  renderResults();
+  showStep(5);
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+
+renderPersonas();
+updateStepIndicator(1);
+updateBreadcrumb();
+</script>
+</body>
+</html>
