@@ -116,8 +116,6 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 
 .hidden { display:none !important; }
 
-/* ── DOODLE MARK SIZING ── */
-.card-icon svg, .svc-icon svg { display:block; }
 .card-icon { display:flex; align-items:center; margin-bottom:10px; }
 .svc-icon  { display:flex; align-items:center; flex-shrink:0; margin-top:1px; }
 
@@ -132,42 +130,7 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 <body>
 
 
-<!-- ══ STACKS DOODLE MARK — JS ══
-     Single SVG symbol, referenced everywhere via <use>.
-     Variants controlled by CSS custom properties on the wrapper.
--->
-<svg width="0" height="0" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <symbol id="doodle-mark" viewBox="0 0 80 80">
-      <!-- Body sitting oval -->
-      <ellipse cx="40" cy="59" rx="21" ry="17" fill="var(--dm-fill,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8"/>
-      <!-- Curly fur body rows -->
-      <path d="M22 56 Q25 50 28 54 Q31 47 34 51 Q37 45 40 49 Q43 45 46 51 Q49 47 52 54 Q55 50 58 56" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M24 64 Q27 58 30 62 Q33 56 36 60 Q39 54 42 58 Q45 54 48 60 Q51 58 54 64" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.5" stroke-linecap="round"/>
-      <!-- Head circle -->
-      <circle cx="40" cy="27" r="15" fill="var(--dm-fill,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8"/>
-      <!-- Curly fur head rows -->
-      <path d="M27 24 Q30 19 33 23 Q36 17 39 21 Q42 17 45 21 Q48 19 51 24" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M27 30 Q30 25 33 29 Q36 23 39 27 Q42 23 45 27 Q48 25 51 30" fill="none" stroke="var(--dm-stroke,currentColor)" stroke-width="1.4" stroke-linecap="round"/>
-      <!-- Floppy ears -->
-      <path d="M25 21 Q18 17 20 30 Q22 37 28 35 Q24 27 25 21Z" fill="var(--dm-ear,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M55 21 Q62 17 60 30 Q58 37 52 35 Q56 27 55 21Z" fill="var(--dm-ear,none)" stroke="var(--dm-stroke,currentColor)" stroke-width="1.8" stroke-linejoin="round"/>
-      <!-- Nose -->
-      <ellipse cx="40" cy="32" rx="3.2" ry="2.2" fill="var(--dm-face,currentColor)"/>
-      <!-- Eyes -->
-      <circle cx="33.5" cy="25.5" r="2" fill="var(--dm-face,currentColor)"/>
-      <circle cx="46.5" cy="25.5" r="2" fill="var(--dm-face,currentColor)"/>
-      <circle cx="34.2" cy="24.8" r="0.7" fill="var(--dm-shine,white)"/>
-      <circle cx="47.2" cy="24.8" r="0.7" fill="var(--dm-shine,white)"/>
-      <!-- Collar with JS -->
-      <rect x="29" y="39" width="22" height="7" rx="3.5" fill="var(--dm-collar,currentColor)"/>
-      <text x="40" y="45" text-anchor="middle"
-            font-family="Georgia, 'Cormorant Garamond', serif"
-            font-size="5.5" font-weight="700"
-            fill="var(--dm-monogram,white)">JS</text>
-    </symbol>
-  </defs>
-</svg>
+
 
 <header class="site-header">
   <div class="logo">STACKS<em>.</em> Advisory</div>
@@ -264,114 +227,101 @@ body { font-family:var(--sans); background:var(--cream); color:var(--ink); min-h
 // ═══════════════════════════════════════════════════
 
 
-// ── DOODLE MARK RENDERER ──
-// variant: 'gold' | 'steel' | 'dark' | 'light'
-function doodleMark(size, variant) {
-  size = size || 28;
-  const variants = {
-    gold:  '--dm-stroke:#b8902a;--dm-fill:rgba(184,144,42,0.08);--dm-ear:rgba(184,144,42,0.2);--dm-face:#0c1a26;--dm-shine:white;--dm-collar:#0c1a26;--dm-monogram:#e8c96d',
-    steel: '--dm-stroke:#4a7090;--dm-fill:rgba(74,112,144,0.08);--dm-ear:rgba(74,112,144,0.18);--dm-face:#2a4459;--dm-shine:white;--dm-collar:#2a4459;--dm-monogram:#e8c96d',
-    dark:  '--dm-stroke:#e8c96d;--dm-fill:rgba(232,201,109,0.1);--dm-ear:rgba(232,201,109,0.2);--dm-face:#e8c96d;--dm-shine:#0c1a26;--dm-collar:#e8c96d;--dm-monogram:#0c1a26',
-    light: '--dm-stroke:#b8902a;--dm-fill:rgba(248,242,224,0.4);--dm-ear:rgba(200,169,110,0.3);--dm-face:#0c1a26;--dm-shine:white;--dm-collar:#b8902a;--dm-monogram:#faf8f4'
-  };
-  const style = variants[variant] || variants.gold;
-  return `<svg width="${size}" height="${size}" viewBox="0 0 80 80" style="${style}" xmlns="http://www.w3.org/2000/svg"><use href="#doodle-mark"/></svg>`;
-}
 
 const PERSONAS = [
-  { id:'founder-ceo',      icon:'🚀', title:'Founder / CEO',                           desc:'Building the company, setting commercial direction, allocating resources to growth.',             tag:'Executive' },
-  { id:'cco-vp-sales',     icon:'📈', title:'CCO / VP Sales',                           desc:'Owning the revenue number — pipeline, quota, team structure, and GTM execution.',               tag:'Commercial' },
-  { id:'rev-ops',          icon:'⚙️', title:'Revenue / Sales Operations',               desc:'Building the systems, data, and processes that make the commercial engine run.',                tag:'Operations' },
-  { id:'product-marketing',icon:'🎯', title:'Product / Marketing Leader',               desc:'Translating scientific capabilities into market positioning, messaging, and launch.',           tag:'Product · Marketing' },
-  { id:'informatics',      icon:'🧬', title:'Scientific Software / Informatics Leader', desc:'Leading platforms at the intersection of genomics, LIMS, ELN, and commercial science.',        tag:'Scientific Tech' },
-  { id:'investor-board',   icon:'💼', title:'Investor / Board Member',                  desc:'Evaluating commercial readiness, diligencing assets, or guiding portfolio companies.',         tag:'Investment' }
+  { id:'founder-ceo',      icon: '🧬', title:'Founder / CEO',                           desc:'Building the company, setting commercial direction, allocating resources to growth.',             tag:'Executive' },
+  { id:'cco-vp-sales',     icon: '🧬', title:'CCO / VP Sales',                           desc:'Owning the revenue number — pipeline, quota, team structure, and GTM execution.',               tag:'Commercial' },
+  { id:'rev-ops',          icon: '🧬', title:'Revenue / Sales Operations',               desc:'Building the systems, data, and processes that make the commercial engine run.',                tag:'Operations' },
+  { id:'product-marketing',icon: '🧬', title:'Product / Marketing Leader',               desc:'Translating scientific capabilities into market positioning, messaging, and launch.',           tag:'Product · Marketing' },
+  { id:'informatics',      icon: '🧬', title:'Scientific Software / Informatics Leader', desc:'Leading platforms at the intersection of genomics, LIMS, ELN, and commercial science.',        tag:'Scientific Tech' },
+  { id:'investor-board',   icon: '🧬', title:'Investor / Board Member',                  desc:'Evaluating commercial readiness, diligencing assets, or guiding portfolio companies.',         tag:'Investment' }
 ];
 
 const OBJECTIVES = {
   'founder-ceo': [
-    { id:'scale-commercial',   icon:'🏗', title:'Build or scale first commercial function',  desc:'Move beyond founder-led sales — design the infrastructure, hire the team, install the process.' },
-    { id:'launch-offering',    icon:'🔬', title:'Launch or scale a scientific offering',      desc:'Translate your platform science into a commercial thesis with ICP, messaging, and GTM motion.' },
-    { id:'close-partners',     icon:'🤝', title:'Close strategic partnerships',              desc:'Identify, structure, and execute partnerships that create durable pipeline and platform value.' },
-    { id:'prep-raise',         icon:'📊', title:'Prepare for a funding round',              desc:'Build the commercial story, data room narrative, and GTM evidence your investors need.' },
-    { id:'cro-cdmo-channel',   icon:'🔗', title:'Penetrate CRO/CDMO/clinical channel',      desc:'Enter and activate the outsourced research ecosystem as a commercial channel.' }
+    { id:'scale-commercial',   icon: '🧬', title:'Build or scale first commercial function',  desc:'Move beyond founder-led sales — design the infrastructure, hire the team, install the process.' },
+    { id:'launch-offering',    icon: '🧬', title:'Launch or scale a scientific offering',      desc:'Translate your platform science into a commercial thesis with ICP, messaging, and GTM motion.' },
+    { id:'close-partners',     icon: '🧬', title:'Close strategic partnerships',              desc:'Identify, structure, and execute partnerships that create durable pipeline and platform value.' },
+    { id:'prep-raise',         icon: '🧬', title:'Prepare for a funding round',              desc:'Build the commercial story, data room narrative, and GTM evidence your investors need.' },
+    { id:'cro-cdmo-channel',   icon: '🧬', title:'Penetrate CRO/CDMO/clinical channel',      desc:'Enter and activate the outsourced research ecosystem as a commercial channel.' }
   ],
   'cco-vp-sales': [
-    { id:'territory-model',    icon:'🗺', title:'Build territory and account segmentation', desc:'Define ICP, segment accounts by propensity, and design territory coverage with precision.' },
-    { id:'pipeline-accel',     icon:'⚡', title:'Accelerate pipeline and close rates',      desc:'Diagnose velocity loss and install the sequencing and deal stage discipline to close faster.' },
-    { id:'hire-ramp',          icon:'👥', title:'Hire and ramp the commercial team',        desc:'Define the hire profile, design onboarding, and build the ramp plan tied to revenue milestones.' },
-    { id:'sole-source',        icon:'🔒', title:'Convert second-source to sole-source',    desc:'Structure the account strategy and engagement cadence to win preferred-provider status.' },
-    { id:'competitive-displace',icon:'⚔️',title:'Win competitive displacement',            desc:'Build the battlecard, proof structure, and reference architecture to displace incumbents.' },
-    { id:'global-pharma',      icon:'🌐', title:'Activate global pharma accounts',          desc:'Navigate enterprise buying structures to drive global standardization and multi-site adoption.' }
+    { id:'territory-model',    icon: '🧬', title:'Build territory and account segmentation', desc:'Define ICP, segment accounts by propensity, and design territory coverage with precision.' },
+    { id:'pipeline-accel',     icon: '🧬', title:'Accelerate pipeline and close rates',      desc:'Diagnose velocity loss and install the sequencing and deal stage discipline to close faster.' },
+    { id:'hire-ramp',          icon: '🧬', title:'Hire and ramp the commercial team',        desc:'Define the hire profile, design onboarding, and build the ramp plan tied to revenue milestones.' },
+    { id:'sole-source',        icon: '🧬', title:'Convert second-source to sole-source',    desc:'Structure the account strategy and engagement cadence to win preferred-provider status.' },
+    { id:'competitive-displace',icon: '🧬',title:'Win competitive displacement',            desc:'Build the battlecard, proof structure, and reference architecture to displace incumbents.' },
+    { id:'global-pharma',      icon: '🧬', title:'Activate global pharma accounts',          desc:'Navigate enterprise buying structures to drive global standardization and multi-site adoption.' }
   ],
   'rev-ops': [
-    { id:'crm-build',          icon:'🏛', title:'Design and build CRM architecture',       desc:'Build HubSpot or Salesforce to match your actual commercial motion — not a generic template.' },
-    { id:'data-pipeline',      icon:'📡', title:'Build commercial data pipeline',           desc:'Connect instrument data, LIMS, CRM, and ERP into a unified commercial intelligence layer.' },
-    { id:'reporting-layer',    icon:'📊', title:'Build GTM reporting and dashboards',       desc:'Create the executive and field-level reporting that ties activity to revenue outcomes.' },
-    { id:'automation',         icon:'🤖', title:'Automate sales and BD workflows',          desc:'Eliminate manual handoffs across outreach, follow-up, and pipeline review.' },
-    { id:'territory-ops',      icon:'⚖️', title:'Operationalize territory and quota',      desc:'Build the calculation engine and review cycle for territory and quota management.' }
+    { id:'crm-build',          icon: '🧬', title:'Design and build CRM architecture',       desc:'Build HubSpot or Salesforce to match your actual commercial motion — not a generic template.' },
+    { id:'data-pipeline',      icon: '🧬', title:'Build commercial data pipeline',           desc:'Connect instrument data, LIMS, CRM, and ERP into a unified commercial intelligence layer.' },
+    { id:'reporting-layer',    icon: '🧬', title:'Build GTM reporting and dashboards',       desc:'Create the executive and field-level reporting that ties activity to revenue outcomes.' },
+    { id:'automation',         icon: '🧬', title:'Automate sales and BD workflows',          desc:'Eliminate manual handoffs across outreach, follow-up, and pipeline review.' },
+    { id:'territory-ops',      icon: '🧬', title:'Operationalize territory and quota',      desc:'Build the calculation engine and review cycle for territory and quota management.' }
   ],
   'product-marketing': [
-    { id:'sci-to-commercial',  icon:'📝', title:'Translate technical capabilities into buyer messaging', desc:'Convert scientific differentiation into the language your buyers use to make decisions.' },
-    { id:'launch-gtm',         icon:'🚀', title:'Build product launch GTM plan',           desc:'Sequence the launch — positioning, ICP, channel mix, sales enablement, and go-live.' },
-    { id:'competitive-pos',    icon:'🎯', title:'Sharpen competitive positioning',          desc:'Map the landscape, identify the white space, and define the positioning architecture.' },
-    { id:'sales-enablement',   icon:'📚', title:'Build sales enablement content',          desc:'Develop case studies, battlecards, ROI calculators, and demo scripts that enable field selling.' },
-    { id:'abm-programs',       icon:'🎪', title:'Design account-based marketing programs', desc:'Pair the commercial team with targeted content and outreach for named accounts.' }
+    { id:'sci-to-commercial',  icon: '🧬', title:'Translate technical capabilities into buyer messaging', desc:'Convert scientific differentiation into the language your buyers use to make decisions.' },
+    { id:'launch-gtm',         icon: '🧬', title:'Build product launch GTM plan',           desc:'Sequence the launch — positioning, ICP, channel mix, sales enablement, and go-live.' },
+    { id:'competitive-pos',    icon: '🧬', title:'Sharpen competitive positioning',          desc:'Map the landscape, identify the white space, and define the positioning architecture.' },
+    { id:'sales-enablement',   icon: '🧬', title:'Build sales enablement content',          desc:'Develop case studies, battlecards, ROI calculators, and demo scripts that enable field selling.' },
+    { id:'abm-programs',       icon: '🧬', title:'Design account-based marketing programs', desc:'Pair the commercial team with targeted content and outreach for named accounts.' }
   ],
   'informatics': [
-    { id:'platform-commercialize',icon:'🧪',title:'Commercialize an informatics platform', desc:'Design the GTM motion for a scientific SaaS or data platform entering regulated pharma markets.' },
-    { id:'lims-eln-gtm',       icon:'💻', title:'Enter LIMS / ELN / workflow market',     desc:'Build ICP, messaging, and channel strategy for scientific software entering biopharma or CGT.' },
-    { id:'partner-ecosystem',  icon:'🤝', title:'Build a partner and integration ecosystem', desc:'Design and activate the technology partnership program — ISVs, CROs, platform integrations.' },
-    { id:'genomics-bd',        icon:'🔬', title:'Develop BD pipeline for genomics',        desc:'Build outreach strategy and pipeline for biopharma, CGT, and diagnostic platform buyers.' },
-    { id:'data-catalog-pos',   icon:'📦', title:'Position unified data layer',             desc:'Build the commercial narrative for a unified scientific data infrastructure play.' }
+    { id:'platform-commercialize',icon: '🧬',title:'Commercialize an informatics platform', desc:'Design the GTM motion for a scientific SaaS or data platform entering regulated pharma markets.' },
+    { id:'lims-eln-gtm',       icon: '🧬', title:'Enter LIMS / ELN / workflow market',     desc:'Build ICP, messaging, and channel strategy for scientific software entering biopharma or CGT.' },
+    { id:'partner-ecosystem',  icon: '🧬', title:'Build a partner and integration ecosystem', desc:'Design and activate the technology partnership program — ISVs, CROs, platform integrations.' },
+    { id:'genomics-bd',        icon: '🧬', title:'Develop BD pipeline for genomics',        desc:'Build outreach strategy and pipeline for biopharma, CGT, and diagnostic platform buyers.' },
+    { id:'data-catalog-pos',   icon: '🧬', title:'Position unified data layer',             desc:'Build the commercial narrative for a unified scientific data infrastructure play.' }
   ],
   'investor-board': [
-    { id:'commercial-diligence',icon:'🔍',title:'Commercial diligence on a target',       desc:'Independent assessment of GTM readiness, pipeline quality, team capability, and market fit.' },
-    { id:'portfolio-support',  icon:'📈', title:'Commercial acceleration for portfolio co.',desc:'Hands-on GTM support for a portfolio company approaching a commercial inflection.' },
-    { id:'market-entry-analysis',icon:'🌍',title:'Market entry and sizing analysis',      desc:'Independent TAM/SAM/SOM build with named account opportunity mapping for a specific segment.' },
-    { id:'board-narrative',    icon:'📋', title:'Build the commercial board narrative',   desc:'Structure the board-level commercial story — metrics, milestones, and forward-looking thesis.' },
-    { id:'ma-target-id',       icon:'🎯', title:'M&A target identification',              desc:'Identify and screen acquisition targets in life sciences tools, informatics, or diagnostics.' }
+    { id:'commercial-diligence',icon: '🧬',title:'Commercial diligence on a target',       desc:'Independent assessment of GTM readiness, pipeline quality, team capability, and market fit.' },
+    { id:'portfolio-support',  icon: '🧬', title:'Commercial acceleration for portfolio co.',desc:'Hands-on GTM support for a portfolio company approaching a commercial inflection.' },
+    { id:'market-entry-analysis',icon: '🧬',title:'Market entry and sizing analysis',      desc:'Independent TAM/SAM/SOM build with named account opportunity mapping for a specific segment.' },
+    { id:'board-narrative',    icon: '🧬', title:'Build the commercial board narrative',   desc:'Structure the board-level commercial story — metrics, milestones, and forward-looking thesis.' },
+    { id:'ma-target-id',       icon: '🧬', title:'M&A target identification',              desc:'Identify and screen acquisition targets in life sciences tools, informatics, or diagnostics.' }
   ]
 };
 
 const OUTCOMES = {
-  'scale-commercial':      [{ id:'crm-playbook',      icon:'🏛', title:'Working CRM + commercial playbook' }, { id:'first-logos', icon:'🎯', title:'First 5 customer logos closed' }, { id:'team-ramp',    icon:'👥', title:'Hired and ramped commercial team' }],
-  'launch-offering':       [{ id:'gtm-thesis',        icon:'🗺', title:'GTM thesis and account prioritization' }, { id:'messaging',    icon:'📝', title:'Scientific-to-commercial messaging' }, { id:'pioneer',      icon:'⭐', title:'Pioneer program executed and closed' }],
-  'close-partners':        [{ id:'signed-lois',       icon:'✍️', title:'Signed LOIs or partnership agreements' }, { id:'partner-pipe', icon:'🔗', title:'Qualified partner pipeline' }, { id:'partner-book', icon:'📘', title:'Partnership engagement playbook' }],
-  'prep-raise':            [{ id:'data-room',         icon:'📊', title:'Commercial data room and narrative' }, { id:'market-size',  icon:'🌍', title:'Market sizing and opportunity framing' }, { id:'rev-milestones',icon:'📈', title:'Revenue milestone framework' }],
-  'cro-cdmo-channel':      [{ id:'channel-map',       icon:'🗺', title:'CRO/CDMO channel map + target list' }, { id:'channel-out',  icon:'📡', title:'Channel outreach and activation' }, { id:'channel-agree',icon:'✍️', title:'Channel partnership agreements' }],
-  'territory-model':       [{ id:'territory-doc',     icon:'🗺', title:'Territory model and coverage architecture' }, { id:'icp-scoring',  icon:'🎯', title:'ICP definition and account scoring' }, { id:'quota-model',  icon:'⚖️', title:'Quota framework and attainment model' }],
-  'pipeline-accel':        [{ id:'pipeline-audit',    icon:'🔍', title:'Pipeline audit and velocity diagnosis' }, { id:'deal-playbook', icon:'📘', title:'Deal stage playbook' }, { id:'multithread',  icon:'🕸', title:'Multi-threading and champion development' }],
-  'hire-ramp':             [{ id:'hire-profile',      icon:'👤', title:'Hire profile and interview framework' }, { id:'onboard-ramp', icon:'📈', title:'Onboarding and ramp plan' }, { id:'comp-design',  icon:'💰', title:'Compensation structure and OTE benchmarking' }],
-  'sole-source':           [{ id:'acct-deepening',    icon:'🔒', title:'Account deepening strategy' }, { id:'std-case',     icon:'📋', title:'Standardization business case' }, { id:'exec-engage',  icon:'🤝', title:'Executive engagement and alignment' }],
-  'competitive-displace':  [{ id:'battlecard',        icon:'⚔️', title:'Competitive battlecard and positioning' }, { id:'displace-proof',icon:'🏆', title:'Displacement proof structure' }, { id:'win-loss',     icon:'🔍', title:'Win/loss analysis' }],
-  'global-pharma':         [{ id:'enterprise-plan',   icon:'🌐', title:'Enterprise account plan' }, { id:'procurement-nav',icon:'🏛', title:'Procurement and vendor approval navigation' }, { id:'global-rollout',icon:'🚀', title:'Global rollout sequencing' }],
-  'crm-build':             [{ id:'crm-config',        icon:'🏛', title:'CRM build and configuration' }, { id:'crm-data-model',icon:'📊', title:'Commercial data model design' }, { id:'crm-adoption', icon:'👥', title:'CRM adoption and field workflow' }],
-  'data-pipeline':         [{ id:'unified-layer',     icon:'🔗', title:'Unified commercial intelligence layer' }, { id:'integration-map',icon:'📡', title:'Integration and data flow mapping' }, { id:'metadata-strat',icon:'🗂', title:'Metadata and provenance strategy' }],
-  'reporting-layer':       [{ id:'exec-dashboard',    icon:'📊', title:'Executive commercial dashboard' }, { id:'field-reporting',icon:'📋', title:'Field-level performance reporting' }, { id:'fin-traceability',icon:'💰', title:'Financial traceability framework' }],
-  'automation':            [{ id:'outreach-auto',     icon:'📧', title:'Outreach sequence automation' }, { id:'pipeline-auto', icon:'🔄', title:'Pipeline review workflow automation' }, { id:'onboard-auto', icon:'⚡', title:'Customer onboarding workflow automation' }],
-  'territory-ops':         [{ id:'quota-track',       icon:'⚖️', title:'Quota model and attainment tracking' }, { id:'territory-rev', icon:'🗺', title:'Territory revision and rebalancing' }, { id:'spiff-design', icon:'🏆', title:'SPIFF and incentive program design' }],
-  'sci-to-commercial':     [{ id:'messaging-arch',    icon:'📝', title:'Messaging architecture and framework' }, { id:'value-prop',    icon:'💡', title:'Value proposition development' }, { id:'pitch-materials',icon:'🎯', title:'Pitch and presentation materials' }],
-  'launch-gtm':            [{ id:'launch-plan',       icon:'🚀', title:'Product launch plan and execution calendar' }, { id:'launch-icp',    icon:'🎯', title:'Launch ICP and early-adopter targeting' }, { id:'launch-metrics',icon:'📊', title:'Launch metrics framework' }],
-  'competitive-pos':       [{ id:'landscape-map',     icon:'🗺', title:'Competitive landscape mapping' }, { id:'white-space',   icon:'🔍', title:'White space and differentiation analysis' }, { id:'positioning-stmt',icon:'📝', title:'Positioning architecture and statement' }],
-  'sales-enablement':      [{ id:'case-studies',      icon:'📖', title:'Customer case study development' }, { id:'roi-calc',      icon:'💰', title:'ROI and value calculator' }, { id:'demo-script',   icon:'🎬', title:'Demo script and objection handling guide' }],
-  'abm-programs':          [{ id:'abm-design',        icon:'🎪', title:'ABM program design' }, { id:'abm-content',   icon:'📄', title:'Account-specific content development' }, { id:'abm-measure',   icon:'📊', title:'ABM measurement and attribution framework' }],
-  'platform-commercialize':[{ id:'platform-gtm',      icon:'🗺', title:'Platform GTM strategy' }, { id:'biopharma-map', icon:'🧬', title:'Biopharma and CGT buyer mapping' }, { id:'platform-pricing',icon:'💰', title:'Pricing and packaging architecture' }],
-  'lims-eln-gtm':          [{ id:'reg-market-entry',  icon:'🏛', title:'Regulated market entry strategy' }, { id:'lims-icp',      icon:'🎯', title:'LIMS/ELN ICP definition and outreach' }, { id:'integration-narr',icon:'🔗', title:'Integration and interoperability narrative' }],
-  'partner-ecosystem':     [{ id:'partner-prog-design',icon:'🤝',title:'Technology partner program design' }, { id:'integration-exec',icon:'🔌', title:'Integration partnership execution' }, { id:'ecosystem-map', icon:'🗺', title:'Partner ecosystem mapping' }],
-  'genomics-bd':           [{ id:'genomics-pipeline', icon:'🔬', title:'Genomics / causal inference BD pipeline' }, { id:'mced-pos',      icon:'🧬', title:'MCED / liquid biopsy commercial narrative' }, { id:'research-clinical',icon:'🌉', title:'Research-to-clinical commercialization bridge' }],
-  'data-catalog-pos':      [{ id:'data-infra-narr',   icon:'📦', title:'Unified data infrastructure narrative' }, { id:'build-buy',     icon:'⚖️', title:'Build vs. buy commercial argument' }, { id:'cio-cdo-engage',icon:'🏛', title:'CIO/CDO engagement strategy' }],
-  'commercial-diligence':  [{ id:'gtm-readiness',     icon:'🔍', title:'GTM readiness assessment' }, { id:'pipeline-quality',icon:'📊', title:'Pipeline quality and coverage audit' }, { id:'competitive-dd', icon:'⚔️', title:'Competitive position diligence' }],
-  'portfolio-support':     [{ id:'hands-on-accel',    icon:'🚀', title:'Hands-on commercial acceleration' }, { id:'board-reporting',icon:'📋', title:'Board-level commercial reporting design' }, { id:'hire-select',   icon:'👤', title:'Commercial hire selection and evaluation' }],
-  'market-entry-analysis': [{ id:'tam-build',         icon:'🌍', title:'TAM/SAM/SOM build' }, { id:'seg-map',       icon:'🗺', title:'Segment and buyer mapping' }, { id:'comp-landscape', icon:'🔍', title:'Competitive landscape deep-dive' }],
-  'board-narrative':       [{ id:'board-deck',        icon:'📋', title:'Commercial board deck' }, { id:'kpi-framework', icon:'📊', title:'Commercial KPI framework' }, { id:'risk-forecast', icon:'📈', title:'Risk-adjusted revenue forecast' }],
-  'ma-target-id':          [{ id:'ma-screen',         icon:'🎯', title:'M&A target screening' }, { id:'commercial-fit',icon:'🔍', title:'Commercial fit and integration analysis' }, { id:'ma-outreach',   icon:'🤝', title:'Soft-touch outreach and relationship development' }]
+  'scale-commercial':      [{ id:'crm-playbook',      icon: '🧬', title:'Working CRM + commercial playbook' }, { id:'first-logos', icon: '🧬', title:'First 5 customer logos closed' }, { id:'team-ramp',    icon: '🧬', title:'Hired and ramped commercial team' }],
+  'launch-offering':       [{ id:'gtm-thesis',        icon: '🧬', title:'GTM thesis and account prioritization' }, { id:'messaging',    icon: '🧬', title:'Scientific-to-commercial messaging' }, { id:'pioneer',      icon: '🧬', title:'Pioneer program executed and closed' }],
+  'close-partners':        [{ id:'signed-lois',       icon: '🧬', title:'Signed LOIs or partnership agreements' }, { id:'partner-pipe', icon: '🧬', title:'Qualified partner pipeline' }, { id:'partner-book', icon: '🧬', title:'Partnership engagement playbook' }],
+  'prep-raise':            [{ id:'data-room',         icon: '🧬', title:'Commercial data room and narrative' }, { id:'market-size',  icon: '🧬', title:'Market sizing and opportunity framing' }, { id:'rev-milestones',icon: '🧬', title:'Revenue milestone framework' }],
+  'cro-cdmo-channel':      [{ id:'channel-map',       icon: '🧬', title:'CRO/CDMO channel map + target list' }, { id:'channel-out',  icon: '🧬', title:'Channel outreach and activation' }, { id:'channel-agree',icon: '🧬', title:'Channel partnership agreements' }],
+  'territory-model':       [{ id:'territory-doc',     icon: '🧬', title:'Territory model and coverage architecture' }, { id:'icp-scoring',  icon: '🧬', title:'ICP definition and account scoring' }, { id:'quota-model',  icon: '🧬', title:'Quota framework and attainment model' }],
+  'pipeline-accel':        [{ id:'pipeline-audit',    icon: '🧬', title:'Pipeline audit and velocity diagnosis' }, { id:'deal-playbook', icon: '🧬', title:'Deal stage playbook' }, { id:'multithread',  icon: '🧬', title:'Multi-threading and champion development' }],
+  'hire-ramp':             [{ id:'hire-profile',      icon: '🧬', title:'Hire profile and interview framework' }, { id:'onboard-ramp', icon: '🧬', title:'Onboarding and ramp plan' }, { id:'comp-design',  icon: '🧬', title:'Compensation structure and OTE benchmarking' }],
+  'sole-source':           [{ id:'acct-deepening',    icon: '🧬', title:'Account deepening strategy' }, { id:'std-case',     icon: '🧬', title:'Standardization business case' }, { id:'exec-engage',  icon: '🧬', title:'Executive engagement and alignment' }],
+  'competitive-displace':  [{ id:'battlecard',        icon: '🧬', title:'Competitive battlecard and positioning' }, { id:'displace-proof',icon: '🧬', title:'Displacement proof structure' }, { id:'win-loss',     icon: '🧬', title:'Win/loss analysis' }],
+  'global-pharma':         [{ id:'enterprise-plan',   icon: '🧬', title:'Enterprise account plan' }, { id:'procurement-nav',icon: '🧬', title:'Procurement and vendor approval navigation' }, { id:'global-rollout',icon: '🧬', title:'Global rollout sequencing' }],
+  'crm-build':             [{ id:'crm-config',        icon: '🧬', title:'CRM build and configuration' }, { id:'crm-data-model',icon: '🧬', title:'Commercial data model design' }, { id:'crm-adoption', icon: '🧬', title:'CRM adoption and field workflow' }],
+  'data-pipeline':         [{ id:'unified-layer',     icon: '🧬', title:'Unified commercial intelligence layer' }, { id:'integration-map',icon: '🧬', title:'Integration and data flow mapping' }, { id:'metadata-strat',icon: '🧬', title:'Metadata and provenance strategy' }],
+  'reporting-layer':       [{ id:'exec-dashboard',    icon: '🧬', title:'Executive commercial dashboard' }, { id:'field-reporting',icon: '🧬', title:'Field-level performance reporting' }, { id:'fin-traceability',icon: '🧬', title:'Financial traceability framework' }],
+  'automation':            [{ id:'outreach-auto',     icon: '🧬', title:'Outreach sequence automation' }, { id:'pipeline-auto', icon: '🧬', title:'Pipeline review workflow automation' }, { id:'onboard-auto', icon: '🧬', title:'Customer onboarding workflow automation' }],
+  'territory-ops':         [{ id:'quota-track',       icon: '🧬', title:'Quota model and attainment tracking' }, { id:'territory-rev', icon: '🧬', title:'Territory revision and rebalancing' }, { id:'spiff-design', icon: '🧬', title:'SPIFF and incentive program design' }],
+  'sci-to-commercial':     [{ id:'messaging-arch',    icon: '🧬', title:'Messaging architecture and framework' }, { id:'value-prop',    icon: '🧬', title:'Value proposition development' }, { id:'pitch-materials',icon: '🧬', title:'Pitch and presentation materials' }],
+  'launch-gtm':            [{ id:'launch-plan',       icon: '🧬', title:'Product launch plan and execution calendar' }, { id:'launch-icp',    icon: '🧬', title:'Launch ICP and early-adopter targeting' }, { id:'launch-metrics',icon: '🧬', title:'Launch metrics framework' }],
+  'competitive-pos':       [{ id:'landscape-map',     icon: '🧬', title:'Competitive landscape mapping' }, { id:'white-space',   icon: '🧬', title:'White space and differentiation analysis' }, { id:'positioning-stmt',icon: '🧬', title:'Positioning architecture and statement' }],
+  'sales-enablement':      [{ id:'case-studies',      icon: '🧬', title:'Customer case study development' }, { id:'roi-calc',      icon: '🧬', title:'ROI and value calculator' }, { id:'demo-script',   icon: '🧬', title:'Demo script and objection handling guide' }],
+  'abm-programs':          [{ id:'abm-design',        icon: '🧬', title:'ABM program design' }, { id:'abm-content',   icon: '🧬', title:'Account-specific content development' }, { id:'abm-measure',   icon: '🧬', title:'ABM measurement and attribution framework' }],
+  'platform-commercialize':[{ id:'platform-gtm',      icon: '🧬', title:'Platform GTM strategy' }, { id:'biopharma-map', icon: '🧬', title:'Biopharma and CGT buyer mapping' }, { id:'platform-pricing',icon: '🧬', title:'Pricing and packaging architecture' }],
+  'lims-eln-gtm':          [{ id:'reg-market-entry',  icon: '🧬', title:'Regulated market entry strategy' }, { id:'lims-icp',      icon: '🧬', title:'LIMS/ELN ICP definition and outreach' }, { id:'integration-narr',icon: '🧬', title:'Integration and interoperability narrative' }],
+  'partner-ecosystem':     [{ id:'partner-prog-design',icon: '🧬',title:'Technology partner program design' }, { id:'integration-exec',icon: '🧬', title:'Integration partnership execution' }, { id:'ecosystem-map', icon: '🧬', title:'Partner ecosystem mapping' }],
+  'genomics-bd':           [{ id:'genomics-pipeline', icon: '🧬', title:'Genomics / causal inference BD pipeline' }, { id:'mced-pos',      icon: '🧬', title:'MCED / liquid biopsy commercial narrative' }, { id:'research-clinical',icon: '🧬', title:'Research-to-clinical commercialization bridge' }],
+  'data-catalog-pos':      [{ id:'data-infra-narr',   icon: '🧬', title:'Unified data infrastructure narrative' }, { id:'build-buy',     icon: '🧬', title:'Build vs. buy commercial argument' }, { id:'cio-cdo-engage',icon: '🧬', title:'CIO/CDO engagement strategy' }],
+  'commercial-diligence':  [{ id:'gtm-readiness',     icon: '🧬', title:'GTM readiness assessment' }, { id:'pipeline-quality',icon: '🧬', title:'Pipeline quality and coverage audit' }, { id:'competitive-dd', icon: '🧬', title:'Competitive position diligence' }],
+  'portfolio-support':     [{ id:'hands-on-accel',    icon: '🧬', title:'Hands-on commercial acceleration' }, { id:'board-reporting',icon: '🧬', title:'Board-level commercial reporting design' }, { id:'hire-select',   icon: '🧬', title:'Commercial hire selection and evaluation' }],
+  'market-entry-analysis': [{ id:'tam-build',         icon: '🧬', title:'TAM/SAM/SOM build' }, { id:'seg-map',       icon: '🧬', title:'Segment and buyer mapping' }, { id:'comp-landscape', icon: '🧬', title:'Competitive landscape deep-dive' }],
+  'board-narrative':       [{ id:'board-deck',        icon: '🧬', title:'Commercial board deck' }, { id:'kpi-framework', icon: '🧬', title:'Commercial KPI framework' }, { id:'risk-forecast', icon: '🧬', title:'Risk-adjusted revenue forecast' }],
+  'ma-target-id':          [{ id:'ma-screen',         icon: '🧬', title:'M&A target screening' }, { id:'commercial-fit',icon: '🧬', title:'Commercial fit and integration analysis' }, { id:'ma-outreach',   icon: '🧬', title:'Soft-touch outreach and relationship development' }]
 };
 
 const ENGAGEMENT_MODELS = [
-  { id:'fractional', icon:'🔄', title:'Fractional VP / Director',     desc:'Ongoing senior commercial leadership without a full-time hire. Ideal for Series A–B companies.', tag:'Ongoing · Monthly' },
-  { id:'sprint',     icon:'⚡', title:'90-Day Commercial Sprint',     desc:'A focused engagement with a defined outcome. Diagnose, design, and launch — in one quarter.',   tag:'Fixed-Scope · 90 Days' },
-  { id:'project',    icon:'📋', title:'Strategic Advisory Project',   desc:'A discrete deliverable for a specific decision. Fast, focused, board-ready.',                    tag:'Fixed-Scope · Deliverable' },
-  { id:'advisory',   icon:'🧠', title:'Advisory Board / Advisor Role', desc:'Monthly calls, network access, and on-demand input at key commercial moments.',                   tag:'Retainer · Ongoing' }
+  { id:'fractional', icon: '🧬', title:'Fractional VP / Director',     desc:'Ongoing senior commercial leadership without a full-time hire. Ideal for Series A–B companies.', tag:'Ongoing · Monthly' },
+  { id:'sprint',     icon: '🧬', title:'90-Day Commercial Sprint',     desc:'A focused engagement with a defined outcome. Diagnose, design, and launch — in one quarter.',   tag:'Fixed-Scope · 90 Days' },
+  { id:'project',    icon: '🧬', title:'Strategic Advisory Project',   desc:'A discrete deliverable for a specific decision. Fast, focused, board-ready.',                    tag:'Fixed-Scope · Deliverable' },
+  { id:'advisory',   icon: '🧬', title:'Advisory Board / Advisor Role', desc:'Monthly calls, network access, and on-demand input at key commercial moments.',                   tag:'Retainer · Ongoing' }
 ];
 
 // ═══════════════════════════════════════════════════
@@ -462,7 +412,7 @@ function getMatchedServices() {
 // Normalize varied field names from services-data.js into our display shape
 function normalizeService(svc) {
   return {
-    icon: svc.icon || svc.emoji || '🔬',
+    icon: svc.icon || svc.emoji || '🧬',
     title: svc.name || svc.title || 'Service',
     desc: svc.description || svc.desc || svc.summary || '',
     tags: (svc.tags || svc.keywords || [svc.pillar || svc.category || 'Advisory']).slice(0, 3)
@@ -473,40 +423,40 @@ function normalizeService(svc) {
 function getFallbackServices() {
   const fallbackMap = {
     'founder-ceo':        [
-      { icon:'🏗', title:'Commercial Architecture Design',       desc:'GTM infrastructure built for your platform, market, and stage — from ICP through pipeline.', tags:['Commercial Architecture'] },
-      { icon:'🤝', title:'Strategic BD and Partnership Execution', desc:'Identify, structure, and close partnerships that compound platform value and create durable pipeline.', tags:['BD & Partnerships'] },
-      { icon:'📝', title:'Scientific-to-Commercial Messaging',   desc:'Translating your platform differentiation into the economic language your buyers use to decide.', tags:['Messaging','Enablement'] },
-      { icon:'📊', title:'Commercial Data Room Build',           desc:'Pipeline data, GTM evidence, unit economics, and the commercial narrative in investor-ready format.', tags:['Deliverable','Strategy'] }
+      { icon: '🧬', title:'Commercial Architecture Design',       desc:'GTM infrastructure built for your platform, market, and stage — from ICP through pipeline.', tags:['Commercial Architecture'] },
+      { icon: '🧬', title:'Strategic BD and Partnership Execution', desc:'Identify, structure, and close partnerships that compound platform value and create durable pipeline.', tags:['BD & Partnerships'] },
+      { icon: '🧬', title:'Scientific-to-Commercial Messaging',   desc:'Translating your platform differentiation into the economic language your buyers use to decide.', tags:['Messaging','Enablement'] },
+      { icon: '🧬', title:'Commercial Data Room Build',           desc:'Pipeline data, GTM evidence, unit economics, and the commercial narrative in investor-ready format.', tags:['Deliverable','Strategy'] }
     ],
     'cco-vp-sales':       [
-      { icon:'⚡', title:'Pipeline Velocity and Stage Diagnosis',  desc:'Stage-by-stage analysis of where deals stall — with root cause and intervention design.', tags:['Revenue Acceleration'] },
-      { icon:'🗺', title:'Territory and Account Segmentation',    desc:'Segmented by account type, geography, and propensity — with quota framework built in.', tags:['Commercial Architecture'] },
-      { icon:'⚔️', title:'Competitive Battlecard and Positioning', desc:'Head-to-head differentiation, proof points, and objection handling for your primary competitive scenario.', tags:['GTM Strategy'] },
-      { icon:'🌐', title:'Global Enterprise Account Plan',         desc:'Multi-site stakeholder map with global standardization pathway and executive engagement strategy.', tags:['BD & Partnerships'] }
+      { icon: '🧬', title:'Pipeline Velocity and Stage Diagnosis',  desc:'Stage-by-stage analysis of where deals stall — with root cause and intervention design.', tags:['Revenue Acceleration'] },
+      { icon: '🧬', title:'Territory and Account Segmentation',    desc:'Segmented by account type, geography, and propensity — with quota framework built in.', tags:['Commercial Architecture'] },
+      { icon: '🧬', title:'Competitive Battlecard and Positioning', desc:'Head-to-head differentiation, proof points, and objection handling for your primary competitive scenario.', tags:['GTM Strategy'] },
+      { icon: '🧬', title:'Global Enterprise Account Plan',         desc:'Multi-site stakeholder map with global standardization pathway and executive engagement strategy.', tags:['BD & Partnerships'] }
     ],
     'rev-ops':            [
-      { icon:'🏛', title:'CRM Architecture and Configuration',    desc:'HubSpot or Salesforce configured to your commercial motion — stages, properties, and workflow.', tags:['CRM','Infrastructure'] },
-      { icon:'📊', title:'Executive Commercial Dashboard',         desc:'C-suite view of pipeline, revenue, and account health tied to board-level metrics.', tags:['Data & Reporting'] },
-      { icon:'🔗', title:'Commercial Data Integration Map',        desc:'Current-state audit and future-state design of all data connections in your commercial stack.', tags:['Data & Reporting'] },
-      { icon:'📧', title:'Outreach Sequence Automation',           desc:'Multi-touch sequences in HubSpot or Salesloft — personalized by persona and ICP segment.', tags:['Automation'] }
+      { icon: '🧬', title:'CRM Architecture and Configuration',    desc:'HubSpot or Salesforce configured to your commercial motion — stages, properties, and workflow.', tags:['CRM','Infrastructure'] },
+      { icon: '🧬', title:'Executive Commercial Dashboard',         desc:'C-suite view of pipeline, revenue, and account health tied to board-level metrics.', tags:['Data & Reporting'] },
+      { icon: '🧬', title:'Commercial Data Integration Map',        desc:'Current-state audit and future-state design of all data connections in your commercial stack.', tags:['Data & Reporting'] },
+      { icon: '🧬', title:'Outreach Sequence Automation',           desc:'Multi-touch sequences in HubSpot or Salesloft — personalized by persona and ICP segment.', tags:['Automation'] }
     ],
     'product-marketing':  [
-      { icon:'📝', title:'Messaging Architecture Framework',       desc:'Persona-level messaging matrix: problem, proof, differentiation — in your buyer\'s language.', tags:['Messaging'] },
-      { icon:'🚀', title:'Product Launch GTM Plan',                desc:'Sequenced launch with channel mix, content calendar, sales enablement, and field activation.', tags:['Launch','GTM Strategy'] },
-      { icon:'🗺', title:'Competitive Landscape Mapping',          desc:'Category map of the competitive environment with positioning of each named competitor.', tags:['Positioning'] },
-      { icon:'📖', title:'Customer Case Study Development',        desc:'Problem-solution-outcome case studies for priority accounts and use cases.', tags:['Enablement','Deliverable'] }
+      { icon: '🧬', title:'Messaging Architecture Framework',       desc:'Persona-level messaging matrix: problem, proof, differentiation — in your buyer\'s language.', tags:['Messaging'] },
+      { icon: '🧬', title:'Product Launch GTM Plan',                desc:'Sequenced launch with channel mix, content calendar, sales enablement, and field activation.', tags:['Launch','GTM Strategy'] },
+      { icon: '🧬', title:'Competitive Landscape Mapping',          desc:'Category map of the competitive environment with positioning of each named competitor.', tags:['Positioning'] },
+      { icon: '🧬', title:'Customer Case Study Development',        desc:'Problem-solution-outcome case studies for priority accounts and use cases.', tags:['Enablement','Deliverable'] }
     ],
     'informatics':        [
-      { icon:'🧪', title:'Scientific SaaS GTM Strategy',           desc:'ICP definition, channel design, and commercial motion for a platform entering regulated markets.', tags:['Platform GTM'] },
-      { icon:'🔬', title:'Genomics / Causal Inference BD Pipeline', desc:'Pioneer outreach, stakeholder mapping, and pipeline development for biopharma and CGT buyers.', tags:['Genomics','BD & Partnerships'] },
-      { icon:'🤝', title:'Technology Partner Program Design',       desc:'Partner tiers, co-sell motion, and partner enablement for ISV and CRO partners.', tags:['BD & Partnerships'] },
-      { icon:'📦', title:'Unified Data Infrastructure Narrative',   desc:'The buyer-facing story for a scientific data layer that replaces fragmented environments.', tags:['Messaging','Technical Commercialization'] }
+      { icon: '🧬', title:'Scientific SaaS GTM Strategy',           desc:'ICP definition, channel design, and commercial motion for a platform entering regulated markets.', tags:['Platform GTM'] },
+      { icon: '🧬', title:'Genomics / Causal Inference BD Pipeline', desc:'Pioneer outreach, stakeholder mapping, and pipeline development for biopharma and CGT buyers.', tags:['Genomics','BD & Partnerships'] },
+      { icon: '🧬', title:'Technology Partner Program Design',       desc:'Partner tiers, co-sell motion, and partner enablement for ISV and CRO partners.', tags:['BD & Partnerships'] },
+      { icon: '🧬', title:'Unified Data Infrastructure Narrative',   desc:'The buyer-facing story for a scientific data layer that replaces fragmented environments.', tags:['Messaging','Technical Commercialization'] }
     ],
     'investor-board':     [
-      { icon:'🔍', title:'GTM Readiness Assessment',               desc:'Independent assessment of ICP clarity, pipeline quality, team capability, and commercial infrastructure.', tags:['Diligence'] },
-      { icon:'🌍', title:'TAM/SAM/SOM Build',                      desc:'Bottom-up market sizing with named account opportunity mapping for a defined segment.', tags:['Market Analysis','Deliverable'] },
-      { icon:'📋', title:'Commercial Board Deck',                   desc:'Board-ready narrative: metrics, milestones, forward thesis, and the commercial evidence for the strategy.', tags:['Board Reporting','Deliverable'] },
-      { icon:'🎯', title:'M&A Target Screening',                   desc:'Systematic identification of acquisition targets by commercial capability and strategic fit.', tags:['Strategy','Diligence'] }
+      { icon: '🧬', title:'GTM Readiness Assessment',               desc:'Independent assessment of ICP clarity, pipeline quality, team capability, and commercial infrastructure.', tags:['Diligence'] },
+      { icon: '🧬', title:'TAM/SAM/SOM Build',                      desc:'Bottom-up market sizing with named account opportunity mapping for a defined segment.', tags:['Market Analysis','Deliverable'] },
+      { icon: '🧬', title:'Commercial Board Deck',                   desc:'Board-ready narrative: metrics, milestones, forward thesis, and the commercial evidence for the strategy.', tags:['Board Reporting','Deliverable'] },
+      { icon: '🧬', title:'M&A Target Screening',                   desc:'Systematic identification of acquisition targets by commercial capability and strategic fit.', tags:['Strategy','Diligence'] }
     ]
   };
   return fallbackMap[state.persona] || fallbackMap['founder-ceo'];
@@ -565,7 +515,7 @@ function updateStepIndicator(step) {
 function cardHTML(item, onclick) {
   return `
     <div class="card" onclick="${onclick}">
-      <span class="card-icon">${doodleMark(26,'gold')}</span>
+      <span class="card-icon">🧬</span>
       <div class="card-title">${item.title}</div>
       <div class="card-desc">${item.desc||''}</div>
       ${item.tag?`<div class="card-tag">${item.tag}</div>`:''}
@@ -580,7 +530,7 @@ function renderOutcomes(id) {
   const outs = OUTCOMES[id] || [];
   document.getElementById('outcomeGrid').innerHTML = outs.map(o=>`
     <div class="card" onclick="selectOutcome('${o.id}')">
-      <span class="card-icon">${doodleMark(24,'steel')}</span>
+      <span class="card-icon">🧬</span>
       <div class="card-title">${o.title}</div>
       <div class="card-action"><button class="btn-select">Select →</button></div>
     </div>`).join('');
@@ -622,7 +572,7 @@ function renderResults() {
   document.getElementById('servicesGrid').innerHTML = services.map(s=>`
     <div class="svc-card">
       <div class="svc-header">
-        <span class="svc-icon">${doodleMark(22,"light")}</span>
+        <span class="svc-icon">🧬</span>
         <div class="svc-title">${s.title}</div>
       </div>
       <div class="svc-desc">${s.desc}</div>
