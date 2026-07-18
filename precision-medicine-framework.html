@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Precision Medicine Practice | Stacks Advisory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1B24;
+    --ink-2: #16262F;
+    --brass: #B4913F;
+    --brass-light: #D9BC7A;
+    --paper: #F4F1E9;
+    --paper-line: #DAD4C4;
+    --slate: #5C6B72;
+    --teal: #3E6C64;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.5;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 32px; border-bottom: 1px solid var(--paper-line);
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; letter-spacing: 1px;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--slate); }
+  .nav-cta {
+    background: var(--ink); color: var(--paper); padding: 9px 18px; border-radius: 4px;
+    font-size: 13.5px; font-weight: 500; text-decoration: none; white-space: nowrap;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink); color: var(--paper);
+    padding: 72px 32px 64px;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--brass-light); margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 46px; line-height: 1.12;
+    max-width: 780px;
+  }
+  .hero h1 em { color: var(--brass-light); font-style: italic; font-weight: 500; }
+  .hero p {
+    margin-top: 20px; font-size: 16.5px; color: rgba(244,241,233,0.72); max-width: 620px;
+  }
+  .gate-row {
+    display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap;
+  }
+  .gate-chip {
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(244,241,233,0.25); border-radius: 999px;
+    padding: 8px 16px; font-size: 13px; color: rgba(244,241,233,0.85);
+  }
+  .gate-chip b { color: var(--brass-light); font-family: 'IBM Plex Mono', monospace; }
+
+  /* FRAMEWORK SECTION */
+  .section { padding: 64px 32px; }
+  .section-head { max-width: 640px; margin-bottom: 40px; }
+  .section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 30px; color: var(--ink);
+  }
+  .section h2 em { font-style: italic; color: var(--teal); }
+  .section-sub { color: var(--slate); font-size: 15px; margin-top: 12px; }
+
+  .gate-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .gate-card {
+    border: 1px solid var(--paper-line); border-radius: 8px; padding: 24px 20px;
+    background: var(--paper);
+  }
+  .gate-card .letter {
+    font-family: 'Fraunces', serif; font-size: 26px; color: var(--brass); font-weight: 600;
+  }
+  .gate-card h3 {
+    font-size: 15px; font-weight: 600; margin: 12px 0 8px;
+  }
+  .gate-card p { font-size: 13px; color: var(--slate); }
+
+  /* USE CASE GRID */
+  .usecase-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  }
+  .usecase-card {
+    border: 1px solid var(--paper-line); border-radius: 8px; padding: 28px;
+    background: var(--white);
+  }
+  .usecase-card .tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: 0.6px; color: var(--teal); border: 1px solid var(--teal);
+    border-radius: 999px; padding: 3px 10px; margin-bottom: 14px;
+  }
+  .usecase-card h3 {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; margin-bottom: 10px;
+  }
+  .usecase-card .need {
+    font-size: 13.5px; color: var(--ink); margin-bottom: 10px; line-height: 1.55;
+  }
+  .usecase-card .gates-used {
+    font-size: 12px; color: var(--slate); margin-bottom: 10px;
+  }
+  .usecase-card .gates-used b { color: var(--brass); }
+  .usecase-card .value {
+    font-size: 13px; color: var(--slate); border-top: 1px solid var(--paper-line);
+    padding-top: 12px; margin-top: 4px;
+  }
+  .usecase-card .value strong { color: var(--ink); }
+
+  /* CLOSING CTA */
+  .cta-section {
+    background: var(--paper); padding: 64px 32px; text-align: left;
+  }
+  .cta-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 30px;
+    flex-wrap: wrap;
+  }
+  .cta-box h2 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 28px; max-width: 520px;
+  }
+  .cta-box h2 em { font-style: italic; color: var(--teal); }
+  .cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper); padding: 13px 24px; border-radius: 5px;
+    text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap;
+  }
+  .btn-secondary {
+    border: 1px solid var(--ink); color: var(--ink); padding: 13px 24px; border-radius: 5px;
+    text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap;
+  }
+
+  footer {
+    padding: 28px 32px; display: flex; justify-content: space-between; align-items: center;
+    font-size: 12.5px; color: var(--slate); border-top: 1px solid var(--paper-line);
+    flex-wrap: wrap; gap: 10px;
+  }
+
+  @media (max-width: 780px) {
+    .hero h1 { font-size: 32px; }
+    .gate-grid { grid-template-columns: repeat(2, 1fr); }
+    .usecase-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .cta-box { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">stacks.advisory</div>
+  <div class="nav-links">
+    <span>Who We Help</span><span>Engagements</span><span>Precision Medicine</span><span>About</span>
+  </div>
+  <a class="nav-cta" href="https://stacksadvisory.com/intake.html">Map Your Opportunity</a>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Precision Medicine Practice &middot; Proposed Initiative</div>
+    <h1>Is lifelong therapy the only answer? <em>A four-gate framework makes it testable.</em></h1>
+    <p>Across immunotherapy, cell therapy, and metabolic disease, the same commercial question keeps surfacing: which patients respond, which can step down or stop, and which need escalation before failure shows up in the data. We apply a structured four-gate stratification framework to translate causal genomics and functional variant science into a commercial and clinical thesis biopharma teams can act on.</p>
+    <div class="gate-row">
+      <div class="gate-chip"><b>A</b> Response &amp; Persistence</div>
+      <div class="gate-chip"><b>B</b> Environment &amp; Context</div>
+      <div class="gate-chip"><b>C</b> Durability &amp; Escape</div>
+      <div class="gate-chip"><b>D</b> Safety &amp; Execution</div>
+    </div>
+  </div>
+</div>
+
+<div class="section wrap">
+  <div class="section-head">
+    <div class="section-eyebrow">The Framework</div>
+    <h2>Four questions, <em>asked of every therapeutic.</em></h2>
+    <p class="section-sub">The weighting shifts by modality, but the structure holds: does the patient's biology support response, does the surrounding tissue or immune environment cooperate, does the benefit hold up over time, and can the treatment be delivered and withdrawn safely.</p>
+  </div>
+  <div class="gate-grid">
+    <div class="gate-card">
+      <div class="letter">A</div>
+      <h3>Response &amp; Persistence</h3>
+      <p>Will this patient's biology sustain a durable response, or does the mechanism need reinforcement to work at all?</p>
+    </div>
+    <div class="gate-card">
+      <div class="letter">B</div>
+      <h3>Environment &amp; Context</h3>
+      <p>Is the surrounding tissue, microenvironment, or metabolic context permissive or hostile to the intended effect?</p>
+    </div>
+    <div class="gate-card">
+      <div class="letter">C</div>
+      <h3>Durability &amp; Escape</h3>
+      <p>Does the benefit hold over the long run, or does resistance, relapse, or target loss emerge — and when?</p>
+    </div>
+    <div class="gate-card">
+      <div class="letter">D</div>
+      <h3>Safety &amp; Execution</h3>
+      <p>Can the therapy be dosed, tapered, or discontinued safely, and does the delivery model hold up operationally?</p>
+    </div>
+  </div>
+</div>
+
+<div class="section wrap" style="background: var(--paper); border-radius: 12px;">
+  <div class="section-head">
+    <div class="section-eyebrow">Use Case Archetypes</div>
+    <h2>Where the framework <em>earns its keep.</em></h2>
+    <p class="section-sub">Six therapeutic contexts where a structured stratification thesis changes the commercial conversation — from patient selection to payer economics.</p>
+  </div>
+  <div class="usecase-grid">
+
+    <div class="usecase-card">
+      <span class="tag">Immuno-Oncology</span>
+      <h3>Checkpoint Inhibitor Combinations</h3>
+      <p class="need">Dual checkpoint blockade regimens outperform monotherapy for some patients but carry meaningfully higher toxicity for all of them. No validated biomarker separates who needs the combination from who doesn't.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b></p>
+      <p class="value"><strong>Commercial angle:</strong> precision de-escalation to monotherapy where safe, preserving efficacy while cutting toxicity-driven cost and hospitalization.</p>
+    </div>
+
+    <div class="usecase-card">
+      <span class="tag">Cell Therapy</span>
+      <h3>CAR-T Cell Therapy</h3>
+      <p class="need">Durable remission depends on T-cell persistence, tumor microenvironment resistance, antigen retention, and manufacturing safety all at once — the one setting where all four gates carry equal weight.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>B</b> &middot; <b>C</b> &middot; <b>D</b></p>
+      <p class="value"><strong>Commercial angle:</strong> shifting durable remission rates upward directly reshapes the cost-effectiveness case for a therapy priced per infusion.</p>
+    </div>
+
+    <div class="usecase-card">
+      <span class="tag">Hematology</span>
+      <h3>JAK Inhibitors</h3>
+      <p class="need">Response and resistance both track closely with variant-level biology, and a meaningful share of patients lose response within a few years — with no structured way to anticipate it.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b> &middot; <b>D</b></p>
+      <p class="value"><strong>Commercial angle:</strong> converting empiric dose escalation into biomarker-guided treatment optimization extends franchise value against generic and next-gen pressure.</p>
+    </div>
+
+    <div class="usecase-card">
+      <span class="tag">Emerging Modality</span>
+      <h3>Bispecific T-Cell Engagers</h3>
+      <p class="need">Efficacy depends entirely on the fitness of the patient's own T cells to be redirected — a dimension current diagnostics measure only crudely.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b></p>
+      <p class="value"><strong>Commercial angle:</strong> a T-cell fitness thesis supports premium positioning against CAR-T and improves patient selection for an emerging drug class.</p>
+    </div>
+
+    <div class="usecase-card">
+      <span class="tag">Immunology</span>
+      <h3>Cytokine-Targeting Biologics</h3>
+      <p class="need">The shift from anti-TNF to targeted cytokine blockade (e.g., IL-23) raises a first-line question: which patients are driven by the targeted pathway versus a different one entirely.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>B</b></p>
+      <p class="value"><strong>Commercial angle:</strong> a pathway-dependence thesis positions targeted cytokine therapy as a precision-selected first-line option rather than a trial-and-error step.</p>
+    </div>
+
+    <div class="usecase-card">
+      <span class="tag">Metabolic Disease</span>
+      <h3>GLP-1 &amp; Metabolic Pharmacogenomics</h3>
+      <p class="need">A $100B+ incretin therapy market with three unresolved questions: who responds, who can safely discontinue, and when the metabolic shift becomes durable enough to stop.</p>
+      <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b> &middot; <b>D</b></p>
+      <p class="value"><strong>Commercial angle:</strong> a discontinuation-readiness thesis reframes GLP-1RA therapy from an indefinite commitment into a precision intervention with a defined endpoint — the single biggest lever on payer economics in the category.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="cta-section">
+  <div class="wrap cta-box">
+    <h2>Bring the four-gate framework <em>to your program.</em></h2>
+    <div class="cta-buttons">
+      <a class="btn-primary" href="https://stacksadvisory.com/intake.html">Map Your Opportunity</a>
+      <a class="btn-secondary" href="https://stacksadvisory.com/capabilities.html">View Full Capabilities</a>
+    </div>
+  </div>
+</div>
+
+<footer class="wrap">
+  <span>&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; jon@stacksadvisory.com</span>
+  <span>Precision Medicine Practice &middot; Proposed Initiative</span>
+</footer>
+
+</body>
+</html>
