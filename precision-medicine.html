@@ -41,13 +41,30 @@ img, svg { display: block; max-width: 100%; }
 .btn-gold { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); }
 .btn-gold:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 3rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); }
-.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--cream); letter-spacing: 0.03em; text-decoration: none; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); gap: 1rem; }
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; flex-shrink: 0; }
 .nav-logo span { color: var(--teal); }
-.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-.nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav-links { display: flex; gap: 1.35rem; list-style: none; align-items: center; flex-wrap: nowrap; }
+.nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; white-space: nowrap; }
 .nav-links a:hover { color: var(--teal); }
 .nav-links .current { color: var(--gold); }
+.nav-links .nav-services a {
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 0.28rem 0.65rem;
+  border-radius: 3px;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.nav-links .nav-services a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+.nav > a.btn-primary { padding: 0.62rem 1.35rem; font-size: 0.72rem; flex-shrink: 0; }
+@media (max-width: 1240px) {
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.68rem; }
+}
 
 .pm-hero { min-height: 62vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
 .pm-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
@@ -123,6 +140,9 @@ img, svg { display: block; max-width: 100%; }
     <li><a href="/index.html#problem">The Problem</a></li>
     <li><a href="/index.html#offers">Engagements</a></li>
     <li><a href="/precision-medicine.html" class="current">Precision Medicine</a></li>
+    <li><a href="/story.html">How It Works</a></li>
+    <li><a href="/crm-architecture.html">CRM Architecture</a></li>
+    <li><a href="/index.html#impact">Impact</a></li>
     <li><a href="/index.html#expertise">About</a></li>
     <li class="nav-services"><a href="/services-cascade.html">🧬 Find Your Engagement</a></li>
   </ul>
