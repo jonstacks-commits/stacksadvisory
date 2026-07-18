@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Commercial Transformation Works | Stacks Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #0D1B2A;
+  --deep:   #071018;
+  --teal:   #00A896;
+  --seafoam:#02C39A;
+  --gold:   #C9A84C;
+  --gold-lt:#E8C96D;
+  --cream:  #F5F1EA;
+  --warm:   #FAFAF7;
+  --slate:  #4A5568;
+  --muted:  #8E9CAD;
+  --rule:   rgba(13,27,42,0.10);
+  --serif:  'DM Serif Display', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+  --mono:   'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-height:1.6;overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(13,27,42,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,168,150,0.14);}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--cream);text-decoration:none;}
+.nav-logo span{color:var(--teal);}
+.nav-cta{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.8rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:0.65rem 1.4rem;border-radius:3px;background:var(--teal);color:var(--navy);text-decoration:none;transition:background 0.18s;}
+.nav-cta:hover{background:var(--seafoam);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:9rem 3rem 5rem;position:relative;overflow:hidden;text-align:center;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(0,168,150,0.09),transparent 70%);}
+/* Animated DNA helix background */
+.dna-canvas{position:absolute;inset:0;pointer-events:none;opacity:0.12;}
+.hero-inner{position:relative;z-index:1;max-width:780px;}
+.hero-eyebrow{display:inline-block;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,168,150,0.35);padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:2rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;color:var(--cream);margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:1.05rem;font-weight:300;color:rgba(245,241,234,0.65);line-height:1.8;max-width:560px;margin:0 auto 2.5rem;}
+.hero-scroll{display:flex;align-items:center;justify-content:center;gap:0.5rem;font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,241,234,0.3);animation:bounce 2.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ── SECTION WRAPPER ── */
+.section{padding:6rem 3rem;}
+.inner{max-width:1100px;margin:0 auto;}
+
+/* ── TRANSLATION BRIDGE ── */
+.bridge{background:var(--cream);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:5rem 3rem;}
+.bridge-inner{max-width:1100px;margin:0 auto;}
+.bridge-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.bridge h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);line-height:1.15;color:var(--navy);margin-bottom:1rem;}
+.bridge h2 em{font-style:italic;color:var(--teal);}
+.bridge-sub{font-size:0.95rem;font-weight:300;color:var(--slate);line-height:1.8;max-width:580px;margin-bottom:3.5rem;}
+.bridge-cols{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;align-items:start;}
+.bridge-col-label{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;padding:0.3rem 0.8rem;border-radius:2px;display:inline-block;}
+.label-park{background:rgba(201,168,76,0.12);color:var(--gold);}
+.label-life{background:rgba(0,168,150,0.12);color:var(--teal);}
+.bridge-arrow{display:flex;align-items:flex-start;justify-content:center;padding-top:2.8rem;}
+.bridge-arrow-inner{width:40px;height:40px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:1.1rem;}
+
+/* ── STEPS ── */
+.steps-section{background:var(--navy);padding:6rem 3rem;}
+.steps-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.steps-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);color:var(--cream);line-height:1.15;margin-bottom:0.8rem;}
+.steps-title em{font-style:italic;color:var(--teal);}
+.steps-sub{font-size:0.95rem;font-weight:300;color:rgba(245,241,234,0.6);max-width:540px;margin-bottom:4rem;line-height:1.8;}
+
+.step-track{position:relative;}
+.step-track::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,rgba(0,168,150,0.6),rgba(0,168,150,0.1));pointer-events:none;}
+
+.step{display:grid;grid-template-columns:58px 1fr;gap:2rem;margin-bottom:3.5rem;position:relative;}
+.step-num{width:58px;height:58px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;font-weight:700;position:relative;z-index:1;background:var(--navy);border:2px solid rgba(0,168,150,0.35);color:var(--teal);transition:border-color 0.2s;}
+.step:hover .step-num{border-color:var(--teal);}
+.step-content{padding-top:0.8rem;}
+.step-eyebrow{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.step-title{font-family:var(--serif);font-size:1.35rem;color:var(--cream);margin-bottom:0.6rem;line-height:1.2;}
+.step-body{font-size:0.88rem;font-weight:300;color:rgba(245,241,234,0.6);line-height:1.75;margin-bottom:1rem;}
+.step-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.step-tag{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.22rem 0.65rem;border-radius:2px;background:rgba(0,168,150,0.1);color:var(--teal);border:1px solid rgba(0,168,150,0.25);}
+.step-tag.gold{background:rgba(201,168,76,0.1);color:var(--gold);border-color:rgba(201,168,76,0.25);}
+
+/* Dog park callout */
+.park-callout{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:0.9rem 1.1rem;margin-top:0.75rem;font-size:0.82rem;color:rgba(245,241,234,0.45);font-style:italic;line-height:1.6;}
+.park-callout strong{color:var(--gold-lt);font-style:normal;}
+
+/* ── ENVIRONMENT MATRIX ── */
+.env-section{background:var(--cream);padding:6rem 3rem;}
+.env-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);color:var(--navy);margin-bottom:0.8rem;line-height:1.15;}
+.env-title em{font-style:italic;color:var(--teal);}
+.env-sub{font-size:0.95rem;font-weight:300;color:var(--slate);max-width:560px;margin-bottom:3rem;line-height:1.8;}
+
+.env-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;}
+.env-card{background:white;border:1px solid rgba(13,27,42,0.09);border-radius:8px;padding:1.6rem;border-top:3px solid transparent;transition:box-shadow 0.2s,transform 0.18s;}
+.env-card:hover{box-shadow:0 8px 28px rgba(0,168,150,0.1);transform:translateY(-2px);}
+.env-card.c-teal{border-top-color:var(--teal);}
+.env-card.c-gold{border-top-color:var(--gold);}
+.env-card.c-navy{border-top-color:var(--navy);}
+.env-card.c-slate{border-top-color:var(--muted);}
+.env-icon{font-size:1.6rem;margin-bottom:0.8rem;}
+.env-card-title{font-size:0.92rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.env-card-body{font-size:0.8rem;color:var(--slate);line-height:1.65;margin-bottom:0.9rem;}
+.env-variants{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.env-variant{font-size:0.67rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;background:rgba(0,168,150,0.07);color:var(--teal);border:1px solid rgba(0,168,150,0.18);}
+.env-note{font-size:0.75rem;color:var(--muted);margin-top:0.75rem;font-style:italic;}
+
+/* ── CTA GATE ── */
+.gate{background:linear-gradient(135deg,#0D1B2A,#071420);padding:7rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.gate::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 75% at 50% 50%,rgba(0,168,150,0.09),transparent);pointer-events:none;}
+.gate-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+.gate-eyebrow{display:inline-block;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.3);padding:0.28rem 0.8rem;border-radius:2px;margin-bottom:1.5rem;}
+.gate h2{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,3rem);color:var(--cream);line-height:1.15;margin-bottom:1.2rem;}
+.gate h2 em{font-style:italic;color:var(--teal);}
+.gate p{font-size:0.98rem;font-weight:300;color:rgba(245,241,234,0.6);line-height:1.8;margin-bottom:2.5rem;}
+
+.gate-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem;text-align:left;}
+.gate-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:1.4rem;}
+.gate-card-icon{font-size:1.3rem;margin-bottom:0.6rem;}
+.gate-card-title{font-size:0.88rem;font-weight:600;color:var(--cream);margin-bottom:0.35rem;}
+.gate-card-body{font-size:0.78rem;color:rgba(245,241,234,0.48);line-height:1.6;}
+.gate-lock{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.4rem;margin-top:0.6rem;}
+
+.gate-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--sans);font-size:0.82rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;transition:all 0.18s;}
+.btn-teal{background:var(--teal);color:var(--navy);}
+.btn-teal:hover{background:var(--seafoam);}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(245,241,234,0.2);}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+.btn-gold{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.4);}
+.btn-gold:hover{background:rgba(201,168,76,0.08);}
+
+/* ── FOOTER ── */
+.footer{background:#060D14;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--serif);font-size:1rem;color:rgba(245,241,234,0.45);}
+.footer-logo span{color:var(--teal);}
+.footer-copy{font-size:0.72rem;color:rgba(245,241,234,0.25);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:0.72rem;color:rgba(245,241,234,0.3);text-decoration:none;transition:color 0.18s;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:768px){
+  .nav{padding:1rem 1.5rem;}
+  .hero,.section,.bridge,.steps-section,.env-section,.gate{padding:4rem 1.5rem;}
+  .hero{padding-top:7rem;}
+  .bridge-cols{grid-template-columns:1fr;}
+  .bridge-arrow{display:none;}
+  .gate-cards{grid-template-columns:1fr;}
+  .footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="/">stacks<span>.</span>advisory</a>
+  <a class="nav-cta" href="/services-cascade.html">🧬 Find Your Engagement</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <canvas class="dna-canvas" id="dnaCanvas"></canvas>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">How Commercial Transformation Works</span>
+    <h1>Every complex problem<br>starts with a <em>simple story.</em></h1>
+    <p class="hero-sub">Before we talk about GTM strategy, CRM architecture, or pioneer programs — let's walk through something you already understand. Then we'll show you exactly how it translates to your commercial challenge in life sciences.</p>
+    <p class="hero-scroll">↓ &nbsp; scroll to begin</p>
+  </div>
+</section>
+
+<!-- TRANSLATION BRIDGE -->
+<section class="bridge">
+  <div class="bridge-inner">
+    <div class="bridge-label">The Method</div>
+    <h2>We teach commercial transformation<br>through <em>a story you already know.</em></h2>
+    <p class="bridge-sub">The same six-step logic that gets a leash-free dog park approved by a city council gets a life sciences platform from zero to its first five enterprise accounts. The players are different. The process is identical.</p>
+
+    <div class="bridge-cols">
+      <!-- LEFT: DOG PARK -->
+      <div>
+        <span class="bridge-col-label label-park">🐕 The Dog Park</span>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 1 — Define the Problem</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Dogs need off-leash space. Current parks prohibit it. No existing venue meets community needs.</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 2 — Map the Buyers</div>
+            <div style="font-size:0.85rem;color:var(--slate);">City council votes. Parks dept. controls land. Neighbors can block or enable. Dog owners are the user base.</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 3 — Build the Case</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Petition signatures. Usage data from comparable parks. Safety record. Cost-to-city analysis.</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 4 — Find the Channel</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Council agenda process. District 5 rep as champion. Parks board approval pathway. Public comment window.</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 5 — Execute the Ask</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Present at council meeting. Pilot proposal: 90-day trial at Crestmoor. Defined success metrics.</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Step 6 — Measure & Sustain</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Usage logs. Incident tracking. Expansion vote at 90 days. Playbook for next park.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="bridge-arrow">
+        <div class="bridge-arrow-inner">→</div>
+      </div>
+
+      <!-- RIGHT: LIFE SCIENCES -->
+      <div>
+        <span class="bridge-col-label label-life">🧬 Life Sciences Commercial Build</span>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 1 — Diagnose the Commercial Gap</div>
+            <div style="font-size:0.85rem;color:var(--slate);">No pipeline visibility. Founder-led sales hitting a ceiling. ICP undefined. Data fragmented across silos.</div>
+          </div>
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 2 — Map the Buyers</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Who in biopharma/CGT decides. Who champions platform adoption. Procurement vs. scientific vs. ops buyers.</div>
+          </div>
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 3 — Build the Commercial Case</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Competitive landscape. TAM/SAM/SOM. Scientific-to-commercial messaging. ROI calculator for the buyer.</div>
+          </div>
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 4 — Activate the Channel</div>
+            <div style="font-size:0.85rem;color:var(--slate);">CRO/CDMO ecosystem. Direct enterprise outreach. Partner-enabled pipeline. CRM built for your motion.</div>
+          </div>
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 5 — Execute the Pioneer Program</div>
+            <div style="font-size:0.85rem;color:var(--slate);">First 5 anchor accounts identified, engaged, and closed. LOIs. Proof structure for the next 50.</div>
+          </div>
+          <div style="background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:0.9rem 1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.25rem;">Step 6 — Embed & Scale</div>
+            <div style="font-size:0.85rem;color:var(--slate);">Reporting layer. Quota model. Playbook your team owns. The system that keeps working after we're done.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE 6 STEPS DEEP DIVE -->
+<section class="steps-section">
+  <div class="inner">
+    <div class="steps-label">The Process</div>
+    <h2 class="steps-title">Six steps from<br><em>zero to commercial momentum.</em></h2>
+    <p class="steps-sub">Each step is a defined phase with specific inputs, activities, and deliverables. No ambiguity about what happens, in what order, or what you own at the end.</p>
+
+    <div class="step-track">
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Diagnose</div>
+          <div class="step-title">Map the current state — including your specific environment.</div>
+          <div class="step-body">Before any strategy, we need to understand what you're actually working with. Not just the commercial gaps — the technical reality. Are your contacts in Salesforce, HubSpot, or a spreadsheet? Is your sequencing data coming off an Illumina NovaSeq, a PacBio, or Nanopore? What LIMS are you running, if any? These aren't footnotes. They define every downstream decision.</div>
+          <div class="step-tags">
+            <span class="step-tag">Commercial infrastructure audit</span>
+            <span class="step-tag">Tech stack mapping</span>
+            <span class="step-tag">Pipeline quality review</span>
+            <span class="step-tag">ICP definition</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> Walking the current parks, counting dogs, photographing conditions, and talking to the neighbors who already let their dogs run off-leash anyway. You learn the actual situation before you write the proposal.
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Design</div>
+          <div class="step-title">Build the commercial thesis and define the target accounts by name.</div>
+          <div class="step-body">Not "biopharma companies in the US." Named organizations, named decision-makers, named buying contexts. The commercial thesis is the argument for why your platform wins — in the language of the buyer who signs the contract, not the scientist who uses it. This is where scientific credibility becomes commercial currency.</div>
+          <div class="step-tags">
+            <span class="step-tag">GTM thesis</span>
+            <span class="step-tag">Named account prioritization</span>
+            <span class="step-tag gold">Scientific-to-commercial messaging</span>
+            <span class="step-tag">Competitive landscape</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> Identifying that Crestmoor Park is the right site, that Council Member Sawyer is the path to yes, and that the argument is community health + property values — not just "dogs need to run."
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Validate</div>
+          <div class="step-title">Pressure-test the strategy before full execution.</div>
+          <div class="step-body">Pilot outreach with 3–5 accounts. Early partner conversations. Market signal collection. The goal is to find out where the thesis breaks before you've committed a full quarter to it. What objections surface? Which personas respond? Which channel creates friction? This is where strategy meets reality — cheaply, before scale.</div>
+          <div class="step-tags">
+            <span class="step-tag">Pilot outreach sequences</span>
+            <span class="step-tag">Early discovery calls</span>
+            <span class="step-tag">Objection mapping</span>
+            <span class="step-tag gold">Partner discovery</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> Informally testing the proposal at a neighborhood association meeting before the formal council presentation. Finding out that three neighbors are concerned about fencing before it becomes a public objection.
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Launch</div>
+          <div class="step-title">Execute the Pioneer Program and activate the commercial infrastructure.</div>
+          <div class="step-body">This is the execution phase — and execution means specific things. BD outreach campaigns running. CRM operational with real pipeline data in it. Key accounts engaged, not just identified. LOIs in process. Partners activated. The infrastructure and the pipeline running simultaneously. This is where most fractional advisors hand off a deck. We're still in the room.</div>
+          <div class="step-tags">
+            <span class="step-tag">Pioneer program execution</span>
+            <span class="step-tag">LOI negotiation</span>
+            <span class="step-tag">CRM activation</span>
+            <span class="step-tag gold">Partner pipeline</span>
+            <span class="step-tag">BD outreach execution</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> Presenting at the council meeting, managing the Q&A, proposing the 90-day pilot, and coordinating the parks department paperwork — not handing the neighbor a template and wishing them luck.
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Realize</div>
+          <div class="step-title">Close the anchor accounts. Build the proof structure for the next wave.</div>
+          <div class="step-body">The Pioneer Program doesn't just create revenue — it creates evidence. Case studies, reference accounts, proof-of-concept structures, and the standardization business case that converts your second-source accounts to sole-source. Every closed deal is engineered to generate the next three.</div>
+          <div class="step-tags">
+            <span class="step-tag">Account closing</span>
+            <span class="step-tag">Case study development</span>
+            <span class="step-tag gold">Standardization business case</span>
+            <span class="step-tag">Reference account program</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> The 90-day pilot goes well. Usage data collected. Incident log is clean. Three council members who voted no are now on-site watching their constituents use the park. The expansion vote is easy.
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-eyebrow">Embed & Scale</div>
+          <div class="step-title">Install the system your team owns and runs without us.</div>
+          <div class="step-body">The playbook is documented. The CRM is running on your team's rhythm, not ours. The territory model, quota framework, and onboarding plan are in place. The reporting layer gives leadership the visibility to manage the commercial function. We've built something that compounds — not something that collapses when the engagement ends.</div>
+          <div class="step-tags">
+            <span class="step-tag">Commercial playbook</span>
+            <span class="step-tag">CRM handoff</span>
+            <span class="step-tag gold">Quota and territory model</span>
+            <span class="step-tag">Team onboarding plan</span>
+            <span class="step-tag">Reporting layer</span>
+          </div>
+          <div class="park-callout">
+            <strong>Dog park equivalent:</strong> The Friends of Crestmoor Dog Park is constituted. Maintenance schedule is set. Budget line is in the parks department. The next community that wants a leash-free park can use your playbook.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /step-track -->
+  </div>
+</section>
+
+<!-- ENVIRONMENT MATRIX — the "it depends on your stack" section -->
+<section class="env-section">
+  <div class="inner">
+    <div class="bridge-label">Your Environment Determines the Detail</div>
+    <h2 class="env-title">Same six steps.<br><em>Different execution</em> for every stack.</h2>
+    <p class="env-sub">Every engagement adapts to your actual environment — not a generic template. The sequencer you run, the CRM you use, and the LIMS you're on define what each step looks like in practice.</p>
+
+    <div class="env-grid">
+
+      <div class="env-card c-teal">
+        <div class="env-icon">🗄</div>
+        <div class="env-card-title">Contact & Pipeline Management</div>
+        <div class="env-card-body">Where do your contacts and accounts currently live? The CRM architecture and workflow design adapts entirely to your existing or target system.</div>
+        <div class="env-variants">
+          <span class="env-variant">HubSpot</span>
+          <span class="env-variant">Salesforce</span>
+          <span class="env-variant">Dynamics 365</span>
+          <span class="env-variant">Siebel</span>
+          <span class="env-variant">Spreadsheet</span>
+          <span class="env-variant">No system yet</span>
+        </div>
+        <div class="env-note">Impacts: CRM Architecture Design, Pipeline Stage Design, Outreach Automation, Reporting Layer</div>
+      </div>
+
+      <div class="env-card c-gold">
+        <div class="env-icon">🧬</div>
+        <div class="env-card-title">Sequencing Platform</div>
+        <div class="env-card-body">If your platform touches genomics, the instrument type defines the data format, integration approach, and commercial narrative for the buyer.</div>
+        <div class="env-variants">
+          <span class="env-variant">Illumina NovaSeq / NextSeq</span>
+          <span class="env-variant">PacBio HiFi</span>
+          <span class="env-variant">Oxford Nanopore</span>
+          <span class="env-variant">Sanger / Capillary</span>
+          <span class="env-variant">BGI / DNBSEQ</span>
+        </div>
+        <div class="env-note">Impacts: Platform GTM Strategy, Scientific Messaging, BD Pipeline, Integration Narrative</div>
+      </div>
+
+      <div class="env-card c-navy">
+        <div class="env-icon">🏭</div>
+        <div class="env-card-title">LIMS / Lab Informatics</div>
+        <div class="env-card-body">Your laboratory information management system determines the data architecture, integration complexity, and regulatory compliance posture.</div>
+        <div class="env-variants">
+          <span class="env-variant">LabVantage</span>
+          <span class="env-variant">STARLIMS</span>
+          <span class="env-variant">LabWare</span>
+          <span class="env-variant">L7 ESP</span>
+          <span class="env-variant">Custom / In-house</span>
+          <span class="env-variant">None yet</span>
+        </div>
+        <div class="env-note">Impacts: Data Integration Map, Unified Commercial Intelligence Layer, Regulated Market Entry</div>
+      </div>
+
+      <div class="env-card c-teal">
+        <div class="env-icon">🤝</div>
+        <div class="env-card-title">Partner & Channel Environment</div>
+        <div class="env-card-body">Are you selling direct, through CROs and CDMOs, via academic medical centers, or through a platform partner? The channel defines the BD motion entirely.</div>
+        <div class="env-variants">
+          <span class="env-variant">Direct enterprise</span>
+          <span class="env-variant">CRO / CDMO channel</span>
+          <span class="env-variant">Academic / AMC</span>
+          <span class="env-variant">Technology partner</span>
+          <span class="env-variant">Distribution</span>
+        </div>
+        <div class="env-note">Impacts: Pioneer Program, CRO/CDMO Channel Map, Partnership Playbook, Account Strategy</div>
+      </div>
+
+      <div class="env-card c-gold">
+        <div class="env-icon">📋</div>
+        <div class="env-card-title">Regulatory Posture</div>
+        <div class="env-card-body">Pre-clinical research tools and regulated IVDs have completely different commercial motions, buyer personas, and procurement pathways.</div>
+        <div class="env-variants">
+          <span class="env-variant">RUO / Research only</span>
+          <span class="env-variant">IVD / 510(k)</span>
+          <span class="env-variant">LDT / CLIA</span>
+          <span class="env-variant">CGT / ATMP</span>
+          <span class="env-variant">GxP / Validated</span>
+        </div>
+        <div class="env-note">Impacts: Regulated Market Entry, Messaging Architecture, Buyer Mapping, Pricing Design</div>
+      </div>
+
+      <div class="env-card c-slate">
+        <div class="env-icon">📊</div>
+        <div class="env-card-title">Company Stage & Funding</div>
+        <div class="env-card-body">The right commercial build for a pre-seed company and a Series B are not the same. Engagement scope, velocity, and infrastructure priority all adapt to stage.</div>
+        <div class="env-variants">
+          <span class="env-variant">Pre-seed / Pre-commercial</span>
+          <span class="env-variant">Seed</span>
+          <span class="env-variant">Series A</span>
+          <span class="env-variant">Series B</span>
+          <span class="env-variant">Growth / PE-backed</span>
+        </div>
+        <div class="env-note">Impacts: Engagement model selection, scope sizing, board narrative, investor materials</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA / GATE -->
+<section class="gate">
+  <div class="gate-inner">
+    <span class="gate-eyebrow">🔒 What Comes Next</span>
+    <h2>The full catalog is built<br>for <em>qualified engagements.</em></h2>
+    <p>The six-step framework above is your front door. Behind it: 84 indexed services across 4 commercial pillars, environment-specific SOW templates, a live services navigator, and the order form — built for clients who are ready to move.</p>
+
+    <div class="gate-cards">
+      <div class="gate-card">
+        <div class="gate-card-icon">🧬</div>
+        <div class="gate-card-title">Services Navigator</div>
+        <div class="gate-card-body">5-step guided cascade: your role → your objective → your outcome → your engagement model → matched services from the live catalog.</div>
+        <div class="gate-lock">✓ Public — no login required</div>
+      </div>
+      <div class="gate-card">
+        <div class="gate-card-icon">📋</div>
+        <div class="gate-card-title">Full Service Catalog (84 services)</div>
+        <div class="gate-card-body">All 84 indexed capabilities across Commercial Architecture, Strategic BD, GTM Strategy, and Revenue Acceleration.</div>
+        <div class="gate-lock">🔒 Available post-intake</div>
+      </div>
+      <div class="gate-card">
+        <div class="gate-card-icon">📄</div>
+        <div class="gate-card-title">Environment-Specific SOW</div>
+        <div class="gate-card-body">Statement of Work template that adapts to your CRM, sequencing platform, LIMS, channel, and regulatory context.</div>
+        <div class="gate-lock">🔒 Available post-intake</div>
+      </div>
+      <div class="gate-card">
+        <div class="gate-card-icon">💰</div>
+        <div class="gate-card-title">Order Form with Pricing</div>
+        <div class="gate-card-body">Benchmarked flat-rate pricing across all 4 engagement models and à la carte services — with market validation footnotes.</div>
+        <div class="gate-lock">🔒 Available post-intake</div>
+      </div>
+    </div>
+
+    <div class="gate-actions">
+      <a href="/services-cascade.html" class="btn btn-teal">🧬 Start the Navigator</a>
+      <a href="/intake.html" class="btn btn-gold">Begin Intake →</a>
+      <a href="/" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">© 2025 Stacks Advisory LLC · Denver, CO · jon@stacksadvisory.com</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+<script>
+// Animated DNA helix on hero canvas
+const canvas = document.getElementById('dnaCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, raf;
+
+function resize() {
+  W = canvas.width  = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function drawDNA(t) {
+  ctx.clearRect(0, 0, W, H);
+  const strands = 3;
+  for (let s = 0; s < strands; s++) {
+    const xBase = W * (0.2 + s * 0.3);
+    const amp   = 40 + s * 15;
+    const freq  = 0.018 - s * 0.003;
+    const speed = 0.0008 + s * 0.0003;
+    const phase = s * Math.PI * 0.7;
+
+    // Draw helix strand A
+    ctx.beginPath();
+    for (let y = 0; y < H; y += 2) {
+      const x = xBase + amp * Math.sin(freq * y + t * speed * 60 + phase);
+      y === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(0,168,150,0.6)`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Draw helix strand B (offset)
+    ctx.beginPath();
+    for (let y = 0; y < H; y += 2) {
+      const x = xBase + amp * Math.sin(freq * y + t * speed * 60 + phase + Math.PI);
+      y === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(201,168,76,0.4)`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Draw rungs
+    for (let y = 0; y < H; y += 28) {
+      const xA = xBase + amp * Math.sin(freq * y + t * speed * 60 + phase);
+      const xB = xBase + amp * Math.sin(freq * y + t * speed * 60 + phase + Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(xA, y);
+      ctx.lineTo(xB, y);
+      ctx.strokeStyle = `rgba(0,168,150,0.25)`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      // node dots
+      ctx.beginPath(); ctx.arc(xA, y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,168,150,0.5)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(xB, y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(201,168,76,0.4)'; ctx.fill();
+    }
+  }
+}
+
+let startT = null;
+function animate(ts) {
+  if (!startT) startT = ts;
+  drawDNA(ts - startT);
+  raf = requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
