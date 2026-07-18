@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precision Medicine Practice | Stacks Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --deep: #0A1520;
+  --teal: #00A896;
+  --seafoam: #02C39A;
+  --ice: #C8E6E3;
+  --cream: #F5F1EA;
+  --warm-white: #FAFAF7;
+  --slate: #4A5568;
+  --muted: #8E9CAD;
+  --gold: #C9A84C;
+  --border-dark: rgba(0,168,150,0.18);
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+.eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+.serif { font-family: var(--serif); }
+.btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-ghost-light { background: transparent; color: var(--cream); border: 1px solid rgba(245,241,234,0.22); }
+.btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
+.btn-ghost-dark { background: transparent; color: var(--navy); border: 1px solid rgba(13,27,42,0.25); }
+.btn-ghost-dark:hover { border-color: var(--teal); color: var(--teal); }
+.btn-gold { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); }
+.btn-gold:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 3rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); }
+.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--cream); letter-spacing: 0.03em; text-decoration: none; }
+.nav-logo span { color: var(--teal); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav-links a:hover { color: var(--teal); }
+.nav-links .current { color: var(--gold); }
+
+.pm-hero { min-height: 62vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+.pm-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
+.pm-hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
+.pm-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
+.pm-hero h1 em { font-style: italic; color: var(--gold); }
+.pm-hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 620px; margin-bottom: 1.6rem; }
+.gate-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.gate-chip { display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(0,168,150,0.3); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.78rem; color: rgba(245,241,234,0.8); }
+.gate-chip b { color: var(--teal); font-family: var(--serif); }
+
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3.5rem; max-width: 640px; }
+.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); margin-top: 0.9rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--navy); }
+.section-title em { font-style: italic; color: var(--teal); }
+
+.gates-explain { background: var(--cream); }
+.gate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.gate-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.5rem; position: relative; overflow: hidden; transition: box-shadow 0.22s, transform 0.18s; }
+.gate-card:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.gate-letter { font-family: var(--serif); font-size: 2.2rem; color: var(--teal); line-height: 1; margin-bottom: 0.7rem; }
+.gate-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.gate-card p { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+
+.usecases { background: var(--warm-white); }
+.usecase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.usecase { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem; transition: box-shadow 0.22s, border-color 0.22s; }
+.usecase:hover { box-shadow: 0 10px 32px rgba(0,168,150,0.09); border-color: rgba(0,168,150,0.28); }
+.usecase-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 2px; margin-bottom: 0.9rem; background: rgba(0,168,150,0.1); color: var(--teal); }
+.usecase h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--navy); margin-bottom: 0.6rem; }
+.usecase .need { font-size: 0.82rem; color: var(--slate); line-height: 1.65; margin-bottom: 0.8rem; }
+.usecase .gates-used { font-size: 0.74rem; color: var(--muted); margin-bottom: 0.8rem; }
+.usecase .gates-used b { color: var(--gold); }
+.usecase .value { font-size: 0.79rem; color: var(--slate); border-top: 1px solid var(--border-light); padding-top: 0.9rem; line-height: 1.6; }
+.usecase .value strong { color: var(--navy); }
+
+.pm-cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.pm-cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
+.pm-cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.pm-cta h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.4rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
+.pm-cta h2 em { font-style: italic; color: var(--teal); }
+.pm-cta p { font-size: 0.92rem; font-weight: 300; color: rgba(245,241,234,0.6); line-height: 1.78; margin-bottom: 2rem; }
+.pm-cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #060D14; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
+.footer-logo span { color: var(--teal); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
+.footer-links a:hover { color: var(--teal); }
+
+@media (max-width: 960px) {
+  .nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .pm-hero { padding: 6.5rem 1.5rem 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .gate-grid { grid-template-columns: 1fr 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
+  <ul class="nav-links">
+    <li><a href="/index.html#who">Who We Help</a></li>
+    <li><a href="/index.html#problem">The Problem</a></li>
+    <li><a href="/index.html#offers">Engagements</a></li>
+    <li><a href="/precision-medicine.html" class="current">Precision Medicine</a></li>
+    <li><a href="/index.html#expertise">About</a></li>
+    <li class="nav-services"><a href="/services-cascade.html">🧬 Find Your Engagement</a></li>
+  </ul>
+  <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+</nav>
+
+<section class="pm-hero">
+  <div class="pm-hero-inner">
+    <span class="hero-label">Precision Medicine Practice &middot; Proposed Initiative</span>
+    <h1>Is lifelong therapy the only answer?<br><em>A four-gate framework makes it testable.</em></h1>
+    <p>Across immunotherapy, cell therapy, and metabolic disease, the same commercial question keeps surfacing: which patients respond, which can step down or stop, and which need escalation before failure shows up in the data. We apply a structured four-gate stratification framework to translate causal genomics and functional variant science into a commercial thesis biopharma teams can act on.</p>
+    <div class="gate-row">
+      <div class="gate-chip"><b>A</b> Response &amp; Persistence</div>
+      <div class="gate-chip"><b>B</b> Environment &amp; Context</div>
+      <div class="gate-chip"><b>C</b> Durability &amp; Escape</div>
+      <div class="gate-chip"><b>D</b> Safety &amp; Execution</div>
+    </div>
+  </div>
+</section>
+
+<section class="section gates-explain">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">The Framework</span>
+      <h2 class="section-title">Four questions, <em>asked of every therapeutic.</em></h2>
+      <p>The weighting shifts by modality, but the structure holds: does the patient's biology support response, does the surrounding tissue or immune environment cooperate, does the benefit hold up over time, and can the treatment be delivered and withdrawn safely.</p>
+    </div>
+    <div class="gate-grid">
+      <div class="gate-card">
+        <div class="gate-letter">A</div>
+        <h3>Response &amp; Persistence</h3>
+        <p>Will this patient's biology sustain a durable response, or does the mechanism need reinforcement to work at all?</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">B</div>
+        <h3>Environment &amp; Context</h3>
+        <p>Is the surrounding tissue, microenvironment, or metabolic context permissive or hostile to the intended effect?</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">C</div>
+        <h3>Durability &amp; Escape</h3>
+        <p>Does the benefit hold over the long run, or does resistance, relapse, or target loss emerge — and when?</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">D</div>
+        <h3>Safety &amp; Execution</h3>
+        <p>Can the therapy be dosed, tapered, or discontinued safely, and does the delivery model hold up operationally?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section usecases">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Use Case Archetypes</span>
+      <h2 class="section-title">Where the framework <em>earns its keep.</em></h2>
+      <p>Six therapeutic contexts where a structured stratification thesis changes the commercial conversation — from patient selection to payer economics.</p>
+    </div>
+    <div class="usecase-grid">
+
+      <div class="usecase">
+        <span class="usecase-tag">Immuno-Oncology</span>
+        <h3>Checkpoint Inhibitor Combinations</h3>
+        <p class="need">Dual checkpoint blockade regimens outperform monotherapy for some patients but carry meaningfully higher toxicity for all of them. No validated biomarker separates who needs the combination from who doesn't.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b></p>
+        <p class="value"><strong>Commercial angle:</strong> precision de-escalation to monotherapy where safe, preserving efficacy while cutting toxicity-driven cost and hospitalization.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Cell Therapy</span>
+        <h3>CAR-T Cell Therapy</h3>
+        <p class="need">Durable remission depends on T-cell persistence, tumor microenvironment resistance, antigen retention, and manufacturing safety all at once — the one setting where all four gates carry equal weight.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>B</b> &middot; <b>C</b> &middot; <b>D</b></p>
+        <p class="value"><strong>Commercial angle:</strong> shifting durable remission rates upward directly reshapes the cost-effectiveness case for a therapy priced per infusion.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Hematology</span>
+        <h3>JAK Inhibitors</h3>
+        <p class="need">Response and resistance both track closely with variant-level biology, and a meaningful share of patients lose response within a few years — with no structured way to anticipate it.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b> &middot; <b>D</b></p>
+        <p class="value"><strong>Commercial angle:</strong> converting empiric dose escalation into biomarker-guided treatment optimization extends franchise value against generic and next-gen pressure.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Emerging Modality</span>
+        <h3>Bispecific T-Cell Engagers</h3>
+        <p class="need">Efficacy depends entirely on the fitness of the patient's own T cells to be redirected — a dimension current diagnostics measure only crudely.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b></p>
+        <p class="value"><strong>Commercial angle:</strong> a T-cell fitness thesis supports premium positioning against CAR-T and improves patient selection for an emerging drug class.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Immunology</span>
+        <h3>Cytokine-Targeting Biologics</h3>
+        <p class="need">The shift from anti-TNF to targeted cytokine blockade (e.g., IL-23) raises a first-line question: which patients are driven by the targeted pathway versus a different one entirely.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>B</b></p>
+        <p class="value"><strong>Commercial angle:</strong> a pathway-dependence thesis positions targeted cytokine therapy as a precision-selected first-line option rather than a trial-and-error step.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Metabolic Disease</span>
+        <h3>GLP-1 &amp; Metabolic Pharmacogenomics</h3>
+        <p class="need">A $100B+ incretin therapy market with three unresolved questions: who responds, who can safely discontinue, and when the metabolic shift becomes durable enough to stop.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b> &middot; <b>D</b></p>
+        <p class="value"><strong>Commercial angle:</strong> a discontinuation-readiness thesis reframes GLP-1RA therapy from an indefinite commitment into a precision intervention with a defined endpoint — the single biggest lever on payer economics in the category.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="pm-cta">
+  <div class="pm-cta-inner">
+    <h2>Bring the four-gate framework <em>to your program.</em></h2>
+    <p>A commercial translation model for genomics platforms and biopharma teams building patient stratification into their next therapeutic program.</p>
+    <div class="pm-cta-actions">
+      <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">🧬 Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+</body>
+</html>
