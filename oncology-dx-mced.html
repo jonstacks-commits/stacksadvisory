@@ -78,6 +78,14 @@ button { font-family: var(--sans); }
 .pm-hero { min-height: 62vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
 .pm-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
 .pm-hero-inner { position: relative; z-index: 1; max-width: 800px; }
+
+.trust { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(0,168,150,0.12); padding: 1rem 3rem; }
+.trust-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.trust-label { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.trust-rule { width: 1px; height: 16px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.trust-logos { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.trust-co { font-size: 0.77rem; font-weight: 500; letter-spacing: 0.05em; color: rgba(245,241,234,0.32); transition: color 0.2s; white-space: nowrap; }
+.trust-co:hover { color: rgba(245,241,234,0.65); }
 .hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
 .pm-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
 .pm-hero h1 em { font-style: italic; color: var(--gold); }
@@ -199,6 +207,21 @@ button { font-family: var(--sans); }
     </div>
   </div>
 </section>
+
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Built For</span>
+    <div class="trust-rule"></div>
+    <div class="trust-logos">
+      <span class="trust-co">Liquid Biopsy Companies</span>
+      <span class="trust-co">MCED Developers</span>
+      <span class="trust-co">Molecular Diagnostics Firms</span>
+      <span class="trust-co">Companion Diagnostic (CDx) Companies</span>
+      <span class="trust-co">CLIA Laboratories</span>
+      <span class="trust-co">Oncology Informatics Vendors</span>
+    </div>
+  </div>
+</div>
 
 <section class="section gates-explain">
   <div class="section-inner">
