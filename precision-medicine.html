@@ -77,10 +77,19 @@ img, svg { display: block; max-width: 100%; }
 .pm-hero { min-height: 62vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
 .pm-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
 .pm-hero-inner { position: relative; z-index: 1; max-width: 800px; }
+
+.trust { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(0,168,150,0.12); padding: 1rem 3rem; }
+.trust-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.trust-label { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.trust-rule { width: 1px; height: 16px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.trust-logos { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.trust-co { font-size: 0.77rem; font-weight: 500; letter-spacing: 0.05em; color: rgba(245,241,234,0.32); transition: color 0.2s; white-space: nowrap; }
+.trust-co:hover { color: rgba(245,241,234,0.65); }
 .hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
 .pm-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
 .pm-hero h1 em { font-style: italic; color: var(--gold); }
 .pm-hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 620px; margin-bottom: 1.6rem; }
+.pm-hero .outcomes-line { font-size: 0.88rem; font-weight: 400; font-style: italic; color: rgba(245,241,234,0.5); line-height: 1.6; margin-bottom: 2rem; border-left: 2px solid rgba(201,168,76,0.4); padding-left: 0.85rem; max-width: 560px; }
 .gate-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 .gate-chip { display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(0,168,150,0.3); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.78rem; color: rgba(245,241,234,0.8); }
 .gate-chip b { color: var(--teal); font-family: var(--serif); }
@@ -163,6 +172,7 @@ img, svg { display: block; max-width: 100%; }
     <span class="hero-label">Precision Medicine Practice &middot; Proposed Initiative</span>
     <h1>Is lifelong therapy the only answer?<br><em>A four-gate framework makes it testable.</em></h1>
     <p>Across immunotherapy, cell therapy, and metabolic disease, the same commercial question keeps surfacing: which patients respond, which can step down or stop, and which need escalation before failure shows up in the data. We apply a structured four-gate stratification framework to translate causal genomics and functional variant science into a commercial thesis biopharma teams can act on.</p>
+    <p class="outcomes-line">The business case: faster time to revenue, stronger physician and payer adoption, and a cleaner readiness story for Series B or strategic partnership conversations.</p>
     <div class="gate-row">
       <div class="gate-chip"><b>A</b> Response &amp; Persistence</div>
       <div class="gate-chip"><b>B</b> Environment &amp; Context</div>
@@ -171,6 +181,21 @@ img, svg { display: block; max-width: 100%; }
     </div>
   </div>
 </section>
+
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Built For</span>
+    <div class="trust-rule"></div>
+    <div class="trust-logos">
+      <span class="trust-co">Genomics Platform Companies</span>
+      <span class="trust-co">Molecular Diagnostics Developers</span>
+      <span class="trust-co">Cell &amp; Gene Therapy Organizations</span>
+      <span class="trust-co">Scientific Informatics Vendors</span>
+      <span class="trust-co">Clinical-Stage Biotech Companies</span>
+      <span class="trust-co">AI-Enabled Precision Medicine Platforms</span>
+    </div>
+  </div>
+</div>
 
 <section class="section gates-explain">
   <div class="section-inner">
