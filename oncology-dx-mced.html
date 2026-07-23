@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oncology Dx · MCED Taxonomy | Stacks Advisory</title>
-<meta name="description" content="A four-category liquid biopsy taxonomy — MRD, early detection, treatment response monitoring, and comprehensive genomic profiling — for commercial strategy in oncology diagnostics.">
+<title>Oncology Diagnostics Practice | Stacks Advisory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -20,9 +19,6 @@
   --slate: #4A5568;
   --muted: #8E9CAD;
   --gold: #C9A84C;
-  --red-soft: #E05555;
-  --blue-soft: #5599E0;
-  --purple: #8855E0;
   --border-dark: rgba(0,168,150,0.18);
   --border-light: rgba(13,27,42,0.09);
   --serif: 'DM Serif Display', Georgia, serif;
@@ -35,7 +31,6 @@ img, svg { display: block; max-width: 100%; }
 button { font-family: var(--sans); }
 .eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
 .serif { font-family: var(--serif); }
-.teal { color: var(--teal); }
 .btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--teal); color: var(--navy); }
@@ -46,77 +41,103 @@ button { font-family: var(--sans); }
 .btn-ghost-dark:hover { border-color: var(--teal); color: var(--teal); }
 .btn-gold { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); }
 .btn-gold:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); gap: 1rem; }
 .nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; flex-shrink: 0; }
 .nav-logo span { color: var(--teal); }
 .nav-links { display: flex; gap: 1.35rem; list-style: none; align-items: center; flex-wrap: nowrap; }
 .nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; white-space: nowrap; }
 .nav-links a:hover { color: var(--teal); }
-.nav-links a.active { color: var(--teal); }
-.nav-links .nav-services a { color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 0.28rem 0.65rem; border-radius: 3px; transition: color 0.18s, border-color 0.18s, background 0.18s; }
-.nav-links .nav-services a:hover { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.08); }
+.nav-links .current { color: var(--gold); }
+.nav-links .nav-services a {
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 0.28rem 0.65rem;
+  border-radius: 3px;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.nav-links .nav-services a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
 .nav > a.btn-primary { padding: 0.62rem 1.35rem; font-size: 0.72rem; flex-shrink: 0; }
-@media (max-width: 1240px) { .nav-links { gap: 1rem; } .nav-links a { font-size: 0.68rem; } }
+@media (max-width: 1240px) {
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.68rem; }
+}
+
+.pm-hero { min-height: 62vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+.pm-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
+.pm-hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
+.pm-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
+.pm-hero h1 em { font-style: italic; color: var(--gold); }
+.pm-hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 620px; margin-bottom: 1.6rem; }
+.gate-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.gate-chip { display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(0,168,150,0.3); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.78rem; color: rgba(245,241,234,0.8); }
+.gate-chip b { color: var(--teal); font-family: var(--serif); }
+
 .section { padding: 6rem 3rem; }
 .section-inner { max-width: 1200px; margin: 0 auto; }
-.section-header { margin-bottom: 3.5rem; }
-.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); max-width: 620px; margin-top: 0.9rem; }
-.section-title { font-family: var(--serif); font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.18; color: var(--navy); }
+.section-header { margin-bottom: 3.5rem; max-width: 640px; }
+.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); margin-top: 0.9rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--navy); }
 .section-title em { font-style: italic; color: var(--teal); }
-.problem { background: var(--navy); }
-.problem .section-title { color: var(--cream); }
-.problem .section-header p { color: rgba(245,241,234,0.62); }
-.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
-.pillar { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.6rem; position: relative; overflow: hidden; transition: box-shadow 0.22s, transform 0.18s; }
-.pillar:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
-.pillar-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.accent-teal { background: var(--teal); }
-.accent-gold { background: var(--gold); }
-.accent-blue { background: var(--blue-soft); }
-.accent-purple { background: var(--purple); }
-.pillar-code { display: inline-block; font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.03em; padding: 0.15rem 0.6rem; border-radius: 3px; margin-bottom: 0.9rem; }
-.code-teal { background: rgba(0,168,150,0.1); color: var(--teal); }
-.code-blue { background: rgba(85,153,224,0.12); color: var(--blue-soft); }
-.code-purple { background: rgba(136,85,224,0.12); color: var(--purple); }
-.code-gold { background: rgba(201,168,76,0.12); color: var(--gold); }
-.pillar-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.9rem; line-height: 1.3; }
-.pillar-row { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px solid var(--border-light); }
-.pillar-row:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
-.pillar-label { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
-.pillar-body { font-size: 0.79rem; color: var(--slate); line-height: 1.65; }
-.pillar-angle { background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.18); border-radius: 6px; padding: 0.75rem 0.85rem; margin-top: 1rem; }
-.pillar-angle .pillar-label { color: var(--gold); }
-.pillar-angle .pillar-body { color: var(--navy); }
-.spectrum-wrap { margin-top: 0.5rem; }
-.spectrum-track { position: relative; height: 5px; border-radius: 3px; margin: 2.6rem 0 1.1rem; background: linear-gradient(90deg, var(--teal) 0%, var(--teal) 22%, var(--blue-soft) 22%, var(--blue-soft) 48%, var(--purple) 48%, var(--purple) 74%, var(--gold) 74%, var(--gold) 100%); }
-.spectrum-points { display: grid; grid-template-columns: repeat(4,1fr); }
-.spectrum-point { text-align: center; }
-.spectrum-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--warm-white); border: 3px solid var(--navy); margin: -37px auto 0.7rem; }
-.spectrum-point:nth-child(1) .spectrum-dot { border-color: var(--teal); }
-.spectrum-point:nth-child(2) .spectrum-dot { border-color: var(--blue-soft); }
-.spectrum-point:nth-child(3) .spectrum-dot { border-color: var(--purple); }
-.spectrum-point:nth-child(4) .spectrum-dot { border-color: var(--gold); }
-.spectrum-code { font-family: var(--serif); font-size: 0.95rem; color: var(--navy); }
-.spectrum-label { font-size: 0.72rem; color: var(--slate); margin-top: 0.2rem; }
-.spectrum-ends { display: flex; justify-content: space-between; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+.gates-explain { background: var(--cream); }
+.gate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.gate-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.5rem; position: relative; overflow: hidden; transition: box-shadow 0.22s, transform 0.18s; }
+.gate-card:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.gate-letter { font-family: var(--serif); font-size: 1.55rem; color: var(--teal); line-height: 1; margin-bottom: 0.9rem; letter-spacing: 0.01em; }
+.gate-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.gate-card p { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+
+.usecases { background: var(--warm-white); }
+.usecase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.usecase { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem; transition: box-shadow 0.22s, border-color 0.22s; }
+.usecase:hover { box-shadow: 0 10px 32px rgba(0,168,150,0.09); border-color: rgba(0,168,150,0.28); }
+.usecase-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 2px; margin-bottom: 0.9rem; background: rgba(0,168,150,0.1); color: var(--teal); }
+.usecase h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--navy); margin-bottom: 0.6rem; }
+.usecase .need { font-size: 0.82rem; color: var(--slate); line-height: 1.65; margin-bottom: 0.8rem; }
+.usecase .gates-used { font-size: 0.74rem; color: var(--muted); margin-bottom: 0.8rem; }
+.usecase .gates-used b { color: var(--gold); }
+.usecase .value { font-size: 0.79rem; color: var(--slate); border-top: 1px solid var(--border-light); padding-top: 0.9rem; line-height: 1.6; }
+.usecase .value strong { color: var(--navy); }
+
+/* self-assessment tool — new component, styled to match gate-card / usecase conventions */
 .tool { background: var(--cream); }
 .tool-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-top: 2.4rem; }
-.tool-opt { text-align: left; background: white; border: 1px solid var(--border-light); border-radius: 8px; padding: 1.2rem 1.3rem; font-family: var(--sans); font-size: 0.83rem; color: var(--navy); cursor: pointer; width: 100%; line-height: 1.55; transition: border-color 0.18s, box-shadow 0.18s; }
-.tool-opt:hover { border-color: var(--teal); box-shadow: 0 8px 24px rgba(0,168,150,0.09); }
-.tool-opt.selected { border-color: var(--teal); background: rgba(0,168,150,0.05); box-shadow: 0 8px 24px rgba(0,168,150,0.12); }
+.tool-opt { text-align: left; background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.3rem 1.4rem; font-family: var(--sans); font-size: 0.82rem; color: var(--navy); cursor: pointer; width: 100%; line-height: 1.55; transition: box-shadow 0.22s, transform 0.18s, border-color 0.18s; }
+.tool-opt:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-2px); }
+.tool-opt.selected { border-color: var(--teal); background: rgba(0,168,150,0.04); box-shadow: 0 14px 42px rgba(0,168,150,0.13); }
 .tool-opt-label { display: block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.4rem; }
 .tool-result { margin-top: 1.6rem; background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 2rem 2.2rem; display: none; }
 .tool-result.show { display: block; }
 .tool-result-head { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.3rem; }
-.tool-result-code { font-family: var(--serif); font-size: 0.9rem; padding: 0.18rem 0.7rem; border-radius: 3px; }
-.tool-result-name { font-family: var(--serif); font-size: 1.4rem; color: var(--navy); }
-.tool-result-position { font-size: 0.75rem; color: var(--muted); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin: 0.7rem 0 1.4rem; }
-.tool-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2rem; }
-.tool-result-angle { grid-column: 1/-1; background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.18); border-radius: 6px; padding: 0.9rem 1rem; margin-top: 0.3rem; }
+.tool-result-code { font-family: var(--serif); font-size: 1.3rem; color: var(--teal); }
+.tool-result-name { font-family: var(--serif); font-size: 1.3rem; color: var(--navy); }
+.tool-result-position { font-size: 0.74rem; color: var(--muted); margin: 0.6rem 0 1.4rem; }
+.tool-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem 2rem; }
+.tool-result .need, .tool-result .gates-used, .tool-result .value { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+.tool-result .value { grid-column: 1/-1; border-top: 1px solid var(--border-light); padding-top: 1rem; margin-top: 0.3rem; }
+.tool-result .value strong { color: var(--navy); }
+.tool-result .gates-used b { color: var(--gold); }
 .tool-result-cta { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 1.3rem; flex-wrap: wrap; }
 .tool-result-cta p { margin: 0; font-size: 0.79rem; color: var(--slate); flex: 1; min-width: 220px; }
-.tool-source { font-size: 0.7rem; color: var(--muted); margin-top: 1rem; }
-.tool-source a { color: var(--muted); }
+
+.disclaimer { background: var(--warm-white); border-top: 1px solid var(--border-light); padding: 2.4rem 3rem; }
+.disclaimer-inner { max-width: 1200px; margin: 0 auto; font-size: 0.72rem; color: var(--muted); line-height: 1.7; }
+.disclaimer-inner b { color: var(--slate); }
+
+.pm-cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.pm-cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
+.pm-cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.pm-cta h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.4rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
+.pm-cta h2 em { font-style: italic; color: var(--teal); }
+.pm-cta p { font-size: 0.92rem; font-weight: 300; color: rgba(245,241,234,0.6); line-height: 1.78; margin-bottom: 2rem; }
+.pm-cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
 .footer { background: #060D14; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 1rem; }
 .footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
 .footer-logo span { color: var(--teal); }
@@ -124,32 +145,14 @@ button { font-family: var(--sans); }
 .footer-links { display: flex; gap: 1.6rem; }
 .footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
 .footer-links a:hover { color: var(--teal); }
-.footer-links a.footer-nav-link { color: var(--gold); opacity: 0.7; }
-.footer-links a.footer-nav-link:hover { color: var(--gold); opacity: 1; }
-.bio { background: var(--navy); border-radius: 12px; padding: 2.4rem; position: relative; overflow: hidden; }
-.bio::after { content: ''; position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(0,168,150,0.1), transparent); pointer-events: none; }
-.bio-role { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
-.bio-name { font-family: var(--serif); font-size: 1.5rem; color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
-.bio-name em { font-style: italic; color: var(--gold); }
-.bio-body { font-size: 0.86rem; font-weight: 300; line-height: 1.85; color: rgba(245,241,234,0.68); max-width: 720px; }
-.bio-body strong { color: var(--cream); font-weight: 600; }
-.bio-body + .bio-body { margin-top: 1rem; }
-.cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 7rem 3rem; text-align: center; position: relative; overflow: hidden; }
-.cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
-.cta-inner { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; }
-.cta h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.2vw, 2.8rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
-.cta h2 em { font-style: italic; color: var(--teal); }
-.cta p { font-size: 1rem; font-weight: 300; color: rgba(245,241,234,0.62); line-height: 1.78; margin-bottom: 2.4rem; }
-.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
 @media (max-width: 960px) {
   .nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
+  .pm-hero { padding: 6.5rem 1.5rem 3rem; }
   .section { padding: 4rem 1.5rem; }
-  .pillars { grid-template-columns: 1fr 1fr; }
-  .spectrum-points { grid-template-columns: 1fr 1fr; row-gap: 1.5rem; }
-  .spectrum-track { margin-bottom: 0.5rem; }
-  .spectrum-dot { margin-top: 0; }
+  .gate-grid { grid-template-columns: 1fr 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
   .tool-grid { grid-template-columns: 1fr; }
   .tool-result-grid { grid-template-columns: 1fr; }
   .footer { flex-direction: column; text-align: center; }
@@ -158,7 +161,6 @@ button { font-family: var(--sans); }
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
   <ul class="nav-links">
@@ -166,100 +168,114 @@ button { font-family: var(--sans); }
     <li><a href="/index.html#problem">The Problem</a></li>
     <li><a href="/index.html#offers">Engagements</a></li>
     <li><a href="/precision-medicine.html">Precision Medicine</a></li>
-    <li><a href="/oncology-dx-mced.html" class="active">Oncology Dx</a></li>
+    <li><a href="/oncology-dx-mced.html" class="current">Oncology Dx</a></li>
     <li><a href="/story.html">How It Works</a></li>
     <li><a href="/crm-architecture.html">CRM Architecture</a></li>
+    <li><a href="/index.html#impact">Impact</a></li>
     <li><a href="/index.html#expertise">About</a></li>
     <li class="nav-services"><a href="/services-cascade.html">🧬 Find Your Engagement</a></li>
   </ul>
   <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
 </nav>
 
-<!-- HERO / INTRO -->
-<section class="section problem" style="padding-top:9rem;">
+<section class="pm-hero">
+  <div class="pm-hero-inner">
+    <span class="hero-label">Oncology Diagnostics Practice &middot; Liquid Biopsy Taxonomy</span>
+    <h1>Liquid biopsy isn't one market.<br><em>It's four — and they don't share a playbook.</em></h1>
+    <p>Minimal residual disease, multi-cancer early detection, treatment response monitoring, and comprehensive genomic profiling get pitched as one category because they share a blood draw. They don't share an evidence bar, a payer conversation, or a competitive set. We use a four-category taxonomy — adapted from the open-data category work at OpenOnco — to keep commercial strategy honest about which job a given test is actually doing.</p>
+    <div class="gate-row">
+      <div class="gate-chip"><b>CGP</b> Genomic Profiling</div>
+      <div class="gate-chip"><b>MRD</b> Residual Disease</div>
+      <div class="gate-chip"><b>TRM</b> Response Monitoring</div>
+      <div class="gate-chip"><b>MCED</b> Early Detection</div>
+    </div>
+  </div>
+</section>
+
+<section class="section gates-explain">
   <div class="section-inner">
-    <div class="section-header" style="margin-bottom:0;">
-      <span class="eyebrow">Oncology Diagnostics Practice · Liquid Biopsy Taxonomy</span>
-      <h1 class="section-title">Liquid biopsy isn't one market.<br>It's four — and they don't share a <em>playbook.</em></h1>
-      <p>Minimal residual disease, multi-cancer early detection, treatment response monitoring, and comprehensive genomic profiling get pitched as one category because they share a blood draw. They don't share an evidence bar, a payer conversation, or a competitive set. We use a four-category taxonomy — built on the open-data category work at OpenOnco — to keep commercial strategy honest about which job a given test is actually doing.</p>
-      <div class="hero-actions">
-        <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
-        <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
+    <div class="section-header">
+      <span class="eyebrow">The Taxonomy</span>
+      <h2 class="section-title">Four categories, <em>one evidence curve.</em></h2>
+      <p>Comprehensive genomic profiling sits on twenty years of tissue-liquid concordance data. MCED is asking a mortality-reduction question that won't have a clean answer for years. Positioning a test as if it sits somewhere it doesn't — in either direction — is the fastest way to lose a payer or a KOL relationship you'll need again.</p>
+    </div>
+    <div class="gate-grid">
+      <div class="gate-card">
+        <div class="gate-letter">CGP</div>
+        <h3>Comprehensive Genomic Profiling</h3>
+        <p>What actionable alterations does this tumor carry right now? The most established category, closest to commodity.</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">MRD</div>
+        <h3>Minimal Residual Disease</h3>
+        <p>After curative-intent treatment, is there detectable disease left — and should adjuvant therapy escalate or de-escalate?</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">TRM</div>
+        <h3>Treatment Response Monitoring</h3>
+        <p>Is ctDNA clearing, plateauing, or rising on therapy — before imaging would show it?</p>
+      </div>
+      <div class="gate-card">
+        <div class="gate-letter">MCED</div>
+        <h3>Multi-Cancer Early Detection</h3>
+        <p>Is there a cancer signal in an asymptomatic person, and where did it originate? The earliest-stage, longest-runway category.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TAXONOMY / SPECTRUM -->
-<section class="section" id="taxonomy">
+<section class="section usecases">
   <div class="section-inner">
-    <span class="eyebrow">The Taxonomy</span>
-    <h2 class="section-title">Four categories, <em>one evidence curve.</em></h2>
-    <p style="font-size:1rem; font-weight:300; line-height:1.8; color:var(--slate); max-width:620px; margin-top:0.9rem;">Comprehensive genomic profiling sits on twenty years of tissue-liquid concordance data. MCED is asking a mortality-reduction question that won't have a clean answer for years. Positioning a test as if it sits somewhere it doesn't — in either direction — is the fastest way to lose a payer or a KOL relationship you'll need again.</p>
-
-    <div class="spectrum-wrap">
-      <div class="spectrum-track"></div>
-      <div class="spectrum-points">
-        <div class="spectrum-point"><div class="spectrum-dot"></div><div class="spectrum-code">CGP</div><div class="spectrum-label">Established</div></div>
-        <div class="spectrum-point"><div class="spectrum-dot"></div><div class="spectrum-code">MRD</div><div class="spectrum-label">Fast-moving</div></div>
-        <div class="spectrum-point"><div class="spectrum-dot"></div><div class="spectrum-code">TRM</div><div class="spectrum-label">Maturing</div></div>
-        <div class="spectrum-point"><div class="spectrum-dot"></div><div class="spectrum-code">MCED</div><div class="spectrum-label">Earliest stage</div></div>
-      </div>
-      <div class="spectrum-ends"><span>Reimbursed at scale</span><span>Pre-reimbursement</span></div>
+    <div class="section-header">
+      <span class="eyebrow">Evidence &amp; Reimbursement</span>
+      <h2 class="section-title">Where each category <em>actually stands.</em></h2>
+      <p>Same underlying chemistry, four different conversations with payers and guideline bodies. The commercial mistake is treating them as interchangeable.</p>
     </div>
+    <div class="usecase-grid">
 
-    <div class="pillars" style="margin-top:3.5rem;">
-
-      <div class="pillar">
-        <div class="pillar-accent accent-teal"></div>
-        <span class="pillar-code code-teal">CGP</span>
-        <div class="pillar-title">Comprehensive Genomic Profiling</div>
-        <div class="pillar-row"><div class="pillar-label">Clinical question</div><div class="pillar-body">What actionable alterations does this tumor carry right now?</div></div>
-        <div class="pillar-row"><div class="pillar-label">Evidence stage</div><div class="pillar-body">Established — validated against tissue NGS across multi-year, real-world data sets.</div></div>
-        <div class="pillar-row"><div class="pillar-label">Reimbursement</div><div class="pillar-body">Broadest of the four. Medicare LCDs and most commercial payers cover liquid CGP for advanced solid tumors.</div></div>
-        <div class="pillar-angle"><div class="pillar-label">Commercial angle</div><div class="pillar-body">Closest to commodity. Differentiate on turnaround time, tissue-liquid concordance, and panel breadth — not on proving the use case exists.</div></div>
+      <div class="usecase">
+        <span class="usecase-tag">Established</span>
+        <h3>Comprehensive Genomic Profiling</h3>
+        <p class="need">Evidence stage: established, validated against tissue NGS across multi-year, real-world data sets.</p>
+        <p class="gates-used">Reimbursement: <b>broadest of the four</b> — Medicare LCDs and most commercial payers cover liquid CGP for advanced solid tumors.</p>
+        <p class="value"><strong>Commercial angle:</strong> differentiate on turnaround time, tissue-liquid concordance, and panel breadth — not on proving the use case exists.</p>
       </div>
 
-      <div class="pillar">
-        <div class="pillar-accent accent-blue"></div>
-        <span class="pillar-code code-blue">MRD</span>
-        <div class="pillar-title">Minimal Residual Disease</div>
-        <div class="pillar-row"><div class="pillar-label">Clinical question</div><div class="pillar-body">After curative-intent treatment, is there detectable disease left — and should adjuvant therapy escalate or de-escalate?</div></div>
-        <div class="pillar-row"><div class="pillar-label">Evidence stage</div><div class="pillar-body">Fast-moving — the most active prospective trials reading out right now across colorectal, breast, and lung.</div></div>
-        <div class="pillar-row"><div class="pillar-label">Reimbursement</div><div class="pillar-body">The fastest-growing reimbursement story in liquid biopsy. Medicare and major payers have moved in several tumor types within two years.</div></div>
-        <div class="pillar-angle"><div class="pillar-label">Commercial angle</div><div class="pillar-body">The near-term opportunity. Build the motion around named trial readouts and guideline-inclusion timing — not general awareness.</div></div>
+      <div class="usecase">
+        <span class="usecase-tag">Fast-Moving</span>
+        <h3>Minimal Residual Disease</h3>
+        <p class="need">Evidence stage: fast-moving, the most active prospective trials reading out right now across colorectal, breast, and lung.</p>
+        <p class="gates-used">Reimbursement: <b>fastest-growing story in liquid biopsy</b> — Medicare and major payers have moved in several tumor types within two years.</p>
+        <p class="value"><strong>Commercial angle:</strong> build the motion around named trial readouts and guideline-inclusion timing — not general awareness.</p>
       </div>
 
-      <div class="pillar">
-        <div class="pillar-accent accent-purple"></div>
-        <span class="pillar-code code-purple">TRM</span>
-        <div class="pillar-title">Treatment Response Monitoring</div>
-        <div class="pillar-row"><div class="pillar-label">Clinical question</div><div class="pillar-body">Is ctDNA clearing, plateauing, or rising on therapy — before imaging would show it?</div></div>
-        <div class="pillar-row"><div class="pillar-label">Evidence stage</div><div class="pillar-body">Maturing — strong retrospective correlation with survival, fewer prospective trials tying a ctDNA-triggered switch to benefit.</div></div>
-        <div class="pillar-row"><div class="pillar-label">Reimbursement</div><div class="pillar-body">Inconsistent. Covered in some indications through companion diagnostic pathways; out-of-pocket or trial-embedded in most others.</div></div>
-        <div class="pillar-angle"><div class="pillar-label">Commercial angle</div><div class="pillar-body">Separate "tracks with outcome" from "acting on this changes outcome." Payers are asking the second question — get ahead of it.</div></div>
+      <div class="usecase">
+        <span class="usecase-tag">Maturing</span>
+        <h3>Treatment Response Monitoring</h3>
+        <p class="need">Evidence stage: maturing, strong retrospective correlation with survival but fewer prospective trials tying a ctDNA-triggered switch to benefit.</p>
+        <p class="gates-used">Reimbursement: <b>inconsistent</b> — covered in some indications through companion diagnostic pathways, out-of-pocket or trial-embedded in most others.</p>
+        <p class="value"><strong>Commercial angle:</strong> separate "tracks with outcome" from "acting on this changes outcome." Payers are asking the second question.</p>
       </div>
 
-      <div class="pillar">
-        <div class="pillar-accent accent-gold"></div>
-        <span class="pillar-code code-gold">MCED</span>
-        <div class="pillar-title">Multi-Cancer Early Detection</div>
-        <div class="pillar-row"><div class="pillar-label">Clinical question</div><div class="pillar-body">Is there a cancer signal in an asymptomatic person, and where did it originate?</div></div>
-        <div class="pillar-row"><div class="pillar-label">Evidence stage</div><div class="pillar-body">Earliest. Screening-population sensitivity and specificity exists; mortality-reduction data is still years out.</div></div>
-        <div class="pillar-row"><div class="pillar-label">Reimbursement</div><div class="pillar-body">Essentially none at scale. Out-of-pocket today. USPSTF and guideline-body decisions are the gating event.</div></div>
-        <div class="pillar-angle"><div class="pillar-label">Commercial angle</div><div class="pillar-body">The longest runway and highest ceiling. Overselling the evidence bar to a payer or KOL costs credibility on the next conversation.</div></div>
+      <div class="usecase">
+        <span class="usecase-tag">Earliest Stage</span>
+        <h3>Multi-Cancer Early Detection</h3>
+        <p class="need">Evidence stage: earliest, screening-population sensitivity and specificity data exists but mortality-reduction data is still years out.</p>
+        <p class="gates-used">Reimbursement: <b>essentially none at scale</b> — out-of-pocket today, with USPSTF and guideline-body decisions as the gating event.</p>
+        <p class="value"><strong>Commercial angle:</strong> the longest runway and highest ceiling. Overselling the evidence bar to a payer or KOL costs credibility on the next conversation.</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- SELF-ASSESSMENT TOOL -->
-<section class="section tool" id="tool">
+<section class="section tool">
   <div class="section-inner">
-    <span class="eyebrow">Framework Tool</span>
-    <h2 class="section-title">Where does your test <em>actually</em> sit?</h2>
-    <p style="font-size:1rem; font-weight:300; line-height:1.8; color:var(--slate); max-width:620px; margin-top:0.9rem;">One question gets you most of the way there. Select the population your test is designed for — not every population it could theoretically serve. Category boundaries, drawn from the OpenOnco taxonomy; positioning and commercial read, ours.</p>
+    <div class="section-header">
+      <span class="eyebrow">Framework Tool</span>
+      <h2 class="section-title">Where does your test <em>actually</em> sit?</h2>
+      <p>One question gets you most of the way there. Select the population your test is designed for — not every population it could theoretically serve.</p>
+    </div>
 
     <div class="tool-grid" id="toolOptions">
       <button class="tool-opt" data-cat="CGP" type="button">
@@ -287,51 +303,42 @@ button { font-family: var(--sans); }
       </div>
       <div class="tool-result-position" id="rPosition"></div>
       <div class="tool-result-grid">
-        <div><div class="pillar-label">Evidence stage</div><div class="pillar-body" id="rEvidence"></div></div>
-        <div><div class="pillar-label">Reimbursement</div><div class="pillar-body" id="rReimb"></div></div>
-        <div class="tool-result-angle"><div class="pillar-label" style="color:var(--gold);">Commercial angle</div><div class="pillar-body" id="rAngle"></div></div>
+        <p class="need" id="rEvidence"></p>
+        <p class="gates-used" id="rReimb"></p>
+        <p class="value" id="rAngle"></p>
       </div>
       <div class="tool-result-cta">
         <p id="rCaution"></p>
         <a class="btn btn-primary" href="/intake.html">Talk Through Positioning</a>
       </div>
-      <div class="tool-source">Category boundaries adapted from the <a href="https://www.openonco.org/" target="_blank" rel="noopener">OpenOnco</a> liquid biopsy taxonomy. Evidence stage, reimbursement read, and commercial angle are Stacks Advisory's own assessment, not OpenOnco's.</div>
     </div>
   </div>
 </section>
 
-<!-- WHERE THIS GOES WRONG -->
-<section class="section" style="padding-top:0;">
-  <div class="section-inner">
-    <div class="bio">
-      <div class="bio-role">Where This Goes Wrong</div>
-      <div class="bio-name">Same chemistry, <em>four different conversations.</em></div>
-      <div class="bio-body">The four categories often share the underlying assay chemistry, which is exactly why they get sold as a continuum of one technology. Commercially, treating them as a single story is the most common mistake we see from platforms crossing from one category into another.</div>
-      <div class="bio-body"><strong>A tumor-informed MRD assay walking into a payer meeting with MCED-grade evidence gets rejected for asking too much, too soon.</strong> An MCED platform pitching like an MRD test gets rejected for the opposite reason — the audience expected proof that isn't there yet, and the pitch didn't fit the maturity stage it was actually standing on.</div>
-    </div>
+<section class="disclaimer">
+  <div class="disclaimer-inner">
+    <b>A note on this page:</b> the four-category taxonomy is adapted from the open-data category structure at <a href="https://www.openonco.org/" target="_blank" rel="noopener" style="color:var(--slate);">OpenOnco</a>; the evidence-stage, reimbursement, and commercial-angle assessments are Stacks Advisory's own and have not been reviewed or endorsed by OpenOnco. This content is offered for commercial strategy and positioning purposes only — it is not medical, clinical, or reimbursement guidance, and should not be used to determine patient care, insurance coverage, or billing. Evidence stage, reimbursement status, and trial activity change quickly; verify current status directly with payers, guideline bodies, and test vendors before acting on anything here.
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta">
-  <div class="cta-inner">
+<section class="pm-cta">
+  <div class="pm-cta-inner">
     <h2>Position each test <em>at its actual evidence stage.</em></h2>
     <p>A commercial translation model for diagnostics platforms building payer and KOL strategy against the right bar for their category — not the one next door.</p>
-    <div class="cta-actions">
+    <div class="pm-cta-actions">
       <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
       <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">stacks<span>.</span>advisory</div>
-  <span class="footer-copy">© 2026 Stacks Advisory · Denver, CO · <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <span class="footer-copy">&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="/capabilities.html">Capabilities</a>
-    <a href="/services-cascade.html" class="footer-nav-link">🧬 Services Navigator</a>
+    <a href="/services-cascade.html">🧬 Services Navigator</a>
     <a href="/intake.html">Start a Diagnostic</a>
   </div>
 </footer>
@@ -341,57 +348,51 @@ button { font-family: var(--sans); }
     CGP: {
       name: "Comprehensive Genomic Profiling",
       position: "Established · reimbursed at scale",
-      codeClass: "code-teal",
-      evidence: "Established — validated against tissue NGS across multi-year, real-world data sets.",
-      reimb: "Broadest of the four. Medicare LCDs and most commercial payers cover liquid CGP for advanced solid tumors.",
-      angle: "Closest to commodity. Differentiate on turnaround time, tissue-liquid concordance, and panel breadth — not on proving the use case exists.",
+      evidence: "Evidence stage: established, validated against tissue NGS across multi-year, real-world data sets.",
+      reimb: "Reimbursement: <b>broadest of the four</b> — Medicare LCDs and most commercial payers cover liquid CGP for advanced solid tumors.",
+      angle: "<strong>Commercial angle:</strong> differentiate on turnaround time, tissue-liquid concordance, and panel breadth — not on proving the use case exists.",
       caution: "If your test also touches monitoring or residual-disease claims, keep those as a separate conversation with a separate evidence bar."
     },
     MRD: {
       name: "Minimal Residual Disease",
       position: "Fast-moving · near-term opportunity",
-      codeClass: "code-blue",
-      evidence: "Fast-moving — the most active prospective trials reading out right now across colorectal, breast, and lung.",
-      reimb: "The fastest-growing reimbursement story in liquid biopsy. Medicare and major payers have moved in several tumor types within two years.",
-      angle: "The near-term opportunity. Build the motion around named trial readouts and guideline-inclusion timing — not general awareness.",
+      evidence: "Evidence stage: fast-moving, the most active prospective trials reading out right now across colorectal, breast, and lung.",
+      reimb: "Reimbursement: <b>fastest-growing story in liquid biopsy</b> — Medicare and major payers have moved in several tumor types within two years.",
+      angle: "<strong>Commercial angle:</strong> build the motion around named trial readouts and guideline-inclusion timing — not general awareness.",
       caution: "Lead with the specific trial and tumor type where your evidence is strongest, not a generic MRD pitch."
     },
     TRM: {
       name: "Treatment Response Monitoring",
       position: "Maturing · reimbursement inconsistent",
-      codeClass: "code-purple",
-      evidence: "Maturing — strong retrospective correlation with survival, fewer prospective trials tying a ctDNA-triggered switch to benefit.",
-      reimb: "Inconsistent. Covered in some indications through companion diagnostic pathways; out-of-pocket or trial-embedded in most others.",
-      angle: "Separate \u201ctracks with outcome\u201d from \u201cacting on this changes outcome.\u201d Payers are asking the second question — get ahead of it.",
+      evidence: "Evidence stage: maturing, strong retrospective correlation with survival but fewer prospective trials tying a ctDNA-triggered switch to benefit.",
+      reimb: "Reimbursement: <b>inconsistent</b> — covered in some indications through companion diagnostic pathways, out-of-pocket or trial-embedded in most others.",
+      angle: "<strong>Commercial angle:</strong> separate \u201ctracks with outcome\u201d from \u201cacting on this changes outcome.\u201d Payers are asking the second question.",
       caution: "Don't borrow MRD's reimbursement momentum. TRM's payer bar is a different, harder question."
     },
     MCED: {
       name: "Multi-Cancer Early Detection",
       position: "Earliest stage · pre-reimbursement",
-      codeClass: "code-gold",
-      evidence: "Earliest. Screening-population sensitivity and specificity exists; mortality-reduction data is still years out.",
-      reimb: "Essentially none at scale. Out-of-pocket today. USPSTF and guideline-body decisions are the gating event.",
-      angle: "The longest runway and highest ceiling. Overselling the evidence bar to a payer or KOL costs credibility on the next conversation.",
+      evidence: "Evidence stage: earliest, screening-population sensitivity and specificity data exists but mortality-reduction data is still years out.",
+      reimb: "Reimbursement: <b>essentially none at scale</b> — out-of-pocket today, with USPSTF and guideline-body decisions as the gating event.",
+      angle: "<strong>Commercial angle:</strong> the longest runway and highest ceiling. Overselling the evidence bar to a payer or KOL costs credibility on the next conversation.",
       caution: "Set expectations against a guideline-body timeline, not a payer-negotiation timeline."
     }
   };
 
   const opts = document.querySelectorAll('.tool-opt');
   const result = document.getElementById('toolResult');
-  const codeEl = document.getElementById('rCode');
 
   opts.forEach(btn => {
     btn.addEventListener('click', () => {
       opts.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       const c = CATS[btn.dataset.cat];
-      codeEl.textContent = btn.dataset.cat;
-      codeEl.className = 'tool-result-code pillar-code ' + c.codeClass;
+      document.getElementById('rCode').textContent = btn.dataset.cat;
       document.getElementById('rName').textContent = c.name;
       document.getElementById('rPosition').textContent = c.position;
       document.getElementById('rEvidence').textContent = c.evidence;
-      document.getElementById('rReimb').textContent = c.reimb;
-      document.getElementById('rAngle').textContent = c.angle;
+      document.getElementById('rReimb').innerHTML = c.reimb;
+      document.getElementById('rAngle').innerHTML = c.angle;
       document.getElementById('rCaution').textContent = c.caution;
       result.classList.add('show');
       result.scrollIntoView({behavior:'smooth', block:'nearest'});
