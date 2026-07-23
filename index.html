@@ -51,6 +51,7 @@ button { font-family: var(--sans); }
 .nav-links { display: flex; gap: 1.35rem; list-style: none; align-items: center; flex-wrap: nowrap; }
 .nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; white-space: nowrap; }
 .nav-links a:hover { color: var(--teal); }
+.nav-links a.active { color: var(--teal); }
 /* Services Navigator nav link — gold accent to distinguish it */
 .nav-links .nav-services a {
   color: var(--gold);
@@ -318,6 +319,7 @@ button { font-family: var(--sans); }
   color: var(--gold);
   flex-shrink: 0;
 }
+.nav-step-num.code { width: auto; min-width: 44px; padding: 0 0.5rem; border-radius: 13px; font-family: var(--sans); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.03em; }
 .nav-step-text {
   font-size: 0.8rem;
   color: rgba(245,241,234,0.6);
@@ -391,6 +393,7 @@ button { font-family: var(--sans); }
     <li><a href="#problem">The Problem</a></li>
     <li><a href="#offers">Engagements</a></li>
     <li><a href="/precision-medicine.html">Precision Medicine</a></li>
+    <li><a href="/oncology-dx-mced.html">Oncology Dx</a></li>
     <li><a href="/story.html">How It Works</a></li>
     <li><a href="/crm-architecture.html">CRM Architecture</a></li>
     <li><a href="#impact">Impact</a></li>
@@ -679,6 +682,27 @@ button { font-family: var(--sans); }
       <div class="nav-step"><div class="nav-step-num">B</div><div class="nav-step-text"><strong>Environment &amp; Context</strong>Is the surrounding biology permissive or hostile?</div></div>
       <div class="nav-step"><div class="nav-step-num">C</div><div class="nav-step-text"><strong>Durability &amp; Escape</strong>Does the benefit hold, or does resistance emerge?</div></div>
       <div class="nav-step"><div class="nav-step-num">D</div><div class="nav-step-text"><strong>Safety &amp; Execution</strong>Can it be dosed, tapered, or stopped safely?</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ONCOLOGY DX / MCED CTA -->
+<section class="navigator-cta" id="oncology-dx">
+  <div class="navigator-cta-inner">
+    <div>
+      <div class="navigator-cta-label">🧬 Oncology Diagnostics Practice</div>
+      <h2>Liquid biopsy isn't one market.<br>It's four — and they don't share a <em>playbook.</em></h2>
+      <p>MRD, early detection, treatment response monitoring, and comprehensive genomic profiling get pitched as one category because they share a blood draw. They don't share an evidence bar, a payer conversation, or a competitive set. We use a four-category taxonomy to keep commercial strategy honest about which job a test is actually doing.</p>
+      <div class="navigator-cta-actions">
+        <a href="/oncology-dx-mced.html" class="btn btn-gold">Explore the Taxonomy →</a>
+        <a href="/intake.html" class="btn btn-ghost-light">Map Your Opportunity</a>
+      </div>
+    </div>
+    <div class="navigator-steps">
+      <div class="nav-step"><div class="nav-step-num code">CGP</div><div class="nav-step-text"><strong>Genomic Profiling</strong>Established — reimbursed at scale</div></div>
+      <div class="nav-step"><div class="nav-step-num code">MRD</div><div class="nav-step-text"><strong>Residual Disease</strong>Fast-moving — near-term opportunity</div></div>
+      <div class="nav-step"><div class="nav-step-num code">TRM</div><div class="nav-step-text"><strong>Response Monitoring</strong>Maturing — reimbursement inconsistent</div></div>
+      <div class="nav-step"><div class="nav-step-num code">MCED</div><div class="nav-step-text"><strong>Early Detection</strong>Earliest stage — pre-reimbursement</div></div>
     </div>
   </div>
 </section>
