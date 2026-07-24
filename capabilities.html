@@ -69,20 +69,26 @@
   .nav-links a:hover { color: var(--rust); }
 
   /* ── page header ── */
-  .page-header {
-    max-width: 1100px; margin: 0 auto;
-    padding: 4rem 4rem 2rem;
-  }
-  .page-header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400; line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-  .page-header h1 em { color: var(--forest); font-style: italic; }
-  .page-header p {
-    color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem;
-  }
+.page-header {
+  max-width: 1100px; margin: 0 auto;
+  padding: 4rem 4rem 2rem;
+}
+.page-header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400; line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.page-header h1 em { color: var(--forest); font-style: italic; }
+.page-header p {
+  color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem;
+}
+.page-header .reconcile-note {
+  color: var(--muted); font-size: 0.82rem; margin-top: 0.9rem; line-height: 1.65;
+  border-left: 2px solid var(--rust); padding-left: 0.9rem; max-width: 620px;
+}
+.page-header .reconcile-note a { color: var(--forest); font-weight: 500; }
+.page-header .reconcile-note a:hover { color: var(--rust); }
   .page-meta {
     display: flex; gap: 2rem; margin-top: 1rem;
     font-size: 0.78rem; color: var(--muted);
