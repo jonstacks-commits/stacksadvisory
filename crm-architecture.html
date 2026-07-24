@@ -27,7 +27,6 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-height:1.6;overflow-x:hidden;}
 
-/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(13,27,42,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,168,150,0.14);}
 .nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--cream);text-decoration:none;}
 .nav-logo span{color:var(--teal);}
@@ -37,7 +36,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .nav-cta{font-size:0.8rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:0.65rem 1.4rem;border-radius:3px;background:var(--teal);color:var(--navy);text-decoration:none;transition:background 0.18s;}
 .nav-cta:hover{background:var(--seafoam);}
 
-/* HERO */
 .hero{background:var(--navy);padding:9rem 3rem 6rem;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 80% 30%,rgba(0,168,150,0.08),transparent 70%),radial-gradient(ellipse 40% 50% at 10% 80%,rgba(201,168,76,0.05),transparent 60%);}
 .hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,168,150,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,168,150,0.03) 1px,transparent 1px);background-size:60px 60px;}
@@ -56,7 +54,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .btn-gold{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.4);}
 .btn-gold:hover{background:rgba(201,168,76,0.08);}
 
-/* Hero diagram — the 7-layer stack */
 .hero-stack{display:flex;flex-direction:column;gap:0.5rem;}
 .stack-layer{display:flex;align-items:center;gap:0.8rem;padding:0.7rem 1rem;border-radius:5px;border:1px solid rgba(255,255,255,0.07);transition:border-color 0.2s;}
 .stack-layer:hover{border-color:rgba(0,168,150,0.3);}
@@ -72,7 +69,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .layer-system{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--muted);}
 .stack-arrow{text-align:center;color:rgba(0,168,150,0.4);font-size:0.75rem;margin:0 0 0 14px;}
 
-/* SECTIONS */
 .section{padding:6rem 3rem;}
 .inner{max-width:1100px;margin:0 auto;}
 .eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:0.75rem;}
@@ -80,7 +76,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .section-title em{font-style:italic;color:var(--teal);}
 .section-sub{font-size:0.95rem;font-weight:300;color:var(--slate);max-width:580px;line-height:1.8;margin-bottom:3rem;}
 
-/* THE PROBLEM */
 .problem-section{background:var(--navy);}
 .problem-section .section-title{color:var(--cream);}
 .problem-section .section-sub{color:rgba(245,241,234,0.6);}
@@ -94,7 +89,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .pi-title{font-size:0.88rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem;}
 .pi-body{font-size:0.8rem;color:rgba(245,241,234,0.5);line-height:1.6;}
 
-/* AI PHILOSOPHY CALLOUT */
 .ai-callout{background:rgba(255,255,255,0.03);border:1px solid rgba(0,168,150,0.2);border-radius:10px;padding:2rem;}
 .ai-callout-headline{font-family:var(--serif);font-size:1.2rem;color:var(--cream);margin-bottom:1rem;line-height:1.3;}
 .ai-callout-body{font-size:0.88rem;font-weight:300;color:rgba(245,241,234,0.65);line-height:1.85;}
@@ -105,7 +99,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .ai-step-text{color:rgba(245,241,234,0.7);}
 .ai-step-text strong{color:var(--cream);}
 
-/* FRAMEWORK */
 .framework-section{background:var(--cream);}
 .framework-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
 .framework-card{background:white;border:1px solid var(--rule);border-radius:8px;padding:1.6rem;border-top:3px solid var(--teal);transition:box-shadow 0.2s,transform 0.18s;}
@@ -120,7 +113,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .fc-system{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;background:rgba(0,168,150,0.07);color:var(--teal);border:1px solid rgba(0,168,150,0.18);}
 .fc-system.gold{background:rgba(201,168,76,0.07);color:var(--gold);border-color:rgba(201,168,76,0.2);}
 
-/* STAGE MODEL */
 .stage-section{background:white;}
 .stage-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-bottom:2rem;}
 .stage-node{background:var(--teal);padding:0.9rem 0.7rem;text-align:center;position:relative;}
@@ -142,7 +134,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .stage-table tr:last-child td{border-bottom:none;}
 .stage-table tr:nth-child(even) td{background:rgba(0,168,150,0.03);}
 
-/* CASE STUDY */
 .case-section{background:var(--navy);}
 .case-section .section-title{color:var(--cream);}
 .case-section .section-sub{color:rgba(245,241,234,0.6);}
@@ -158,7 +149,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .case-metric-val{font-family:var(--serif);font-size:1.6rem;color:var(--teal);display:block;line-height:1;margin-bottom:0.3rem;}
 .case-metric-lbl{font-size:0.72rem;color:rgba(245,241,234,0.5);line-height:1.4;}
 
-/* SYSTEMS FLOW */
 .flow-section{background:var(--cream);}
 .flow-diagram{background:white;border:1px solid var(--rule);border-radius:10px;padding:2rem;overflow-x:auto;}
 .flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:0.5rem;}
@@ -171,7 +161,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .flow-arrow{color:var(--muted);font-size:0.8rem;flex-shrink:0;}
 .flow-caption{font-size:0.78rem;font-style:italic;color:var(--muted);text-align:center;margin-top:1rem;}
 
-/* ENVIRONMENT VARIANTS */
 .env-section{background:white;}
 .env-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
 .env-card{background:var(--warm);border:1px solid var(--rule);border-radius:8px;padding:1.4rem;border-left:3px solid var(--teal);}
@@ -182,7 +171,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .env-variants{display:flex;flex-wrap:wrap;gap:0.3rem;}
 .env-v{font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:3px;background:rgba(0,168,150,0.07);color:var(--teal);border:1px solid rgba(0,168,150,0.18);}
 
-/* CTA */
 .cta-section{background:linear-gradient(135deg,#0D1B2A,#071420);padding:6rem 3rem;text-align:center;position:relative;overflow:hidden;}
 .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 75% at 50% 50%,rgba(0,168,150,0.09),transparent);pointer-events:none;}
 .cta-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
@@ -191,7 +179,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 .cta-inner p{font-size:0.95rem;font-weight:300;color:rgba(245,241,234,0.6);line-height:1.8;margin-bottom:2.2rem;}
 .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 
-/* FOOTER */
 .footer{background:#060D14;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:1rem;}
 .footer-logo{font-family:var(--serif);font-size:1rem;color:rgba(245,241,234,0.45);}
 .footer-logo span{color:var(--teal);}
@@ -216,7 +203,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="/">stacks<span>.</span>advisory</a>
   <ul class="nav-links">
@@ -227,15 +213,14 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   <a class="nav-cta" href="/intake.html">Map Your Opportunity</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div>
-      <span class="hero-pillar">Pillar 1 · Commercial Architecture</span>
+      <span class="hero-pillar">Module · GTM &amp; Revenue Infrastructure</span>
       <h1>CRM-to-Revenue<br><em>Architecture</em><br>for Life Sciences</h1>
-      <p class="hero-sub">Connecting sales behavior to pipeline accuracy to financial reporting — across Salesforce, HubSpot, ERP, and the systems your commercial team actually uses. Not a configuration project. A revenue infrastructure build.</p>
+      <p class="hero-sub">Connecting sales behavior to pipeline accuracy to financial reporting — across Salesforce, HubSpot, ERP, and the systems your commercial team actually uses. This is the module that becomes the connective tissue of your commercial operating system — not a configuration project on its own.</p>
       <div class="hero-actions">
         <a href="/intake.html" class="btn btn-teal">Start the Conversation</a>
         <a href="/services-cascade.html" class="btn btn-ghost">🧬 Find Your Engagement</a>
@@ -288,7 +273,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- THE PROBLEM -->
 <section class="section problem-section">
   <div class="inner">
     <span class="eyebrow">The Core Challenge</span>
@@ -321,7 +305,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
           </div>
         </div>
       </div>
-      <!-- AI Philosophy -->
       <div class="ai-callout">
         <div class="ai-callout-headline">"AI becomes valuable only when the commercial data foundation is stable, governed, and trusted."</div>
         <div class="ai-callout-body">If the CRM and ERP aren't aligned, <strong>AI doesn't solve the problem — it scales the noise.</strong> The sequence matters: establish MDM discipline first, apply automation to repeatable decisions second, and only then introduce predictive intelligence into pipeline scoring, forecast confidence, and pricing guidance.<br><br><strong>AI is most valuable when it makes revenue decisions faster, not when it replaces judgment.</strong></div>
@@ -335,7 +318,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- THE FRAMEWORK — 7 COMPONENTS -->
 <section class="section framework-section">
   <div class="inner">
     <span class="eyebrow">The Framework</span>
@@ -432,7 +414,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- STAGE MODEL -->
 <section class="section stage-section">
   <div class="inner">
     <span class="eyebrow">The Stage Model</span>
@@ -471,7 +452,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- PROOF CASE -->
 <section class="section case-section">
   <div class="inner">
     <span class="eyebrow" style="color:var(--gold);">Proof Case — Genomics Tools Company</span>
@@ -523,7 +503,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- SYSTEMS FLOW -->
 <section class="section flow-section">
   <div class="inner">
     <span class="eyebrow">Systems Architecture</span>
@@ -596,7 +575,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- ENVIRONMENT VARIANTS -->
 <section class="section env-section">
   <div class="inner">
     <span class="eyebrow">Environment Variants</span>
@@ -677,7 +655,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
     <span class="eyebrow" style="color:var(--gold);display:block;margin-bottom:1rem;">Ready to Build It?</span>
@@ -691,7 +668,6 @@ body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-heigh
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">stacks<span>.</span>advisory</div>
   <span class="footer-copy">© 2025 Stacks Advisory LLC · Denver, CO · jon@stacksadvisory.com</span>
