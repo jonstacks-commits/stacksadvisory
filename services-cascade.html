@@ -542,8 +542,18 @@ function renderEngagements() {
   ).join('');
 }
 
+// Engagement models with a live, fixed-price Stripe Payment Link today.
+// 'sprint' (milestone-split billing) and 'project' (custom-scope, quote-only)
+// are intentionally excluded — they still route to Calendly.
+const CHECKOUT_ELIGIBLE = ['fractional', 'advisory'];
+
 function renderResults() {
   const { services, live } = getMatchedServices();
+
+  const isCheckoutEligible = CHECKOUT_ELIGIBLE.includes(state.engagement);
+  const ctaHref   = isCheckoutEligible ? '/engagement.html' : 'https://calendly.com/jonstacks/introductory-discussion';
+  const ctaLabel  = isCheckoutEligible ? '→ Continue to Payment' : '→ Continue to Intake';
+  const ctaTarget = isCheckoutEligible ? '' : ' target="_blank"';
 
   // Summary
   document.getElementById('summaryPanel').innerHTML = `
@@ -555,7 +565,7 @@ function renderResults() {
       <div class="summary-row"><div class="summary-key">Engagement Model</div><div class="summary-val">${getEngagementTitle(state.engagement)}</div></div>
     </div>
     <div class="cta-row">
-      <a class="btn-primary btn-cta" href="https://calendly.com/jonstacks/introductory-discussion" target="_blank">→ Continue to Intake</a>
+      <a class="btn-primary btn-cta" href="${ctaHref}"${ctaTarget}>${ctaLabel}</a>
       <button class="btn-primary btn-ghost" onclick="restart()">↺ Start Over</button>
     </div>`;
 
