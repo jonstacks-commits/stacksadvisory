@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Data Infrastructure | Stacks Advisory</title>
+<meta name="description" content="AI in life sciences is only as good as the data beneath it. Most organizations aren't ready. A commercial framework for building the unified metadata and process layer that AI adoption actually depends on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stacksadvisory.com/scientific-data-infrastructure.html">
+<meta property="og:title" content="Scientific Data Infrastructure | Stacks Advisory">
+<meta property="og:description" content="AI in life sciences is only as good as the data beneath it. A commercial framework for building the unified metadata and process layer AI adoption depends on.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --deep: #0A1520;
+  --teal: #00A896;
+  --seafoam: #02C39A;
+  --ice: #C8E6E3;
+  --cream: #F5F1EA;
+  --warm-white: #FAFAF7;
+  --slate: #4A5568;
+  --muted: #8E9CAD;
+  --gold: #C9A84C;
+  --brick: #C1502E;
+  --border-dark: rgba(0,168,150,0.18);
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+.eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+.btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-ghost-light { background: transparent; color: var(--cream); border: 1px solid rgba(245,241,234,0.22); }
+.btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); gap: 1rem; }
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; flex-shrink: 0; }
+.nav-logo span { color: var(--teal); }
+.nav a.back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav a.back:hover { color: var(--teal); }
+
+.hero { min-height: 58vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
+.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 640px; margin-bottom: 1.6rem; }
+.hero .sub { font-size: 0.88rem; font-weight: 400; font-style: italic; color: rgba(245,241,234,0.5); line-height: 1.6; border-left: 2px solid rgba(201,168,76,0.4); padding-left: 0.85rem; max-width: 580px; }
+
+.stats { background: var(--deep); padding: 2.6rem 3rem; border-bottom: 1px solid rgba(0,168,150,0.12); }
+.stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.stat-num { font-family: var(--serif); font-size: 1.9rem; color: var(--teal); display: block; line-height: 1; margin-bottom: 0.5rem; }
+.stat-label { font-size: 0.8rem; color: rgba(245,241,234,0.6); line-height: 1.55; }
+.stat-source { font-size: 0.68rem; color: rgba(245,241,234,0.32); margin-top: 0.5rem; letter-spacing: 0.02em; }
+
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3.5rem; max-width: 680px; }
+.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); margin-top: 0.9rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--navy); }
+.section-title em { font-style: italic; color: var(--teal); }
+
+.quote-section { background: var(--navy); padding: 4.5rem 3rem; position: relative; overflow: hidden; }
+.quote-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 20% 40%, rgba(0,168,150,0.08), transparent); }
+.quote-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.quote-source-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; display: block; }
+.quote-main { font-family: var(--serif); font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.5; color: var(--cream); border-left: 3px solid var(--teal); padding-left: 1.6rem; margin-bottom: 1.8rem; }
+.quote-supporting { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 2rem; }
+.quote-supporting p { font-size: 0.86rem; color: rgba(245,241,234,0.62); line-height: 1.75; }
+.quote-cite { margin-top: 1.6rem; font-size: 0.78rem; }
+.quote-cite a { color: var(--teal); text-decoration: none; }
+.quote-cite a:hover { text-decoration: underline; }
+@media (max-width: 900px) { .quote-supporting { grid-template-columns: 1fr; } }
+
+.diagram-section { background: var(--cream); }
+.diagram-wrap { background: white; border-radius: 12px; border: 1px solid var(--border-light); padding: 2.4rem; margin-bottom: 1.4rem; }
+.diagram-caption { text-align: center; font-size: 0.8rem; color: var(--muted); font-style: italic; }
+
+.problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.problem-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.5rem; transition: box-shadow 0.22s, transform 0.18s; }
+.problem-card:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.problem-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.problem-card p { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+
+.usecases { background: var(--warm-white); }
+.usecase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.usecase { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem; transition: box-shadow 0.22s, border-color 0.22s; }
+.usecase:hover { box-shadow: 0 10px 32px rgba(0,168,150,0.09); border-color: rgba(0,168,150,0.28); }
+.usecase-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 2px; margin-bottom: 0.9rem; background: rgba(0,168,150,0.1); color: var(--teal); }
+.usecase h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
+.usecase p { font-size: 0.82rem; color: var(--slate); line-height: 1.65; margin-bottom: 0.8rem; }
+.usecase .value { font-size: 0.79rem; color: var(--slate); border-top: 1px solid var(--border-light); padding-top: 0.9rem; line-height: 1.6; }
+.usecase .value strong { color: var(--navy); }
+
+.cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
+.cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.cta h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.4rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
+.cta h2 em { font-style: italic; color: var(--teal); }
+.cta p { font-size: 0.92rem; font-weight: 300; color: rgba(245,241,234,0.6); line-height: 1.78; margin-bottom: 2rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #060D14; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
+.footer-logo span { color: var(--teal); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
+.footer-links a:hover { color: var(--teal); }
+
+@media (max-width: 960px) {
+  .hero { padding: 6.5rem 1.5rem 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .stats-inner { grid-template-columns: 1fr; gap: 1.4rem; text-align: center; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .problem-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
+  <a class="back" href="/capabilities.html">&larr; Back to Capabilities</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Platform Architecture &middot; Scientific Data Infrastructure</span>
+    <h1>AI is only as good as the data beneath it.<br><em>In life sciences, that data usually isn't ready.</em></h1>
+    <p>Sample-to-answer workflows in genomics, diagnostics, and cell &amp; gene therapy still run across fragmented systems &mdash; wet lab, sequencing, analysis, manufacturing or diagnosis, and clinic each operating with their own tools and manual hand-offs between them. AI and automation initiatives stall not because the models are weak, but because the underlying metadata was never unified in the first place.</p>
+    <p class="sub">The commercial question every platform, health system, and biopharma R&amp;D group is quietly wrestling with: what does it take to become AI-ready, and what does that unlock commercially once it's built?</p>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">~1 in 5</span>
+      <div class="stat-label">Biopharma &amp; medtech organizations report successfully scaling AI beyond pilots &mdash; most have more use cases than data infrastructure to support them.</div>
+      <div class="stat-source">Deloitte, 2026 Life Sciences Outlook</div>
+    </div>
+    <div>
+      <span class="stat-num">73%</span>
+      <div class="stat-label">Of biotech professionals still rely heavily on spreadsheets for data management &mdash; more than half say existing tools don't reflect actual lab workflows.</div>
+      <div class="stat-source">Industry survey, late 2025</div>
+    </div>
+    <div>
+      <span class="stat-num">MDM</span>
+      <div class="stat-label">Master data management is emerging as the backbone of "agent-ready" data &mdash; the layer that lets AI systems act reliably across commercial, regulatory, and R&amp;D workflows.</div>
+      <div class="stat-source">Industry commentary, 2026</div>
+    </div>
+  </div>
+</div>
+
+<section class="quote-section">
+  <div class="quote-inner">
+    <span class="quote-source-label">The Consultancy View</span>
+    <p class="quote-main">"You can have perfect data infrastructure but fail to bring along the medical writers or the clinical scientists&hellip; without adoption, there is no transformation."</p>
+    <div class="quote-supporting">
+      <p>McKinsey's life sciences leadership frames AI's promise as breaking down the organizational silos that have long separated research, clinical development, and patient care &mdash; but they're explicit that infrastructure is necessary, not sufficient, on its own.</p>
+      <p>Their own estimate: roughly 80% of life sciences workflows are structurally capable of AI/agent support, with organizations deploying at scale seeing 5&ndash;10% growth improvement and 3&ndash;5% margin improvement. The gap between that potential and realized value is exactly where commercial and technical readiness have to meet.</p>
+    </div>
+    <div class="quote-cite">Alex Devereson, Delphine Nain Zurkiya &amp; Lieven Van der Veken &mdash; <a href="https://www.mckinsey.com/featured-insights/mckinsey-explainers/ai-in-life-sciences-explained-the-technology-that-could-reinvent-medicine" target="_blank" rel="noopener">McKinsey &amp; Company, June 2026</a></div>
+  </div>
+</section>
+
+<section class="section diagram-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">The Pattern</span>
+      <h2 class="section-title">The same six-step chain, <em>breaking at every hand-off.</em></h2>
+      <p>Whether it's an academic medical center's genomics program, a diagnostics lab, or a cell therapy manufacturer, the sample-to-answer path looks structurally the same &mdash; and so does where it breaks down.</p>
+    </div>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1120 460" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="34" font-family="DM Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5" fill="#8E9CAD">BEFORE &mdash; SILOED HAND-OFFS</text>
+        <g font-family="DM Sans, sans-serif" font-size="12.5" fill="#0D1B2A" text-anchor="middle">
+          <!-- Before row -->
+          <g id="before-steps">
+            <rect x="10" y="55" width="160" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="90" y="90">Wet Lab</text>
+            <rect x="210" y="55" width="160" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="290" y="90">Sequencing</text>
+            <rect x="410" y="55" width="160" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="490" y="90">Analysis</text>
+            <rect x="610" y="55" width="180" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="700" y="82">Diagnosis or</text>
+            <text x="700" y="98">Manufacturing</text>
+            <rect x="830" y="55" width="170" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="915" y="82">Shipment or</text>
+            <text x="915" y="98">Report</text>
+            <rect x="1030" y="55" width="80" height="60" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+            <text x="1070" y="90">Clinic</text>
+          </g>
+          <!-- brick walls between before steps -->
+          <g fill="#C1502E">
+            <rect x="184" y="50" width="10" height="70"/>
+            <rect x="384" y="50" width="10" height="70"/>
+            <rect x="584" y="50" width="10" height="70"/>
+            <rect x="804" y="50" width="10" height="70"/>
+            <rect x="1010" y="50" width="10" height="70"/>
+          </g>
+          <text x="560" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="#4A5568">Manual reconciliation at every wall &mdash; spreadsheets, PDFs, email, no shared record of what happened where.</text>
+        </g>
+
+        <text x="20" y="240" font-family="DM Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5" fill="#00A896">AFTER &mdash; UNIFIED METADATA LAYER</text>
+        <g font-family="DM Sans, sans-serif" font-size="12.5" fill="#0D1B2A" text-anchor="middle">
+          <rect x="10" y="260" width="160" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="90" y="295">Wet Lab</text>
+          <rect x="210" y="260" width="160" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="290" y="295">Sequencing</text>
+          <rect x="410" y="260" width="160" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="490" y="295">Analysis</text>
+          <rect x="610" y="260" width="180" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="700" y="287">Diagnosis or</text>
+          <text x="700" y="303">Manufacturing</text>
+          <rect x="830" y="260" width="170" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="915" y="287">Shipment or</text>
+          <text x="915" y="303">Report</text>
+          <rect x="1030" y="260" width="80" height="60" rx="8" fill="#FFFFFF" stroke="#00A896" stroke-width="1.5"/>
+          <text x="1070" y="295">Clinic</text>
+        </g>
+        <!-- connecting arrows -->
+        <g stroke="#00A896" stroke-width="2" fill="none" marker-end="url(#arrow)">
+          <line x1="170" y1="290" x2="208" y2="290"/>
+          <line x1="370" y1="290" x2="408" y2="290"/>
+          <line x1="570" y1="290" x2="608" y2="290"/>
+          <line x1="790" y1="290" x2="828" y2="290"/>
+          <line x1="1000" y1="290" x2="1028" y2="290"/>
+        </g>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#00A896"/>
+          </marker>
+        </defs>
+        <!-- unified layer bar -->
+        <rect x="10" y="345" width="1100" height="50" rx="8" fill="#0D1B2A"/>
+        <text x="560" y="376" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13.5" font-weight="600" fill="#F5F1EA">Unified Metadata &amp; Process Layer &mdash; provenance, audit trail, AI-ready structure</text>
+        <g stroke="#00A896" stroke-width="1.5" stroke-dasharray="3,3">
+          <line x1="90" y1="320" x2="90" y2="345"/>
+          <line x1="290" y1="320" x2="290" y2="345"/>
+          <line x1="490" y1="320" x2="490" y2="345"/>
+          <line x1="700" y1="320" x2="700" y2="345"/>
+          <line x1="915" y1="320" x2="915" y2="345"/>
+          <line x1="1070" y1="320" x2="1070" y2="345"/>
+        </g>
+        <text x="560" y="430" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" font-style="italic" fill="#4A5568">Same six steps &mdash; now connected by a single record of provenance, ready for AI/ML rather than reconciled by hand.</text>
+      </svg>
+    </div>
+    <p class="diagram-caption">A generalized pattern observed across genomics, diagnostics, and cell &amp; gene therapy commercial engagements &mdash; not tied to any specific platform or client.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Why It Stalls</span>
+      <h2 class="section-title">The problems are consistent <em>across the industry.</em></h2>
+      <p>Different labs, different modalities, same four failure modes &mdash; each one a direct blocker to AI adoption, not just an operational nuisance.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>Fragmented Visibility</h3>
+        <p>No single view of where a sample or dataset is in its lifecycle &mdash; visibility ends at each system's own walls.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Manual Reconciliation</h3>
+        <p>Spreadsheets and PDFs carry the hand-off between steps, introducing error and cost at every transition.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Weak Provenance</h3>
+        <p>Without a structured audit trail, compliance (FDA, CLIA, CAP) and AI validation both run into the same wall: no trustworthy lineage.</p>
+      </div>
+      <div class="problem-card">
+        <h3>No AI-Ready Substrate</h3>
+        <p>Models need consistently structured, connected data. Fragmented systems can't feed one &mdash; no matter how good the model is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section usecases">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Where It Applies</span>
+      <h2 class="section-title">Four settings, <em>one underlying fix.</em></h2>
+      <p>The specific instruments and regulatory context shift by setting &mdash; the commercial thesis for closing the gap doesn't.</p>
+    </div>
+    <div class="usecase-grid">
+      <div class="usecase">
+        <span class="usecase-tag">Academic &amp; Health System</span>
+        <h3>Genomics &amp; Precision Medicine Programs</h3>
+        <p>Multi-department programs running NGS, imaging, and clinical data through disconnected LIMS, EMR, and analysis tools, with no shared patient-to-sample metadata layer.</p>
+        <p class="value"><strong>Commercial angle:</strong> a unified layer turns disconnected cohort data into a searchable research asset and shortens time-to-answer for clinicians and researchers alike.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Diagnostics</span>
+        <h3>Outsourced Testing Pipelines</h3>
+        <p>Diagnostic developers coordinating sample receipt, third-party wet lab processing, sequencing, and bioinformatics across multiple vendors and cloud handoffs.</p>
+        <p class="value"><strong>Commercial angle:</strong> automated data ingest and provenance tracking across vendor boundaries de-risks scale-up and shortens report turnaround.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Cell &amp; Gene Therapy</span>
+        <h3>Personalized Manufacturing</h3>
+        <p>Patient-specific manufacturing processes requiring chain-of-identity and chain-of-custody documentation from procurement through infusion &mdash; traditionally paper-based.</p>
+        <p class="value"><strong>Commercial angle:</strong> digitized batch records reduce manufacturing cost per patient and strengthen the regulatory story for commercial launch.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Biopharma R&amp;D</span>
+        <h3>Translational &amp; Discovery Research</h3>
+        <p>Discovery data spread across instrument software, ELNs, and cloud storage with no consistent structure &mdash; the exact condition that stalls AI pilots before production.</p>
+        <p class="value"><strong>Commercial angle:</strong> AI-readiness becomes a partnering and fundraising asset, not just an IT project &mdash; it's increasingly what diligence looks for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>AI-readiness starts with the <em>data layer, not the model.</em></h2>
+    <p>A commercial framework for diagnosing where your data infrastructure stands today, and what it takes to make AI adoption viable &mdash; built on years of platform commercialization experience across genomics, diagnostics, and cell &amp; gene therapy.</p>
+    <div class="cta-actions">
+      <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">🧬 Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+</body>
+</html>
