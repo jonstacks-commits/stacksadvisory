@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Account Strategy | Stacks Advisory</title>
+<meta name="description" content="M&A revenue synergy targets have tripled since 2019 — but most of that value depends on legacy, specialized, and channel sales teams pulling in the same direction. A commercial framework for making that happen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stacksadvisory.com/enterprise-account-strategy.html">
+<meta property="og:title" content="Enterprise Account Strategy | Stacks Advisory">
+<meta property="og:description" content="Revenue synergy targets have tripled since 2019. Realizing them depends on legacy, specialized, and channel sales teams pulling in the same direction.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --deep: #0A1520;
+  --teal: #00A896;
+  --seafoam: #02C39A;
+  --cream: #F5F1EA;
+  --warm-white: #FAFAF7;
+  --slate: #4A5568;
+  --muted: #8E9CAD;
+  --gold: #C9A84C;
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+.eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+.btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-ghost-light { background: transparent; color: var(--cream); border: 1px solid rgba(245,241,234,0.22); }
+.btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); gap: 1rem; }
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; flex-shrink: 0; }
+.nav-logo span { color: var(--teal); }
+.nav a.back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav a.back:hover { color: var(--teal); }
+
+.hero { min-height: 56vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
+.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.9rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 640px; margin-bottom: 1.6rem; }
+.hero .sub { font-size: 0.88rem; font-weight: 400; font-style: italic; color: rgba(245,241,234,0.5); line-height: 1.6; border-left: 2px solid rgba(201,168,76,0.4); padding-left: 0.85rem; max-width: 580px; }
+
+.stats { background: var(--deep); padding: 2.6rem 3rem; border-bottom: 1px solid rgba(0,168,150,0.12); }
+.stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.stat-num { font-family: var(--serif); font-size: 1.9rem; color: var(--teal); display: block; line-height: 1; margin-bottom: 0.5rem; }
+.stat-label { font-size: 0.8rem; color: rgba(245,241,234,0.6); line-height: 1.55; }
+.stat-source { font-size: 0.68rem; color: rgba(245,241,234,0.32); margin-top: 0.5rem; letter-spacing: 0.02em; }
+
+.quote-section { background: var(--navy); padding: 4.5rem 3rem; position: relative; overflow: hidden; }
+.quote-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 20% 40%, rgba(0,168,150,0.08), transparent); }
+.quote-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.quote-source-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; display: block; }
+.quote-main { font-family: var(--serif); font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.5; color: var(--cream); border-left: 3px solid var(--teal); padding-left: 1.6rem; margin-bottom: 1.8rem; }
+.quote-supporting { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 2rem; }
+.quote-supporting p { font-size: 0.86rem; color: rgba(245,241,234,0.62); line-height: 1.75; }
+.quote-cite { margin-top: 1.6rem; font-size: 0.78rem; }
+.quote-cite a { color: var(--teal); text-decoration: none; }
+.quote-cite a:hover { text-decoration: underline; }
+@media (max-width: 900px) { .quote-supporting { grid-template-columns: 1fr; } }
+
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3.5rem; max-width: 680px; }
+.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); margin-top: 0.9rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--navy); }
+.section-title em { font-style: italic; color: var(--teal); }
+
+.diagram-section { background: var(--cream); }
+.diagram-wrap { background: white; border-radius: 12px; border: 1px solid var(--border-light); padding: 2.4rem; margin-bottom: 1.4rem; }
+.diagram-caption { text-align: center; font-size: 0.8rem; color: var(--muted); font-style: italic; }
+
+.problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.problem-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.5rem; transition: box-shadow 0.22s, transform 0.18s; }
+.problem-card:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.problem-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.problem-card p { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+
+.usecases { background: var(--warm-white); }
+.usecase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.usecase { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem; transition: box-shadow 0.22s, border-color 0.22s; }
+.usecase:hover { box-shadow: 0 10px 32px rgba(0,168,150,0.09); border-color: rgba(0,168,150,0.28); }
+.usecase-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 2px; margin-bottom: 0.9rem; background: rgba(0,168,150,0.1); color: var(--teal); }
+.usecase h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin-bottom: 0.6rem; }
+.usecase p { font-size: 0.82rem; color: var(--slate); line-height: 1.65; margin-bottom: 0.8rem; }
+.usecase .value { font-size: 0.79rem; color: var(--slate); border-top: 1px solid var(--border-light); padding-top: 0.9rem; line-height: 1.6; }
+.usecase .value strong { color: var(--navy); }
+
+.cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
+.cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.cta h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.4rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
+.cta h2 em { font-style: italic; color: var(--teal); }
+.cta p { font-size: 0.92rem; font-weight: 300; color: rgba(245,241,234,0.6); line-height: 1.78; margin-bottom: 2rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #060D14; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
+.footer-logo span { color: var(--teal); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
+.footer-links a:hover { color: var(--teal); }
+
+@media (max-width: 960px) {
+  .hero { padding: 6.5rem 1.5rem 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .stats-inner { grid-template-columns: 1fr; gap: 1.4rem; text-align: center; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .problem-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
+  <a class="back" href="/capabilities.html">&larr; Back to Capabilities</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Enterprise Account Strategy &middot; Multi-Stakeholder Accounts</span>
+    <h1>Synergy targets are only real <em>once three sales teams agree on who owns the account.</em></h1>
+    <p>Every M&amp;A revenue-synergy case assumes a unified go-to-market motion the day after close. In practice, legacy sales reps, newly-acquired specialized teams, and channel partners are often still calling on the same global accounts with different pricing, different messaging, and no shared account plan &mdash; and the synergy case quietly erodes.</p>
+    <p class="sub">The commercial question every acquirer eventually asks: who actually owns this account now, and how do we get three sales organizations pulling toward one number?</p>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">$372B</span>
+      <div class="stat-label">Total life sciences M&amp;A deal value in 2025, up 47% year over year &mdash; the environment where synergy pull-through matters is accelerating.</div>
+      <div class="stat-source">McKinsey, Life Sciences Dealmaking, Feb. 2026</div>
+    </div>
+    <div>
+      <span class="stat-num">17%</span>
+      <div class="stat-label">Median announced revenue synergy as a share of target company revenue since 2020 &mdash; nearly triple the 6% seen 2015&ndash;2019.</div>
+      <div class="stat-source">McKinsey, M&amp;A Synergy Research, Feb. 2026</div>
+    </div>
+    <div>
+      <span class="stat-num">+3.6%</span>
+      <div class="stat-label">TSR outperformance for acquirers who publicly commit to synergy targets, versus &minus;1.7% for those who don't.</div>
+      <div class="stat-source">McKinsey, M&amp;A Synergy Research, Feb. 2026</div>
+    </div>
+  </div>
+</div>
+
+<section class="quote-section">
+  <div class="quote-inner">
+    <span class="quote-source-label">The Consultancy View</span>
+    <p class="quote-main">"Commercial synergies call for product, pricing, and sales teams working in lockstep."</p>
+    <div class="quote-supporting">
+      <p>McKinsey's M&amp;A practice is explicit that revenue synergies &mdash; unlike cost synergies, which can be captured with a spreadsheet exercise &mdash; depend on cross-functional coordination across the exact seams where deals break down: legacy versus acquired sales forces, direct versus channel coverage, and pricing that was never built to be reconciled.</p>
+      <p>Their research also points to the fix: a dedicated integration management office with named owners and measurable KPIs for each synergy lever, rather than leaving commercial integration to "figure itself out" after close. The deals that hit their revenue synergy targets are the ones that treated the sales org redesign as seriously as the deal itself.</p>
+    </div>
+    <div class="quote-cite">Jeff Rudnicki, Paul K&uuml;derli, Sebastian Muehlbauer &amp; Gordian Hoffmann &mdash; <a href="https://www.mckinsey.com/capabilities/m-and-a/our-insights/how-strategic-buyers-can-outperform-financial-investors-by-building-a-synergy-muscle" target="_blank" rel="noopener">McKinsey &amp; Company, Feb. 2026</a></div>
+  </div>
+</section>
+
+<section class="section diagram-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">The Pattern</span>
+      <h2 class="section-title">Three sales motions, <em>one global account, no shared plan.</em></h2>
+      <p>The specific brands and territories change deal to deal &mdash; the structural collision between legacy, specialized, and channel coverage on the same enterprise account doesn't.</p>
+    </div>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1120 440" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="34" font-family="DM Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5" fill="#8E9CAD">BEFORE &mdash; THREE MOTIONS, ONE ACCOUNT</text>
+        <g font-family="DM Sans, sans-serif" font-size="13" fill="#0D1B2A" text-anchor="middle">
+          <rect x="20" y="55" width="300" height="70" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+          <text x="170" y="87">Legacy Sales Org</text>
+          <text x="170" y="107" font-size="11" fill="#4A5568">Own pricing, own CRM record</text>
+
+          <rect x="410" y="55" width="300" height="70" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+          <text x="560" y="87">Specialized / Acquired Team</text>
+          <text x="560" y="107" font-size="11" fill="#4A5568">Own pricing, own product line</text>
+
+          <rect x="800" y="55" width="300" height="70" rx="8" fill="#F5F1EA" stroke="#00A896" stroke-width="1.5"/>
+          <text x="950" y="87">Channel Partner</text>
+          <text x="950" y="107" font-size="11" fill="#4A5568">Own margin, own relationship</text>
+        </g>
+        <!-- crossing conflict lines to a shared account -->
+        <g stroke="#C1502E" stroke-width="1.8" stroke-dasharray="5,4">
+          <line x1="170" y1="125" x2="560" y2="230"/>
+          <line x1="560" y1="125" x2="560" y2="230"/>
+          <line x1="950" y1="125" x2="560" y2="230"/>
+        </g>
+        <circle cx="560" cy="230" r="44" fill="#0D1B2A"/>
+        <text x="560" y="226" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#F5F1EA">Same</text>
+        <text x="560" y="242" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#F5F1EA">Account</text>
+        <text x="560" y="300" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" font-style="italic" fill="#4A5568">No shared account plan &mdash; conflicting pricing, duplicate outreach, and unclear ownership at every touchpoint.</text>
+
+        <text x="20" y="350" font-family="DM Sans, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5" fill="#00A896">AFTER &mdash; UNIFIED ACCOUNT COVERAGE</text>
+        <g font-family="DM Sans, sans-serif" font-size="12" fill="#0D1B2A" text-anchor="middle">
+          <rect x="20" y="365" width="1080" height="55" rx="8" fill="#0D1B2A"/>
+          <text x="560" y="397" text-anchor="middle" font-size="13" font-weight="600" fill="#F5F1EA">One Account Plan &middot; Named Owner &middot; Reconciled Pricing &middot; Shared Call Cadence</text>
+        </g>
+      </svg>
+    </div>
+    <p class="diagram-caption">A generalized post-merger commercial integration pattern &mdash; not tied to any specific deal, account, or organization.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Why It Erodes</span>
+      <h2 class="section-title">The revenue synergy case fails <em>at the account level, not the model level.</em></h2>
+      <p>The deal thesis is sound. The failure mode is almost always structural, not strategic.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>Overlapping Coverage</h3>
+        <p>Legacy and acquired reps calling on the same buyer with no coordination, eroding trust before the synergy story is even told.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Conflicting Account Ownership</h3>
+        <p>No named owner for the combined relationship means every escalation becomes a turf negotiation instead of a customer conversation.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Inconsistent Messaging</h3>
+        <p>Different pricing, different value props, sometimes in the same week &mdash; the customer notices before leadership does.</p>
+      </div>
+      <div class="problem-card">
+        <h3>No Shared Account Plan</h3>
+        <p>Without one plan and one set of KPIs, cross-sell targets stay aspirational instead of becoming quota.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section usecases">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Where It Applies</span>
+      <h2 class="section-title">Four settings, <em>one integration discipline.</em></h2>
+      <p>The org charts differ; the fix is the same set of decisions, made early and made explicit.</p>
+    </div>
+    <div class="usecase-grid">
+      <div class="usecase">
+        <span class="usecase-tag">Post-Merger Integration</span>
+        <h3>Legacy &amp; Acquired Sales Force Consolidation</h3>
+        <p>Two sales organizations, two CRMs, two comp plans, one set of global accounts &mdash; and a synergy target on the board deck that assumes it already works.</p>
+        <p class="value"><strong>Commercial angle:</strong> a named integration owner and a reconciled account plan convert a synergy assumption into a trackable KPI within the first two quarters.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Multi-Business-Unit Accounts</span>
+        <h3>Global Pharma Account Coordination</h3>
+        <p>Large pharma accounts spanning multiple product lines and business units, each with its own rep and its own view of the relationship.</p>
+        <p class="value"><strong>Commercial angle:</strong> a single strategic account framework surfaces cross-BU opportunity that no individual rep can see alone.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Channel Coexistence</span>
+        <h3>Direct &amp; Channel Overlap Resolution</h3>
+        <p>Newly acquired channel relationships colliding with existing direct coverage on the same named accounts &mdash; a common step-out-deal byproduct.</p>
+        <p class="value"><strong>Commercial angle:</strong> clear rules of engagement protect channel margin and direct relationships simultaneously, instead of forcing a zero-sum fight.</p>
+      </div>
+      <div class="usecase">
+        <span class="usecase-tag">Revenue Synergy Enablement</span>
+        <h3>Cross-Sell Across Newly Combined Portfolios</h3>
+        <p>The combined portfolio has genuine cross-sell logic on paper &mdash; but the reps who'd need to pitch it have never been trained on, or compensated for, the other company's product line.</p>
+        <p class="value"><strong>Commercial angle:</strong> enablement and comp plan redesign turn a synergy slide into pipeline within the first sales cycle post-close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Revenue synergy is a <em>sales org design problem first.</em></h2>
+    <p>A commercial framework for diagnosing where legacy, specialized, and channel coverage collide on your most important accounts &mdash; built on managing a multi-account, multi-stakeholder revenue base through a major industry integration.</p>
+    <div class="cta-actions">
+      <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">🧬 Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+</body>
+</html>
