@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM-to-Revenue Architecture | Stacks Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #0D1B2A;
+  --deep:   #071018;
+  --teal:   #00A896;
+  --seafoam:#02C39A;
+  --gold:   #C9A84C;
+  --gold-lt:#E8C96D;
+  --cream:  #F5F1EA;
+  --warm:   #FAFAF7;
+  --slate:  #4A5568;
+  --muted:  #8E9CAD;
+  --rule:   rgba(13,27,42,0.10);
+  --serif:  'DM Serif Display', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+  --mono:   'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--warm);color:var(--navy);line-height:1.6;overflow-x:hidden;}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(13,27,42,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,168,150,0.14);}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--cream);text-decoration:none;}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.18s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{font-size:0.8rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:0.65rem 1.4rem;border-radius:3px;background:var(--teal);color:var(--navy);text-decoration:none;transition:background 0.18s;}
+.nav-cta:hover{background:var(--seafoam);}
+
+.hero{background:var(--navy);padding:9rem 3rem 6rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 80% 30%,rgba(0,168,150,0.08),transparent 70%),radial-gradient(ellipse 40% 50% at 10% 80%,rgba(201,168,76,0.05),transparent 60%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,168,150,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,168,150,0.03) 1px,transparent 1px);background-size:60px 60px;}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.hero-pillar{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,168,150,0.3);padding:0.28rem 0.8rem;border-radius:2px;display:inline-block;margin-bottom:1.2rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;color:var(--cream);margin-bottom:1.2rem;}
+.hero h1 em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:0.98rem;font-weight:300;color:rgba(245,241,234,0.65);line-height:1.8;margin-bottom:2rem;max-width:480px;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--sans);font-size:0.82rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:0.85rem 1.8rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;transition:all 0.18s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-teal{background:var(--teal);color:var(--navy);}
+.btn-teal:hover{background:var(--seafoam);}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(245,241,234,0.2);}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+.btn-gold{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.4);}
+.btn-gold:hover{background:rgba(201,168,76,0.08);}
+
+.hero-stack{display:flex;flex-direction:column;gap:0.5rem;}
+.stack-layer{display:flex;align-items:center;gap:0.8rem;padding:0.7rem 1rem;border-radius:5px;border:1px solid rgba(255,255,255,0.07);transition:border-color 0.2s;}
+.stack-layer:hover{border-color:rgba(0,168,150,0.3);}
+.stack-layer.l1{background:rgba(0,168,150,0.14);}
+.stack-layer.l2{background:rgba(0,168,150,0.10);}
+.stack-layer.l3{background:rgba(0,168,150,0.08);}
+.stack-layer.l4{background:rgba(0,168,150,0.06);}
+.stack-layer.l5{background:rgba(201,168,76,0.08);}
+.stack-layer.l6{background:rgba(201,168,76,0.06);}
+.stack-layer.l7{background:rgba(201,168,76,0.04);}
+.layer-icon{font-size:1rem;width:28px;text-align:center;flex-shrink:0;}
+.layer-label{font-size:0.8rem;font-weight:600;color:var(--cream);flex:1;}
+.layer-system{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--muted);}
+.stack-arrow{text-align:center;color:rgba(0,168,150,0.4);font-size:0.75rem;margin:0 0 0 14px;}
+
+.section{padding:6rem 3rem;}
+.inner{max-width:1100px;margin:0 auto;}
+.eyebrow{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:0.75rem;}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.15;color:var(--navy);margin-bottom:1rem;}
+.section-title em{font-style:italic;color:var(--teal);}
+.section-sub{font-size:0.95rem;font-weight:300;color:var(--slate);max-width:580px;line-height:1.8;margin-bottom:3rem;}
+
+.problem-section{background:var(--navy);}
+.problem-section .section-title{color:var(--cream);}
+.problem-section .section-sub{color:rgba(245,241,234,0.6);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.problem-items{display:flex;flex-direction:column;gap:0.8rem;}
+.problem-item{display:flex;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;}
+.problem-item:nth-child(1){border-left-color:#E05555;}
+.problem-item:nth-child(2){border-left-color:#E09055;}
+.problem-item:nth-child(3){border-left-color:var(--gold);}
+.problem-item:nth-child(4){border-left-color:#8855E0;}
+.pi-title{font-size:0.88rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem;}
+.pi-body{font-size:0.8rem;color:rgba(245,241,234,0.5);line-height:1.6;}
+
+.ai-callout{background:rgba(255,255,255,0.03);border:1px solid rgba(0,168,150,0.2);border-radius:10px;padding:2rem;}
+.ai-callout-headline{font-family:var(--serif);font-size:1.2rem;color:var(--cream);margin-bottom:1rem;line-height:1.3;}
+.ai-callout-body{font-size:0.88rem;font-weight:300;color:rgba(245,241,234,0.65);line-height:1.85;}
+.ai-callout-body strong{color:var(--teal);font-weight:600;}
+.ai-sequence{display:flex;flex-direction:column;gap:0.5rem;margin-top:1.4rem;}
+.ai-step{display:flex;align-items:center;gap:0.8rem;font-size:0.82rem;}
+.ai-step-num{width:24px;height:24px;border-radius:50%;background:rgba(0,168,150,0.15);border:1px solid rgba(0,168,150,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.65rem;color:var(--teal);flex-shrink:0;}
+.ai-step-text{color:rgba(245,241,234,0.7);}
+.ai-step-text strong{color:var(--cream);}
+
+.framework-section{background:var(--cream);}
+.framework-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
+.framework-card{background:white;border:1px solid var(--rule);border-radius:8px;padding:1.6rem;border-top:3px solid var(--teal);transition:box-shadow 0.2s,transform 0.18s;}
+.framework-card:hover{box-shadow:0 8px 28px rgba(0,168,150,0.1);transform:translateY(-2px);}
+.framework-card.gold{border-top-color:var(--gold);}
+.framework-card.purple{border-top-color:#8855E0;}
+.fc-num{font-family:var(--serif);font-size:2rem;color:rgba(13,27,42,0.06);line-height:1;margin-bottom:0.6rem;}
+.fc-icon{font-size:1.5rem;margin-bottom:0.6rem;}
+.fc-title{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+.fc-body{font-size:0.82rem;color:var(--slate);line-height:1.65;margin-bottom:0.9rem;}
+.fc-systems{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.fc-system{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:3px;background:rgba(0,168,150,0.07);color:var(--teal);border:1px solid rgba(0,168,150,0.18);}
+.fc-system.gold{background:rgba(201,168,76,0.07);color:var(--gold);border-color:rgba(201,168,76,0.2);}
+
+.stage-section{background:white;}
+.stage-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-bottom:2rem;}
+.stage-node{background:var(--teal);padding:0.9rem 0.7rem;text-align:center;position:relative;}
+.stage-node:not(:last-child)::after{content:'';position:absolute;right:-12px;top:0;bottom:0;width:0;height:0;border-top:28px solid transparent;border-bottom:28px solid transparent;border-left:12px solid var(--teal);z-index:1;}
+.stage-node:nth-child(2){background:#0098A0;}
+.stage-node:nth-child(3){background:#008890;}
+.stage-node:nth-child(3)::after{border-left-color:#008890;}
+.stage-node:nth-child(4){background:#007880;}
+.stage-node:nth-child(4)::after{border-left-color:#007880;}
+.stage-node:nth-child(5){background:#006870;}
+.stage-node:nth-child(5)::after{border-left-color:#006870;}
+.stage-node:nth-child(6){background:#005860;}
+.stage-node-name{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:white;display:block;margin-bottom:0.2rem;}
+.stage-node-pct{font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,0.85);}
+
+.stage-table{width:100%;border-collapse:collapse;margin-top:0;}
+.stage-table th{background:var(--navy);color:white;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.7rem 1rem;text-align:left;}
+.stage-table td{padding:0.75rem 1rem;font-size:0.85rem;border-bottom:1px solid var(--rule);}
+.stage-table tr:last-child td{border-bottom:none;}
+.stage-table tr:nth-child(even) td{background:rgba(0,168,150,0.03);}
+
+.case-section{background:var(--navy);}
+.case-section .section-title{color:var(--cream);}
+.case-section .section-sub{color:rgba(245,241,234,0.6);}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.case-block{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:1.6rem;}
+.case-block-label{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:0.8rem;display:block;}
+.case-block-title{font-family:var(--serif);font-size:1.1rem;color:var(--cream);margin-bottom:0.8rem;line-height:1.3;}
+.case-items{display:flex;flex-direction:column;gap:0.45rem;}
+.case-item{display:flex;gap:0.65rem;font-size:0.82rem;color:rgba(245,241,234,0.6);line-height:1.5;}
+.case-item::before{content:'→';color:var(--teal);flex-shrink:0;font-weight:600;}
+.case-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.case-metric{background:rgba(0,168,150,0.08);border:1px solid rgba(0,168,150,0.18);border-radius:6px;padding:1rem;text-align:center;}
+.case-metric-val{font-family:var(--serif);font-size:1.6rem;color:var(--teal);display:block;line-height:1;margin-bottom:0.3rem;}
+.case-metric-lbl{font-size:0.72rem;color:rgba(245,241,234,0.5);line-height:1.4;}
+
+.flow-section{background:var(--cream);}
+.flow-diagram{background:white;border:1px solid var(--rule);border-radius:10px;padding:2rem;overflow-x:auto;}
+.flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:0.5rem;}
+.flow-row-label{width:160px;flex-shrink:0;font-size:0.75rem;font-weight:700;color:var(--navy);padding:0.6rem 0.8rem 0.6rem 0;display:flex;align-items:center;border-right:2px solid var(--rule);}
+.flow-nodes{display:flex;align-items:center;gap:0.4rem;padding-left:1rem;flex:1;}
+.flow-node{background:var(--navy);color:white;font-size:0.72rem;font-weight:600;padding:0.55rem 0.85rem;border-radius:4px;white-space:nowrap;text-align:center;}
+.flow-node.teal{background:var(--teal);color:var(--navy);}
+.flow-node.gold{background:var(--gold);color:var(--navy);}
+.flow-node.muted{background:rgba(13,27,42,0.08);color:var(--navy);border:1px solid var(--rule);}
+.flow-arrow{color:var(--muted);font-size:0.8rem;flex-shrink:0;}
+.flow-caption{font-size:0.78rem;font-style:italic;color:var(--muted);text-align:center;margin-top:1rem;}
+
+.env-section{background:white;}
+.env-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
+.env-card{background:var(--warm);border:1px solid var(--rule);border-radius:8px;padding:1.4rem;border-left:3px solid var(--teal);}
+.env-card.gold-l{border-left-color:var(--gold);}
+.env-card-icon{font-size:1.4rem;margin-bottom:0.6rem;}
+.env-card-title{font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+.env-card-body{font-size:0.8rem;color:var(--slate);line-height:1.6;margin-bottom:0.8rem;}
+.env-variants{display:flex;flex-wrap:wrap;gap:0.3rem;}
+.env-v{font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:3px;background:rgba(0,168,150,0.07);color:var(--teal);border:1px solid rgba(0,168,150,0.18);}
+
+.cta-section{background:linear-gradient(135deg,#0D1B2A,#071420);padding:6rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 75% at 50% 50%,rgba(0,168,150,0.09),transparent);pointer-events:none;}
+.cta-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
+.cta-inner h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.15;margin-bottom:1.2rem;}
+.cta-inner h2 em{font-style:italic;color:var(--teal);}
+.cta-inner p{font-size:0.95rem;font-weight:300;color:rgba(245,241,234,0.6);line-height:1.8;margin-bottom:2.2rem;}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+.footer{background:#060D14;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--serif);font-size:1rem;color:rgba(245,241,234,0.45);}
+.footer-logo span{color:var(--teal);}
+.footer-copy{font-size:0.72rem;color:rgba(245,241,234,0.25);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:0.72rem;color:rgba(245,241,234,0.3);text-decoration:none;transition:color 0.18s;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:900px){
+  .nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero-inner,.problem-grid,.case-grid{grid-template-columns:1fr;}
+  .hero{padding:8rem 1.5rem 4rem;}
+  .section{padding:4rem 1.5rem;}
+  .stage-flow{grid-template-columns:repeat(3,1fr);gap:0.4rem;}
+  .stage-node::after{display:none;}
+  .flow-row{flex-direction:column;}
+  .flow-row-label{width:100%;border-right:none;border-bottom:2px solid var(--rule);padding-bottom:0.4rem;margin-bottom:0.4rem;}
+  .footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">stacks<span>.</span>advisory</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/story.html">How It Works</a></li>
+    <li><a href="/capabilities.html">Capabilities</a></li>
+  </ul>
+  <a class="nav-cta" href="/intake.html">Map Your Opportunity</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-pillar">Module · GTM &amp; Revenue Infrastructure</span>
+      <h1>CRM-to-Revenue<br><em>Architecture</em><br>for Life Sciences</h1>
+      <p class="hero-sub">Connecting sales behavior to pipeline accuracy to financial reporting — across Salesforce, HubSpot, ERP, and the systems your commercial team actually uses. This is the module that becomes the connective tissue of your commercial operating system — not a configuration project on its own.</p>
+      <div class="hero-actions">
+        <a href="/intake.html" class="btn btn-teal">Start the Conversation</a>
+        <a href="/services-cascade.html" class="btn btn-ghost">🧬 Find Your Engagement</a>
+      </div>
+    </div>
+    <!-- 7-Layer Stack Diagram -->
+    <div class="hero-stack">
+      <div class="stack-layer l1">
+        <span class="layer-icon">📣</span>
+        <span class="layer-label">Lead Capture & MQL Scoring</span>
+        <span class="layer-system">HubSpot / SFMC</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l2">
+        <span class="layer-icon">🏗</span>
+        <span class="layer-label">Opportunity Management</span>
+        <span class="layer-system">Salesforce Sales Cloud · 6-Stage</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l3">
+        <span class="layer-icon">💰</span>
+        <span class="layer-label">CPQ & Deal Desk Approval</span>
+        <span class="layer-system">Salesforce CPQ · DocuSign</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l4">
+        <span class="layer-icon">🔗</span>
+        <span class="layer-label">ERP Integration & Order Entry</span>
+        <span class="layer-system">Epicor · MuleSoft / Workato</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l5">
+        <span class="layer-icon">🤝</span>
+        <span class="layer-label">Customer Success Handoff</span>
+        <span class="layer-system">Salesforce Service Cloud · CS Workflows</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l6">
+        <span class="layer-icon">📊</span>
+        <span class="layer-label">Analytics & Forecasting</span>
+        <span class="layer-system">Tableau CRM · Einstein · Power BI</span>
+      </div>
+      <div class="stack-arrow">↓</div>
+      <div class="stack-layer l7">
+        <span class="layer-icon">🔄</span>
+        <span class="layer-label">MDM Governance & Continuous Improvement</span>
+        <span class="layer-system">Master Data · Audit Trail · Kaizen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section problem-section">
+  <div class="inner">
+    <span class="eyebrow">The Core Challenge</span>
+    <h2 class="section-title" style="color:var(--cream);">Most life sciences CRM projects<br><em>solve the wrong problem.</em></h2>
+    <p class="section-sub">They configure the tool. They don't redesign the motion. The result is a system that technically works but doesn't change how deals move, how forecasts are built, or how leadership sees the business.</p>
+    <div class="problem-grid">
+      <div class="problem-items">
+        <div class="problem-item">
+          <div>
+            <div class="pi-title">Data Integrity Without MDM Discipline</div>
+            <div class="pi-body">Duplicate records, inconsistent field definitions, and no master data governance mean every report starts from a compromised foundation. AI doesn't fix this — it amplifies it.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div>
+            <div class="pi-title">Manual Quote-to-Cash Creates Version-Control Failures</div>
+            <div class="pi-body">When pricing, quoting, and booking live in different systems — or spreadsheets — the gap between CRM opportunity value and ERP order value widens every quarter.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div>
+            <div class="pi-title">Stage Definitions Without Exit Criteria Destroy Forecast Accuracy</div>
+            <div class="pi-body">If "Propose" means different things to different reps, your weighted pipeline is noise. Forecast calls become storytelling sessions, not data-driven conversations.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div>
+            <div class="pi-title">No Post-Sale Visibility Breaks the Revenue Loop</div>
+            <div class="pi-body">When Sales and Customer Success operate in separate systems with no closed-loop feedback, you can't attribute revenue to pipeline, can't measure churn signals early, and can't tie marketing ROI to bookings.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-callout">
+        <div class="ai-callout-headline">"AI becomes valuable only when the commercial data foundation is stable, governed, and trusted."</div>
+        <div class="ai-callout-body">If the CRM and ERP aren't aligned, <strong>AI doesn't solve the problem — it scales the noise.</strong> The sequence matters: establish MDM discipline first, apply automation to repeatable decisions second, and only then introduce predictive intelligence into pipeline scoring, forecast confidence, and pricing guidance.<br><br><strong>AI is most valuable when it makes revenue decisions faster, not when it replaces judgment.</strong></div>
+        <div class="ai-sequence">
+          <div class="ai-step"><div class="ai-step-num">1</div><div class="ai-step-text"><strong>MDM Discipline</strong> — clean, governed, trusted data foundation</div></div>
+          <div class="ai-step"><div class="ai-step-num">2</div><div class="ai-step-text"><strong>Automation</strong> — repeatable decisions systematized</div></div>
+          <div class="ai-step"><div class="ai-step-num">3</div><div class="ai-step-text"><strong>Predictive Intelligence</strong> — pipeline scoring, forecast confidence, pricing guidance</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section framework-section">
+  <div class="inner">
+    <span class="eyebrow">The Framework</span>
+    <h2 class="section-title">Seven layers.<br><em>One revenue system.</em></h2>
+    <p class="section-sub">Every CRM-to-Revenue engagement is structured around the same seven components — sequenced in the order that matters, adapted to the specific stack your team is running.</p>
+    <div class="framework-grid">
+
+      <div class="framework-card">
+        <div class="fc-num">01</div>
+        <div class="fc-icon">📣</div>
+        <div class="fc-title">Lead Capture & MQL→SQL Integration</div>
+        <div class="fc-body">Design the lead scoring model, define the MQL threshold, and build the handoff from marketing automation into CRM — with closed-loop feedback so campaign ROI traces back to bookings.</div>
+        <div class="fc-systems">
+          <span class="fc-system">HubSpot</span>
+          <span class="fc-system">Salesforce Marketing Cloud</span>
+          <span class="fc-system">Marketo</span>
+        </div>
+      </div>
+
+      <div class="framework-card">
+        <div class="fc-num">02</div>
+        <div class="fc-icon">🏗</div>
+        <div class="fc-title">Sales Process & Stage Model Design</div>
+        <div class="fc-body">Define the 5–6 stage model with weighted probabilities, entry/exit criteria, and required field completion per stage. This is the foundation of forecast accuracy — and most companies get it wrong at the design phase.</div>
+        <div class="fc-systems">
+          <span class="fc-system">Salesforce Sales Cloud</span>
+          <span class="fc-system">HubSpot CRM</span>
+          <span class="fc-system">Custom Objects</span>
+        </div>
+      </div>
+
+      <div class="framework-card gold">
+        <div class="fc-num">03</div>
+        <div class="fc-icon">💰</div>
+        <div class="fc-title">Product Catalog, CPQ & Deal Desk Automation</div>
+        <div class="fc-body">Build the product catalog hierarchy first — individual SKUs rolling up into configured solutions in the product master — so quoting logic has something coherent to price. Layer in tiered discount approval workflows and Deal Desk controls, deal-card dashboards tracking pipeline velocity by stage, and automation that advances deals through sales stages and stakeholder approvals without manual chasing.</div>
+        <div class="fc-systems">
+          <span class="fc-system gold">HubSpot Product Library</span>
+          <span class="fc-system gold">Salesforce CPQ</span>
+          <span class="fc-system gold">Deal Desk Flows</span>
+        </div>
+      </div>
+
+      <div class="framework-card gold">
+        <div class="fc-num">04</div>
+        <div class="fc-icon">🔗</div>
+        <div class="fc-title">ERP Integration & Quote-to-Cash</div>
+        <div class="fc-body">Sync CRM opportunities to ERP order entry via middleware — daily push with audit trail, opportunity ID writeback, and exception handling for discount overrides and currency mismatches. The handoff where most revenue leaks.</div>
+        <div class="fc-systems">
+          <span class="fc-system gold">Epicor</span>
+          <span class="fc-system gold">MuleSoft</span>
+          <span class="fc-system gold">Workato</span>
+          <span class="fc-system gold">NetSuite</span>
+        </div>
+      </div>
+
+      <div class="framework-card">
+        <div class="fc-num">05</div>
+        <div class="fc-icon">🤝</div>
+        <div class="fc-title">Customer Success Handoff Architecture</div>
+        <div class="fc-body">Build the post-sale handoff from sales to CS — account health tracking, onboarding workflows, NPS feedback loops, and the closed-loop signal that feeds back into the pipeline model and marketing attribution.</div>
+        <div class="fc-systems">
+          <span class="fc-system">Salesforce Service</span>
+          <span class="fc-system">Gainsight</span>
+          <span class="fc-system">CS Workflows</span>
+        </div>
+      </div>
+
+      <div class="framework-card">
+        <div class="fc-num">06</div>
+        <div class="fc-icon">📊</div>
+        <div class="fc-title">Analytics, Forecasting & Executive Reporting</div>
+        <div class="fc-body">Build the QBR dashboard infrastructure — weighted pipeline by rep/region/product, forecast confidence scoring, margin visibility, and FX-adjusted revenue views for global operations. Automate the reports leadership actually reads.</div>
+        <div class="fc-systems">
+          <span class="fc-system">Tableau CRM</span>
+          <span class="fc-system">Einstein Analytics</span>
+          <span class="fc-system">Power BI</span>
+        </div>
+      </div>
+
+      <div class="framework-card purple" style="border-top-color:#8855E0;">
+        <div class="fc-num">07</div>
+        <div class="fc-icon">🔄</div>
+        <div class="fc-title">MDM Governance & Continuous Improvement</div>
+        <div class="fc-body">Establish the master data model, data validation rules, role-based visibility, and the quarterly CRM NPS feedback loop that surfaces adoption gaps before they become forecast problems. Kaizen for commercial operations.</div>
+        <div class="fc-systems">
+          <span class="fc-system" style="background:rgba(136,85,224,0.07);color:#8855E0;border-color:rgba(136,85,224,0.2);">MDM Framework</span>
+          <span class="fc-system" style="background:rgba(136,85,224,0.07);color:#8855E0;border-color:rgba(136,85,224,0.2);">Validation Rules</span>
+          <span class="fc-system" style="background:rgba(136,85,224,0.07);color:#8855E0;border-color:rgba(136,85,224,0.2);">CRM NPS Loop</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section stage-section">
+  <div class="inner">
+    <span class="eyebrow">The Stage Model</span>
+    <h2 class="section-title">Weighted pipeline design<br><em>built for forecast precision.</em></h2>
+    <p class="section-sub">Stage definitions without exit criteria are decorative. The model below is the starting framework — adapted to your specific sales motion, product mix, and buyer cycle during the engagement.</p>
+
+    <div class="stage-flow">
+      <div class="stage-node"><span class="stage-node-name">Prospect</span><span class="stage-node-pct">10%</span></div>
+      <div class="stage-node"><span class="stage-node-name">Qualify</span><span class="stage-node-pct">25%</span></div>
+      <div class="stage-node"><span class="stage-node-name">Scope</span><span class="stage-node-pct">40%</span></div>
+      <div class="stage-node"><span class="stage-node-name">Propose</span><span class="stage-node-pct">60%</span></div>
+      <div class="stage-node"><span class="stage-node-name">Commit</span><span class="stage-node-pct">85%</span></div>
+      <div class="stage-node"><span class="stage-node-name">Closed Won</span><span class="stage-node-pct">100%</span></div>
+    </div>
+
+    <table class="stage-table">
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Weight</th>
+          <th>Exit Criteria</th>
+          <th>Required CRM Fields</th>
+          <th>System Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Prospect</strong></td><td>10%</td><td>ICP confirmed, decision-maker identified</td><td>Account type, Contact role, Source</td><td>SDR / Inside Sales</td></tr>
+        <tr><td><strong>Qualify</strong></td><td>25%</td><td>Need validated, budget conversation initiated</td><td>Est. value, Close date, Competitor</td><td>Field Sales / AE</td></tr>
+        <tr><td><strong>Scope</strong></td><td>40%</td><td>Technical and commercial requirements documented</td><td>Product family, Use case, # users</td><td>Sales + Technical</td></tr>
+        <tr><td><strong>Propose</strong></td><td>60%</td><td>Formal proposal submitted, CPQ quote generated</td><td>Quote ID, Discount %, Legal entity</td><td>Sales + Deal Desk</td></tr>
+        <tr><td><strong>Commit</strong></td><td>85%</td><td>Verbal agreement, contract in legal review</td><td>Contract date, Signed by, PO expected</td><td>Sales + Finance</td></tr>
+        <tr><td><strong>Closed Won</strong></td><td>100%</td><td>Contract executed, ERP order created</td><td>Epicor Order #, Revenue rec. date</td><td>Commercial Ops</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:0.8rem;font-style:italic;">Weighted pipeline values (Amount × Stage %) aggregate automatically by rep, region, and product family — providing consistent forecast health visibility across the commercial organization.</p>
+  </div>
+</section>
+
+<section class="section case-section">
+  <div class="inner">
+    <span class="eyebrow" style="color:var(--gold);">Proof Case — Genomics Tools Company</span>
+    <h2 class="section-title" style="color:var(--cream);">A full Salesforce RevOps build<br><em>for a growth-stage genomics platform.</em></h2>
+    <p class="section-sub">The following engagement (anonymized) demonstrates the full CRM-to-Revenue architecture in a Salesforce + Epicor + HubSpot environment at a genomics tools company at commercial inflection.</p>
+
+    <div class="case-grid">
+      <div class="case-block">
+        <span class="case-block-label">The Situation</span>
+        <div class="case-block-title">Fragmented lead-to-revenue stack with no unified system of record</div>
+        <div class="case-items">
+          <div class="case-item">HubSpot managing marketing leads with no structured MQL→SQL handoff to Salesforce</div>
+          <div class="case-item">Salesforce opportunity stages undefined — "Propose" meant different things to different reps</div>
+          <div class="case-item">No CPQ — pricing and discounting managed via email and spreadsheet</div>
+          <div class="case-item">Salesforce and Epicor ERP not synced — opportunity values routinely diverged from order values</div>
+          <div class="case-item">No executive dashboard — QBR prep consumed 2–3 days of analyst time per quarter</div>
+          <div class="case-item">Post-sale handoff undocumented — CS and Sales operated with no shared visibility</div>
+        </div>
+      </div>
+
+      <div class="case-block">
+        <span class="case-block-label">The Build</span>
+        <div class="case-block-title">7-layer commercial operations architecture designed and implemented</div>
+        <div class="case-items">
+          <div class="case-item">HubSpot behavioral + firmographic lead scoring → MQL threshold → Salesforce Lead object → territory auto-routing</div>
+          <div class="case-item">6-stage sales model with weighted probabilities, exit criteria, and 32 field-validation rules enforced at each stage</div>
+          <div class="case-item">Salesforce CPQ deployed with tiered discount schema (Direct / Partner / OEM), Deal Desk approval flows, and DocuSign integration</div>
+          <div class="case-item">Salesforce ↔ Epicor daily middleware sync via Workato — opportunity ID writeback, bookings reconciliation, exception logging</div>
+          <div class="case-item">Tableau CRM dashboards: weighted pipeline by rep/geo/product, margin visibility, FX-adjusted revenue, AOP attainment</div>
+          <div class="case-item">Quarterly CRM NPS feedback loop (Sales + CS + Marketing) → categorized into UX / Data / Reporting → roadmap prioritization</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-metrics">
+      <div class="case-metric">
+        <span class="case-metric-val">95%</span>
+        <span class="case-metric-lbl">Pipeline completeness target — driven by Salesforce validation rules and stage hygiene</span>
+      </div>
+      <div class="case-metric">
+        <span class="case-metric-val">+10%</span>
+        <span class="case-metric-lbl">QoQ forecast accuracy improvement target — weighted pipeline governance</span>
+      </div>
+      <div class="case-metric">
+        <span class="case-metric-val">−15%</span>
+        <span class="case-metric-lbl">Stage velocity reduction target — standardized exit criteria and deal desk automation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section flow-section">
+  <div class="inner">
+    <span class="eyebrow">Systems Architecture</span>
+    <h2 class="section-title">The data flow that makes<br><em>executive reporting reliable.</em></h2>
+    <p class="section-sub">Forecast accuracy improves when quoting, pricing, and booking share the same data model — not separate spreadsheets, emails, and manual uploads. This is the architecture that connects them.</p>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <div class="flow-row-label">Marketing Layer</div>
+        <div class="flow-nodes">
+          <div class="flow-node teal">HubSpot / SFMC</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Lead Scoring</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">MQL Threshold Met</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node teal">Salesforce Lead</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-row-label">Sales Layer</div>
+        <div class="flow-nodes">
+          <div class="flow-node teal">Salesforce Sales Cloud</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">6-Stage Pipeline</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node gold">Salesforce CPQ</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node gold">Deal Desk Approval</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-row-label">Finance Layer</div>
+        <div class="flow-nodes">
+          <div class="flow-node gold">Quote → Order</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Workato / MuleSoft</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">ERP (Epicor)</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Bookings + Invoices</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-row-label">Reporting Layer</div>
+        <div class="flow-nodes">
+          <div class="flow-node muted">Orders + Bookings + COGS</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node teal">Tableau CRM</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Pipeline · Revenue · Margin · FX</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">Executive QBR</div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-row-label">Governance Layer</div>
+        <div class="flow-nodes">
+          <div class="flow-node muted">MDM + FX Rates (OANDA)</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Validation Rules + Audit Trail</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node muted">Quarterly Reconciliation</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node teal">Continuous Improvement</div>
+        </div>
+      </div>
+      <div class="flow-caption">Appendix B data flow swimlane — adapted from a live Salesforce ↔ Epicor ↔ Tableau CRM implementation in a genomics tools environment.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section env-section">
+  <div class="inner">
+    <span class="eyebrow">Environment Variants</span>
+    <h2 class="section-title">The framework adapts to<br><em>your specific stack.</em></h2>
+    <p class="section-sub">The seven-layer architecture is constant. The implementation adapts entirely to the CRM, ERP, and analytics tools already in your environment — or helps you select the right stack if you're starting from scratch.</p>
+
+    <div class="env-grid">
+      <div class="env-card">
+        <div class="env-card-icon">🗄</div>
+        <div class="env-card-title">CRM Platform</div>
+        <div class="env-card-body">Full architecture and configuration adapts to your CRM — object model, pipeline stages, CPQ, and reporting all built to match the platform's actual capabilities.</div>
+        <div class="env-variants">
+          <span class="env-v">Salesforce Sales Cloud</span>
+          <span class="env-v">HubSpot CRM</span>
+          <span class="env-v">Dynamics 365</span>
+          <span class="env-v">No CRM yet</span>
+        </div>
+      </div>
+      <div class="env-card">
+        <div class="env-card-icon">🏭</div>
+        <div class="env-card-title">ERP System</div>
+        <div class="env-card-body">ERP integration design adapts to the specific system — middleware selection, sync frequency, object mapping, and exception handling all differ by platform.</div>
+        <div class="env-variants">
+          <span class="env-v">Epicor</span>
+          <span class="env-v">NetSuite</span>
+          <span class="env-v">SAP</span>
+          <span class="env-v">QuickBooks</span>
+          <span class="env-v">No ERP yet</span>
+        </div>
+      </div>
+      <div class="env-card gold-l">
+        <div class="env-card-icon">📊</div>
+        <div class="env-card-title">Analytics & Reporting</div>
+        <div class="env-card-body">Dashboard design and data model adapt to your BI platform — whether native CRM reporting, Tableau, Power BI, or a custom analytics stack.</div>
+        <div class="env-variants">
+          <span class="env-v">Tableau CRM</span>
+          <span class="env-v">Power BI</span>
+          <span class="env-v">Einstein Analytics</span>
+          <span class="env-v">Looker</span>
+          <span class="env-v">Native CRM</span>
+        </div>
+      </div>
+      <div class="env-card gold-l">
+        <div class="env-card-icon">📣</div>
+        <div class="env-card-title">Marketing Automation</div>
+        <div class="env-card-body">The MQL→SQL handoff logic, lead scoring model, and closed-loop feedback design adapt to your marketing automation platform and sales motion.</div>
+        <div class="env-variants">
+          <span class="env-v">HubSpot</span>
+          <span class="env-v">Marketo</span>
+          <span class="env-v">Salesforce MC</span>
+          <span class="env-v">Pardot</span>
+          <span class="env-v">Manual today</span>
+        </div>
+      </div>
+      <div class="env-card">
+        <div class="env-card-icon">🌐</div>
+        <div class="env-card-title">Multi-Currency / Global Ops</div>
+        <div class="env-card-body">For global life sciences companies, currency-adjusted forecasting, regional price books, and OEM/reseller transfer pricing require specific architectural decisions.</div>
+        <div class="env-variants">
+          <span class="env-v">Salesforce ACM</span>
+          <span class="env-v">OANDA / Bloomberg FX</span>
+          <span class="env-v">Multi-entity ERP</span>
+          <span class="env-v">USD only</span>
+        </div>
+      </div>
+      <div class="env-card">
+        <div class="env-card-icon">📋</div>
+        <div class="env-card-title">Regulatory & Compliance</div>
+        <div class="env-card-body">Audit trail requirements, data validation standards, and governance protocols adapt to your regulatory posture — GxP environments require different controls than RUO.</div>
+        <div class="env-variants">
+          <span class="env-v">GxP / 21 CFR Pt 11</span>
+          <span class="env-v">HIPAA</span>
+          <span class="env-v">GDPR</span>
+          <span class="env-v">RUO standard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="eyebrow" style="color:var(--gold);display:block;margin-bottom:1rem;">Ready to Build It?</span>
+    <h2>The systems won't just be working.<br><em>They'll be working for you.</em></h2>
+    <p>Whether you're starting from a spreadsheet or optimizing an existing Salesforce org, the CRM-to-Revenue Architecture engagement adapts to where you are and builds toward where you need to be.</p>
+    <div class="cta-actions">
+      <a href="/intake.html" class="btn btn-teal">Map Your Opportunity</a>
+      <a href="/services-cascade.html" class="btn btn-gold">🧬 Find Your Engagement</a>
+      <a href="/" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">© 2025 Stacks Advisory LLC · Denver, CO · jon@stacksadvisory.com</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+</body>
+</html>
