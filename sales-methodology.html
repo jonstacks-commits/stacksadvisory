@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Methodology | Stacks Advisory</title>
+<meta name="description" content="Strategic Selling and MEDDPICC solve different problems at different altitudes. One is a map, the other is a scanner. A framework for structured qualification on long-cycle, multi-stakeholder enterprise pursuits.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stacksadvisory.com/sales-methodology.html">
+<meta property="og:title" content="Sales Methodology | Stacks Advisory">
+<meta property="og:description" content="One is a map. The other is a scanner. Structured qualification for long-cycle, multi-stakeholder enterprise pursuits.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --deep: #0A1520;
+  --teal: #00A896;
+  --seafoam: #02C39A;
+  --cream: #F5F1EA;
+  --warm-white: #FAFAF7;
+  --slate: #4A5568;
+  --muted: #8E9CAD;
+  --gold: #C9A84C;
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+.eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; }
+.btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-ghost-light { background: transparent; color: var(--cream); border: 1px solid rgba(245,241,234,0.22); }
+.btn-ghost-light:hover { border-color: var(--teal); color: var(--teal); }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); gap: 1rem; }
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; flex-shrink: 0; }
+.nav-logo span { color: var(--teal); }
+.nav a.back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav a.back:hover { color: var(--teal); }
+
+.hero { min-height: 54vh; background: var(--navy); display: flex; align-items: center; padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 65% at 78% 30%, rgba(0,168,150,0.09) 0%, transparent 70%); }
+.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.8rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.9rem); line-height: 1.15; color: var(--cream); margin-bottom: 1.4rem; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: rgba(245,241,234,0.68); max-width: 640px; margin-bottom: 1.6rem; }
+.hero .sub { font-size: 0.88rem; font-weight: 400; font-style: italic; color: rgba(245,241,234,0.5); line-height: 1.6; border-left: 2px solid rgba(201,168,76,0.4); padding-left: 0.85rem; max-width: 580px; }
+
+.stats { background: var(--deep); padding: 2.6rem 3rem; border-bottom: 1px solid rgba(0,168,150,0.12); }
+.stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.stat-num { font-family: var(--serif); font-size: 1.9rem; color: var(--teal); display: block; line-height: 1; margin-bottom: 0.5rem; }
+.stat-label { font-size: 0.8rem; color: rgba(245,241,234,0.6); line-height: 1.55; }
+
+.quote-section { background: var(--navy); padding: 4.5rem 3rem; position: relative; overflow: hidden; }
+.quote-section::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 20% 40%, rgba(0,168,150,0.08), transparent); }
+.quote-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.quote-source-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; display: block; }
+.quote-main { font-family: var(--serif); font-size: clamp(1.2rem, 1.9vw, 1.55rem); line-height: 1.55; color: var(--cream); border-left: 3px solid var(--teal); padding-left: 1.6rem; margin-bottom: 1.8rem; }
+.quote-supporting { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 2rem; }
+.quote-supporting p { font-size: 0.86rem; color: rgba(245,241,234,0.62); line-height: 1.75; }
+.quote-cite { margin-top: 1.6rem; font-size: 0.78rem; }
+.quote-cite a { color: var(--teal); text-decoration: none; }
+.quote-cite a:hover { text-decoration: underline; }
+@media (max-width: 900px) { .quote-supporting { grid-template-columns: 1fr; } }
+
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3.5rem; max-width: 700px; }
+.section-header p { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--slate); margin-top: 0.9rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--navy); }
+.section-title em { font-style: italic; color: var(--teal); }
+
+.thread-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+.thread-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 2rem; }
+.thread-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 2px; margin-bottom: 1rem; background: rgba(0,168,150,0.1); color: var(--teal); }
+.thread-card h3 { font-family: var(--serif); font-size: 1.25rem; color: var(--navy); margin-bottom: 0.9rem; }
+.thread-steps { list-style: none; margin-bottom: 1rem; }
+.thread-steps li { font-size: 0.85rem; color: var(--slate); line-height: 1.7; padding-left: 1.4rem; position: relative; margin-bottom: 0.6rem; }
+.thread-steps li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-weight: 600; }
+.thread-card .note { font-size: 0.8rem; color: var(--muted); font-style: italic; border-top: 1px solid var(--border-light); padding-top: 1rem; margin-top: 0.6rem; }
+
+.diagram-section { background: var(--cream); }
+.lesson-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.lesson-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.5rem; transition: box-shadow 0.22s, transform 0.18s; }
+.lesson-card:hover { box-shadow: 0 14px 42px rgba(0,168,150,0.11); transform: translateY(-3px); }
+.lesson-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+.lesson-card p { font-size: 0.81rem; color: var(--slate); line-height: 1.65; }
+
+.cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
+.cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.cta h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.8vw, 2.4rem); color: var(--cream); line-height: 1.22; margin-bottom: 1.2rem; }
+.cta h2 em { font-style: italic; color: var(--teal); }
+.cta p { font-size: 0.92rem; font-weight: 300; color: rgba(245,241,234,0.6); line-height: 1.78; margin-bottom: 2rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #060D14; padding: 2.2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: var(--serif); font-size: 1.05rem; color: rgba(245,241,234,0.5); }
+.footer-logo span { color: var(--teal); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-size: 0.72rem; color: rgba(245,241,234,0.3); text-decoration: none; transition: color 0.18s; }
+.footer-links a:hover { color: var(--teal); }
+
+@media (max-width: 960px) {
+  .hero { padding: 6.5rem 1.5rem 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .stats-inner { grid-template-columns: 1fr; gap: 1.4rem; text-align: center; }
+  .thread-grid { grid-template-columns: 1fr; }
+  .lesson-grid { grid-template-columns: 1fr 1fr; }
+  .footer { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .lesson-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
+  <a class="back" href="/capabilities.html">&larr; Back to Capabilities</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Sales Methodology &middot; Structured Qualification for Complex Deals</span>
+    <h1>One is a map. <em>The other is a scanner.</em></h1>
+    <p>Miller Heiman's Strategic Selling and LAMP tradition and MEDDPICC get debated as if a sales org has to pick one. They don't compete &mdash; they solve different problems at different altitudes. One designs how a long-cycle, multi-stakeholder pursuit gets won. The other tells you, with evidence, whether the deal in front of you is actually healthy.</p>
+    <p class="sub">Run only the map and you get eloquent strategy that fails inspection. Run only the scanner and you get immaculate inspection with no strategy behind it. De-risking enterprise pursuits means running both, deliberately, at the same time.</p>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">8 Pillars</span>
+      <div class="stat-label">Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Identified Pain, Champion, Competition &mdash; each evidenced in a CRM note, an email, or a dated plan.</div>
+    </div>
+    <div>
+      <span class="stat-num">1 Objective</span>
+      <div class="stat-label">Strategic Selling's discipline of forcing a Single Sales Objective for every pursuit &mdash; before templates, before forms.</div>
+    </div>
+  </div>
+</div>
+
+<section class="quote-section">
+  <div class="quote-inner">
+    <span class="quote-source-label">The Practitioner View</span>
+    <p class="quote-main">"One is a map; the other is a kind of scanner. One points the team in the right direction; the other tells you whether the deal is healthy enough to run."</p>
+    <div class="quote-supporting">
+      <p>After two decades leading enterprise sales organizations through cycles of increasing complexity, this practitioner's conclusion is that the debate over which methodology is "better" invites the wrong behavior entirely. Strategic Selling gives a team the strategic map &mdash; relationship mapping, a named Economic Buyer, a forced Single Sales Objective. MEDDPICC gives the diagnostic spine &mdash; inspectable, binary, hard to fake.</p>
+      <p>The failure mode he names directly: using MEDDPICC as a compliance checklist gets you the form without the force &mdash; every letter filled in, the deal still weak underneath it. The combination is what actually moves a forecast number reliably, quarter after quarter.</p>
+    </div>
+    <div class="quote-cite">Matthias K&ouml;hler, Enterprise Sales &amp; Leadership &mdash; <a href="https://www.linkedin.com/pulse/64-after-20-years-sales-comparing-meddpicc-miller-heiman-k%C3%B6hler" target="_blank" rel="noopener">LinkedIn, October 2025</a></div>
+  </div>
+</section>
+
+<section class="section diagram-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">The Two Disciplines</span>
+      <h2 class="section-title">Strategy sets the direction. <em>Qualification tells you if it's real.</em></h2>
+      <p>Neither framework alone accounts for how a complex, multi-stakeholder enterprise deal actually gets won. Run together, they cover the full altitude &mdash; from executive relationship strategy down to the specific, dated evidence that a deal is progressing.</p>
+    </div>
+    <div class="thread-grid">
+      <div class="thread-card">
+        <span class="thread-tag">The Map</span>
+        <h3>Strategic Selling / LAMP</h3>
+        <ul class="thread-steps">
+          <li>Map buying influences and name the true Economic Buyer</li>
+          <li>Separate technical objections from political ones</li>
+          <li>Force a Single Sales Objective for every pursuit</li>
+          <li>Align customer outcomes with personal wins for key stakeholders</li>
+          <li>Build a teachable review cadence around relationship and account strategy</li>
+        </ul>
+        <p class="note">Answers: how do we design the pursuit and win the room?</p>
+      </div>
+      <div class="thread-card">
+        <span class="thread-tag">The Scanner</span>
+        <h3>MEDDPICC</h3>
+        <ul class="thread-steps">
+          <li>Metrics &mdash; quantified outcomes the customer will recognize as success</li>
+          <li>Economic Buyer &amp; Decision Criteria &mdash; named, written, verified</li>
+          <li>Decision Process &amp; Paper Process &mdash; the calendar, gates, and path from proposal to PO</li>
+          <li>Identified Pain &mdash; measured, not poetic</li>
+          <li>Champion &amp; Competition &mdash; power confirmed, position known</li>
+        </ul>
+        <p class="note">Answers: is this deal actually healthy enough to forecast?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="eyebrow">Why It Matters</span>
+      <h2 class="section-title">What a hybrid approach <em>actually de-risks.</em></h2>
+    </div>
+    <div class="lesson-grid">
+      <div class="lesson-card">
+        <h3>Honest Forecasting</h3>
+        <p>Inspectable qualification criteria replace stage-percentage debates with evidence &mdash; a fifteen-minute review can surface the one real blocker.</p>
+      </div>
+      <div class="lesson-card">
+        <h3>Paper Process as Deal Design</h3>
+        <p>Treating the path to signature &mdash; proposal to MSA to PO &mdash; as part of the deal strategy from day one, not a legal afterthought.</p>
+      </div>
+      <div class="lesson-card">
+        <h3>Champion Cultivation</h3>
+        <p>The strategic layer teaches how a coach becomes a true Champion &mdash; something a qualification checklist alone can't build.</p>
+      </div>
+      <div class="lesson-card">
+        <h3>Coaching Rhythm</h3>
+        <p>A shared language across both frameworks gives managers a consistent, teachable cadence instead of ad hoc deal reviews.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Complex deals need <em>a map and a scanner &mdash; not a choice between them.</em></h2>
+    <p>Structured qualification built for long-cycle, multi-stakeholder enterprise pursuits in life sciences &mdash; combining pursuit strategy with the inspectable evidence that keeps a forecast honest.</p>
+    <div class="cta-actions">
+      <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+      <a href="/capabilities.html" class="btn btn-ghost-light">View Full Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">stacks<span>.</span>advisory</div>
+  <span class="footer-copy">&copy; 2026 Stacks Advisory &middot; Denver, CO &middot; <a href="mailto:jon@stacksadvisory.com" style="color:inherit;text-decoration:none;">jon@stacksadvisory.com</a></span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/jonstacks/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="/capabilities.html">Capabilities</a>
+    <a href="/services-cascade.html">🧬 Services Navigator</a>
+    <a href="/intake.html">Start a Diagnostic</a>
+  </div>
+</footer>
+
+</body>
+</html>
