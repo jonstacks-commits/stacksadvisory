@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacks Advisory | Capabilities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --teal: #00A896;
+  --seafoam: #02C39A;
+  --gold: #C9A84C;
+  --cream: #F5F1EA;
+  --warm-white: #FAFAF7;
+  --slate: #4A5568;
+  --muted: #8E9CAD;
+  --border-light: rgba(13,27,42,0.09);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); background: var(--warm-white); color: var(--navy); line-height: 1.6; }
+.eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 1rem; }
+.btn { display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 3px; border: none; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; text-decoration: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--teal); color: var(--navy); }
+.btn-primary:hover { background: var(--seafoam); }
+.btn-gold { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.45); }
+.btn-gold:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+
+.nav { position: sticky; top: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.25rem; background: rgba(13,27,42,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,168,150,0.14); }
+.nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); letter-spacing: 0.02em; text-decoration: none; }
+.nav-logo span { color: var(--teal); }
+.nav a.back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.18s; }
+.nav a.back:hover { color: var(--teal); }
+
+.hero { padding: 4.5rem 3rem 2rem; max-width: 900px; margin: 0 auto; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.2; margin-bottom: 1rem; }
+.hero h1 em { font-style: italic; color: var(--teal); }
+.hero p { font-size: 1rem; font-weight: 300; color: var(--slate); max-width: 620px; line-height: 1.8; }
+
+.proof-strip { background: var(--navy); padding: 2.2rem 3rem; }
+.proof-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.proof-stat { text-align: center; }
+.proof-num { font-family: var(--serif); font-size: 1.9rem; color: var(--teal); display: block; line-height: 1; }
+.proof-label { font-size: 0.74rem; color: rgba(245,241,234,0.55); margin-top: 0.4rem; letter-spacing: 0.03em; }
+
+.pillars-section { padding: 3rem 3rem 4rem; max-width: 1100px; margin: 0 auto; }
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.pillar-card { background: white; border: 1px solid var(--border-light); border-radius: 10px; padding: 1.8rem 1.6rem; transition: box-shadow 0.22s, transform 0.18s; }
+.pillar-card:hover { box-shadow: 0 14px 36px rgba(0,168,150,0.1); transform: translateY(-2px); }
+.pillar-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); background: rgba(0,168,150,0.08); border: 1px solid rgba(0,168,150,0.2); border-radius: 2px; padding: 0.2rem 0.6rem; margin-bottom: 0.9rem; }
+.pillar-title { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.25; }
+.pillar-desc { font-size: 0.83rem; color: var(--slate); line-height: 1.65; }
+.pillar-desc strong { color: var(--navy); font-weight: 600; }
+
+.cta-section { background: var(--cream); padding: 4rem 3rem; text-align: center; }
+.cta-section h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 1rem; }
+.cta-section h2 em { font-style: italic; color: var(--gold); }
+.cta-section p { font-size: 0.92rem; color: var(--slate); max-width: 520px; margin: 0 auto 1.8rem; line-height: 1.75; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.footer { background: #060D14; padding: 2rem 3rem; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-copy { font-size: 0.72rem; color: rgba(245,241,234,0.28); }
+
+@media (max-width: 900px) {
+  .pillars-grid { grid-template-columns: 1fr 1fr; }
+  .proof-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .hero, .pillars-section, .cta-section { padding-left: 1.4rem; padding-right: 1.4rem; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .proof-inner { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/index.html">stacks<span>.</span>advisory</a>
+  <a class="back" href="/index.html">&larr; Back to stacksadvisory.com</a>
+</nav>
+
+<div class="hero">
+  <span class="eyebrow">Capabilities</span>
+  <h1>Twenty years, <em>applied.</em></h1>
+  <p>Commercial infrastructure and go-to-market execution across life science tools, genomics, biopharma SaaS, and diagnostics — organized by the outcome each area delivers.</p>
+</div>
+
+<div class="proof-strip">
+  <div class="proof-inner">
+    <div class="proof-stat"><span class="proof-num">20+</span><span class="proof-label">Years enterprise life sciences</span></div>
+    <div class="proof-stat"><span class="proof-num">$367M</span><span class="proof-label">Revenue base managed, 26 accounts</span></div>
+    <div class="proof-stat"><span class="proof-num">$13.6B</span><span class="proof-label">Integration scale, Thermo Fisher</span></div>
+    <div class="proof-stat"><span class="proof-num">25+</span><span class="proof-label">Enterprise logos, L7 Informatics</span></div>
+  </div>
+</div>
+
+<div class="pillars-section">
+  <div class="pillars-grid">
+    <a class="pillar-card" href="/crm-architecture.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Commercial Infrastructure</span>
+      <div class="pillar-title">Building Revenue Systems from Zero</div>
+      <div class="pillar-desc">Employee #18 and first sales hire at L7 Informatics. Closed the first five logos, then built the commercial function that scaled to <strong>25+ enterprise logos</strong>. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/enterprise-account-strategy.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Enterprise Account Strategy</span>
+      <div class="pillar-title">Managing Complex, Multi-Stakeholder Accounts</div>
+      <div class="pillar-desc">Stewarded a <strong>$367M revenue base across 26 global pharma accounts</strong> at Thermo Fisher, through the <strong>$13.6B Life Technologies integration</strong> — and the synergy pull-through discipline it takes. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/scientific-fluency.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Scientific Fluency</span>
+      <div class="pillar-title">Credibility Across Genomics &amp; Cell Biology</div>
+      <div class="pillar-desc">A molecular biology foundation (BA, CU Boulder) enabling genuine technical dialogue — NGS, cell/gene therapy, liquid biopsy, and lab informatics. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/sales-methodology.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Sales Methodology</span>
+      <div class="pillar-title">Structured Qualification for Complex Deals</div>
+      <div class="pillar-desc">Practitioner of MEDDPICC and Miller Heiman's LAMP framework — de-risking long-cycle, multi-stakeholder enterprise pursuits. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/bd-partnerships.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">BD &amp; Partnerships</span>
+      <div class="pillar-title">Structuring Strategic Relationships</div>
+      <div class="pillar-desc">LOI development, partner qualification, and outreach sequencing for academic medical center and institutional genomics partnerships. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/market-entry.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Market Entry</span>
+      <div class="pillar-title">Positioning for Emerging Life Science Markets</div>
+      <div class="pillar-desc">Sizing and entering new verticals with first-principles market mapping, building narrative before proof points exist. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/revenue-operations.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Revenue Operations</span>
+      <div class="pillar-title">Quote-to-Cash &amp; Forecast Discipline</div>
+      <div class="pillar-desc">Deal desk workflows and pipeline governance that turn a sales process into a commercial operating system. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/regulatory-fluency.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Regulatory Fluency</span>
+      <div class="pillar-title">Compliance-Aware Commercial Design</div>
+      <div class="pillar-desc">Working knowledge of 21 CFR Part 11 and GxP requirements that shape how commercial systems get built in regulated environments. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/precision-medicine.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Precision Medicine</span>
+      <div class="pillar-title">Causal Genomics &amp; Diagnostics Strategy</div>
+      <div class="pillar-desc">A four-gate stratification framework and a four-category diagnostics taxonomy, translating scientific complexity into commercial thesis. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/contract-strategy.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Contract Strategy</span>
+      <div class="pillar-title">Enterprise Agreement Structuring</div>
+      <div class="pillar-desc">MSAs, SOWs, and SaaS licensing frameworks built for complex, multi-stakeholder enterprise sales cycles. &rarr;</div>
+    </a>
+    <a class="pillar-card" href="/scientific-data-infrastructure.html" style="text-decoration:none;color:inherit;display:block;">
+      <span class="pillar-tag">Platform Architecture</span>
+      <div class="pillar-title">Scientific Data Infrastructure</div>
+      <div class="pillar-desc">LIMS and informatics deployment strategy — data provenance and access architecture for regulated environments, and the AI-readiness case it now supports. &rarr;</div>
+    </a>
+    <div class="pillar-card">
+      <span class="pillar-tag">Founder Operating</span>
+      <div class="pillar-title">Building Stacks Advisory</div>
+      <div class="pillar-desc">Full-stack founder execution — brand, web, content strategy, and delivery — built on 20+ years of the experience above.</div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>This is the <em>shape of it.</em></h2>
+  <p>The specifics — which engagements, which tools, which track record maps to your situation — are worth a conversation, not a page.</p>
+  <div class="cta-actions">
+    <a href="/intake.html" class="btn btn-primary">Map Your Opportunity</a>
+    <a href="/services-cascade.html" class="btn btn-gold">🧬 Find Your Engagement</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-copy">© 2025 Stacks Advisory · Denver, CO</span>
+</footer>
+
+</body>
+</html>
