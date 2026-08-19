@@ -384,7 +384,8 @@ button { font-family: var(--sans); }
 
 /* PRECISION FEED TICKER */
 .pf-ticker {
-  position: relative;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   width: 100%;
   background: #0D1B2A;
   border-bottom: 1px solid rgba(0,168,150,0.35);
@@ -392,6 +393,13 @@ button { font-family: var(--sans); }
   height: 38px;
   display: flex;
   align-items: center;
+  z-index: 210;
+}
+/* Push the fixed nav down below the fixed ticker, and give the hero room for both */
+.nav { top: 38px !important; }
+.hero { padding-top: calc(8rem + 38px) !important; }
+@media (max-width: 640px) {
+  .hero { padding-top: calc(5.5rem + 38px) !important; }
 }
 .pf-ticker-label {
   flex: 0 0 auto;
