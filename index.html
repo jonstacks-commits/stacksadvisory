@@ -381,9 +381,110 @@ button { font-family: var(--sans); }
   .navigator-cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .navigator-cta { padding: 3.5rem 1.5rem; }
 }
+
+/* PRECISION FEED TICKER */
+.pf-ticker {
+  position: relative;
+  width: 100%;
+  background: #0D1B2A;
+  border-bottom: 1px solid rgba(0,168,150,0.35);
+  overflow: hidden;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+.pf-ticker-label {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  height: 100%;
+  padding: 0 .9rem;
+  background: #00A896;
+  color: #0D1B2A;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 2;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  padding-right: 1.4rem;
+}
+.pf-ticker-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #0D1B2A;
+  animation: pf-pulse 1.6s ease-in-out infinite;
+}
+@keyframes pf-pulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+.pf-ticker-track {
+  flex: 1 1 auto;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.pf-ticker-items {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: pf-scroll-ltr linear infinite;
+  animation-duration: 42s;
+}
+.pf-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 2.2rem 0 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  color: #F5F1EA;
+}
+.pf-ticker-item a {
+  color: #F5F1EA;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245,241,234,0.25);
+  transition: border-color .15s ease, color .15s ease;
+}
+.pf-ticker-item a:hover { color: #C9A84C; border-color: #C9A84C; }
+.pf-ticker-tag {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+.pf-ticker-sep { color: rgba(245,241,234,0.3); margin: 0 .3rem; }
+@keyframes pf-scroll-ltr {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+.pf-ticker:hover .pf-ticker-items { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .pf-ticker-items { animation: none; position: static; white-space: normal; }
+  .pf-ticker { height: auto; padding: .4rem 0; flex-wrap: wrap; }
+}
+@media (max-width: 640px) {
+  .pf-ticker-label span.pf-ticker-label-full { display: none; }
+}
 </style>
 </head>
 <body>
+
+<!-- PRECISION MEDICINE FEED TICKER -->
+<div class="pf-ticker" id="pf-ticker" role="region" aria-label="Precision medicine and diagnostics news ticker">
+  <div class="pf-ticker-label"><span class="pf-ticker-dot"></span><span class="pf-ticker-label-full">Precision&nbsp;Feed</span></div>
+  <div class="pf-ticker-track">
+    <div class="pf-ticker-items" id="pf-ticker-items"></div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -762,6 +863,75 @@ button { font-family: var(--sans); }
     <a href="/intake.html">Start a Diagnostic</a>
   </div>
 </footer>
+
+<!-- PRECISION FEED TICKER: DATA + RENDER -->
+<script>
+(function () {
+  // Seeded feed — static array simulating a live precision medicine / diagnostics wire.
+  // Update this list to refresh the ticker; each item needs a tag, headline, and source url.
+  var PF_FEED = [
+    {
+      tag: "Genomics",
+      text: "AstraZeneca's Centre for Genomics Research published MILTON, a machine-learning framework that predicts disease onset from UK Biobank biomarkers and sharpened over 180 gene\u2013disease signals missed by standard case\u2013control analysis.",
+      url: "https://www.nature.com/articles/s41588-024-01898-1",
+      source: "Nature Genetics"
+    },
+    {
+      tag: "CDx",
+      text: "SOPHiA GENETICS signed a multi-year companion diagnostics collaboration with AstraZeneca, extending its decentralized solid tumor and hematological oncology assays into CDx programs.",
+      url: "https://www.prnewswire.com/news-releases/sophia-genetics-enters-collaboration-to-develop-companion-diagnostics-for-precision-oncology-therapies-302841676.html",
+      source: "PR Newswire"
+    },
+    {
+      tag: "Rare Disease",
+      text: "Karolinska University Hospital's shift to routine whole genome sequencing lifted the rare disease diagnostic yield to 23% across more than 15,000 patients, with the strongest gains in pediatric cases.",
+      url: "https://medicalxpress.com/news/2026-03-precision-medicine-patients-genetic-diagnosis.html",
+      source: "Medical Xpress"
+    },
+    {
+      tag: "Market",
+      text: "The global precision diagnostics and medicine market is on pace for an 11.1% CAGR through 2029, crossing an estimated $246B in value as AI-driven interpretation scales across health systems.",
+      url: "https://www.reportsnreports.com/healthcare/biotechnology-reports/precision-diagnostics-medicine-2/",
+      source: "Reports and Reports"
+    }
+  ];
+
+  var container = document.getElementById("pf-ticker-items");
+  if (!container) return;
+
+  function renderSet() {
+    var frag = document.createDocumentFragment();
+    PF_FEED.forEach(function (item, i) {
+      var el = document.createElement("span");
+      el.className = "pf-ticker-item";
+      el.innerHTML =
+        '<span class="pf-ticker-tag">' + item.tag + '</span>' +
+        '<a href="' + item.url + '" target="_blank" rel="noopener">' + item.text + '</a>' +
+        '<span class="pf-ticker-sep">&mdash; ' + item.source + '</span>';
+      frag.appendChild(el);
+      if (i < PF_FEED.length - 1) {
+        var sep = document.createElement("span");
+        sep.className = "pf-ticker-sep";
+        sep.textContent = "\u2022";
+        frag.appendChild(sep);
+      }
+    });
+    return frag;
+  }
+
+  // Duplicate the set so the loop has no visible seam.
+  container.appendChild(renderSet());
+  container.appendChild(renderSet());
+
+  // Scale animation duration to content width so scroll speed stays consistent.
+  window.addEventListener("load", function () {
+    var width = container.scrollWidth / 2;
+    var pxPerSecond = 55;
+    var duration = Math.max(24, width / pxPerSecond);
+    container.style.animationDuration = duration + "s";
+  });
+})();
+</script>
 
 </body>
 </html>
