@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake Portal | Precision Diagnostics | Stacks Advisory</title>
+<meta name="description" content="A short history checklist and optional variant lookup that flags patterns worth a genetic counseling conversation. Informational only — not a diagnosis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1B2A;
+    --navy-70: rgba(13,27,42,0.7);
+    --navy-45: rgba(13,27,42,0.45);
+    --navy-12: rgba(13,27,42,0.12);
+    --teal:#00A896;
+    --teal-10: rgba(0,168,150,0.1);
+    --gold:#C9A84C;
+    --cream:#F5F1EA;
+    --paper:#FFFFFF;
+    --amber:#B8763A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--navy);
+    font-family:'DM Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--teal); }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 28px; }
+
+  header{
+    padding:26px 0 22px;
+    border-bottom:1px solid var(--navy-12);
+  }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; }
+  .brand{ font-family:'DM Serif Display', serif; font-size:1.1rem; text-decoration:none; color:var(--navy); }
+  .crumb{ font-size:0.83rem; color:var(--navy-45); }
+  .crumb a{ color:inherit; text-decoration:none; border-bottom:1px solid var(--navy-12); }
+
+  main{ padding:56px 0 100px; }
+
+  /* progress */
+  .progress{
+    display:flex;
+    gap:8px;
+    margin-bottom:36px;
+  }
+  .progress span{
+    height:3px;
+    flex:1;
+    background:var(--navy-12);
+    border-radius:2px;
+  }
+  .progress span.done{ background:var(--teal); }
+
+  .step-label{
+    font-size:0.82rem;
+    color:var(--navy-45);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:clamp(1.7rem, 3.4vw, 2.3rem);
+    line-height:1.18;
+    margin:0 0 14px;
+  }
+  .lede{
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--navy-70);
+    max-width:56ch;
+    margin:0 0 40px;
+  }
+
+  fieldset{ border:none; padding:0; margin:0 0 34px; }
+  legend{
+    font-family:'DM Sans', sans-serif;
+    font-weight:600;
+    font-size:0.98rem;
+    margin:0 0 4px;
+    padding:0;
+  }
+  .fieldset-note{
+    font-size:0.86rem;
+    color:var(--navy-45);
+    margin:0 0 16px;
+  }
+
+  .check-row{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    padding:14px 0;
+    border-top:1px solid var(--navy-12);
+    cursor:pointer;
+  }
+  fieldset .check-row:first-of-type{ border-top:1px solid var(--navy-12); }
+  .check-row input{
+    margin-top:3px;
+    width:17px;
+    height:17px;
+    accent-color:var(--teal);
+    flex-shrink:0;
+  }
+  .check-row label{
+    font-size:0.96rem;
+    line-height:1.5;
+    color:var(--navy);
+    cursor:pointer;
+  }
+
+  .btn-row{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    margin-top:38px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:inherit;
+    font-size:0.93rem;
+    font-weight:500;
+    border:none;
+    cursor:pointer;
+    padding:13px 24px;
+    border-radius:2px;
+    background:var(--teal);
+    color:#fff;
+  }
+  .btn:hover{ background:#008f7e; }
+  .btn.secondary{
+    background:transparent;
+    color:var(--navy-70);
+    text-decoration:underline;
+    padding:13px 6px;
+  }
+  .btn.secondary:hover{ color:var(--navy); }
+
+  /* step 2 — variant lookup */
+  .lookup-box{
+    border:1px solid var(--navy-12);
+    background:var(--paper);
+    padding:26px 28px;
+    margin-bottom:8px;
+  }
+  .lookup-box label{
+    display:block;
+    font-size:0.92rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .lookup-box input[type=text]{
+    width:100%;
+    font-family:inherit;
+    font-size:0.98rem;
+    padding:12px 14px;
+    border:1px solid var(--navy-12);
+    border-radius:2px;
+    background:var(--cream);
+    color:var(--navy);
+  }
+  .lookup-box input[type=text]:focus{ outline:2px solid var(--teal); outline-offset:1px; }
+  .lookup-hint{ font-size:0.82rem; color:var(--navy-45); margin:9px 0 0; }
+  .demo-tag{
+    display:inline-block;
+    font-size:0.74rem;
+    color:var(--amber);
+    background:rgba(184,118,58,0.1);
+    border:1px solid rgba(184,118,58,0.3);
+    padding:3px 9px;
+    border-radius:2px;
+    margin-bottom:14px;
+  }
+
+  /* results */
+  .result-panel{
+    border:1px solid var(--navy-12);
+    background:var(--paper);
+    padding:34px 32px;
+    margin-bottom:28px;
+  }
+  .result-flag{
+    font-size:0.82rem;
+    font-weight:600;
+    margin:0 0 12px;
+    display:inline-block;
+    padding:5px 12px;
+    border-radius:2px;
+  }
+  .flag-yes{ background:rgba(201,168,76,0.18); color:#8a6c1f; }
+  .flag-no{ background:var(--teal-10); color:#00695c; }
+  .result-panel h2{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:1.4rem;
+    margin:0 0 14px;
+    line-height:1.25;
+  }
+  .result-panel p{
+    font-size:0.98rem;
+    line-height:1.65;
+    color:var(--navy-70);
+    margin:0 0 16px;
+  }
+  .result-list{
+    margin:0 0 4px;
+    padding-left:20px;
+    font-size:0.94rem;
+    color:var(--navy-70);
+    line-height:1.7;
+  }
+
+  .next-steps{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .next-step{
+    border:1px solid var(--navy-12);
+    padding:22px 22px;
+    background:var(--paper);
+  }
+  .next-step h3{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:1.08rem;
+    margin:0 0 8px;
+  }
+  .next-step p{
+    font-size:0.9rem;
+    line-height:1.55;
+    color:var(--navy-70);
+    margin:0 0 14px;
+  }
+  .next-step a.btn{ padding:10px 18px; font-size:0.86rem; }
+  .next-step a.btn.ghost{
+    background:transparent;
+    border:1px solid var(--navy);
+    color:var(--navy);
+  }
+
+  .disclaimer{
+    margin-top:40px;
+    padding-top:24px;
+    border-top:1px solid var(--navy-12);
+    font-size:0.82rem;
+    line-height:1.6;
+    color:var(--navy-45);
+  }
+
+  [data-step]{ display:none; }
+  [data-step].active{ display:block; }
+
+  @media (max-width: 620px){
+    .next-steps{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="precision-diagnostics.html">Stacks Advisory</a>
+    <div class="crumb"><a href="precision-diagnostics.html">Precision Diagnostics</a> &nbsp;/&nbsp; Intake</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="progress">
+    <span id="p1" class="done"></span>
+    <span id="p2"></span>
+    <span id="p3"></span>
+  </div>
+
+  <!-- STEP 1 -->
+  <section data-step="1" class="active">
+    <p class="step-label">Step 1 of 3</p>
+    <h1>Personal &amp; family history</h1>
+    <p class="lede">Check anything that applies to you or a blood relative. This is a screening checklist, not a diagnosis — it's built from patterns that hereditary cancer risk assessment criteria typically flag as worth a genetic counseling conversation.</p>
+
+    <form id="historyForm">
+      <fieldset>
+        <legend>Your own history</legend>
+        <p class="fieldset-note">Any cancer diagnosis, at any point</p>
+        <div class="check-row"><input type="checkbox" id="q1" data-weight="3"><label for="q1">Diagnosed with any cancer before age 50</label></div>
+        <div class="check-row"><input type="checkbox" id="q2" data-weight="3"><label for="q2">Diagnosed with two or more separate primary cancers</label></div>
+        <div class="check-row"><input type="checkbox" id="q3" data-weight="3"><label for="q3">Diagnosed with ovarian cancer, at any age</label></div>
+        <div class="check-row"><input type="checkbox" id="q4" data-weight="3"><label for="q4">Diagnosed with pancreatic cancer, at any age</label></div>
+        <div class="check-row"><input type="checkbox" id="q5" data-weight="3"><label for="q5">Male, and diagnosed with breast cancer</label></div>
+        <div class="check-row"><input type="checkbox" id="q6" data-weight="3"><label for="q6">Diagnosed with metastatic or high-risk prostate cancer</label></div>
+        <div class="check-row"><input type="checkbox" id="q7" data-weight="2"><label for="q7">Diagnosed with triple-negative breast cancer before age 60</label></div>
+        <div class="check-row"><input type="checkbox" id="q8" data-weight="2"><label for="q8">Diagnosed with colorectal or endometrial cancer before age 50, or told a tumor tested "MSI-high" or "mismatch repair deficient"</label></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Family history (parents, siblings, children, grandparents, aunts/uncles)</legend>
+        <div class="check-row"><input type="checkbox" id="q9" data-weight="2"><label for="q9">A parent, sibling, or child diagnosed with any cancer before age 50</label></div>
+        <div class="check-row"><input type="checkbox" id="q10" data-weight="1"><label for="q10">Three or more relatives on the same side of the family with breast, ovarian, pancreatic, or prostate cancer</label></div>
+        <div class="check-row"><input type="checkbox" id="q11" data-weight="1"><label for="q11">Three or more relatives on the same side with colorectal, endometrial, ovarian, gastric, or urinary tract cancer</label></div>
+        <div class="check-row"><input type="checkbox" id="q12" data-weight="3"><label for="q12">A relative has already tested positive for a known hereditary cancer gene variant (e.g., BRCA1/2, Lynch syndrome genes)</label></div>
+        <div class="check-row"><input type="checkbox" id="q13" data-weight="1"><label for="q13">Ashkenazi Jewish ancestry, combined with any personal or family history of breast, ovarian, or pancreatic cancer</label></div>
+      </fieldset>
+
+      <div class="btn-row">
+        <button type="button" class="btn" onclick="goToStep(2)">Continue</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- STEP 2 -->
+  <section data-step="2">
+    <p class="step-label">Step 2 of 3</p>
+    <h1>Genetic test results <span style="color:var(--navy-45); font-family:'DM Sans',sans-serif; font-size:0.55em; font-weight:400;">(optional)</span></h1>
+    <p class="lede">If you've already had genetic testing and know a gene or variant that came back, enter it below. If not, skip this step — the history checklist alone still produces a result.</p>
+
+    <div class="lookup-box">
+      <span class="demo-tag">Demo dataset — checks against a small illustrative reference set, not the full ClinVar database</span>
+      <label for="variantInput">Gene or variant (e.g. "BRCA1", "MLH1", "c.68_69delAG")</label>
+      <input type="text" id="variantInput" placeholder="Enter a gene name or variant, or leave blank">
+      <p class="lookup-hint">In a production build, this step queries ClinVar directly rather than a fixed reference set.</p>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="btn" onclick="goToStep(3)">See my result</button>
+      <button type="button" class="btn secondary" onclick="skipLookup()">Skip this step</button>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section data-step="3">
+    <p class="step-label">Step 3 of 3</p>
+    <h1>Your result</h1>
+
+    <div class="result-panel" id="resultPanel"></div>
+
+    <div class="next-steps" id="nextSteps"></div>
+
+    <div class="disclaimer">
+      This tool provides general educational information based on published hereditary cancer risk referral patterns. It does not diagnose any condition, calculate a risk percentage, or replace evaluation by a genetic counselor or physician. Anyone with a personal health concern should speak with a healthcare provider regardless of this result.
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const knownGenes = {
+    "brca1": { syndrome: "Hereditary Breast and Ovarian Cancer (HBOC)", note: "BRCA1 pathogenic/likely pathogenic variants are associated with elevated breast and ovarian cancer risk." },
+    "brca2": { syndrome: "Hereditary Breast and Ovarian Cancer (HBOC)", note: "BRCA2 pathogenic/likely pathogenic variants are associated with elevated breast, ovarian, prostate, and pancreatic cancer risk." },
+    "palb2": { syndrome: "Hereditary Breast Cancer", note: "PALB2 pathogenic/likely pathogenic variants are associated with elevated breast and pancreatic cancer risk." },
+    "mlh1": { syndrome: "Lynch Syndrome", note: "MLH1 pathogenic/likely pathogenic variants are associated with elevated colorectal, endometrial, and other Lynch-spectrum cancer risk." },
+    "msh2": { syndrome: "Lynch Syndrome", note: "MSH2 pathogenic/likely pathogenic variants are associated with elevated colorectal, endometrial, and other Lynch-spectrum cancer risk." },
+    "msh6": { syndrome: "Lynch Syndrome", note: "MSH6 pathogenic/likely pathogenic variants are associated with elevated endometrial and colorectal cancer risk." },
+    "pms2": { syndrome: "Lynch Syndrome", note: "PMS2 pathogenic/likely pathogenic variants are associated with Lynch-spectrum cancer risk, generally at lower penetrance than MLH1/MSH2." },
+    "apc": { syndrome: "Familial Adenomatous Polyposis", note: "APC pathogenic/likely pathogenic variants are associated with a strongly elevated colorectal cancer risk." },
+    "mutyh": { syndrome: "MUTYH-Associated Polyposis", note: "Two MUTYH pathogenic variants (one from each parent) are associated with elevated colorectal cancer risk." },
+    "tp53": { syndrome: "Li-Fraumeni Syndrome", note: "TP53 pathogenic/likely pathogenic variants are associated with a broad, early-onset cancer risk spectrum." }
+  };
+  const knownVariantStrings = {
+    "c.68_69delag": "brca1", "187delag": "brca1",
+    "c.5266dupc": "brca1", "5382insc": "brca1",
+    "c.5946delt": "brca2", "6174delt": "brca2"
+  };
+
+  function goToStep(n){
+    document.querySelectorAll('[data-step]').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="'+n+'"]').classList.add('active');
+    for(let i=1;i<=3;i++){
+      document.getElementById('p'+i).classList.toggle('done', i<=n);
+    }
+    if(n===3){ renderResult(); window.scrollTo({top:0, behavior:'smooth'}); }
+  }
+
+  function skipLookup(){
+    document.getElementById('variantInput').value = '';
+    goToStep(3);
+  }
+
+  function scoreHistory(){
+    let score = 0;
+    document.querySelectorAll('#historyForm input[type=checkbox]:checked').forEach(el => {
+      score += parseInt(el.dataset.weight, 10);
+    });
+    return score;
+  }
+
+  function lookupVariant(){
+    const raw = document.getElementById('variantInput').value.trim().toLowerCase();
+    if(!raw) return null;
+    if(knownGenes[raw]) return knownGenes[raw];
+    if(knownVariantStrings[raw]) return knownGenes[knownVariantStrings[raw]];
+    // loose match: does the input contain a known gene symbol
+    for(const gene in knownGenes){
+      if(raw.includes(gene)) return knownGenes[gene];
+    }
+    return 'unmatched';
+  }
+
+  function renderResult(){
+    const historyScore = scoreHistory();
+    const variantResult = lookupVariant();
+    const historyFlag = historyScore >= 3;
+    const variantFlag = variantResult && variantResult !== 'unmatched';
+    const flagged = historyFlag || variantFlag;
+
+    const panel = document.getElementById('resultPanel');
+    const next = document.getElementById('nextSteps');
+
+    if(flagged){
+      let reasonHtml = '';
+      if(variantFlag){
+        reasonHtml += '<p><strong>' + variantResult.syndrome + ':</strong> ' + variantResult.note + '</p>';
+      }
+      if(historyFlag){
+        reasonHtml += '<p>Your personal and family history checklist matches a pattern that hereditary cancer risk criteria typically flag for further evaluation.</p>';
+      }
+      panel.innerHTML =
+        '<span class="result-flag flag-yes">Pattern identified</span>' +
+        '<h2>This is a pattern worth discussing with a genetic counselor.</h2>' +
+        reasonHtml +
+        '<p>This does not mean you have or will develop cancer. It means your history or test result matches criteria where a genetic counselor can help interpret what it does and doesn\u2019t mean for you, and whether further testing makes sense.</p>';
+
+      next.innerHTML =
+        '<div class="next-step">' +
+          '<h3>Talk to a genetic counselor</h3>' +
+          '<p>A licensed genetic counselor can review your full history and, if appropriate, order the right test.</p>' +
+          '<a class="btn ghost" href="https://www.findageneticcounselor.com/" target="_blank" rel="noopener">Find a counselor</a>' +
+        '</div>' +
+        '<div class="next-step">' +
+          '<h3>Compare confirmatory tests</h3>' +
+          '<p>If testing is recommended, OpenOnco is a free, vendor-neutral way to compare available panels.</p>' +
+          '<a class="btn ghost" href="https://www.openonco.org/" target="_blank" rel="noopener">Browse OpenOnco</a>' +
+        '</div>';
+    } else {
+      panel.innerHTML =
+        '<span class="result-flag flag-no">No strong pattern identified</span>' +
+        '<h2>Nothing here matches typical genetic counseling referral criteria.</h2>' +
+        '<p>Based on what you entered, your history doesn\u2019t match the patterns this checklist screens for. That can change — family history is worth revisiting periodically, especially after a new diagnosis in the family.</p>';
+
+      next.innerHTML =
+        '<div class="next-step">' +
+          '<h3>Revisit this later</h3>' +
+          '<p>If your family history changes, this checklist takes about two minutes to redo.</p>' +
+          '<a class="btn ghost" href="intake-portal.html">Retake the intake</a>' +
+        '</div>' +
+        '<div class="next-step">' +
+          '<h3>General awareness</h3>' +
+          '<p>Screening guidelines for the general population still apply regardless of this result.</p>' +
+          '<a class="btn ghost" href="https://www.cancer.org/cancer/screening.html" target="_blank" rel="noopener">Screening guidelines</a>' +
+        '</div>';
+    }
+  }
+</script>
+
+</body>
+</html>
