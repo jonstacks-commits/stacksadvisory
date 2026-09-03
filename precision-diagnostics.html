@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precision Diagnostics | Stacks Advisory</title>
+<meta name="description" content="Two entry points into precision diagnostics: a patient intake portal for early genetic risk signals, and a pharma-facing four-gate causal genomics stratification showcase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1B2A;
+    --navy-70: rgba(13,27,42,0.7);
+    --navy-40: rgba(13,27,42,0.4);
+    --navy-12: rgba(13,27,42,0.12);
+    --teal:#00A896;
+    --gold:#C9A84C;
+    --cream:#F5F1EA;
+    --paper:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--navy);
+    font-family:'DM Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---- header ---- */
+  header{
+    padding:28px 0 24px;
+    border-bottom:1px solid var(--navy-12);
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:'DM Serif Display', serif;
+    font-size:1.15rem;
+    text-decoration:none;
+    letter-spacing:0.01em;
+  }
+  .crumb{
+    font-size:0.85rem;
+    color:var(--navy-70);
+  }
+  .crumb a{ text-decoration:none; border-bottom:1px solid var(--navy-12); }
+
+  /* ---- hero ---- */
+  .hero{
+    padding:88px 0 64px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap:64px;
+    align-items:end;
+  }
+  h1{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:clamp(2.3rem, 4vw, 3.4rem);
+    line-height:1.08;
+    margin:0 0 22px;
+    max-width:14ch;
+  }
+  .hero-lede{
+    font-size:1.08rem;
+    line-height:1.62;
+    color:var(--navy-70);
+    max-width:46ch;
+    margin:0;
+  }
+  .hero-note{
+    font-size:0.95rem;
+    line-height:1.6;
+    color:var(--navy-70);
+    border-left:2px solid var(--gold);
+    padding-left:20px;
+    max-width:36ch;
+    margin:0;
+  }
+
+  /* ---- split portals ---- */
+  .portals{
+    padding:0 0 100px;
+  }
+  .portal-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    border:1px solid var(--navy-12);
+  }
+  .portal{
+    padding:48px 44px;
+    position:relative;
+  }
+  .portal + .portal{
+    border-left:1px solid var(--navy-12);
+  }
+  .portal-kicker{
+    font-size:0.8rem;
+    color:var(--navy-40);
+    margin:0 0 14px;
+  }
+  .portal h2{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:1.65rem;
+    margin:0 0 16px;
+    line-height:1.2;
+  }
+  .portal p{
+    font-size:0.98rem;
+    line-height:1.6;
+    color:var(--navy-70);
+    margin:0 0 28px;
+    max-width:38ch;
+  }
+  .portal-list{
+    list-style:none;
+    margin:0 0 32px;
+    padding:0;
+    font-size:0.9rem;
+    color:var(--navy-70);
+  }
+  .portal-list li{
+    padding:9px 0;
+    border-top:1px solid var(--navy-12);
+  }
+  .portal-list li:first-child{ border-top:none; }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.92rem;
+    font-weight:500;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:2px;
+  }
+
+  /* patient portal — warm, human register */
+  .portal--patient{
+    background:var(--paper);
+  }
+  .portal--patient .cta{
+    background:var(--teal);
+    color:var(--paper);
+  }
+
+  /* pharma portal — technical, dense register */
+  .portal--pharma{
+    background:var(--navy);
+    color:var(--cream);
+  }
+  .portal--pharma .portal-kicker{ color:rgba(245,241,234,0.5); }
+  .portal--pharma p{ color:rgba(245,241,234,0.72); }
+  .portal--pharma .portal-list{ color:rgba(245,241,234,0.72); }
+  .portal--pharma .portal-list li{ border-top-color:rgba(245,241,234,0.15); }
+  .portal--pharma .cta{
+    background:var(--gold);
+    color:var(--navy);
+  }
+  .status-tag{
+    display:inline-block;
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    color:rgba(245,241,234,0.55);
+    border:1px solid rgba(245,241,234,0.3);
+    padding:4px 10px;
+    border-radius:2px;
+    margin-bottom:20px;
+  }
+
+  /* ---- attribution ---- */
+  .attribution{
+    padding:56px 0 90px;
+    border-top:1px solid var(--navy-12);
+  }
+  .attribution-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .attribution h3{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:1.2rem;
+    margin:0 0 12px;
+  }
+  .attribution p{
+    font-size:0.94rem;
+    line-height:1.65;
+    color:var(--navy-70);
+    margin:0;
+    max-width:44ch;
+  }
+  .attribution a{
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,168,150,0.35);
+  }
+
+  @media (max-width: 840px){
+    .hero-grid{ grid-template-columns:1fr; gap:32px; }
+    .portal-grid{ grid-template-columns:1fr; }
+    .portal + .portal{ border-left:none; border-top:1px solid var(--navy-12); }
+    .attribution-grid{ grid-template-columns:1fr; gap:28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html">Stacks Advisory</a>
+    <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Precision Diagnostics</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Reading genomic signal at whatever resolution the question needs.</h1>
+      <p class="hero-lede">Precision diagnostics work happens at two altitudes. One is a person wondering whether their family history is worth a conversation. The other is a partner deciding which variant biology is worth funding. Both start with the same discipline — interpret the signal correctly before anyone acts on it.</p>
+    </div>
+    <p class="hero-note">Neither portal below provides a diagnosis. Each is designed to get the right person to the right next conversation.</p>
+  </div>
+</section>
+
+<section class="portals">
+  <div class="wrap">
+    <div class="portal-grid">
+
+      <div class="portal portal--patient">
+        <p class="portal-kicker">For patients and clients</p>
+        <h2>Intake &amp; early signal portal</h2>
+        <p>A short history checklist and an optional genetic result lookup — built against published hereditary-risk referral criteria, not a proprietary score. The output is a plain-language flag: does this pattern typically warrant a genetic counseling conversation.</p>
+        <ul class="portal-list">
+          <li>Personal &amp; family history intake</li>
+          <li>Optional variant lookup</li>
+          <li>Informational only — no diagnosis, no risk percentage</li>
+          <li>Routes to genetic counseling and, where relevant, <a href="https://www.openonco.org/" target="_blank" rel="noopener">OpenOnco</a> for confirmatory test comparison</li>
+        </ul>
+        <a class="cta" href="intake-portal.html">Start the intake &rarr;</a>
+      </div>
+
+      <div class="portal portal--pharma">
+        <p class="portal-kicker">For biopharma &amp; diagnostics partners</p>
+        <span class="status-tag">Computational pre-screen (JAK) in progress</span>
+        <h2>Four-gate precision immunotherapy gating</h2>
+        <p>Causal, functional variant stratification across exhaustion &amp; persistence, TME &amp; stress, antigen &amp; escape, and safety &amp; manufacturing — applied to specific franchises, not a generic biomarker pitch.</p>
+        <ul class="portal-list">
+          <li>Gate A&ndash;D framework, applied per therapeutic modality</li>
+          <li>Live computational pre-screen, starting with JAK1/2 pathway variants</li>
+          <li>Trial architecture &amp; commercial value modeling per use case</li>
+        </ul>
+        <a class="cta" href="precision-medicine.html">View the framework &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="attribution">
+  <div class="wrap attribution-grid">
+    <div>
+      <h3>Why OpenOnco, not our own test database</h3>
+      <p>OpenOnco is a free, open, vendor-neutral comparison of 100+ liquid biopsy tests across MRD, early detection, and comprehensive genomic profiling. Once someone's history warrants a conversation, comparing which confirmatory test fits is exactly the problem OpenOnco already solves well. We link to it rather than rebuild it.</p>
+    </div>
+    <div>
+      <h3>What this portal doesn't do</h3>
+      <p>It doesn't diagnose, score risk numerically, or replace a clinician. It flags patterns against published referral criteria and points toward a genetic counselor. Anyone with a personal health concern should talk to a healthcare provider regardless of what the intake returns.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
