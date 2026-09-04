@@ -120,6 +120,10 @@ img, svg { display: block; max-width: 100%; }
 .usecase .gates-used b { color: var(--gold); }
 .usecase .value { font-size: 0.79rem; color: var(--slate); border-top: 1px solid var(--border-light); padding-top: 0.9rem; line-height: 1.6; }
 .usecase .value strong { color: var(--navy); }
+.usecase .source { font-size: 0.7rem; color: var(--muted); margin-top: 0.7rem; line-height: 1.5; }
+.usecase .source a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(0,168,150,0.3); }
+.usecase .source a:hover { border-bottom-color: var(--teal); }
+.usecase-grid > .usecase:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 520px; margin: 0 auto; }
 
 .pm-cta { background: linear-gradient(135deg, #0D1B2A, #0A1E2C, #0A2028); padding: 6rem 3rem; text-align: center; position: relative; overflow: hidden; }
 .pm-cta::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 65% 75% at 50% 50%, rgba(0,168,150,0.09), transparent); }
@@ -235,7 +239,7 @@ img, svg { display: block; max-width: 100%; }
     <div class="section-header">
       <span class="eyebrow">Use Case Archetypes</span>
       <h2 class="section-title">Where the framework <em>earns its keep.</em></h2>
-      <p>Six therapeutic contexts where a structured stratification thesis changes the commercial conversation — from patient selection to payer economics.</p>
+      <p>Seven therapeutic contexts where a structured stratification thesis changes the commercial conversation — from patient selection to payer economics.</p>
     </div>
     <div class="usecase-grid">
 
@@ -285,6 +289,15 @@ img, svg { display: block; max-width: 100%; }
         <p class="need">A $100B+ incretin therapy market with three unresolved questions: who responds, who can safely discontinue, and when the metabolic shift becomes durable enough to stop.</p>
         <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b> &middot; <b>D</b></p>
         <p class="value"><strong>Commercial angle:</strong> a discontinuation-readiness thesis reframes GLP-1RA therapy from an indefinite commitment into a precision intervention with a defined endpoint — the single biggest lever on payer economics in the category.</p>
+      </div>
+
+      <div class="usecase">
+        <span class="usecase-tag">Solid Tumor Oncology</span>
+        <h3>RAS-Targeted Therapy</h3>
+        <p class="need">RAS mutations drive roughly 90% of pancreatic adenocarcinomas and a meaningful share of colorectal and lung cancers, but the target was considered undruggable for decades — leaving patient selection and resistance tracking largely unaddressed as the first approved agents reach the clinic.</p>
+        <p class="gates-used">Primary gates: <b>A</b> &middot; <b>C</b></p>
+        <p class="value"><strong>Commercial angle:</strong> converting an undruggable-target narrative into a biomarker-selected franchise reframes RAS inhibition from a last-line option to a stratified first-line thesis.</p>
+        <p class="source">FDA approval: <a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-class-targeted-therapy-metastatic-pancreatic-cancer" target="_blank" rel="noopener">Rasonque (daraxonrasib), Aug. 2026</a> &middot; Emerging approach: <a href="https://doi.org/10.1016/j.immuni.2023.09.013" target="_blank" rel="noopener">Biswas et al., <em>Immunity</em>, 2023</a></p>
       </div>
 
     </div>
