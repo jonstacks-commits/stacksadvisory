@@ -500,28 +500,24 @@
 
   function loadCalendly() {
     const container = document.getElementById('calendly-container');
-    // Build prefill params from collected form data
-    const name  = encodeURIComponent((formData.fname || '') + ' ' + (formData.lname || '')).trim();
-    const email = encodeURIComponent(formData.email || '');
+
+    // Prefill goes in the URL itself (the widget's `prefill` option does not populate the form).
+    // encodeURIComponent keeps spaces as %20; URLSearchParams would send "+" and Calendly shows it literally.
+    const fullName = ((formData.fname || '') + ' ' + (formData.lname || '')).trim();
+    const params = ['hide_gdpr_banner=1', 'primary_color=1fba7c'];
+    if (fullName)          params.push('name='  + encodeURIComponent(fullName));
+    if (formData.email)    params.push('email=' + encodeURIComponent(formData.email));
+    if (formData.priority) params.push('a1='    + encodeURIComponent(formData.priority.slice(0, 500)));
+    const calendlyUrl = 'https://calendly.com/jonstacks/introductory-discussion?' + params.join('&');
 
     // Use Calendly inline widget API if script has loaded, otherwise inject iframe directly
     function injectWidget() {
       if (window.Calendly) {
-        Calendly.initInlineWidget({
-          url: 'https://calendly.com/jonstacks/introductory-discussion?hide_gdpr_banner=1&primary_color=1fba7c',
-          parentElement: container,
-          prefill: {
-            name:  (formData.fname || '') + ' ' + (formData.lname || ''),
-            email: formData.email || '',
-          },
-        });
+        Calendly.initInlineWidget({ url: calendlyUrl, parentElement: container });
       } else {
         // Fallback: inject iframe directly
-        const src = 'https://calendly.com/jonstacks/introductory-discussion?embed_type=Inline&hide_gdpr_banner=1&primary_color=1fba7c'
-          + (name  ? '&name='  + name  : '')
-          + (email ? '&email=' + email : '');
         container.innerHTML =
-          '<iframe src="' + src + '" width="100%" height="700" frameborder="0" style="border:0;border-radius:10px;"></iframe>';
+          '<iframe src="' + calendlyUrl + '&embed_type=Inline" width="100%" height="700" frameborder="0" style="border:0;border-radius:10px;"></iframe>';
       }
     }
 
@@ -539,40 +535,26 @@
       }, 4000);
     }
 
-    // Also fire mailto notification to jon@stacksadvisory.com
-    sendIntakeEmail();
+    // Record the intake in the Engagement Tracker sheet (and email Jon)
+    sendIntake();
   }
 
-  function sendIntakeEmail() {
-    const body = [
-      'New diagnostic intake',
-      '',
-      'Name: '    + (formData.fname || '') + ' ' + (formData.lname || ''),
-      'Email: '   + (formData.email || ''),
-      'Company: ' + (formData.company || ''),
-      'Role: '    + (formData.role || ''),
-      '',
-      'Stage: '     + (formData.stage || ''),
-      'Domain: '    + (formData.domain || ''),
-      'Situation: ' + (formData.situation || ''),
-      '',
-      'Priority problem:',
-      formData.priority || '',
-      '',
-      'Engagement interest: ' + (formData.engage || ''),
-      'Timeline: '            + (formData.timeline || ''),
-    ].join('\n');
+  // Apps Script web app that appends a row to the Engagement Tracker sheet.
+  // Paste the deployed /exec URL here.
+  const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzEXDIIB2KR0XzuwdGG0mjEDHl8jT7pR920NciApET-BBVx0qvKOgwS1KfxAd1Z1DPQKg/exec';
 
-    const mailto = 'mailto:jon@stacksadvisory.com'
-      + '?subject=' + encodeURIComponent('Diagnostic intake — ' + (formData.company || 'new prospect'))
-      + '&body='    + encodeURIComponent(body);
-
-    const a = document.createElement('a');
-    a.href = mailto;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+  function sendIntake() {
+    if (!INTAKE_ENDPOINT) return;
+    try {
+      // text/plain + no-cors avoids a preflight; the booking step never waits on this.
+      fetch(INTAKE_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData),
+      }).catch(function () {});
+    } catch (e) {}
   }
 
   function validateStep(step) {
