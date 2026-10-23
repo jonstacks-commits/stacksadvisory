@@ -203,12 +203,23 @@
       overflow: hidden;
       border: 1px solid var(--border2);
       background: #fff;
-      min-height: 700px;
+      height: 700px;
       animation: fadeUp 0.5s ease 0.2s both;
+    }
+    /* Calendly injects its iframe at height:100%; a percentage height only
+       resolves against a fixed-height parent, so pin both explicitly. */
+    #calendly-container iframe {
+      width: 100% !important;
+      height: 700px !important;
+      border: 0;
     }
     .calendly-inline-widget {
       min-width: 100% !important;
       height: 700px !important;
+    }
+    @media (max-width: 600px) {
+      .calendly-wrap,
+      #calendly-container iframe { height: 900px !important; }
     }
 
     /* Fallback link if JS blocked */
@@ -497,7 +508,7 @@
     function injectWidget() {
       if (window.Calendly) {
         Calendly.initInlineWidget({
-          url: 'https://calendly.com/jonstacks/introductory-discussion?hide_gdpr_banner=1&background_color=16201a&text_color=e8ede9&primary_color=1fba7c',
+          url: 'https://calendly.com/jonstacks/introductory-discussion?hide_gdpr_banner=1&primary_color=1fba7c',
           parentElement: container,
           prefill: {
             name:  (formData.fname || '') + ' ' + (formData.lname || ''),
@@ -506,7 +517,7 @@
         });
       } else {
         // Fallback: inject iframe directly
-        const src = 'https://calendly.com/jonstacks/introductory-discussion?embed_type=Inline&hide_gdpr_banner=1&background_color=16201a&text_color=e8ede9&primary_color=1fba7c'
+        const src = 'https://calendly.com/jonstacks/introductory-discussion?embed_type=Inline&hide_gdpr_banner=1&primary_color=1fba7c'
           + (name  ? '&name='  + name  : '')
           + (email ? '&email=' + email : '');
         container.innerHTML =
