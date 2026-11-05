@@ -217,7 +217,66 @@
     border-bottom:1px solid rgba(0,168,150,0.35);
   }
 
+  /* ---- gene-to-assay context ---- */
+  .gac{ padding:0 0 100px; }
+  .gac-head{ max-width:62ch; margin:0 0 32px; }
+  .gac-head .portal-kicker{ margin-bottom:10px; }
+  .gac-head h2{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size:1.8rem;
+    line-height:1.2;
+    margin:0 0 14px;
+  }
+  .gac-head p{ font-size:0.98rem; line-height:1.62; color:var(--navy-70); margin:0; }
+  .gac-chips{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 10px; }
+  .gac-chip{
+    font:inherit; font-size:0.88rem; font-weight:500;
+    padding:9px 16px; border-radius:2px; cursor:pointer;
+    background:var(--paper); color:var(--navy);
+    border:1px solid var(--navy-12);
+  }
+  .gac-chip[aria-pressed="true"]{ background:var(--navy); color:var(--cream); border-color:var(--navy); }
+  .gac-chip:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .gac-stamp{ font-size:0.8rem; color:var(--navy-40); margin:0 0 24px; min-height:1.2em; }
+  .gac-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    border:1px solid var(--navy-12); background:var(--paper);
+  }
+  .gac-panel{ padding:32px 36px; min-width:0; }
+  .gac-panel:nth-child(even){ border-left:1px solid var(--navy-12); }
+  .gac-panel:nth-child(n+3){ border-top:1px solid var(--navy-12); }
+  .gac-panel h3{
+    font-family:'DM Serif Display', serif; font-weight:400;
+    font-size:1.2rem; margin:0 0 4px;
+  }
+  .gac-tag{ font-size:0.76rem; color:var(--navy-40); margin:0 0 18px; }
+  .gac-lede{ font-weight:600; font-size:0.95rem; margin:0 0 6px; }
+  .gac-meta, .gac-status, .gac-assay p, .gac-foot{
+    font-size:0.88rem; line-height:1.55; color:var(--navy-70); margin:0 0 14px;
+  }
+  .gac-status--err{ color:#8a4b00; }
+  .gac-foot{ font-size:0.8rem; color:var(--navy-40); margin:14px 0 6px; }
+  .gac-panel a{ color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(0,168,150,0.35); }
+  .gac-table{ width:100%; border-collapse:collapse; font-size:0.86rem; }
+  .gac-table th{ text-align:left; font-weight:500; color:var(--navy-40); padding:6px 8px 6px 0; border-bottom:1px solid var(--navy-12); }
+  .gac-table td{ padding:8px 8px 8px 0; border-bottom:1px solid var(--navy-12); vertical-align:top; color:var(--navy-70); }
+  .gac-num{ font-variant-numeric:tabular-nums; }
+  .gac-list{ list-style:none; margin:0; padding:0; }
+  .gac-list li{ padding:10px 0; border-top:1px solid var(--navy-12); font-size:0.88rem; line-height:1.45; }
+  .gac-list li:first-child{ border-top:none; }
+  .gac-sub{ display:block; font-size:0.78rem; color:var(--navy-40); margin-top:3px; }
+  .gac-assay{ padding:10px 0; border-top:1px solid var(--navy-12); }
+  .gac-assay:first-child{ border-top:none; padding-top:0; }
+  .gac-assay h4{ font-size:0.9rem; font-weight:600; margin:0 0 4px; }
+  .gac-assay p{ margin:0; }
+  .gac-disclaimer{ font-size:0.82rem; line-height:1.55; color:var(--navy-70); border-left:2px solid var(--gold); padding-left:16px; max-width:70ch; margin:24px 0 0; }
+
   @media (max-width: 840px){
+    .gac-grid{ grid-template-columns:1fr; }
+    .gac-panel:nth-child(even){ border-left:none; }
+    .gac-panel:nth-child(n+2){ border-top:1px solid var(--navy-12); }
+    .gac-panel{ padding:28px 24px; }
     .hero-grid{ grid-template-columns:1fr; gap:32px; }
     .portal-grid{ grid-template-columns:1fr; }
     .portal + .portal{ border-left:none; border-top:1px solid var(--navy-12); }
@@ -278,6 +337,44 @@
   </div>
 </section>
 
+<section class="gac" id="gene-assay-context">
+  <div class="wrap">
+    <div class="gac-head">
+      <p class="portal-kicker">Gene-to-assay context</p>
+      <h2>Where the genetics meets a test you can actually run.</h2>
+      <p>Pick a gene in the JAK1/2 pathway. The page pulls current gene&ndash;disease evidence, recent epigenetic and cell-free DNA assay literature, and open studies from public sources at the moment you look, then sets them beside the assay classes that apply. Evidence strength and testability are different questions, so they sit side by side.</p>
+    </div>
+
+    <div class="gac-chips" id="gac-chips" role="group" aria-label="Select a gene"></div>
+    <p class="gac-stamp" id="gac-stamp" aria-live="polite"></p>
+
+    <div class="gac-grid">
+      <div class="gac-panel">
+        <h3>Genetic evidence</h3>
+        <p class="gac-tag">Live &middot; Open Targets Platform</p>
+        <div id="gac-evidence"></div>
+      </div>
+      <div class="gac-panel">
+        <h3>Testable outcomes</h3>
+        <p class="gac-tag">Editorial &middot; assay classes by gene</p>
+        <div id="gac-assays"></div>
+      </div>
+      <div class="gac-panel">
+        <h3>Epigenetic &amp; cfDNA literature</h3>
+        <p class="gac-tag">Live &middot; PubMed, past 12 months</p>
+        <div id="gac-lit"></div>
+      </div>
+      <div class="gac-panel">
+        <h3>Open studies</h3>
+        <p class="gac-tag">Live &middot; ClinicalTrials.gov</p>
+        <div id="gac-trials"></div>
+      </div>
+    </div>
+
+    <p class="gac-disclaimer">Informational only. Nothing here is a diagnosis, a risk estimate, or a recommendation to order a test. A variant or biomarker result means something only in the context of a person&rsquo;s history, which is a conversation for a clinician or genetic counselor.</p>
+  </div>
+</section>
+
 <section class="attribution">
   <div class="wrap attribution-grid">
     <div>
@@ -291,5 +388,6 @@
   </div>
 </section>
 
+<script src="assets/gene-assay-context.js" defer></script>
 </body>
 </html>
