@@ -164,8 +164,10 @@
     var panel = els.lit;
     setStatus(panel, 'Searching PubMed for recent ' + symbol + ' assay literature…');
 
-    var term = '(' + symbol + '[Title/Abstract]) AND (methylation[Title/Abstract] OR epigenetic[Title/Abstract] OR "cell-free DNA"[Title/Abstract] OR cfDNA[Title/Abstract]) AND (assay[Title/Abstract] OR biomarker[Title/Abstract] OR detection[Title/Abstract])';
-    var s = EUTILS + 'esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=date&datetype=pdat&reldate=365&term=' + encodeURIComponent(term);
+    // Gene in title/abstract; epigenetic or cfDNA term in title/abstract; and an assay-type
+    // word in the TITLE, which screens out papers that only mention the gene in passing.
+    var term = '(' + symbol + '[Title/Abstract]) AND (methylation[Title/Abstract] OR epigenetic[Title/Abstract] OR "cell-free DNA"[Title/Abstract] OR cfDNA[Title/Abstract] OR ctDNA[Title/Abstract]) AND (assay[Title] OR biomarker[Title] OR biomarkers[Title] OR detection[Title] OR diagnostic[Title] OR prognostic[Title])';
+    var s = EUTILS + 'esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=date&datetype=pdat&reldate=730&term=' + encodeURIComponent(term);
 
     getJSON(s).then(function (d) {
       var ids = d.esearchresult.idlist || [];
@@ -178,9 +180,9 @@
       if (token !== state.token) return;
       clear(panel);
       var pubmedUrl = 'https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(term) + '&sort=date';
-      panel.appendChild(el('p', 'gac-meta', res.count + ' PubMed records in the past 12 months matching ' + symbol + ' with methylation, epigenetic or cfDNA terms. Most recent:'));
+      panel.appendChild(el('p', 'gac-meta', res.count + ' PubMed records in the past 24 months match ' + symbol + ' with methylation, epigenetic or cfDNA terms and an assay-type word in the title.' + (res.docs.length ? ' Most recent:' : '')));
       if (!res.docs.length) {
-        panel.appendChild(el('p', 'gac-status', 'Nothing in the last 12 months. That is itself a signal: no recent assay literature for this gene on these terms.'));
+        panel.appendChild(el('p', 'gac-status', 'No matches on this strict query. That does not mean no assay work exists, so try the broader PubMed search below.'));
       }
       var list = el('ul', 'gac-list');
       res.docs.forEach(function (doc) {
@@ -190,8 +192,10 @@
         list.appendChild(li);
       });
       panel.appendChild(list);
-      panel.appendChild(el('p', 'gac-foot', 'Keyword match, not curated review. Preprints and unreviewed work can appear.'));
-      panel.appendChild(link(pubmedUrl, 'See all results on PubMed'));
+      panel.appendChild(el('p', 'gac-foot', 'Keyword match, not curated review. Relevance varies, so read the paper before relying on it.'));
+      panel.appendChild(link(pubmedUrl, 'See this search on PubMed'));
+      panel.appendChild(document.createTextNode(' · '));
+      panel.appendChild(link('https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=' + encodeURIComponent(symbol + ' AND (methylation OR cfDNA OR ctDNA) AND (assay OR biomarker)'), 'Broader search'));
     }).catch(function () {
       if (token !== state.token) return;
       fail(panel, 'PubMed', 'https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(symbol + ' methylation cfDNA'));
